@@ -4,4 +4,6 @@ core.python*
 env.py
 __pycache__/
 *.py[cod]
+*.sqlite3
+*.pyc
 node_modules/
