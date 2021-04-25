@@ -3,12 +3,29 @@
 
 {% block content %}
 
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                {{ products }}
+<div class="container">
+    <h2 class="text-center">Moose Juice</h2>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi eius laboriosam cumque suscipit aperiam, facere id eum inventore perspiciatis atque? Sed quidem maiores veniam eius hic aspernatur, non similique tempore.</p>
+</div>
+
+
+<div class="container my-5">
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4">
+        {% for product in products %}
+            <div class="col mb-4">
+                <div class="card h-100">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.profile }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">{{ product.brand }}</small>
+                    </div>
+                </div>
             </div>
-        </div>
+        {% endfor %}
     </div>
+</div>
 
 {% endblock %}
