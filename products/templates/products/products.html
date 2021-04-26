@@ -17,7 +17,7 @@
                     <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">{{ product.name }}</h5>
-                        <p class="card-text">{{ product.profile }}</p>
+                        <a href="{% url 'product_detail' product.id %}">Details</a>
                     </div>
                     <div class="card-footer">
                         <small class="text-muted">{{ product.brand }}</small>

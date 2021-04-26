@@ -30,7 +30,7 @@
     <header>
         <nav class="navbar navbar-expand-md navbar-light bg-light">
 
-            <a class="navbar-brand" href="#">Moose Juice</a>
+            <a class="navbar-brand" href="{% url 'home' %}">Moose Juice</a>
             <ul class="navbar-nav d-inline-block list-inline list-unstyled d-md-none ml-auto mr-3">
                 {% include 'includes/navbar-cluster.html' %}
             </ul>
@@ -41,7 +41,7 @@
             
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav mx-auto">
-                    <a class="nav-link" href="#">All Juices</a>
+                    <a class="nav-link" href="{% url 'products' %}">All Juices</a>
 
                     <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
