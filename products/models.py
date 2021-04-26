@@ -10,7 +10,9 @@ class Brand(models.Model):
         return self.friendly_name
 
 
-class ProductProfile(models.Model):
+class Category(models.Model):
+    class Meta:
+        verbose_name_plural = "Categories"
     name = models.CharField(max_length=50)
     friendly_name = models.CharField(max_length=50, null=True, blank=True)
     description = models.TextField()
@@ -21,11 +23,12 @@ class ProductProfile(models.Model):
 
 class Product(models.Model):
     brand = models.ForeignKey(
-        'Brand', null=True, blank=True, on_delete=models.SET_NULL, related_name='brand')
-    profile = models.ForeignKey(
-        'ProductProfile', null=True, blank=True, on_delete=models.SET_NULL, related_name='profile')
+        'Brand', null=True, blank=True, on_delete=models.SET_NULL)
+    category = models.ForeignKey(
+        'Category', null=True, blank=True, on_delete=models.SET_NULL)
     name = models.CharField(max_length=50)
+    friendly_name = models.CharField(max_length=50, null=True, blank=True)
     description = models.TextField()
 
     def __str__(self):
-        return self.name
+        return self.friendly_name
