@@ -3,10 +3,11 @@ from django.db import models
 
 class Brand(models.Model):
     name = models.CharField(max_length=50)
+    friendly_name = models.CharField(max_length=50, null=True, blank=True)
     description = models.TextField()
 
     def __str__(self):
-        return self.name
+        return self.friendly_name
 
 
 class ProductProfile(models.Model):

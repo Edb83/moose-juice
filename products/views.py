@@ -1,16 +1,22 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.db.models import Q  # for handling complex queries
-from .models import Product
+from .models import Product, Brand
 
 
 def all_products(request):
     """ A view to return all Products """
 
     products = Product.objects.all()
+    brand = None
     query = None
 
     if request.GET:
+        if 'brand' in request.GET:
+            brand = request.GET['brand']
+            products = products.filter(brand__name=brand)
+            brand = get_object_or_404(Brand, name=brand)
+
         if 'q' in request.GET:
             query = request.GET['q']
             if not query:
@@ -24,6 +30,7 @@ def all_products(request):
     context = {
         'products': products,
         'search_term': query,
+        'brand': brand,
     }
 
     return render(request, 'products/products.html', context)

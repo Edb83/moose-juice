@@ -3,9 +3,15 @@
 
 {% block content %}
 
+
 <div class="container">
-    <h2 class="text-center">Moose Juice</h2>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi eius laboriosam cumque suscipit aperiam, facere id eum inventore perspiciatis atque? Sed quidem maiores veniam eius hic aspernatur, non similique tempore.</p>
+        {% if brand %}
+            <h2 class="text-center">{{ brand.friendly_name }}</h2>
+            <p>{{brand.description}}</p>
+        {% else %}
+            <h2 class="text-center">Moose Juice</h2>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi eius laboriosam cumque suscipit aperiam, facere id eum inventore perspiciatis atque? Sed quidem maiores veniam eius hic aspernatur, non similique tempore.</p>
+        {% endif %}    
 </div>
 
 
