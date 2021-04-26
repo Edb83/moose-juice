@@ -19,6 +19,21 @@
 
 
 <div class="container my-5">
+    <div class="row">
+        <div class="col col-sm-6 offset-sm-6 offset-md-8 col-md-4 offset-l-10 col-l-2 py-3">
+            <select class="custom-select my-1 mr-sm-2">
+                <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
+                <option value="date_added_desc" {% if current_sorting == 'date_added_desc' %}selected{% endif %}>New arrivals</option>
+                <option value="rating_desc" {% if current_sorting == 'rating_desc' %}selected{% endif %}>Top rated</option>
+                <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>A-Z</option>
+                <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Z-A</option>
+                <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (asc)</option>
+                <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (desc)</option>
+            </select>
+        </div>
+    </div>
+    
+
     <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4">
         {% for product in products %}
             <div class="col mb-4">
