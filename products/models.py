@@ -12,17 +12,18 @@ class Brand(models.Model):
 
 class ProductProfile(models.Model):
     name = models.CharField(max_length=50)
+    friendly_name = models.CharField(max_length=50, null=True, blank=True)
     description = models.TextField()
 
     def __str__(self):
-        return self.name
+        return self.friendly_name
 
 
 class Product(models.Model):
     brand = models.ForeignKey(
-        'Brand', null=True, blank=True, on_delete=models.SET_NULL)
+        'Brand', null=True, blank=True, on_delete=models.SET_NULL, related_name='brand')
     profile = models.ForeignKey(
-        'ProductProfile', null=True, blank=True, on_delete=models.SET_NULL)
+        'ProductProfile', null=True, blank=True, on_delete=models.SET_NULL, related_name='profile')
     name = models.CharField(max_length=50)
     description = models.TextField()
 

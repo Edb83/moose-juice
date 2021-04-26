@@ -59,12 +59,12 @@
                             Flavours
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Bakery</a>
-                            <a class="dropdown-item" href="#">Desserts</a>
-                            <a class="dropdown-item" href="#">Drinks</a>
-                            <a class="dropdown-item" href="#">Fruits</a>
-                            <a class="dropdown-item" href="#">Sweets</a>
-                            <a class="dropdown-item" href="#">Tobacco</a>
+                            <a class="dropdown-item" href="{% url 'products' %}?profile=bakery">Bakery</a>
+                            <a class="dropdown-item" href="{% url 'products' %}?profile=desserts">Desserts</a>
+                            <a class="dropdown-item" href="{% url 'products' %}?profile=drinks">Drinks</a>
+                            <a class="dropdown-item" href="{% url 'products' %}?profile=fruits">Fruits</a>
+                            <a class="dropdown-item" href="{% url 'products' %}?profile=sweets">Sweets</a>
+                            <a class="dropdown-item" href="{% url 'products' %}?profile=tobacco">Tobacco</a>
                         </div>
                     </div>
 
