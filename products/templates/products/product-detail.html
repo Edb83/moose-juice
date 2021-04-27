@@ -6,9 +6,23 @@
 <div class="container">
     <h2 class="text-center">{{ product.friendly_name }}</h2>
     <p>{{ product.description }}</p>
+    <h3>Flavours:</h3>
     {% for tag in product.tags.all %}
         <p>{{ tag }}</p>
     {% endfor %}
+    <h3>Bottle size:</h3>
+    {% for size in product.brand.available_sizes.all %}
+        <ul>
+            <li>{{ size }}</li>
+        </ul>
+    {% endfor %}
+    <h3>Nicotine strength:</h3>
+    {% for nic in product.brand.available_nics.all %}
+        <ul>
+            <li>{{ nic.strength }} {{ nic.type }}</li>
+        </ul>
+    {% endfor %}
+
 </div>
 
 {% endblock %}

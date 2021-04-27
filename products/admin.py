@@ -1,10 +1,34 @@
 from django.contrib import admin
 from products.models import (
     Brand,
+    Size,
+    Nicotine,
     Category,
     Tag,
     Product,
 )
+
+
+class BrandAdmin(admin.ModelAdmin):
+    filter_horizontal = (
+        'available_sizes', 'available_sizes',
+        'available_nics', 'available_nics'
+        )
+
+
+class NicotineAdmin(admin.ModelAdmin):
+    list_display = (
+        'strength',
+        'type',
+    )
+
+
+class CategoryAdmin(admin.ModelAdmin):
+    ordering = ('name',)
+
+
+class TagAdmin(admin.ModelAdmin):
+    ordering = ('name',)
 
 
 class ProductAdmin(admin.ModelAdmin):
@@ -13,10 +37,13 @@ class ProductAdmin(admin.ModelAdmin):
         'brand',
         'category',
     )
+    ordering = ('brand', 'name',)
     filter_horizontal = ('tags', 'tags')
 
 
-admin.site.register(Brand)
-admin.site.register(Category)
-admin.site.register(Tag)
+admin.site.register(Brand, BrandAdmin)
+admin.site.register(Size)
+admin.site.register(Nicotine, NicotineAdmin)
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(Tag, TagAdmin)
 admin.site.register(Product, ProductAdmin)

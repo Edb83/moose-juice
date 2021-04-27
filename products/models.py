@@ -1,11 +1,33 @@
 from django.db import models
-from datetime import datetime
+
+
+class Size(models.Model):
+    label = models.CharField(max_length=50, null=True, blank=True)
+
+    def __str__(self):
+        return self.label
+
+
+class Nicotine(models.Model):
+    TYPE_CHOICES = (
+        ('freebase', 'FREEBASE'),
+        ('salt', 'SALT'),
+    )
+    strength = models.CharField(max_length=50, null=True, blank=True)
+    type = models.CharField(
+        max_length=8, choices=TYPE_CHOICES, null=True, blank=True
+    )
+
+    def __str__(self):
+        return self.strength
 
 
 class Brand(models.Model):
     name = models.CharField(max_length=50)
     friendly_name = models.CharField(max_length=50, null=True, blank=True)
     description = models.TextField()
+    available_sizes = models.ManyToManyField(Size)
+    available_nics = models.ManyToManyField(Nicotine)
 
     def __str__(self):
         return self.name
