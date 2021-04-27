@@ -4,8 +4,11 @@
 {% block content %}
 
 <div class="container">
-    <h2 class="text-center">{{ product.name }}</h2>
+    <h2 class="text-center">{{ product.friendly_name }}</h2>
     <p>{{ product.description }}</p>
+    {% for tag in product.tags.all %}
+        <p>{{ tag }}</p>
+    {% endfor %}
 </div>
 
 {% endblock %}
