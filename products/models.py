@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 
 class Brand(models.Model):
@@ -38,6 +39,8 @@ class Product(models.Model):
     category = models.ForeignKey(
         'Category', null=True, blank=True, on_delete=models.SET_NULL)
     tags = models.ManyToManyField(Tag)
+    average_rating = models.PositiveSmallIntegerField(null=True, blank=True)
+    created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name

@@ -29,6 +29,7 @@ def all_products(request):
                 messages.error(request, "You forgot to put the words in!")
                 return redirect(reverse('products'))
             # Need to amend to search on flavours
+            # Q(tags__name__icontains=query)
             queries = (
                 Q(friendly_name__icontains=query) | Q(description__icontains=query))
             products = products.filter(queries)
