@@ -21,18 +21,22 @@
 <div class="container my-5">
     <div class="row">
         <div class="col col-sm-6 offset-sm-6 offset-md-8 col-md-4 offset-l-10 col-l-2 py-3">
-            <select class="custom-select my-1 mr-sm-2">
+            <select id="sort-selector" class="custom-select my-1 mr-sm-2">
                 <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
-                <option value="date_desc" {% if current_sorting == 'date_desc' %}selected{% endif %}>New arrivals</option>
-                <option value="rating_desc" {% if current_sorting == 'rating_desc' %}selected{% endif %}>Top rated</option>
+                <option value="created_on_desc" {% if current_sorting == 'date_desc' %}selected{% endif %}>New arrivals</option>
+                <option value="average_rating_desc" {% if current_sorting == 'rating_desc' %}selected{% endif %}>Top rated</option>
                 <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>A-Z</option>
                 <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Z-A</option>
-                <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (asc)</option>
-                <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (desc)</option>
+                <!-- <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (asc)</option>
+                <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (desc)</option> -->
             </select>
         </div>
     </div>
-    
+    <div class="row">
+        <div class="col">
+            {{ products|length }} Juice{% if products|length > 1 %}s{% endif %}{% if search_term %} found with <strong>"{{ search_term }}"</strong>{% endif %}
+        </div>
+    </div>
 
     <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4">
         {% for product in products %}
@@ -44,12 +48,47 @@
                         <a href="{% url 'product_detail' product.id %}">Details</a>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted">{{ product.average_rating }} / 5</small>
+                        {% if product.average_rating %}
+                            <small class="text-muted">{{ product.average_rating }} / 5</small>
+                        {% else %}
+                            <small class="text-muted">Not yet rated</small>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         {% endfor %}
     </div>
 </div>
+
+{% endblock %}
+
+{% block extra_js %}
+
+    {{ block.super }}
+
+    <script type="text/javascript">
+        $('#sort-selector').change(function() {
+            let selector = $(this);
+            let currentUrl = new URL(window.location);
+
+            let selectedVal = selector.val();
+            if(selectedVal != "reset"){
+                let stringSplit = selectedVal.split("_")
+                let direction = stringSplit[(stringSplit.length)-1];
+                stringSplit.pop();
+                let sort = stringSplit.join("_");
+
+                currentUrl.searchParams.set("sort", sort);
+                currentUrl.searchParams.set("direction", direction);
+
+                window.location.replace(currentUrl);
+            } else {
+                currentUrl.searchParams.delete("sort");
+                currentUrl.searchParams.delete("direction");
+
+                window.location.replace(currentUrl);
+            }
+        })
+    </script>
 
 {% endblock %}

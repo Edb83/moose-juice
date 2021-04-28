@@ -8,7 +8,11 @@
     <p>{{ product.description }}</p>
     <h3>Flavours:</h3>
     {% for tag in product.tags.all %}
-        <p>{{ tag }}</p>
+        <ul>
+            <li>
+                <a href="{% url 'products' %}?q={{tag.name}}">{{ tag.name }}</a>
+            </li>
+        </ul>
     {% endfor %}
     <h3>Bottle size:</h3>
     {% for size in product.brand.available_sizes.all %}
