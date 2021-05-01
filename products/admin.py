@@ -36,6 +36,7 @@ class ProductAdmin(admin.ModelAdmin):
         'name',
         'brand',
         'category',
+        'on_sale',
     )
     ordering = ('brand', 'name',)
     filter_horizontal = ('tags', 'tags')

@@ -11,6 +11,9 @@
         {% elif category %}
             <h2 class="text-center">{{ category.friendly_name }}</h2>
             <p>{{ category.description}}</p>
+        {% elif sale %}
+            <h2 class="text-center">Sale</h2>
+            <p>Grab your favourite Moose Juice while it's on sale!</p>
         {% else %}
             <h2 class="text-center">Moose Juice</h2>
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi eius laboriosam cumque suscipit aperiam, facere id eum inventore perspiciatis atque? Sed quidem maiores veniam eius hic aspernatur, non similique tempore.</p>
@@ -20,15 +23,13 @@
 
 <div class="container my-5">
     <div class="row">
-        <div class="col col-sm-6 offset-sm-6 offset-md-8 col-md-4 offset-l-10 col-l-2 py-3">
+        <div class="col-12 offset-md-8 col-md-4 offset-l-10 col-l-2 py-3">
             <select id="sort-selector" class="custom-select my-1 mr-sm-2">
                 <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
                 <option value="created_on_desc" {% if current_sorting == 'date_desc' %}selected{% endif %}>New arrivals</option>
                 <option value="average_rating_desc" {% if current_sorting == 'rating_desc' %}selected{% endif %}>Top rated</option>
                 <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>A-Z</option>
                 <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Z-A</option>
-                <!-- <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (asc)</option>
-                <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (desc)</option> -->
             </select>
         </div>
     </div>
@@ -38,21 +39,26 @@
         </div>
     </div>
 
-    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
         {% for product in products %}
             <div class="col mb-4">
                 <div class="card h-100">
                     <img src="" class="card-img-top" alt="">
                     <div class="card-body">
-                        <h5 class="card-title">{{ product.friendly_name }}</h5>
-                        <a href="{% url 'product_detail' product.id %}">Details</a>
-                    </div>
-                    <div class="card-footer">
+                        {% if product.on_sale %}
+                            <strong>Sale!</strong>
+                        {% endif %}
+                        <a href="{% url 'product_detail' product.id %}">
+                            <h5 class="card-title">{{ product.friendly_name }}</h5>
+                        </a>
                         {% if product.average_rating %}
                             <small class="text-muted">{{ product.average_rating }} / 5</small>
                         {% else %}
                             <small class="text-muted">Not yet rated</small>
                         {% endif %}
+                    </div>
+                    <div class="card-footer">
+                        {% if product.brand.available_sizes.all|length > 1 %}From {% endif %}{% if product.on_sale %}<s>£{{ product.brand.available_sizes.all.0.price }}</s> £{{ product.brand.available_sizes.all.0.sale_price }}{% else %}£{{ product.brand.available_sizes.all.0.price }}{% endif %}
                     </div>
                 </div>
             </div>

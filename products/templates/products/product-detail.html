@@ -17,7 +17,7 @@
     <h3>Bottle size:</h3>
     {% for size in product.brand.available_sizes.all %}
         <ul>
-            <li>{{ size }}</li>
+            <li>{{ size.label }} (£{% if product.on_sale %}{{ size.sale_price }}{% else %}{{ size.price }}{% endif %})</li>
         </ul>
     {% endfor %}
     <h3>Nicotine strength:</h3>

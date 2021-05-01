@@ -9,11 +9,12 @@ def all_products(request):
     """ A view to return all Products """
 
     products = Product.objects.all()
-    brand = None
-    query = None
-    category = None
     sort = None
     direction = None
+    sale = False
+    brand = None
+    category = None
+    query = None
 
     if request.GET:
         if 'sort' in request.GET:
@@ -28,6 +29,10 @@ def all_products(request):
                 if direction == 'desc':
                     sortkey = f'-{sortkey}'
             products = products.order_by(sortkey)
+
+        if 'sale' in request.GET:
+            sale = True
+            products = products.filter(on_sale=True)
 
         if 'brand' in request.GET:
             brand = request.GET['brand']
@@ -59,6 +64,7 @@ def all_products(request):
     context = {
         'products': products,
         'search_term': query,
+        'sale': sale,
         'brand': brand,
         'category': category,
         'current_sorting': current_sorting,
