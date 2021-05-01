@@ -2,7 +2,7 @@
     <a class="nav-link" href="#"><i class="fas fa-heart fa-x2 fa-fw"></i></a>
 </li>
 <li class="nav-item list-inline-item">
-    <a class="nav-link" href="#">
+    <a class="nav-link" href="{% url 'view_cart' %}">
         {% if grand_total %}
             £{{ grand_total|floatformat:2 }}
         {% else %}
