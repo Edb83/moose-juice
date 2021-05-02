@@ -9,28 +9,57 @@
             <h2 class="text-center">Cart</h2>
             {% if cart_items %}
                 <div class="table-responsive">
-                    {{ cart_items }}
                     <table class="table table-borderless text-center">
                         <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
-                        </tr>
+                            <tr>
+                                <!-- <th scope="col">#</th> -->
+                                <th scope="col">Item</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Qty</th>
+                                <th scope="col">Subtotal</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
+                            {% for item in cart_items %}
+                            <tr>
+                                <!-- <th scope="row">{{ forloop.counter }}</th> -->
+                                <td>{{ item.product.friendly_name }} <span class="text-muted">({{ item.nic.strength }} {{ item.nic.type }}, {{ item.size.label }})</span></td>
+                                <td>£{{ item.price }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>TBC</td>
+                            </tr>
+                            {% endfor %}
+                            <tr>
+                                <td colspan="4" class="pt-5 text-right">
+                                    <h6><strong>Cart Total: £{{ total|floatformat:2 }}</strong></h6>
+                                    <h6>Delivery: £{{ delivery|floatformat:2 }}</h6>
+                                    <h4 class="mt-4"><strong>Grand Total: £{{ grand_total|floatformat:2 }}</strong></h4>
+                                    {% if free_delivery_delta > 0 %}
+                                        <p class="mb-1 text-danger">
+                                            You could get free delivery by spending just <strong>£{{ free_delivery_delta }}</strong> more!
+                                        </p>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="text-right">
+                                    <a href="{% url 'products' %}" class="btn btn-outline-dark mt-5">
+                                        <span class="icon">
+                                            <i class="fas fa-chevron-left"></i>
+                                        </span>Keep Shopping
+                                    </a>
+                                    <a href="" class="btn btn-outline-dark mt-5">Secure Checkout
+                                        <span class="icon">
+                                            <i class="fas fa-lock"></i>
+                                        </span>
+                                    </a>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
             {% else %}
-                <p class="text-center">CART EMPTY!</p>
+                <p class="text-center">Cart is empty!</p>
             {% endif %}
         </div>
     </div>    

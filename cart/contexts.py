@@ -34,6 +34,7 @@ def cart_contents(request):
             'product': product,
             'size': size,
             'nic': nic,
+            'price': price,
             'quantity': quantity,
         })
 
