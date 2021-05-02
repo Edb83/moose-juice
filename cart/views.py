@@ -12,15 +12,16 @@ def add_to_cart(request, item_id):
 
     size = request.POST.get('size')
     nic = request.POST.get('nic')
+    # Create string representing item and options chosen for contexts.py
     item = f'{item_id}_{size}_{nic}'
     quantity = int(request.POST.get('quantity'))
     redirect_url = request.POST.get('redirect_url')
-    bag = request.session.get('bag', {})
+    cart = request.session.get('cart', {})
 
-    if item in list(bag.keys()):
-        bag[item] += quantity
+    if item in list(cart.keys()):
+        cart[item] += quantity
     else:
-        bag[item] = quantity
+        cart[item] = quantity
 
-    request.session['bag'] = bag
+    request.session['cart'] = cart
     return redirect(redirect_url)
