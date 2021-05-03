@@ -20,7 +20,7 @@ def cart_contents(request):
         product = get_object_or_404(Product, pk=product_id)
         size = get_object_or_404(Size, pk=size_id)
         nic = get_object_or_404(Nicotine, pk=nic_id)
-        # Check sale status and retrieve relevant price from Size
+        # Check sale status and retrieve relevant price from Size model
         if product.on_sale:
             price = size.sale_price
         else:
@@ -28,9 +28,7 @@ def cart_contents(request):
         total += quantity * price
         product_count += quantity
         cart_items.append({
-            'item_id': product_id,
-            'size_id': size_id,
-            'nic_id': nic_id,
+            'item_id': item,
             'product': product,
             'size': size,
             'nic': nic,

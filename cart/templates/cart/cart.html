@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load cart_tools %}
 
 {% block content %}
 
@@ -12,7 +13,6 @@
                     <table class="table table-borderless text-center">
                         <thead>
                             <tr>
-                                <!-- <th scope="col">#</th> -->
                                 <th scope="col">Item</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Qty</th>
@@ -22,11 +22,40 @@
                         <tbody>
                             {% for item in cart_items %}
                             <tr>
-                                <!-- <th scope="row">{{ forloop.counter }}</th> -->
                                 <td>{{ item.product.friendly_name }} <span class="text-muted">({{ item.nic.strength }} {{ item.nic.type }}, {{ item.size.label }})</span></td>
                                 <td>£{{ item.price }}</td>
-                                <td>{{ item.quantity }}</td>
-                                <td>TBC</td>
+                                <td>
+                                    <form action="{% url 'update_cart' item.item_id %}" method="POST" class="form update-form">
+                                        {% csrf_token %}
+                                        <div class="form-group d-flex justify-content-center">
+                                            <div class="input-group"> 
+                        
+                                                <!-- Decrement qty -->
+                                                <div class="input-group-prepend">
+                                                    <button class="decrement-qty btn btn-sm rounded-0" 
+                                                        data-item_id="{{ item.item_id }}" id="decrement-qty_{{ item.item_id }}">
+                                                        <i class="fas fa-caret-left fa-sm"></i>
+                                                    </button>
+                                                </div>
+                        
+                                                <!-- Input qty -->
+                                                <input class="form-control form-control-sm qty_input text-center" type="number" name="quantity" value="{{ item.quantity }}" min="1" max="99" data-item_id="{{ item.item_id }}" id="id_qty_{{ item.item_id }}" autocomplete="off">
+                        
+                                                <!-- Increment qty -->
+                                                <div class="input-group-append">
+                                                    <button class="increment-qty btn btn-sm rounded-0"
+                                                    data-item_id="{{ item.item_id }}" id="increment-qty_{{ item.item_id }}">
+                                                        <i class="fas fa-caret-right fa-sm"></i>
+                                                    </button>
+                                                </div>
+                        
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <a class="update-link text-info"><small>Update</small></a>
+                                    <a class="remove-item text-danger" id="remove_{{ item.item_id }}"><small>Remove</small></a>
+                                </td>
+                                <td>£{{ item.price | calc_subtotal:item.quantity }}</td>
                             </tr>
                             {% endfor %}
                             <tr>
@@ -64,5 +93,32 @@
         </div>
     </div>    
 </div> 
+
+{% endblock %}
+
+{% block extra_js %}
+    {{ block.super }}
+    {% include 'products/includes/quantity_input_script.html' %}
+
+    <script type="text/javascript">
+        // Update quantity on click
+        $('.update-link').click(function(e) {
+            let form = $(this).prev('.update-form');
+            form.submit();
+        })
+    
+        // Remove item and reload on click
+        $('.remove-item').click(function(e) {
+            let csrfToken = "{{ csrf_token }}";
+            let itemId = $(this).attr('id').split('remove_')[1];
+            let url = `/cart/remove/${itemId}/`;
+            let data = {'csrfmiddlewaretoken': csrfToken};
+    
+            $.post(url, data)
+             .done(function() {
+                 location.reload();
+             });
+        })
+    </script>
 
 {% endblock %}
