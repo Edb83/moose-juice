@@ -8,6 +8,7 @@
     <div class="row">
         <div class="col">
             <h2 class="text-center">Cart</h2>
+
             {% if cart_items %}
                 <div class="table-responsive">
                     <table class="table table-borderless text-center">
@@ -63,6 +64,13 @@
                                     <h6><strong>Cart Total: £{{ total|floatformat:2 }}</strong></h6>
                                     <h6>Delivery: £{{ delivery|floatformat:2 }}</h6>
                                     <h4 class="mt-4"><strong>Grand Total: £{{ grand_total|floatformat:2 }}</strong></h4>
+
+                                    {% if savings > 0 %}
+                                        <p class="mb-1 text-success">
+                                            You've saved <strong>£{{ savings }}</strong> already!
+                                        </p>
+                                    {% endif %}
+
                                     {% if free_delivery_delta > 0 %}
                                         <p class="mb-1 text-danger">
                                             You could get free delivery by spending just <strong>£{{ free_delivery_delta }}</strong> more!

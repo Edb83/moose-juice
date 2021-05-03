@@ -8,6 +8,7 @@ def cart_contents(request):
 
     cart_items = []
     total = 0
+    savings = 0
     product_count = 0
     cart = request.session.get('cart', {})
 
@@ -23,6 +24,7 @@ def cart_contents(request):
         # Check sale status and retrieve relevant price from Size model
         if product.on_sale:
             price = size.sale_price
+            savings += (size.price - size.sale_price) * quantity
         else:
             price = size.price
         total += quantity * price
@@ -48,6 +50,7 @@ def cart_contents(request):
     context = {
         'cart_items': cart_items,
         'total': total,
+        'savings': savings,
         'product_count': product_count,
         'delivery': delivery,
         'free_delivery_delta': free_delivery_delta,
