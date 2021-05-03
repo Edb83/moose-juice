@@ -15,3 +15,8 @@ html {
 .remove-item {
     cursor: pointer;
 }
+
+.message-container {
+    position: fixed;
+    z-index: 999999;
+}
