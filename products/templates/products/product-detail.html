@@ -3,8 +3,8 @@
 
 {% block content %}
 
-<div class="container">
-    <h2 class="text-center">{{ product.friendly_name }}</h2>
+<div class="container text-center">
+    <h2>{{ product.friendly_name }}</h2>
     <p>{{ product.description }}</p>
     {% for tag in product.tags.all %}
         <p class="text-muted text-center">
@@ -26,32 +26,52 @@
         </ul>
     {% endfor %} -->
 
-    <form class="form" action="{% url 'add_to_cart' product.id %}" method="POST">
+    <form class="form my-3" action="{% url 'add_to_cart' product.id %}" method="POST">
         {% csrf_token %}
-        <div class="form-row my-3">
+        <div class="form-row">
             <div class="col-12 btn-group-toggle my-3" data-toggle="buttons">
-                <h5>Size:</h5>
+                <h5 class="my-3">Size</h5>
                 {% for size in product.brand.available_sizes.all %}
                     <label class="btn btn-outline-dark active">
-                        <input type="radio" name="size" value="{{ size.id }}" id="id_size_{{ size.id }}" data-item_id="{{ product.id }}" autocomplete="off"> {{ size.label }}
+                        <input type="radio" name="size" value="{{ size.id }}" autocomplete="off" required> {{ size.label }}
                     </label>
                 {% endfor %}
             </div>
 
             <div class="col-12 btn-group-toggle my-3" data-toggle="buttons">
-                <h5>Nic content:</h5>
+                <h5 class="my-3">Nic content</h5>
                 {% for nic in product.brand.available_nics.all %}
                     <label class="btn btn-outline-dark active">
-                        <input type="radio" name="nic" value="{{ nic.id }}" id="id_nic_{{ nic.id }}" data-item_id="{{ product.id }}" autocomplete="off"> {{ nic.strength }} {{ nic.type }}
+                        <input type="radio" name="nic" value="{{ nic.id }}" autocomplete="off" required> {{ nic.strength }} {{ nic.type }}
                     </label>
                 {% endfor %}
             </div>
 
             <div class="col-12">
-                <h5>Quantity:</h5>
-                <div class="form-group w-50">
-                    <div class="input-group">
-                        <input class="form-control" type="number" name="quantity" value="1" min="1" max="99" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}">
+                <h5 class="my-3">Quantity</h5>
+                <div class="form-group d-flex justify-content-center">
+                    <div class="input-group" style="max-width: fit-content">
+
+                        <div class="input-group-prepend">
+                            <button class="decrement-qty btn btn-black rounded-0" 
+                                data-item_id="{{ product.id }}" id="decrement-qty_{{ product.id }}">
+                                <span class="icon">
+                                    <i class="fas fa-caret-left"></i>
+                                </span>
+                            </button>
+                        </div>
+
+                        <input class="form-control qty_input text-center" type="number" name="quantity" value="1" min="1" max="99" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}" autocomplete="off">
+
+                        <div class="input-group-append">
+                            <button class="increment-qty btn btn-black rounded-0"
+                            data-item_id="{{ product.id }}" id="increment-qty_{{ product.id }}">
+                                <span class="icon">
+                                    <i class="fas fa-caret-right"></i>
+                                </span>
+                            </button>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -75,4 +95,9 @@
 
 </div>
 
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+{% include 'products/includes/quantity_input_script.html' %}
 {% endblock %}
