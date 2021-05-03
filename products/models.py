@@ -3,8 +3,10 @@ from django.db import models
 
 class Size(models.Model):
     label = models.CharField(max_length=50, null=True, blank=True)
-    price = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
-    sale_price = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
+    price = models.DecimalField(
+        max_digits=4, decimal_places=2, null=True, blank=True)
+    sale_price = models.DecimalField(
+        max_digits=4, decimal_places=2, null=True, blank=True)
 
     def __str__(self):
         return self.label
@@ -68,10 +70,5 @@ class Product(models.Model):
     average_rating = models.PositiveSmallIntegerField(null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
 
-    # def save(self, *args, **kwargs):
-    #     size = self.brand__available_sizes__value
-    #     self.price = self.price_per_ml*size
-    #     super().save(*args, **kwargs)
-
     def __str__(self):
-        return self.name
+        return self.friendly_name

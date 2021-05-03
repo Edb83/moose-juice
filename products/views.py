@@ -49,15 +49,15 @@ def all_products(request):
             if not query:
                 messages.error(request, "You forgot to put the words in!")
                 return redirect(reverse('products'))
-            # Need to amend to search on flavours
 
             queries = (
-                Q(friendly_name__iexact=query) |
-                # Q(description__icontains=query)
-                Q(tags__name__iexact=query)
+                Q(friendly_name__icontains=query) |
+                Q(description__icontains=query) |
+                Q(tags__name__icontains=query)
                 )
 
-            products = products.filter(queries)
+            # distinct disregards duplicate rows across tables
+            products = products.filter(queries).distinct()
 
     current_sorting = f'{sort}_{direction}'
 
