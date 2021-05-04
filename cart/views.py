@@ -13,10 +13,10 @@ def add_to_cart(request, item_id):
     """ Add a quantity of the chosen product (inc options) to the shopping cart """
 
     product = Product.objects.get(pk=item_id)
-    size = request.POST.get('size')
-    nic = request.POST.get('nic')
+    size_id = request.POST.get('size')
+    nic_id = request.POST.get('nic')
     # Create string representing item and options chosen for contexts.py
-    item = f'{item_id}_{size}_{nic}'
+    item = f'{item_id}_{size_id}_{nic_id}'
     quantity = int(request.POST.get('quantity'))
     redirect_url = request.POST.get('redirect_url')
     cart = request.session.get('cart', {})
@@ -25,7 +25,7 @@ def add_to_cart(request, item_id):
         cart[item] += quantity
     else:
         cart[item] = quantity
-        messages.success(request, f'Added {product.friendly_name} to the cart!')
+        messages.success(request, f'Added {product.friendly_name}!')
 
     request.session['cart'] = cart
     return redirect(redirect_url)
@@ -35,13 +35,16 @@ def add_to_cart(request, item_id):
 def update_cart(request, item_id):
     """ Update quantity of the chosen product in shopping cart """
 
+    product = Product.objects.get(pk=item_id.split('_')[0])
     quantity = int(request.POST.get('quantity'))
     cart = request.session.get('cart', {})
 
     if quantity > 0:
         cart[item_id] = quantity
+        messages.success(request, f'Updated {product.friendly_name}')
     else:
         cart.pop(item_id)
+        messages.success(request, f'Removed {product.friendly_name}')
 
     request.session['cart'] = cart
     return redirect(reverse('view_cart'))
@@ -50,10 +53,12 @@ def update_cart(request, item_id):
 def remove_from_cart(request, item_id):
     """ Remove chosen product from shopping cart """
 
+    product = Product.objects.get(pk=item_id.split('_')[0])
     cart = request.session.get('cart', {})
 
     try:
         cart.pop(item_id)
+        messages.success(request, f'Removed {product.friendly_name}')
 
         request.session['cart'] = cart
         return HttpResponse(status=200)

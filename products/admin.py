@@ -16,6 +16,14 @@ class BrandAdmin(admin.ModelAdmin):
         )
 
 
+class SizeAdmin(admin.ModelAdmin):
+    list_display = (
+        'label',
+        'price',
+        'sale_price',
+    )
+
+
 class NicotineAdmin(admin.ModelAdmin):
     list_display = (
         'strength',
@@ -43,7 +51,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Brand, BrandAdmin)
-admin.site.register(Size)
+admin.site.register(Size, SizeAdmin)
 admin.site.register(Nicotine, NicotineAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Tag, TagAdmin)

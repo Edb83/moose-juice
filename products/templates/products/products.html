@@ -35,7 +35,7 @@
     </div>
     <div class="row">
         <div class="col">
-            {{ products|length }} Juice{% if products|length > 1 %}s{% endif %}{% if search_term %} found with <strong>"{{ search_term }}"</strong>{% endif %}
+            {{ products|length }} Juice{{products|length|pluralize }}{% if search_term %} found with <strong>"{{ search_term }}"</strong>{% endif %}
         </div>
     </div>
 

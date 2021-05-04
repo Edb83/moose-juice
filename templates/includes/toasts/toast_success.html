@@ -8,6 +8,40 @@
         </button>
     </div>
     <div class="toast-body bg-white">
-        {{ message }}        
+        <div class="row">
+            <div class="col">
+                {{ message }}
+            </div>
+        </div>
+
+        {% if grand_total %}
+            <hr>
+            <p>You have <strong>{{ product_count }}</strong> item{{ product_count|pluralize }} in your cart</p>
+            {% for item in cart_items %}
+                <p><strong>{{ item.quantity }}</strong> x {{ item.product.friendly_name }} ({{ item.nic.strength }} {{ item.nic.type }})</p>
+            {% endfor %}
+            <div class="row">
+                <div class="col">
+                    <p>
+                        <strong>
+                            Total{% if free_delivery_delta > 0 %} (Exc. delivery){% endif %}:
+                            <span class="float-right">£{{ total|floatformat:2 }}</span>
+                        </strong>
+                    </p>
+                    {% if free_delivery_delta > 0 %}
+                    <p>
+                        Spend <strong>£{{ free_delivery_delta }}</strong> more for free delivery!
+                    </p>
+                    {% endif %}
+                    <a href="{% url 'view_cart' %}" class="btn btn-outline-dark">
+                        Secure Checkout
+                        <span class="icon">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+
     </div>
 </div>
