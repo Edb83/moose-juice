@@ -4,3 +4,6 @@ Solution: find erroneous string iteration pointing to Nicotine (4 items) rather 
 Bug 2: search queries with multiple criteria would return duplicate results
 Solution: using .distinct() on the filtered query
 
+Bug 3: line order items can be set to 0 in Admin
+Solution: due to setting default=0 ?
+
