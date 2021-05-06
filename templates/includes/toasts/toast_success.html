@@ -14,7 +14,7 @@
             </div>
         </div>
 
-        {% if grand_total %}
+        {% if grand_total and not on_profile_page %}
             <hr>
             <p>You have <strong>{{ product_count }}</strong> item{{ product_count|pluralize }} in your cart</p>
             {% for item in cart_items %}

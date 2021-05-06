@@ -14,4 +14,21 @@
         </div>
     </div>
 
+    <h2 class="text-center">
+        Default delivery info
+    </h2>
+    <form action="{% url 'profile' %}" method="POST" id="profile-update-form">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button class="btn btn-outline-dark">Update info</button>
+    </form>
+    <div class="col">
+        <h2 class="text-center">
+            Order History
+        </h2>
+        {% for order in orders %}
+            <p>{{ order }}</p>
+        {% endfor %}
+    </div>
+
 {% endblock %}
