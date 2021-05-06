@@ -27,7 +27,12 @@
             Order History
         </h2>
         {% for order in orders %}
-            <p>{{ order }}</p>
+            <div><a href="{% url 'order_history' order.order_number %}">{{ order.order_number }}</a> | {{ order.date }} | £{{ order.grand_total }}</div>
+            {% for item in order.lineitems.all %}
+                <p>{{ item.product.friendly_name }}</p>
+                <p>{{ item.bottle_size.label }}</p>
+                <p>{{ item.nicotine.strength }}</p>
+            {% endfor %}
         {% endfor %}
     </div>
 
