@@ -7,6 +7,6 @@ Solution: using .distinct() on the filtered query
 Bug 3: line order items can be set to 0 in Admin
 Solution: due to setting default=0 ?
 
-Bug 4: line order items have price tied to the model when it should be set on save
-Solution: 
+<!-- Bug 4: line order items have price tied to the model when it should be set on save
+Solution:  -->
 

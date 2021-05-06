@@ -35,3 +35,14 @@
     color: #000;
     border: 1px solid #000;
 }
+
+select,
+select option {
+    color: #000;
+}
+
+
+select option[value=""],
+select:invalid {
+    color: #aab7c4 !important;
+}
