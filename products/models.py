@@ -37,6 +37,9 @@ class Brand(models.Model):
     def __str__(self):
         return self.name
 
+    def get_friendly_name(self):
+        return self.friendly_name
+
 
 class Category(models.Model):
     class Meta:
@@ -47,6 +50,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_friendly_name(self):
+        return self.friendly_name
 
 
 class Tag(models.Model):
@@ -59,7 +65,6 @@ class Tag(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=50)
-    friendly_name = models.CharField(max_length=50, null=True, blank=True)
     on_sale = models.BooleanField(default=False)
     description = models.TextField()
     brand = models.ForeignKey(
@@ -71,4 +76,4 @@ class Product(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.friendly_name
+        return self.name

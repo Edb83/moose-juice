@@ -49,7 +49,7 @@
                             <strong>Sale!</strong>
                         {% endif %}
                         <a href="{% url 'product_detail' product.id %}">
-                            <h5 class="card-title">{{ product.friendly_name }}</h5>
+                            <h5 class="card-title">{{ product.name }}</h5>
                         </a>
                         {% if product.average_rating %}
                             <small class="text-muted">{{ product.average_rating }} / 5</small>

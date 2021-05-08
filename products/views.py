@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.db.models import Q  # for handling complex queries
 from django.db.models.functions import Lower
 from .models import Product, Brand, Category
+from .forms import ProductForm
 
 
 def all_products(request):
@@ -83,3 +84,26 @@ def product_detail(request, product_id):
     }
 
     return render(request, 'products/product-detail.html', context)
+
+
+def add_product(request):
+    """ Add a product to the store """
+
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Product successfully added')
+            return redirect(reverse('add_product'))
+        else:
+            messages.error(request, 'Failed to add product - please check form and try again')
+
+    else:
+        form = ProductForm()
+
+    template = 'products/add-product.html'
+    context = {
+        'form': form,
+    }
+
+    return render(request, template, context)
