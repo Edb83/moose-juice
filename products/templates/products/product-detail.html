@@ -94,7 +94,15 @@
 
     <!-- Reviews -->
     <h2 class="text-center">Reviews</h2>
-    <div id="product-reviews" class="reviews-wrapper">
+    <div class="review-form-wrapper">
+        {% if request.user.is_authenticated %}
+            {% include 'products/includes/product-review-form.html' %}
+        {% else %}
+            <p class="text-center">Please <a class="dropdown-item" href="{% url 'account_signup' %}">Register</a> or <a class="dropdown-item" href="{% url 'account_login' %}">Login</a> to leave a review.</p>
+        {% endif %}
+    </div>
+
+    <div id="product-reviews" class="reviews-wrapper my-5">
         {% for review in product.reviews.all %}
             <div class="card">
                 <div class="card-header">
@@ -110,7 +118,7 @@
                 </div>
               </div>
         {% empty %}
-              <p>No reviews yet!</p>
+              <p class="text-center">No reviews yet!</p>
         {% endfor %}
     </div>
 

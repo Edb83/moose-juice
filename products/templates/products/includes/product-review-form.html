@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="col-12 col-md-8 mx-auto">
+        <form method="POST" action="{% url 'product_detail' product.id %}" class="form mb-2">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <div class="text-right">
+                <button class="btn btn-outline-dark rounded-0" type="submit">Submit Review</button>
+            </div>
+        </form>
+    </div>            
+</div>

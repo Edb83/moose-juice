@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.db.models import Q  # for handling complex queries
 from django.db.models.functions import Lower
 from .models import Product, Brand, Category
-from .forms import ProductForm
+from .forms import ProductForm, ReviewForm
 
 
 def all_products(request):
@@ -75,12 +75,31 @@ def all_products(request):
 
 
 def product_detail(request, product_id):
-    """ A view to return individual Product details """
+    """
+    A view to return individual Product details and a form for
+    submitting product reviews and ratings
+    """
 
     product = get_object_or_404(Product, pk=product_id)
 
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.product = product
+            review.user = request.user
+            review.save()
+            messages.success(request, 'Review added')
+            return redirect(reverse('product_detail', args=[product.id]))
+        else:
+            messages.error(request, 'Failed to add review - please check form and try again')
+    else:
+        form = ReviewForm()
+
     context = {
         'product': product,
+        'form': form,
     }
 
     return render(request, 'products/product-detail.html', context)
