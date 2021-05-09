@@ -75,7 +75,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             {% if request.user.is_authenticated %}
-                                <a class="dropdown-item" href="#">Profile</a>
+                                <a class="dropdown-item" href="{% url 'profile' %}">Dashboard</a>
                                 <a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
                             {% else %}
                                 <a class="dropdown-item" href="{% url 'account_signup' %}">Register</a>

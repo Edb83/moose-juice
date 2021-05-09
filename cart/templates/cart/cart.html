@@ -23,7 +23,7 @@
                         <tbody>
                             {% for item in cart_items %}
                             <tr>
-                                <td>{{ item.product.friendly_name }} <span class="text-muted">({{ item.nic.strength }} {{ item.nic.type }}, {{ item.size.label }})</span></td>
+                                <td>{{ item.product.name }} <span class="text-muted">({{ item.nic.strength }} {{ item.nic.type }}, {{ item.size.label }})</span></td>
                                 <td>£{{ item.price }}</td>
                                 <td>
                                     <form action="{% url 'update_cart' item.item_id %}" method="POST" class="form update-form">

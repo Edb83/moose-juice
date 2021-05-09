@@ -8,32 +8,88 @@
 {% block content %}
 
 <div class="container">
-    <div class="row">
+    <div class="row mb-5">
         <div class="col">
-            <h2 class="text-center">Profile</h2>
+            <h2 class="text-center">Account Dashboard</h2>
         </div>
     </div>
+    
+    <!-- <div class="col">
+        {% for order in orders %}
+            <div><a href="{% url 'order_history' order.order_number %}">{{ order.order_number }}</a> | {{ order.date }} | £{{ order.grand_total }}</div>
+            {% for item in order.lineitems.all %}
+                <p>{{ item.product.name }} - {{ item.bottle_size.label }} - {{ item.nicotine.strength }}</p>
+            {% endfor %}
+        {% endfor %}
+    </div> -->
 
-    <h2 class="text-center">
-        Default delivery info
-    </h2>
-    <form action="{% url 'profile' %}" method="POST" id="profile-update-form">
+  <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a class="nav-link active btn btn-outline-dark" id="pills-details-tab" data-toggle="pill" href="#pills-details" role="tab" aria-controls="pills-details" aria-selected="true">Details</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link btn btn-outline-dark" id="pills-orders-tab" data-toggle="pill" href="#pills-orders" role="tab" aria-controls="pills-orders" aria-selected="false">Orders</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link btn btn-outline-dark" id="pills-points-tab" data-toggle="pill" href="#pills-points" role="tab" aria-controls="pills-points" aria-selected="false">Points</a>
+    </li>
+  </ul>
+  <div class="tab-content col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-details" role="tabpanel" aria-labelledby="pills-details-tab">
+      <form action="{% url 'profile' %}" method="POST" id="profile-update-form">
         {% csrf_token %}
         {{ form|crispy }}
         <button class="btn btn-outline-dark">Update info</button>
     </form>
-    <div class="col">
-        <h2 class="text-center">
-            Order History
-        </h2>
-        {% for order in orders %}
-            <div><a href="{% url 'order_history' order.order_number %}">{{ order.order_number }}</a> | {{ order.date }} | £{{ order.grand_total }}</div>
-            {% for item in order.lineitems.all %}
-                <p>{{ item.product.friendly_name }}</p>
-                <p>{{ item.bottle_size.label }}</p>
-                <p>{{ item.nicotine.strength }}</p>
-            {% endfor %}
-        {% endfor %}
     </div>
+    <div class="tab-pane fade" id="pills-orders" role="tabpanel" aria-labelledby="pills-orders-tab">
+      
+    <table class="table table-sm table-borderless">
+      <thead>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Order</th>
+          <th scope="col">Items</th>
+          <th scope="col">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for order in orders %}
+        <tr>
+          <td scope="row">{{ order.date|date:"SHORT_DATE_FORMAT" }}</th>
+          <td><a href="{% url 'order_history' order.order_number %}" title="{{ order.order_number }}">{{ order.order_number|truncatechars:6 }}</a></td>
+          <td>{{ order.lineitems.all|length }}</td>
+          <td>£{{ order.grand_total }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+    <div class="tab-pane fade" id="pills-points" role="tabpanel" aria-labelledby="pills-points-tab">
+      TBC
+    </div>
+  </div>
 
+
+    
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+<script>
+$('#pills-details-tab').on('click', function (event) {
+  event.preventDefault()
+  $(this).tab('show')
+})
+$('#pills-orders-tab').on('click', function (event) {
+  event.preventDefault()
+  $(this).tab('show')
+})
+$('#pills-points-tab').on('click', function (event) {
+  event.preventDefault()
+  $(this).tab('show')
+})
+</script>
 {% endblock %}

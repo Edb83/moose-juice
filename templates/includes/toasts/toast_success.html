@@ -18,7 +18,7 @@
             <hr>
             <p>You have <strong>{{ product_count }}</strong> item{{ product_count|pluralize }} in your cart</p>
             {% for item in cart_items %}
-                <p><strong>{{ item.quantity }}</strong> x {{ item.product.friendly_name }} ({{ item.nic.strength }} {{ item.nic.type }})</p>
+                <p><strong>{{ item.quantity }}</strong> x {{ item.product.name }} ({{ item.nic.strength }} {{ item.nic.type }})</p>
             {% endfor %}
             <div class="row">
                 <div class="col">

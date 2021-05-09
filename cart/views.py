@@ -23,9 +23,10 @@ def add_to_cart(request, item_id):
 
     if item in list(cart.keys()):
         cart[item] += quantity
+        messages.success(request, f'Added more {product.name}')
     else:
         cart[item] = quantity
-        messages.success(request, f'Added {product.friendly_name}!')
+        messages.success(request, f'Added {product.name}')
 
     request.session['cart'] = cart
     return redirect(redirect_url)
@@ -41,10 +42,10 @@ def update_cart(request, item_id):
 
     if quantity > 0:
         cart[item_id] = quantity
-        messages.success(request, f'Updated {product.friendly_name}')
+        messages.success(request, f'Updated {product.name}')
     else:
         cart.pop(item_id)
-        messages.success(request, f'Removed {product.friendly_name}')
+        messages.success(request, f'Removed {product.name}')
 
     request.session['cart'] = cart
     return redirect(reverse('view_cart'))
@@ -58,7 +59,7 @@ def remove_from_cart(request, item_id):
 
     try:
         cart.pop(item_id)
-        messages.success(request, f'Removed {product.friendly_name}')
+        messages.success(request, f'Removed {product.name}')
 
         request.session['cart'] = cart
         return HttpResponse(status=200)

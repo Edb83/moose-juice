@@ -4,15 +4,14 @@
 {% block content %}
 
 <div class="container text-center">
-    <h2>{{ product.friendly_name }}</h2>
+    <h2>{{ product.name }}</h2>
     <p>{{ product.description }}</p>
-    {% for tag in product.tags.all %}
-        <p class="text-muted text-center">
-            <a href="{% url 'products' %}?q={{tag.name}}">{{ tag.name }}</a>
-        </p> 
-    {% endfor %}
+    <ul class="list-inline">
+        {% for tag in product.tags.all %}
+        <li class="list-inline-item"><a href="{% url 'products' %}?q={{tag.name}}">{{ tag.name }}</a></li>
+        {% endfor %}
+    </ul>
     <hr>
-
     <form class="form my-3" action="{% url 'add_to_cart' product.id %}" method="POST">
         {% csrf_token %}
         <div class="form-row">
@@ -20,7 +19,7 @@
             <div class="col-12 btn-group-toggle my-3" data-toggle="buttons">
                 <h5 class="my-3">Size</h5>
                 {% for size in product.brand.available_sizes.all %}
-                    <label class="btn btn-outline-dark active">
+                    <label class="btn btn-outline-dark active m-1">
                         <input type="radio" name="size" value="{{ size.id }}" autocomplete="off" required> {{ size.label }}
                     </label>
                 {% endfor %}
@@ -30,14 +29,14 @@
             <div class="col-12 btn-group-toggle my-3" data-toggle="buttons">
                 <h5 class="my-3">Nic content</h5>
                 {% for nic in product.brand.available_nics.all %}
-                    <label class="btn btn-outline-dark active">
+                    <label class="btn btn-outline-dark active m-1">
                         <input type="radio" name="nic" value="{{ nic.id }}" autocomplete="off" required> {{ nic.strength }} {{ nic.type }}
                     </label>
                 {% endfor %}
             </div>
 
             <!-- Quantity -->
-            <div class="col-12">
+            <div class="col-auto mx-auto">
                 <h5 class="my-3">Quantity</h5>
                 <div class="form-group d-flex justify-content-center">
                     <div class="input-group"> 
