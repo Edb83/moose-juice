@@ -7,6 +7,17 @@
 
     <!-- Product -->
     <h2 class="text-center">{{ product.name }}</h2>
+    {% if request.user.is_superuser %}
+    <div class="row">
+        <div class="col-auto mx-auto">
+            <small class="text-center">
+                <a href="{% url 'edit_product' product.id %}">Edit</a> | 
+                <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
+            </small>
+        </div>
+    </div>
+    {% endif %}
+
     {% if product.reviews.all %}
         <p class="text-center">{{ product.average_rating | floatformat:2 }}</p>
         <p class="text-center"><a href="#product-reviews">{{ product.reviews.all | length }} review{{ product.reviews.all | length | pluralize }}</a></p>
@@ -20,7 +31,9 @@
         {% endfor %}
     </ul>
     <p class="text-center">{{ product.description }}</p>
+
     <hr>
+
     <form class="form my-3 text-center" action="{% url 'add_to_cart' product.id %}" method="POST">
         {% csrf_token %}
         <div class="form-row">
