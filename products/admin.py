@@ -45,10 +45,12 @@ class ProductAdmin(admin.ModelAdmin):
         'name',
         'brand',
         'category',
+        'average_rating',
         'on_sale',
     )
     ordering = ('brand', 'name',)
     filter_horizontal = ('tags', 'tags')
+    readonly_fields = ('average_rating',)
 
 
 class ProductReviewAdmin(admin.ModelAdmin):

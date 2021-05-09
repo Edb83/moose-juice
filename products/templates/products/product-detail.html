@@ -7,12 +7,19 @@
 
     <!-- Product -->
     <h2 class="text-center">{{ product.name }}</h2>
-    <p class="text-center">{{ product.description }}</p>
+    {% if product.reviews.all %}
+        <p class="text-center">{{ product.average_rating | floatformat:2 }}</p>
+        <p class="text-center"><a href="#product-reviews">{{ product.reviews.all | length }} review{{ product.reviews.all | length | pluralize }}</a></p>
+    {% else %}
+        <p class="text-center">No reviews</p>
+        <p class="text-center"><a href="#product-reviews">Leave your own?</a></p>
+    {% endif %}
     <ul class="list-inline text-center">
         {% for tag in product.tags.all %}
-        <li class="list-inline-item"><a href="{% url 'products' %}?q={{tag.name}}">{{ tag.name }}</a></li>
+        <li class="list-inline-item"><a href="{% url 'products' %}?q={{tag.name}}">{{ tag.name | capfirst }}</a></li>
         {% endfor %}
     </ul>
+    <p class="text-center">{{ product.description }}</p>
     <hr>
     <form class="form my-3 text-center" action="{% url 'add_to_cart' product.id %}" method="POST">
         {% csrf_token %}
@@ -87,11 +94,12 @@
 
     <!-- Reviews -->
     <h2 class="text-center">Reviews</h2>
-    <div class="reviews-wrapper">
+    <div id="product-reviews" class="reviews-wrapper">
         {% for review in product.reviews.all %}
             <div class="card">
                 <div class="card-header">
-                    {{ review.rating }}
+                    <p class="text-center">{{ review.rating }}</p>
+                    {% if review.verified_purchase %}<p class="text-center"><small>Verified purchase</small></p>{% endif %}
                 </div>
                 <div class="card-body">
                   <h5 class="card-title">{{ review.title }}</h5>

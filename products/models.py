@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from django.db.models import Avg
+
 
 class Size(models.Model):
     label = models.CharField(max_length=50, null=True, blank=True)
@@ -73,8 +75,13 @@ class Product(models.Model):
     category = models.ForeignKey(
         'Category', null=True, blank=True, on_delete=models.SET_NULL)
     tags = models.ManyToManyField(Tag)
-    average_rating = models.PositiveSmallIntegerField(null=True, blank=True)
+    average_rating = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
+
+    def calculate_rating(self):
+        self.average_rating = self.reviews.all().aggregate(Avg("rating"))[
+            'rating__avg']
+        self.save()
 
     def __str__(self):
         return self.name
@@ -87,8 +94,9 @@ class ProductReview(models.Model):
         User, null=True, blank=True, on_delete=models.CASCADE)
     title = models.CharField(max_length=254)
     body = models.TextField()
-    rating = models.IntegerField()
+    rating = models.DecimalField(max_digits=4, decimal_places=2, default=3)
     created_on = models.DateTimeField(auto_now_add=True)
+    verified_purchase = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
