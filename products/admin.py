@@ -6,6 +6,7 @@ from products.models import (
     Category,
     Tag,
     Product,
+    ProductReview
 )
 
 
@@ -50,9 +51,20 @@ class ProductAdmin(admin.ModelAdmin):
     filter_horizontal = ('tags', 'tags')
 
 
+class ProductReviewAdmin(admin.ModelAdmin):
+    list_display = (
+        'product',
+        'user',
+        'created_on',
+        'rating',
+    )
+    ordering = ('created_on',)
+
+
 admin.site.register(Brand, BrandAdmin)
 admin.site.register(Size, SizeAdmin)
 admin.site.register(Nicotine, NicotineAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Product, ProductAdmin)
+admin.site.register(ProductReview, ProductReviewAdmin)

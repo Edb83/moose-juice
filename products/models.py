@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Size(models.Model):
@@ -77,3 +78,17 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class ProductReview(models.Model):
+    product = models.ForeignKey(
+        Product, null=True, blank=True, related_name='reviews', on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        User, null=True, blank=True, on_delete=models.CASCADE)
+    title = models.CharField(max_length=254)
+    body = models.TextField()
+    rating = models.IntegerField()
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
