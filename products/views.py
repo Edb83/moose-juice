@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
 from django.db.models import Q  # for handling complex queries
 from django.db.models.functions import Lower
 from .models import Product, Brand, Category
@@ -81,21 +83,23 @@ def product_detail(request, product_id):
     """
 
     product = get_object_or_404(Product, pk=product_id)
+    form = None
 
-    if request.method == 'POST':
-        form = ReviewForm(request.POST)
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = ReviewForm(request.POST)
 
-        if form.is_valid():
-            review = form.save(commit=False)
-            review.product = product
-            review.user = request.user
-            review.save()
-            messages.success(request, 'Review added')
-            return redirect(reverse('product_detail', args=[product.id]))
+            if form.is_valid():
+                review = form.save(commit=False)
+                review.product = product
+                review.user = request.user
+                review.save()
+                messages.success(request, 'Review added')
+                return redirect(reverse('product_detail', args=[product.id]))
+            else:
+                messages.error(request, 'Failed to add review - please check form and try again')
         else:
-            messages.error(request, 'Failed to add review - please check form and try again')
-    else:
-        form = ReviewForm()
+            form = ReviewForm()
 
     context = {
         'product': product,
@@ -105,8 +109,13 @@ def product_detail(request, product_id):
     return render(request, 'products/product-detail.html', context)
 
 
+@login_required
 def add_product(request):
     """ Add a product to the store """
+
+    if not request.user.is_superuser:
+        messages.error(request, "Sorry, you don't have the necessary permissions to do that.")
+        return redirect(reverse('home'))
 
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
@@ -128,10 +137,15 @@ def add_product(request):
     return render(request, template, context)
 
 
+@login_required
 def edit_product(request, product_id):
     """
     Edit a product in the store
     """
+
+    if not request.user.is_superuser:
+        messages.error(request, "Sorry, you don't have the necessary permissions to do that.")
+        return redirect(reverse('home'))
 
     product = get_object_or_404(Product, pk=product_id)
 
@@ -157,10 +171,16 @@ def edit_product(request, product_id):
     return render(request, template, context)
 
 
+@login_required
 def delete_product(request, product_id):
     """
     Delete a product from the store
     """
+
+    if not request.user.is_superuser:
+        messages.error(request, "Sorry, you don't have the necessary permissions to do that.")
+        return redirect(reverse('home'))
+
     product = get_object_or_404(Product, pk=product_id)
     product_name = product.name
     product.delete()

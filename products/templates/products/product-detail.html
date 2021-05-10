@@ -111,7 +111,7 @@
         {% if request.user.is_authenticated %}
             {% include 'products/includes/product-review-form.html' %}
         {% else %}
-            <p class="text-center">Please <a class="dropdown-item" href="{% url 'account_signup' %}">Register</a> or <a class="dropdown-item" href="{% url 'account_login' %}">Login</a> to leave a review.</p>
+            <p class="text-center">Please <a href="{% url 'account_signup' %}">Register</a> or <a href="{% url 'account_login' %}">Login</a> to leave a review.</p>
         {% endif %}
     </div>
 
