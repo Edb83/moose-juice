@@ -7,6 +7,15 @@
 
     <!-- Product -->
     <h2 class="text-center">{{ product.name }}</h2>
+    {% if not product in user_profile.favourites.all %}
+        <a href="{% url 'add_to_favourites' product.id %}"><span class="icon">
+            <i class="far fa-heart fa-fw"></i>
+        </span></a>
+    {% else %}
+        <a href="{% url 'remove_from_favourites' product.id %}"><span class="icon">
+            <i class="fas fa-heart fa-fw"></i>
+        </span></a>
+    {% endif %}
     {% if request.user.is_superuser %}
     <div class="row">
         <div class="col-auto mx-auto">

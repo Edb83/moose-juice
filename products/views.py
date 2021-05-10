@@ -4,7 +4,10 @@ from django.contrib.auth.decorators import login_required
 
 from django.db.models import Q  # for handling complex queries
 from django.db.models.functions import Lower
+
 from .models import Product, Brand, Category
+from profiles.models import UserProfile
+
 from .forms import ProductForm, ReviewForm
 
 
@@ -18,6 +21,11 @@ def all_products(request):
     brand = None
     category = None
     query = None
+    if request.user.is_authenticated:
+        user_profile = get_object_or_404(UserProfile, user_id=request.user)
+    else:
+        user_profile = None
+    favourites = False
 
     if request.GET:
         if 'sort' in request.GET:
@@ -47,6 +55,11 @@ def all_products(request):
             products = products.filter(category__name=category)
             category = get_object_or_404(Category, name=category)
 
+        if 'favourites' in request.GET:
+            if user_profile:
+                products = user_profile.favourites.all()
+            favourites = True
+
         if 'q' in request.GET:
             query = request.GET['q']
             if not query:
@@ -69,6 +82,8 @@ def all_products(request):
         'search_term': query,
         'sale': sale,
         'brand': brand,
+        'user_profile': user_profile,
+        'favourites': favourites,
         'category': category,
         'current_sorting': current_sorting,
     }
@@ -107,6 +122,26 @@ def product_detail(request, product_id):
     }
 
     return render(request, 'products/product-detail.html', context)
+
+
+@login_required
+def add_to_favourites(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    user_profile = get_object_or_404(UserProfile, user_id=request.user)
+    user_profile.favourites.add(product)
+    messages.success(request, f'Added {product.name} to your favourites')
+
+    return redirect(reverse('products'))
+
+
+@login_required
+def remove_from_favourites(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    user_profile = get_object_or_404(UserProfile, user_id=request.user)
+    user_profile.favourites.remove(product)
+    messages.success(request, f'Added {product.name} to your favourites')
+
+    return redirect(reverse('products'))
 
 
 @login_required
