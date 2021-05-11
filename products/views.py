@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
@@ -21,11 +21,12 @@ def all_products(request):
     brand = None
     category = None
     query = None
+    # favourites = False
+
     if request.user.is_authenticated:
-        user_profile = get_object_or_404(UserProfile, user_id=request.user)
+        profile = get_object_or_404(UserProfile, user_id=request.user)
     else:
-        user_profile = None
-    favourites = False
+        profile = None
 
     if request.GET:
         if 'sort' in request.GET:
@@ -55,10 +56,10 @@ def all_products(request):
             products = products.filter(category__name=category)
             category = get_object_or_404(Category, name=category)
 
-        if 'favourites' in request.GET:
-            if user_profile:
-                products = user_profile.favourites.all()
-            favourites = True
+        # if 'favourites' in request.GET:
+        #     if profile:
+        #         products = profile.favourites.all()
+        #     favourites = True
 
         if 'q' in request.GET:
             query = request.GET['q']
@@ -82,8 +83,8 @@ def all_products(request):
         'search_term': query,
         'sale': sale,
         'brand': brand,
-        'user_profile': user_profile,
-        'favourites': favourites,
+        'profile': profile,
+        # 'favourites': favourites,
         'category': category,
         'current_sorting': current_sorting,
     }
@@ -96,6 +97,10 @@ def product_detail(request, product_id):
     A view to return individual Product details and a form for
     submitting product reviews and ratings
     """
+    if request.user.is_authenticated:
+        profile = get_object_or_404(UserProfile, user_id=request.user)
+    else:
+        profile = None
 
     product = get_object_or_404(Product, pk=product_id)
     form = None
@@ -118,6 +123,7 @@ def product_detail(request, product_id):
 
     context = {
         'product': product,
+        'profile': profile,
         'form': form,
     }
 
@@ -125,23 +131,30 @@ def product_detail(request, product_id):
 
 
 @login_required
-def add_to_favourites(request, product_id):
-    product = get_object_or_404(Product, pk=product_id)
-    user_profile = get_object_or_404(UserProfile, user_id=request.user)
-    user_profile.favourites.add(product)
-    messages.success(request, f'Added {product.name} to your favourites')
+def favourites(request):
+    profile = get_object_or_404(UserProfile, user=request.user)
+    products = profile.favourites.all()
+    template = 'products/favourites.html'
+    context = {
+        'products': products,
+    }
 
-    return redirect(reverse('products'))
+    return render(request, template, context)
 
 
 @login_required
-def remove_from_favourites(request, product_id):
+def toggle_favourite(request, product_id):
+    profile = get_object_or_404(UserProfile, user=request.user)
     product = get_object_or_404(Product, pk=product_id)
-    user_profile = get_object_or_404(UserProfile, user_id=request.user)
-    user_profile.favourites.remove(product)
-    messages.success(request, f'Added {product.name} to your favourites')
+    if profile.favourites.filter(pk=product_id).exists():
+        profile.favourites.remove(product)
+        messages.success(request, f'Removed {product.name} from your favourites')
+    else:
+        profile.favourites.add(product)
+        messages.success(request, f'Added {product.name} to your favourites')
 
-    return redirect(reverse('products'))
+    # NEED TO HANDLE 'next'
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 
 @login_required

@@ -14,9 +14,6 @@
         {% elif sale %}
             <h2 class="text-center">Sale</h2>
             <p>Grab your favourite Moose Juice while it's on sale!</p>
-        {% elif favourites %}
-            <h2 class="text-center">Favourites</h2>
-            <p>Here are your favourite Moose Juices!</p>
         {% else %}
             <h2 class="text-center">Moose Juice</h2>
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi eius laboriosam cumque suscipit aperiam, facere id eum inventore perspiciatis atque? Sed quidem maiores veniam eius hic aspernatur, non similique tempore.</p>
@@ -48,15 +45,15 @@
                 <div class="card h-100">
                     <img src="" class="card-img-top" alt="">
                     <div class="card-body">
-                        <!-- {% if not product in user_profile.favourites.all %}
-                            <a href="{% url 'add_to_favourites' product.id %}"><span class="icon">
+                        <a href="{% url 'toggle_favourite' product.id %}">
+                            <span class="icon">
+                                {% if product not in profile.favourites.all %}
                                 <i class="far fa-heart fa-fw"></i>
-                            </span></a>
-                        {% else %}
-                            <a href="{% url 'remove_from_favourites' product.id %}"><span class="icon">
+                                {% else %}
                                 <i class="fas fa-heart fa-fw"></i>
-                            </span></a>
-                        {% endif %} -->
+                                {% endif %}
+                            </span>
+                        </a>
                         {% if product.on_sale %}
                             <strong>Sale!</strong>
                         {% endif %}
