@@ -81,11 +81,12 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request',  #required by Allauth
+                'django.template.context_processors.request',  # for Allauth
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
                 'cart.contexts.cart_contents',
+                'home.contexts.product_groups',  # access to brands/categories
             ],
             'builtins': [
                 'crispy_forms.templatetags.crispy_forms_tags',

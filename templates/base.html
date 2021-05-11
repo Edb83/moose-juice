@@ -49,9 +49,9 @@
                             Brands
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="{% url 'products' %}?brand=minimoose">Mini Moose</a>
-                            <a class="dropdown-item" href="{% url 'products' %}?brand=bigmoose">Big Moose</a>
-                            <a class="dropdown-item" href="{% url 'products' %}?brand=saltymoose">Salty Moose</a>
+                            {% for brand in brands %}
+                                <a class="dropdown-item" href="{% url 'products' %}?brand={{ brand.name }}">{{ brand.friendly_name }}</a>
+                            {% endfor %}
                         </div>
                     </div>
 
@@ -60,12 +60,9 @@
                             Flavours
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="{% url 'products' %}?category=bakery">Bakery</a>
-                            <a class="dropdown-item" href="{% url 'products' %}?category=desserts">Desserts</a>
-                            <a class="dropdown-item" href="{% url 'products' %}?category=drinks">Drinks</a>
-                            <a class="dropdown-item" href="{% url 'products' %}?category=fruits">Fruits</a>
-                            <a class="dropdown-item" href="{% url 'products' %}?category=sweets">Sweets</a>
-                            <a class="dropdown-item" href="{% url 'products' %}?category=tobacco">Tobacco</a>
+                            {% for category in categories %}
+                            <a class="dropdown-item" href="{% url 'products' %}?category={{ category.name}}">{{ category.friendly_name }}</a>
+                            {% endfor %}
                         </div>
                     </div>
 
@@ -101,7 +98,7 @@
                 <div class="col-12">
                     <form method="GET" action="{% url 'products' %}">
                         <div class="input-group">
-                            <input type="text" class="form-control text-center" name="q" placeholder="What's your flavour?">
+                            <input type="text" class="form-control text-center" name="q" placeholder="What's your flavour?" autocomplete="off">
                             <span class="input-group-append">
                                 <button class="btn btn-outline-light border border-left-0 text-dark" type="submit">
                                     <i class="fa fa-search"></i>

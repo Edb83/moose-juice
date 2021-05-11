@@ -24,20 +24,27 @@
     <HR></HR>
     <h3>Brands</h3>
     <div class="d-flex justify-content-around">
-        <div>Mini Moose</div>
-        <div>Big Moose</div>
-        <div>Salty Moose</div>
+        {% for brand in brands %}
+            <div>{{ brand.friendly_name }}</div>
+        {% endfor %}
     </div>
     <hr>
+
     <h3>Flavour Profiles</h3>
-    <div class="d-flex justify-content-around">
-        <div>Bakery</div>
-        <div>Dessert</div>
-        <div>Drinks</div>
-        <div>Fruits</div>
-        <div>Sweets</div>
-        <div>Tobacco</div>
+    <div class="row d-flex justify-content-around">
+        {% for category in categories %}
+            <div class="col-12 col-sm-6 col-md-4 my-5">
+                <!-- NEED TO FIX SIZING -->
+                {% if category.image %}
+                    <a href="{% url 'products' %}?category={{category.name}}">
+                        <img class="mx-auto img-fluid mb-3" style="max-height: 96px; width: auto;" src="{{ category.image.url }}" alt="{{ category.friendly_name }}">
+                    </a>
+                {% endif %}
+                <div>{{ category.friendly_name }}</div>
+            </div>
+        {% endfor %}
     </div>
+
 </div>
 
 
