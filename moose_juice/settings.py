@@ -138,9 +138,9 @@ else:
         }
     }
 
-DATABASES = {
-    'default': dj_database_url.parse('postgres://<INSERT URL HERE>')
-}
+# DATABASES = {
+#     'default': dj_database_url.parse('postgres://<INSERT URL HERE>')
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
