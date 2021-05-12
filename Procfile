@@ -1,1 +1,1 @@
-web: gunicorn moose-juice.wsgi:application
+web: gunicorn moose_juice.wsgi:application
