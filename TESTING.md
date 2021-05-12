@@ -15,3 +15,7 @@ Solution: use a signal on Review creation/update/delete to call calculate_rating
 
 Bug 6: review save/delete signal would not fire as expected
 Solution: import the signal in the product/apps.py
+
+Bug 7: if product is deleted while exists in cart, 404 across all pages
+Solution (immediate): set cart contexts to equal 0 across the board and delete session cookies
+Solution (long-term): 
