@@ -61,18 +61,34 @@
                             {% endfor %}
                             <tr>
                                 <td colspan="4" class="pt-5 text-right">
-                                    <h6><strong>Cart Total: £{{ total|floatformat:2 }}</strong></h6>
+                                    {% if points_available > 0 and not discount_applied %}
+                                        <div class="discount-wrapper mb-3">
+                                            <a href="{% url 'toggle_discount' %}" >You have {{ points_available}} points available - Apply discount?
+                                                <span class="icon text-success"><i class="fas fa-piggy-bank"></i>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                    <h6><strong>Cart Total: £{{ original_total|floatformat:2 }}</strong></h6>
+                                    {% if discount_applied %}
+                                        <h6><strong>After discount: £{{ total|floatformat:2 }}</strong></h6>
+                                        <a href="{% url 'toggle_discount' %}" >Remove discount
+                                            <span class="icon text-danger"><i class="fas fa-times"></i>
+                                            </span>
+                                        </a>
+
+                                    {% endif %}
                                     <h6>Delivery: £{{ delivery|floatformat:2 }}</h6>
                                     <h4 class="mt-4"><strong>Grand Total: £{{ grand_total|floatformat:2 }}</strong></h4>
 
-                                    {% if savings > 0 %}
-                                        <p class="mb-1 text-success">
-                                            You've saved <strong>£{{ savings }}</strong> already!
-                                        </p>
+                                    {% if request.user and total >= 1 %}
+                                        <small class="text-info text-muted">You will earn {{ points_earned }} points for completing this purchase</small>
                                     {% endif %}
 
+                                    <!-- Toggle discount -->
+
                                     {% if free_delivery_delta > 0 %}
-                                        <p class="mb-1 text-danger">
+                                        <p class="mb-1 text-warning">
                                             You could get free delivery by spending just <strong>£{{ free_delivery_delta }}</strong> more!
                                         </p>
                                     {% endif %}
@@ -85,6 +101,7 @@
                                             <i class="fas fa-chevron-left"></i>
                                         </span>Keep Shopping
                                     </a>
+                                    
                                     <a href="{% url 'checkout' %}" class="btn btn-outline-dark mt-5">Secure Checkout
                                         <span class="icon">
                                             <i class="fas fa-lock"></i>

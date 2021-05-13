@@ -4,6 +4,8 @@ from django.db import models
 from django.db.models import Sum
 from django.conf import settings
 
+from decimal import Decimal
+
 from django_countries.fields import CountryField
 
 from products.models import Product, Size, Nicotine
@@ -49,8 +51,7 @@ class Order(models.Model):
         self.order_total = self.lineitems.aggregate(
             Sum('lineitem_total'))['lineitem_total__sum'] or 0
         if self.order_total < settings.FREE_DELIVERY_THRESHOLD:
-            self.delivery_cost = (
-                self.order_total * settings.STANDARD_DELIVERY_PERCENTAGE / 100)
+            self.delivery_cost = Decimal(settings.STANDARD_DELIVERY)
         else:
             self.delivery_cost = 0
         self.grand_total = self.order_total + self.delivery_cost

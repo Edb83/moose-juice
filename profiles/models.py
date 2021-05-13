@@ -27,8 +27,12 @@ class UserProfile(models.Model):
     # Favourite products
     favourites = models.ManyToManyField(Product)
 
+    # Reward points
+    points = models.IntegerField(default=100, null=True, blank=True)
+
     def __str__(self):
         return self.user.username
+
 
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, created, **kwargs):

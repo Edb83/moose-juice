@@ -7,8 +7,8 @@
 </li>
 <li class="nav-item list-inline-item">
     <a class="nav-link" href="{% url 'view_cart' %}">
-        {% if grand_total %}
-            £{{ grand_total|floatformat:2 }}
+        {% if total %}
+            £{{ total|floatformat:2 }}
         {% else %}
             £0.00
         {% endif %}

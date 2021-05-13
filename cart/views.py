@@ -66,3 +66,10 @@ def remove_from_cart(request, item_id):
 
     except Exception as e:
         return HttpResponse(status=500)
+
+
+def toggle_discount(request):
+    discount_applied = request.session.get('discount_applied', False)
+    request.session['discount_applied'] = not discount_applied
+    
+    return redirect(reverse('view_cart'))

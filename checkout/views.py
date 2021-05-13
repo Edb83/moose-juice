@@ -180,6 +180,7 @@ def checkout_success(request, order_number):
 
     if 'cart' in request.session:
         del request.session['cart']
+        del request.session['discount_applied']
 
     template = 'checkout/checkout_success.html'
     context = {
