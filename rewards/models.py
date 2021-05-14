@@ -17,7 +17,7 @@ class RewardHistory(models.Model):
         verbose_name_plural = 'Reward History'
 
     reward = models.ForeignKey(Reward, on_delete=models.CASCADE, null=True, blank=True)
-    profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True, blank=True)
+    profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True, blank=True, related_name="rewards")
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
 

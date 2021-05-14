@@ -27,11 +27,13 @@ def profile(request):
         form = UserProfileForm(instance=profile)
 
     orders = profile.orders.all()
+    rewards = profile.rewards.all()
 
     template = 'profiles/profile.html'
     context = {
         'form': form,
         'orders': orders,
+        'rewards': rewards,
         'on_profile_page': True,
     }
 
