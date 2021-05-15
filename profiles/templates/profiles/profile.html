@@ -91,7 +91,11 @@
                 {% endif %}
               </th>
                 <td>{{ event.created_on|date:"SHORT_DATE_FORMAT" }}</td>
-                <td>{% if event.points > 0 %}+{% endif %} {{ event.points }}</td>
+                <td>{% if event.reward.type == "Redemption" %}-{{ event.points }}
+                      {% elif event.points > 0 %}+{{ event.points }}
+                      {% else %}{{ event.points }}
+                    {% endif %}
+                  </td>
               </tr>
             {% endfor %}
         </tbody>

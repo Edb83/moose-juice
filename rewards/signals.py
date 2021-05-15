@@ -67,13 +67,23 @@ def reward_purchase(sender, instance, **kwargs):
     carry out the function.
     """
     if instance.user_profile:
-        reward = Reward.objects.get(type="Purchase")
         profile = instance.user_profile
-        points_earned = int(math.floor(instance.order_total)) * reward.value
 
-        profile.points += points_earned
+        if instance.points_redeemed:
+            redemption = Reward.objects.get(type="Redemption")
+            new_redemption = RewardHistory.objects.create(
+                reward=redemption, profile=profile,
+                product=None, points=instance.points_redeemed
+            )
+            new_redemption.save()
+
+        reward = Reward.objects.get(type="Purchase")
+        profile.points += instance.points_earned
+
         profile.save()
 
         new_reward = RewardHistory.objects.create(
-            reward=reward, profile=profile, product=None, points=points_earned)
+            reward=reward, profile=profile,
+            product=None, points=instance.points_earned
+            )
         new_reward.save()

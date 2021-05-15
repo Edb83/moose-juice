@@ -8,8 +8,10 @@ from .models import Order, OrderLineItem
 from products.models import Product, Size, Nicotine
 from profiles.forms import UserProfileForm
 from profiles.models import UserProfile
+from rewards.models import Reward
 from cart.contexts import cart_contents
 
+import math
 import stripe
 import json
 
@@ -148,14 +150,29 @@ def checkout_success(request, order_number):
     """
 
     save_info = request.session.get('save_info')
+    
     order = get_object_or_404(Order, order_number=order_number)
 
     if request.user.is_authenticated:
 
         profile = UserProfile.objects.get(user=request.user)
+        reward = Reward.objects.get(type="Purchase")
+        discount_applied = request.session.get('discount_applied', False)
 
         # Attach the user's profile to the order
         order.user_profile = profile
+
+        # Add points earned to order
+        points_earned = int(math.floor(order.order_total)) * reward.value
+        order.points_earned = points_earned
+
+        # Add points redeemed to order and remove from profile 
+        if discount_applied:
+            order.points_redeemed = profile.points
+            profile.points = 0
+
+        # Update profile and order
+        profile.save()
         order.save()
 
         # Save the user's info
@@ -173,6 +190,7 @@ def checkout_success(request, order_number):
 
             if user_profile_form.is_valid():
                 user_profile_form.save()
+
 
     messages.success(request, f'Order successfully processed! \
         Your order number is {order_number}. A confirmation \

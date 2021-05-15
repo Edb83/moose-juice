@@ -36,6 +36,8 @@ class Order(models.Model):
     original_cart = models.TextField(null=False, blank=False, default='')
     stripe_pid = models.CharField(
         max_length=254, null=False, blank=False, default='')
+    points_redeemed = models.IntegerField(null=True, blank=True)
+    points_earned = models.IntegerField(null=True, blank=True, default=0)
 
     def _generate_order_number(self):
         """
