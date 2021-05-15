@@ -14,7 +14,7 @@ class RewardHistoryAdmin(admin.ModelAdmin):
     list_display = (
         'reward',
         'profile',
-        'product',
+        'points',
         'created_on',
     )
     ordering = ('-created_on',)

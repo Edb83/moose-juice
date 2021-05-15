@@ -34,37 +34,43 @@
       <a class="nav-link btn btn-outline-dark" id="pills-points-tab" data-toggle="pill" href="#pills-points" role="tab" aria-controls="pills-points" aria-selected="false">Points</a>
     </li>
   </ul>
+
   <div class="tab-content col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3" id="pills-tabContent">
+  
+    <!-- Details tab -->
     <div class="tab-pane fade show active" id="pills-details" role="tabpanel" aria-labelledby="pills-details-tab">
       <form action="{% url 'profile' %}" method="POST" id="profile-update-form">
         {% csrf_token %}
         {{ form|crispy }}
         <button class="btn btn-outline-dark">Update info</button>
-    </form>
+      </form>
     </div>
+  
+    <!-- Orders tab -->
     <div class="tab-pane fade" id="pills-orders" role="tabpanel" aria-labelledby="pills-orders-tab">
-      
-    <table class="table table-sm table-borderless">
-      <thead>
-        <tr>
-          <th scope="col">Date</th>
-          <th scope="col">Order</th>
-          <th scope="col">Items</th>
-          <th scope="col">Total</th>
-        </tr>
-      </thead>
-      <tbody>
-          {% for order in orders %}
-            <tr>
-              <td scope="row">{{ order.date|date:"SHORT_DATE_FORMAT" }}</th>
-              <td><a href="{% url 'order_history' order.order_number %}" title="{{ order.order_number }}">{{ order.order_number|truncatechars:6 }}</a></td>
-              <td>{{ order.lineitems.all|length }}</td>
-              <td>£{{ order.grand_total }}</td>
-            </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+      <table class="table table-sm table-borderless">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Order</th>
+            <th scope="col">Items</th>
+            <th scope="col">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+              <tr>
+                <td scope="row">{{ order.date|date:"SHORT_DATE_FORMAT" }}</th>
+                <td><a href="{% url 'order_history' order.order_number %}" title="{{ order.order_number }}">{{ order.order_number|truncatechars:6 }}</a></td>
+                <td>{{ order.lineitems.all|length }}</td>
+                <td>£{{ order.grand_total }}</td>
+              </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
+  
+    <!-- Points tab -->
     <div class="tab-pane fade" id="pills-points" role="tabpanel" aria-labelledby="pills-points-tab">
       <table class="table table-sm table-borderless">
         <thead>
@@ -79,22 +85,21 @@
               <tr>
                 <td scope="row">
                   {% if event.product %}
-                    <a href="{% url 'product_detail' event.product.id %}">{{ event.reward.type }}</a>
+                    {{ event.reward.type }}: <a href="{% url 'product_detail' event.product.id %}">{{ event.product.name }}</a>
                   {% else %}
                     {{ event.reward.type }}
                 {% endif %}
               </th>
                 <td>{{ event.created_on|date:"SHORT_DATE_FORMAT" }}</td>
-                <td>{% if event.reward.value > 0 %}+{% endif %} {{ event.reward.value }}</td>
+                <td>{% if event.points > 0 %}+{% endif %} {{ event.points }}</td>
               </tr>
             {% endfor %}
         </tbody>
       </table>
     </div>
+
   </div>
 
-
-    
 </div>
 
 {% endblock %}

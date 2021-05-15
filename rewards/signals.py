@@ -33,7 +33,7 @@ def reward_review(sender, instance, **kwargs):
 
         # Add the reward to user's reward history
         new_reward = RewardHistory.objects.create(
-            reward=reward, profile=user.userprofile, product=instance.product)
+            reward=reward, profile=user.userprofile, product=instance.product, points=reward_value)
         new_reward.save()
 
 
@@ -51,7 +51,7 @@ def reward_account_creation(sender, instance, created, **kwargs):
         instance.save()
 
         new_reward = RewardHistory.objects.create(
-            reward=reward, profile=instance, product=None)
+            reward=reward, profile=instance, product=None, points=reward_value)
         new_reward.save()
 
 
@@ -75,5 +75,5 @@ def reward_purchase(sender, instance, **kwargs):
         profile.save()
 
         new_reward = RewardHistory.objects.create(
-            reward=reward, profile=profile, product=None)
+            reward=reward, profile=profile, product=None, points=points_earned)
         new_reward.save()
