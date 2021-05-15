@@ -56,16 +56,24 @@ def reward_account_creation(sender, instance, created, **kwargs):
 
 
 @receiver(post_save, sender=Order)
-def reward_purchase(sender, instance, created, **kwargs):
+def reward_purchase(sender, instance, **kwargs):
     """
     Add reward to RewardHistory and update user's points
-      on Order creation
+    on Order creation
+
+    As the Order is saved multiple times the signal will
+    be fired repeatedly, so checking that the user profile
+    has been attached to the instance is necessary to
+    carry out the function.
     """
-    if created:
+    if instance.user_profile:
         reward = Reward.objects.get(type="Purchase")
-        points_earned = int(math.floor(instance.order_total))
-        reward_value = reward.value * points_earned
-        print(reward_value)
+        profile = instance.user_profile
+        points_earned = int(math.floor(instance.order_total)) * reward.value
+
+        profile.points += points_earned
+        profile.save()
+
         new_reward = RewardHistory.objects.create(
-            reward=reward, profile=instance.user_profile, product=None)
+            reward=reward, profile=profile, product=None)
         new_reward.save()

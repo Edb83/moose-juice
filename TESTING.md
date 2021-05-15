@@ -24,4 +24,4 @@ Bug 8: signal to check whether user has already reviewed product when awarding p
 Solution: change from post_save to pre_save (as otherwise user will always have reviewed the product post save)
 
 Bug 9: signal to award points on Order post_save cannot retrieve the instance UserProfile
-Solution: 
+Solution: this was due to 'if created' check only looking at the instance on the initial Order save, before the user's profile relationship was established. Fixed by switching 'if created' to 'if instance.user_profile'
