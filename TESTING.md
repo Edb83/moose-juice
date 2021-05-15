@@ -19,3 +19,9 @@ Solution: import the signal in the product/apps.py
 Bug 7: if product is deleted while exists in cart, 404 across all pages
 Solution (immediate): set cart contexts to equal 0 across the board and delete session cookies
 Solution (long-term): 
+
+Bug 8: signal to check whether user has already reviewed product when awarding points would always return true
+Solution: change from post_save to pre_save (as otherwise user will always have reviewed the product post save)
+
+Bug 9: signal to award points on Order post_save cannot retrieve the instance UserProfile
+Solution: 

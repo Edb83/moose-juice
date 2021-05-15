@@ -12,7 +12,7 @@ class Reward(models.Model):
 
 
 class RewardHistory(models.Model):
-    
+
     class Meta:
         verbose_name_plural = 'Reward History'
 
@@ -22,4 +22,4 @@ class RewardHistory(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.reward
+        return str(self.reward)

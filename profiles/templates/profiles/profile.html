@@ -77,7 +77,13 @@
         <tbody>
             {% for event in rewards %}
               <tr>
-                <td scope="row">{{ event.reward.type }}</th>
+                <td scope="row">
+                  {% if event.product %}
+                    <a href="{% url 'product_detail' event.product.id %}">{{ event.reward.type }}</a>
+                  {% else %}
+                    {{ event.reward.type }}
+                {% endif %}
+              </th>
                 <td>{{ event.created_on|date:"SHORT_DATE_FORMAT" }}</td>
                 <td>{% if event.reward.value > 0 %}+{% endif %} {{ event.reward.value }}</td>
               </tr>
