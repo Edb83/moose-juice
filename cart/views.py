@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse, HttpResponse
 from django.contrib import messages
 from products.models import Product
+from checkout.models import Order
 
 
 def view_cart(request):
@@ -69,7 +70,31 @@ def remove_from_cart(request, item_id):
 
 
 def toggle_discount(request):
+    """
+    Toggle session variable to determine whether points should
+    be used on purchase
+    """
     discount_applied = request.session.get('discount_applied', False)
     request.session['discount_applied'] = not discount_applied
-    
+
+    return redirect(reverse('view_cart'))
+
+
+def replicate_cart(request, order_number):
+    """
+    Create a new cart filled with items/quantities from previous order
+    """
+
+    if 'cart' in request.session:
+        del request.session['cart']
+
+    order = Order.objects.get(order_number=order_number)
+    original_cart = eval(order.original_cart)
+    cart = request.session.get('cart', {})
+
+    for item, quantity in original_cart.items():
+        cart[item] = quantity
+
+    request.session['cart'] = cart
+
     return redirect(reverse('view_cart'))

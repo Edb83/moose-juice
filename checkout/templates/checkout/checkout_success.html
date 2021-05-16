@@ -158,6 +158,16 @@
         </div>
     </div>
 
+    <!-- Button to repeat order -->
+    <div>
+        <a href="{% url 'replicate_cart' order.order_number %}" class="btn btn-outline-dark mt-5">
+            <span class="icon">
+                <i class="fas fa-shopping-cart"></i>
+            </span>
+            Order again
+        </a>
+    </div>
+
 </div> 
 
 {% endblock %}

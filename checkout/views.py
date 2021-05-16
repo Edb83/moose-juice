@@ -55,7 +55,7 @@ def checkout(request):
         order_form = OrderForm(form_data)
 
         if order_form.is_valid():
-            order = order_form.save(commit=False) # prevent multiple save events
+            order = order_form.save(commit=False)  # prevent multiple save events
             pid = request.POST.get('client_secret').split('_secret')[0]
             order.stripe_pid = pid
             order.original_cart = json.dumps(cart)
@@ -150,7 +150,6 @@ def checkout_success(request, order_number):
     """
 
     save_info = request.session.get('save_info')
-    
     order = get_object_or_404(Order, order_number=order_number)
 
     if request.user.is_authenticated:
@@ -190,7 +189,6 @@ def checkout_success(request, order_number):
 
             if user_profile_form.is_valid():
                 user_profile_form.save()
-
 
     messages.success(request, f'Order successfully processed! \
         Your order number is {order_number}. A confirmation \

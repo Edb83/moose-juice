@@ -18,7 +18,6 @@ def cart_contents(request):
     cart = request.session.get('cart', {})
 
     discount_applied = request.session.get('discount_applied')
-
     for item, quantity in cart.items():
         # Use string created in cart view to isolate model ids
         product_id = item.split("_")[0]
