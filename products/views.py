@@ -10,6 +10,8 @@ from profiles.models import UserProfile
 
 from .forms import ProductForm, ReviewForm
 
+from checkout.models import OrderLineItem
+
 
 def all_products(request):
     """ A view to return all Products """
@@ -21,7 +23,6 @@ def all_products(request):
     brand = None
     category = None
     query = None
-    # favourites = False
 
     if request.user.is_authenticated:
         profile = get_object_or_404(UserProfile, user_id=request.user)
@@ -56,11 +57,6 @@ def all_products(request):
             products = products.filter(category__name=category)
             category = get_object_or_404(Category, name=category)
 
-        # if 'favourites' in request.GET:
-        #     if profile:
-        #         products = profile.favourites.all()
-        #     favourites = True
-
         if 'q' in request.GET:
             query = request.GET['q']
             if not query:
@@ -84,7 +80,6 @@ def all_products(request):
         'sale': sale,
         'brand': brand,
         'profile': profile,
-        # 'favourites': favourites,
         'category': category,
         'current_sorting': current_sorting,
     }
@@ -113,6 +108,12 @@ def product_detail(request, product_id):
                 review = form.save(commit=False)
                 review.product = product
                 review.user = request.user
+                # Check whether line items related to user include the product
+                if OrderLineItem.objects.filter(
+                    order__user_profile=profile).filter(
+                        product=product).exists():
+                    review.verified_purchase = True
+
                 review.save()
                 messages.success(request, 'Review added')
                 return redirect(reverse('product_detail', args=[product.id]))
@@ -233,4 +234,5 @@ def delete_product(request, product_id):
     product_name = product.name
     product.delete()
     messages.success(request, f'{product_name} deleted!')
+
     return redirect(reverse('products'))
