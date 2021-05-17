@@ -1,3 +1,10 @@
+<defs>
+    <linearGradient id="{{ product.id}}-gradient" gradientTransform="rotate(90)">
+      <stop offset="30%" stop-color="#ffffff" />
+      <stop offset="70%" stop-color="{{ product.color }}" />
+    </linearGradient>
+  </defs>
+
 <path class="outline" fill="#ffffff" stroke="black" stroke-width="2" d="M 0.00,0.00
     M 119.00,140.00
     C 122.19,135.67 121.00,129.17 120.83,124.00
@@ -74,7 +81,7 @@
         113.00,133.00 105.00,133.00 105.00,133.00
         105.00,133.00 105.00,85.00 105.00,85.00 Z"
 />
-<path id="{{ product.id}}-body" fill="{{ product.color }}" stroke="black" stroke-width="1" d="M 0.00,0.00
+<path id="{{ product.id}}-body" fill="url('#{{ product.id}}-gradient')" stroke="black" stroke-width="1" d="M 0.00,0.00
     M 52.00,141.24
     C 52.00,141.24 98.00,141.24 98.00,141.24
         114.08,141.20 119.98,152.44 120.00,167.00
