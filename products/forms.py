@@ -6,7 +6,7 @@ class ProductForm(forms.ModelForm):
 
     class Meta:
         model = Product
-        exclude = ('on_sale', 'average_rating')
+        exclude = ('average_rating',)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

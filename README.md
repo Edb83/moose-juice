@@ -164,6 +164,8 @@ Pages for 404 and 500 errors keep the user on the site when something goes wrong
 ### Extensions and kits
 - [Boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
 - [Pillow](https://pillow.readthedocs.io/en/stable/)
+- [django-colorfield](https://pypi.org/project/django-colorfield/)
+- [jscolor](https://jscolor.com/)
 ### Project management
 - [Amazon AWS](https://aws.amazon.com/) (S3)
 - [Balsamiq](https://balsamiq.com/wireframes/)

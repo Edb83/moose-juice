@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'rewards',
 
     # Other
+    'colorfield',
     'crispy_forms',
     'storages',
 ]

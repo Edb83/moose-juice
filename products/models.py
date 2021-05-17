@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 from django.db.models import Avg
+from colorfield.fields import ColorField
 
 
 class Size(models.Model):
@@ -71,6 +72,7 @@ class Product(models.Model):
     name = models.CharField(max_length=50)
     on_sale = models.BooleanField(default=False)
     description = models.TextField()
+    color = ColorField(default='#FFFFFF')
     brand = models.ForeignKey(
         'Brand', null=True, blank=True, on_delete=models.SET_NULL)
     category = models.ForeignKey(

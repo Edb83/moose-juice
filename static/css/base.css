@@ -20,3 +20,27 @@ html {
     position: fixed;
     z-index: 999999;
 }
+
+
+/* Products */
+.product-svg-container {
+    max-height: 200px;
+}
+
+.product-detail-svg-container {
+    max-height: 100px;
+}
+
+.product-heart-container {
+    position: absolute;
+    top: 0;
+    right: 20%;
+}
+
+.product-heart a:hover {
+    text-decoration: none;
+}
+
+.product-heart i {
+    color: #db39a9;
+}
