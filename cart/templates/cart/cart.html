@@ -15,6 +15,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Item</th>
+                                <th scope="col"></th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Qty</th>
                                 <th scope="col">Subtotal</th>
@@ -23,6 +24,11 @@
                         <tbody>
                             {% for item in cart_items %}
                             <tr>
+                                <td>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" length="auto" viewBox="0 0 154 339">
+                                            {% include 'products/includes/product-svg.html' %}
+                                        </svg>
+                                </td>
                                 <td>{{ item.product.name }} <span class="text-muted">({{ item.nic.strength }} {{ item.nic.type }}, {{ item.size.label }})</span></td>
                                 <td>£{{ item.price }}</td>
                                 <td>

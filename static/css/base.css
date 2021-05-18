@@ -2,13 +2,31 @@ html {
     height: 100%;
 }
 
-/* from Bulma */
-.icon {
-    align-items: center;
-    display: inline-flex;
-    justify-content: center;
-    height: 1.5rem;
-    width: 1.5rem;
+body {
+    font-family: Karla, sans-serif;
+}
+
+.navbar {
+    border-bottom: solid 3px #FF6633
+}
+
+.navbar-nav .nav-link,
+.cluster-icon .fa-heart {
+    color: #fff !important;
+}
+
+.navbar-nav .nav-link:hover,
+.cluster-icon .fa-heart:hover {
+    color: #ff6633 !important;
+}
+
+.navbar-dark .navbar-toggler {
+    border: none;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: Raleway, sans-serif;
 }
 
 .update-link,
@@ -24,7 +42,8 @@ html {
 
 /* Products */
 .product-svg-container {
-    max-height: 200px;
+    width: 100px;
+    align-self: center;
 }
 
 .product-detail-svg-container {
@@ -33,14 +52,36 @@ html {
 
 .product-heart-container {
     position: absolute;
-    top: 0;
-    right: 20%;
+    right: 10%;
 }
 
-.product-heart a:hover {
+a:hover {
     text-decoration: none;
 }
 
-.product-heart i {
-    color: #db39a9;
+
+/* Icons */
+
+.icon {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.fa-heart {
+    color: #ff6633;
+}
+
+
+.icon-product:hover .fas.fa-heart:before {
+    content: "\f7a9";
+}
+
+.icon-product:hover .far.fa-heart::before {
+    content: "\F004";
+    /* Required or the pseudo-class will not work: */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
 }

@@ -4,57 +4,57 @@
 {% block content %}
 
 <div class="container">
-    <!-- Product -->
-    <div class="row">
-        
-        <div class="col-4 col-md-3 col-lg-2 mx-auto">
-            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="auto" viewBox="0 0 154 339">
-                {% include 'products/includes/product-svg.html' %}
-            </svg>
-        </div>
-        
-    </div>
-   
-    <h2 class="text-center">{{ product.name }}
-        <span class="product-heart">
-            <a href="{% url 'toggle_favourite' product.id %}">
-                <span class="icon">
-                    {% if product not in profile.favourites.all %}
-                        <i class="far fa-heart fa-lg"></i>
-                    {% else %}
-                        <i class="fas fa-heart fa-lg"></i>
-                    {% endif %}
-                </span>
-            </a>
-        </span>
-    </h2>
     
-    {% if request.user.is_superuser %}
-    <div class="row">
-        <div class="col-auto mx-auto">
-            <small class="text-center">
-                <a href="{% url 'edit_product' product.id %}">Edit</a> | 
-                <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
-            </small>
+    <div class="card">
+        <div class="card-body">
+
+            <div class="row">        
+                <div class="col-4 col-md-3 col-lg-2 mx-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 339">
+                        {% include 'products/includes/product-svg.html' %}
+                    </svg>
+                </div>
+            </div>
+            <div class="product-heart-container">
+                <a href="{% url 'toggle_favourite' product.id %}">
+                    <span class="icon icon-product">
+                        {% if product not in profile.favourites.all %}
+                            <i class="far fa-heart fa-2x"></i>
+                        {% else %}
+                            <i class="fas fa-heart fa-2x"></i>
+                        {% endif %}
+                    </span>
+                </a>
+            </div>
+            <h2 class="card-title text-center">{{ product.name }}</h2>
+     
+            {% if request.user.is_superuser %}
+                <div class="row">
+                    <div class="col-auto mx-auto">
+                        <small class="text-center">
+                            <a href="{% url 'edit_product' product.id %}">Edit</a> | 
+                            <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
+                        </small>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if product.reviews.all %}
+                <p class="text-center">{{ product.average_rating | floatformat:2 }}</p>
+                <p class="text-center"><a href="#product-reviews">{{ product.reviews.all | length }} review{{ product.reviews.all | length | pluralize }}</a></p>
+            {% else %}
+                <p class="text-center">No reviews</p>
+                <p class="text-center"><a href="#product-reviews">Leave your own?</a></p>
+            {% endif %}
+            <ul class="list-inline text-center">
+                {% for tag in product.tags.all %}
+                <li class="list-inline-item"><a href="{% url 'products' %}?q={{tag.name}}">{{ tag.name | capfirst }}</a></li>
+                {% endfor %}
+            </ul>
+            <p class="text-justify">{{ product.description }}</p>
+    
         </div>
     </div>
-    {% endif %}
-
-    {% if product.reviews.all %}
-        <p class="text-center">{{ product.average_rating | floatformat:2 }}</p>
-        <p class="text-center"><a href="#product-reviews">{{ product.reviews.all | length }} review{{ product.reviews.all | length | pluralize }}</a></p>
-    {% else %}
-        <p class="text-center">No reviews</p>
-        <p class="text-center"><a href="#product-reviews">Leave your own?</a></p>
-    {% endif %}
-    <ul class="list-inline text-center">
-        {% for tag in product.tags.all %}
-        <li class="list-inline-item"><a href="{% url 'products' %}?q={{tag.name}}">{{ tag.name | capfirst }}</a></li>
-        {% endfor %}
-    </ul>
-    <p class="text-center">{{ product.description }}</p>
-
-    <hr>
 
     <form class="form my-3 text-center" action="{% url 'add_to_cart' product.id %}" method="POST">
         {% csrf_token %}
@@ -157,7 +157,7 @@
         {% endfor %}
     </div>
 
-</div>
+
 
 {% endblock %}
 

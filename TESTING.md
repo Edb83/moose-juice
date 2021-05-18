@@ -28,3 +28,16 @@ Solution: this was due to 'if created' check only looking at the instance on the
 
 Bug 10: after checking out successfully with discount applied, when adding items to another cart the 'remove discount' toggle still appears despite being set to False on checkout
 Solution:
+
+Bug 11: cannot get ::before pseudo class to work with certain font-awesome icons
+
+`.icon-product:hover .far.fa-heart::before {
+    content: "\F004";
+}`
+
+Solution: adding font-family and font-weight to the pseudo class (https://stackoverflow.com/questions/47712987/font-awesome-5-on-pseudo-elements)
+
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+
+

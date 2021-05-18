@@ -1,7 +1,7 @@
 <defs>
-    <linearGradient id="{{ product.id}}-gradient" gradientTransform="rotate(90)">
+    <linearGradient id="{{ forloop.counter }}-gradient" gradientTransform="rotate(90)">
       <stop offset="30%" stop-color="#ffffff" />
-      <stop offset="70%" stop-color="{{ product.color }}" />
+      <stop offset="70%" stop-color="{% if product.id %}{{ product.color }}{% else %}{{ item.product.color}}{% endif %}" />
     </linearGradient>
   </defs>
 
@@ -81,7 +81,7 @@
         113.00,133.00 105.00,133.00 105.00,133.00
         105.00,133.00 105.00,85.00 105.00,85.00 Z"
 />
-<path id="{{ product.id}}-body" fill="url('#{{ product.id}}-gradient')" stroke="black" stroke-width="1" d="M 0.00,0.00
+<path id="{{ product.id}}-body" fill="url('#{{ forloop.counter }}-gradient')" stroke="black" stroke-width="1" d="M 0.00,0.00
     M 52.00,141.24
     C 52.00,141.24 98.00,141.24 98.00,141.24
         114.08,141.20 119.98,152.44 120.00,167.00
