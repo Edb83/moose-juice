@@ -154,8 +154,8 @@ def toggle_favourite(request, product_id):
         profile.favourites.add(product)
         messages.success(request, f'Added {product.name} to your favourites')
 
-    # NEED TO HANDLE 'next'
-    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+    # NEED TO HANDLE 'next' if returning to same page --> JS/json?
+    return redirect(reverse('products'))
 
 
 @login_required
