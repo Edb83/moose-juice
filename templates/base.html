@@ -27,7 +27,8 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top border-accent">
 
             <a class="navbar-brand" href="{% url 'home' %}">Moose Juice</a>
             <ul class="navbar-nav d-inline-block list-inline list-unstyled d-md-none ml-auto mr-2">
@@ -40,6 +41,7 @@
             
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav mx-auto">
+
                     <a class="nav-link" href="{% url 'products' %}">All Juices</a>
                     <a class="nav-link" href="{% url 'products' %}?sale">Sale</a>
                     
@@ -89,24 +91,20 @@
             <ul class="navbar-nav d-none d-md-inline-flex list-inline list-unstyled ml-auto mr-3">
                 {% include 'includes/navbar-cluster.html' %}
             </ul>
-
+            
         </nav>
 
-        <div class="container-fluid my-5">
-            <div class="row">
-                <div class="col-12">
-                    <form method="GET" action="{% url 'products' %}">
-                        <div class="input-group">
-                            <input type="text" class="form-control text-center" name="q" placeholder="What's your flavour?" autocomplete="off">
-                            <span class="input-group-append">
-                                <button class="btn btn-outline-light border border-left-0 text-dark" type="submit">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
-                    </form>
+        <div class="container-fluid container-search">
+            <form method="GET" action="{% url 'products' %}">
+                <div class="input-group">
+                    <input type="text" class="form-control text-center" name="q" placeholder="What's your flavour?" autocomplete="off">
+                    <span class="input-group-append">
+                        <button class="btn btn-dark border border-left-0 text-light" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
                 </div>
-            </div>
+            </form>
         </div>
 
     </header>

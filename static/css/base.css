@@ -1,6 +1,8 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Karla&family=Raleway&display=swap');
 
+/* Common styles */
+
 :root {
     --color-accent: #FF6633;
     --color-accent-alt: #343a40;
@@ -13,13 +15,14 @@ html {
     height: 100%;
 }
 
-
 body {
     font-family: var(--font-default);
 }
 
-.navbar {
-    border-bottom: solid 3px var(--color-accent);
+/* Navbar */
+
+.border-accent {
+    border-bottom: solid 2px var(--color-accent);
 }
 
 .navbar-nav .nav-link,
@@ -36,21 +39,63 @@ body {
     border: none;
 }
 
+/* Search */
+
+.container-search {
+    position: absolute;
+    top: 70px;
+    z-index: 2;
+}
+
+.btn:focus,
+.form-control:focus,
+.btn:active:focus:active:focus {
+    box-shadow: none;
+    border-color: var(--color-accent);
+}
+
+.first-element-buffer {
+    margin-top: 155px;
+}
+
+/* Headings */
 
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
 }
 
-
-.home-image-container {
+/* Home page */
+.hero-image {
     height: 100vh;
+    position: relative;
     background: url('/media/background.jpg') no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
     background-size: cover;
 }
 
+.hero-overlay {
+    height: 100vh;
+    opacity: 1;
+    background-color: white;
+
+}
+
+.hero-text-container {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.hero-heading {
+    color: var(--color-accent-alt);
+    font-weight: 600;
+    text-shadow: 2px 2px var(--color-accent);
+    font-size: 4em;
+}
+
+
+/* TBC */
 
 .update-link,
 .remove-item {
