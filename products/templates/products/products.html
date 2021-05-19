@@ -71,9 +71,11 @@
                         <h5 class="card-title">{{ product.name }}</h5>
                         
                         {% if product.average_rating %}
-                            <small class="text-muted">{{ product.average_rating }} / 5</small>
+                            <div class="product-stars" data-value="{{ product.average_rating }}"></div>
                         {% else %}
-                            <small class="text-muted">Not yet rated</small>
+                            <div>
+                                <span>Not yet rated</span>
+                            </div>
                         {% endif %}
                         {% if request.user.is_superuser %}
                             <small class="text-center">
@@ -121,6 +123,28 @@
 
                 window.location.replace(currentUrl);
             }
+        })
+    </script>
+
+    <script type="text/javascript">
+
+        const productStars = document.querySelectorAll('.product-stars');
+
+        productStars.forEach(rating => {
+            const ratingValue = parseInt(rating.getAttribute('data-value'));
+            const fullStar = ratingValue;
+            let stars = '';
+
+            for (let i = 1; i < 6; i++) {
+                if (i <= fullStar) {
+                    stars += `<i class="fas fa-star"></i>`;
+                }
+                else {
+                    stars += `<i class="far fa-star"></i>`;
+                }
+            }
+
+        rating.innerHTML = stars;
         })
     </script>
 

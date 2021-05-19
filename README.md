@@ -259,11 +259,12 @@ Full details of testing can be found [here](TESTING.md).
 ### Tutorials / Resources
 - TBC
 ### Student projects
-- [TBC](#)
+- [LigaMoon's Prickly](https://github.com/LigaMoon/Prickly)
 ### Code modified from other sources
 - [TBC](#)
 ### Content
 - All text outside of user-generated content is original
+- [Star rating implementation](https://github.com/LigaMoon/Prickly/blob/main/products/static/products/js/product_item.js)
 - [Favicon](https://favicon.io/emoji-favicons/house)
 - Images from [Pixabay](https://pixabay.com/)
 ### Acknowledgements
