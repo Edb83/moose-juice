@@ -91,13 +91,20 @@ class Product(models.Model):
 
 
 class ProductReview(models.Model):
+    RATING_CHOICES = (
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+    )
     product = models.ForeignKey(
         Product, null=True, blank=True, related_name='reviews', on_delete=models.CASCADE)
     user = models.ForeignKey(
         User, null=True, blank=True, on_delete=models.CASCADE)
     title = models.CharField(max_length=254)
     body = models.TextField()
-    rating = models.DecimalField(max_digits=4, decimal_places=2, default=3)
+    rating = models.IntegerField(choices=RATING_CHOICES)
     created_on = models.DateTimeField(auto_now_add=True)
     verified_purchase = models.BooleanField(default=False)
 
