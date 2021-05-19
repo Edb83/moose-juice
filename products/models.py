@@ -24,14 +24,16 @@ class Nicotine(models.Model):
     )
     strength = models.CharField(max_length=50, null=True, blank=True)
     type = models.CharField(
-        max_length=8, choices=TYPE_CHOICES, null=True, blank=True
-    )
+        max_length=8, choices=TYPE_CHOICES, null=True, blank=True)
 
     def __str__(self):
         return self.strength
 
 
 class Brand(models.Model):
+    class Meta:
+        ordering = ['name']
+
     name = models.CharField(max_length=50)
     friendly_name = models.CharField(max_length=50, null=True, blank=True)
     description = models.TextField()
@@ -48,6 +50,7 @@ class Brand(models.Model):
 class Category(models.Model):
     class Meta:
         verbose_name_plural = "Categories"
+        ordering = ['name']
     name = models.CharField(max_length=50)
     friendly_name = models.CharField(max_length=50, null=True, blank=True)
     description = models.TextField()
@@ -61,7 +64,10 @@ class Category(models.Model):
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=50)
+    class Meta:
+        ordering = ['name']
+
+    name = models.CharField(max_length=50, unique=True)
     friendly_name = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
@@ -69,6 +75,8 @@ class Tag(models.Model):
 
 
 class Product(models.Model):
+    class Meta:
+        ordering = ['-id']
     name = models.CharField(max_length=50)
     on_sale = models.BooleanField(default=False)
     description = models.TextField()
@@ -78,7 +86,8 @@ class Product(models.Model):
     category = models.ForeignKey(
         'Category', null=True, blank=True, on_delete=models.SET_NULL)
     tags = models.ManyToManyField(Tag)
-    average_rating = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
+    average_rating = models.DecimalField(max_digits=4, decimal_places=2,
+                                         null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
 
     def calculate_rating(self):
@@ -92,19 +101,22 @@ class Product(models.Model):
 
 class ProductReview(models.Model):
     RATING_CHOICES = (
-        (1, '1'),
-        (2, '2'),
-        (3, '3'),
-        (4, '4'),
         (5, '5'),
+        (4, '4'),
+        (3, '3'),
+        (2, '2'),
+        (1, '1'),
     )
-    product = models.ForeignKey(
-        Product, null=True, blank=True, related_name='reviews', on_delete=models.CASCADE)
-    user = models.ForeignKey(
-        User, null=True, blank=True, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product,
+                                null=True,
+                                blank=True,
+                                related_name='reviews',
+                                on_delete=models.CASCADE)
+    user = models.ForeignKey(User, null=True, blank=True,
+                             on_delete=models.CASCADE)
     title = models.CharField(max_length=254)
     body = models.TextField()
-    rating = models.IntegerField(choices=RATING_CHOICES)
+    rating = models.IntegerField(choices=RATING_CHOICES, default=3)
     created_on = models.DateTimeField(auto_now_add=True)
     verified_purchase = models.BooleanField(default=False)
 
