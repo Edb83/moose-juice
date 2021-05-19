@@ -1,7 +1,7 @@
 Bug 1: get_object_or_404 error caused by object id not being found
 Solution: find erroneous string iteration pointing to Nicotine (4 items) rather than Size (3 items)
 
-Bug 2: search queries with multiple criteria would return duplicate results
+Bug 2: search queries via M2M relationship (Tags model) would return duplicate results
 Solution: using .distinct() on the filtered query
 
 Bug 3: line order items can be set to 0 in Admin
@@ -40,4 +40,5 @@ Solution: adding font-family and font-weight to the pseudo class (https://stacko
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
 
-
+Bug 12: sorting products by rating worked fine in mySQL but not in Postgres, appearing to order by nulls first
+Solution: 
