@@ -15,10 +15,15 @@ class RewardHistory(models.Model):
 
     class Meta:
         verbose_name_plural = 'Reward History'
+        ordering = ['-pk']
 
-    reward = models.ForeignKey(Reward, on_delete=models.CASCADE, null=True, blank=True)
-    profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True, blank=True, related_name="rewards")
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, blank=True)
+    reward = models.ForeignKey(
+        Reward, on_delete=models.CASCADE, null=True, blank=True)
+    profile = models.ForeignKey(
+        UserProfile, on_delete=models.CASCADE,
+        null=True, blank=True, related_name="rewards")
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, null=True, blank=True)
     points = models.IntegerField(null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
 

@@ -76,7 +76,7 @@ class Tag(models.Model):
 
 class Product(models.Model):
     class Meta:
-        ordering = ['-id']
+        ordering = ['-pk']
     name = models.CharField(max_length=50)
     on_sale = models.BooleanField(default=False)
     description = models.TextField()
