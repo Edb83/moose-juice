@@ -30,7 +30,10 @@
 
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top border-accent">
 
-            <a class="navbar-brand" href="{% url 'home' %}">Moose Juice</a>
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="{{ MEDIA_URL }}moose-logo-dark.png" width="30" height="30" class="d-inline-block align-top logo" alt="Moose logo">
+                <span class="d-none d-sm-inline-block">Moose Juice</span>
+            </a>
             <ul class="navbar-nav d-inline-block list-inline list-unstyled d-md-none ml-auto mr-2">
                 {% include 'includes/navbar-cluster.html' %}
             </ul>

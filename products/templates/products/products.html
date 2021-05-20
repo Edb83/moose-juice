@@ -5,19 +5,31 @@
 
 
 <div class="container first-element-buffer">
-        {% if brand %}
-            <h2 class="text-center">{{ brand.friendly_name }}</h2>
-            <p>{{brand.description}}</p>
-        {% elif category %}
-            <h2 class="text-center">{{ category.friendly_name }}</h2>
-            <p>{{ category.description}}</p>
-        {% elif sale %}
-            <h2 class="text-center">Sale</h2>
-            <p>Grab your favourite Moose Juice while it's on sale!</p>
-        {% else %}
-            <h2 class="text-center">Moose Juice</h2>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi eius laboriosam cumque suscipit aperiam, facere id eum inventore perspiciatis atque? Sed quidem maiores veniam eius hic aspernatur, non similique tempore.</p>
-        {% endif %}    
+    {% if brand %}
+        <h2 class="text-center">{{ brand.friendly_name }}</h2>
+        <p class="product-filter-text">{{brand.description}}</p>
+    {% elif category %}
+    <div class="row">
+        <div class="col-1">
+            {% if category.image %}
+                <img class="category-img-sm mr-2" src="{{ category.image.url }}" alt="{{ category.friendly_name }}">
+            {% endif %}
+        </div>
+        <div class="col-10">
+            <h2 class="text-center category-heading">
+                {{ category.friendly_name }}
+            </h2>
+        </div>
+        <div class="col-1"></div>
+    </div>
+        <p class="product-filter-text">{{ category.description}}</p>
+    {% elif sale %}
+        <h2 class="text-center">Sale</h2>
+        <p class="product-filter-text">Grab your favourite Moose Juice while it's on sale!</p>
+    {% else %}
+        <h2 class="text-center">Moose Juice</h2>
+        <p class="product-filter-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi eius laboriosam cumque suscipit aperiam, facere id eum inventore perspiciatis atque? Sed quidem maiores veniam eius hic aspernatur, non similique tempore.</p>
+    {% endif %}
 </div>
 
 

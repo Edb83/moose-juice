@@ -19,7 +19,15 @@ body {
     font-family: var(--font-default);
 }
 
+a:hover {
+    text-decoration: none;
+}
+
 /* Navbar */
+
+.logo {
+    margin-right: 0.5em;
+}
 
 .border-accent {
     border-bottom: solid 2px var(--color-accent);
@@ -94,6 +102,10 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 4em;
 }
 
+.category-thumbnail {
+    max-height: 96px;
+    width: auto;
+}
 
 /* TBC */
 
@@ -123,10 +135,17 @@ h1, h2, h3, h4, h5, h6 {
     right: 10%;
 }
 
-a:hover {
-    text-decoration: none;
+.category-img-sm {
+    height: 50px;
 }
 
+.category-heading {
+    margin-top: 0.5rem;
+}
+
+.product-filter-text {
+    margin-top: 1em;
+}
 
 /* Icons */
 
