@@ -55,15 +55,7 @@
         {% for product in products %}
             <div class="col mb-4">
                 <div class="card h-100 border-white">
-                    <div class="product-svg-container">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 339">
-                            <a href="{% url 'product_detail' product.id %}">
-                                {% include 'products/includes/product-svg.html' %}
-                            </a>
-                        </svg>
-                    </div>
-                    
-                    <div class="card-body">
+                    <div class="product-img-container">
                         <div class="product-heart-container">
                             <a href="{% url 'toggle_favourite' product.id %}">
                                 <span class="icon icon-product">
@@ -75,11 +67,16 @@
                                 </span>
                             </a>
                         </div>
-                        
-                        {% if product.on_sale %}
-                            <strong>Sale!</strong>
-                        {% endif %}
-                        
+                        <div class="product-svg-container">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 339">
+                                <a href="{% url 'product_detail' product.id %}">
+                                    {% include 'products/includes/product-svg.html' %}
+                                </a>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="card-body">    
                         <h5 class="card-title">{{ product.name }}</h5>
                         
                         {% if product.average_rating %}

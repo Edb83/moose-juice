@@ -8,24 +8,25 @@
     <div class="card">
         <div class="card-body">
 
-            <div class="row">        
+            <div class="row">
+                <div class="product-heart-container">
+                    <a href="{% url 'toggle_favourite' product.id %}">
+                        <span class="icon icon-product">
+                            {% if product not in profile.favourites.all %}
+                                <i class="far fa-heart fa-2x"></i>
+                            {% else %}
+                                <i class="fas fa-heart fa-2x"></i>
+                            {% endif %}
+                        </span>
+                    </a>
+                </div>    
                 <div class="col-4 col-md-3 col-lg-2 mx-auto">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 339">
                         {% include 'products/includes/product-svg.html' %}
                     </svg>
                 </div>
             </div>
-            <div class="product-heart-container">
-                <a href="{% url 'toggle_favourite' product.id %}">
-                    <span class="icon icon-product">
-                        {% if product not in profile.favourites.all %}
-                            <i class="far fa-heart fa-2x"></i>
-                        {% else %}
-                            <i class="fas fa-heart fa-2x"></i>
-                        {% endif %}
-                    </span>
-                </a>
-            </div>
+            
             <h2 class="card-title text-center">{{ product.name }}</h2>
      
             {% if request.user.is_superuser %}

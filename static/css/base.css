@@ -130,6 +130,10 @@ h1, h2, h3, h4, h5, h6 {
     max-height: 100px;
 }
 
+.product-img-container {
+    display: contents;
+}
+
 .product-heart-container {
     position: absolute;
     right: 10%;
