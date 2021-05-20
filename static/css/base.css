@@ -4,8 +4,9 @@
 /* Common styles */
 
 :root {
-    --color-accent: #FF6633;
-    --color-accent-alt: #343a40;
+    --color-primary: #343a40;
+    --color-accent-primary: #FF6633;
+    --color-accent-dark: #2c2c2c;
     --color-info: #0062cc;
     --font-heading: 'Raleway', sans-serif;
     --font-default: 'Karla', sans-serif;
@@ -30,7 +31,7 @@ a:hover {
 }
 
 .border-accent {
-    border-bottom: solid 2px var(--color-accent);
+    border-bottom: solid 2px var(--color-accent-primary);
 }
 
 .navbar-nav .nav-link,
@@ -40,7 +41,7 @@ a:hover {
 
 .navbar-nav .nav-link:hover,
 .cluster-icon .fa-heart:hover {
-    color: var(--color-accent) !important;
+    color: var(--color-accent-primary) !important;
 }
 
 .navbar-dark .navbar-toggler {
@@ -59,11 +60,16 @@ a:hover {
 .form-control:focus,
 .btn:active:focus:active:focus {
     box-shadow: none;
-    border-color: var(--color-accent);
+    border-color: var(--color-accent-primary);
 }
 
 .first-element-buffer {
     margin-top: 155px;
+}
+
+.first-element-buffer h2{
+    font-weight: 600;
+    color: var(--color-accent-dark);
 }
 
 /* Headings */
@@ -83,7 +89,7 @@ h1, h2, h3, h4, h5, h6 {
 .hero-overlay {
     height: 100vh;
     opacity: 1;
-    background-color: white;
+    background-color: #fff;
 
 }
 
@@ -96,10 +102,29 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-heading {
-    color: var(--color-accent-alt);
+    color: var(--color-accent-dark);
     font-weight: 600;
-    text-shadow: 2px 2px var(--color-accent);
-    font-size: 4em;
+    text-shadow: 1px 1px var(--color-accent-primary);
+    font-size: 3em;
+}
+
+#intro-section {
+    background-color: #fff;
+}
+
+.card-intro {
+    border: 1px solid var(--color-accent-primary);
+    color: #fff;
+    background-color: var(--color-primary);
+}
+
+.card-intro h5 {
+    color: var(--color-accent-primary);
+    font-weight: 600;
+}
+
+.card-intro span {
+    color: var(--color-accent-primary);
 }
 
 .category-thumbnail {
@@ -161,8 +186,9 @@ h1, h2, h3, h4, h5, h6 {
     width: 1.5rem;
 }
 
-.fa-heart {
-    color: var(--color-accent);
+.fa-heart,
+.fa-star {
+    color: var(--color-accent-primary);
 }
 
 
