@@ -41,4 +41,4 @@ Solution: adding font-family and font-weight to the pseudo class (https://stacko
     font-weight: 900;
 
 Bug 12: sorting products by rating worked fine in mySQL but not in Postgres, appearing to order by nulls first
-Solution: 
+Solution: using F function with nulls_last=True as argument in separate conditional for sortkey == 'average_rating'
