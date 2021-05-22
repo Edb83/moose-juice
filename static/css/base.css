@@ -5,8 +5,8 @@
 
 :root {
     --color-dark: #343a40;
-    --color-accent-primary: #FF6633;
-    --color-accent-dark: #2c2c2c;
+    --color-accent-dark: #ff7f54 ;
+    --color-accent-light: #e4714b;
     --color-info: #0062cc;
     --font-heading: 'Raleway', sans-serif;
     --font-default: 'Karla', sans-serif;
@@ -31,11 +31,11 @@ a:hover {
 }
 
 .border-accent-primary {
-    border-bottom: solid 1px var(--color-accent-primary) !important;
+    border-bottom: solid 1px var(--color-accent-light) !important;
 }
 
 .border-accent-dark {
-    border-bottom: solid 1px var(--color-accent-dark) !important;
+    border-bottom: solid 1px var(--color-dark) !important;
 }
 
 .navbar-nav .nav-link,
@@ -45,7 +45,7 @@ a:hover {
 
 .navbar-nav .nav-link:hover,
 .cluster-icon .fa-heart:hover {
-    color: var(--color-accent-primary) !important;
+    color: var(--color-accent-dark) !important;
 }
 
 .navbar-dark .navbar-toggler {
@@ -64,7 +64,7 @@ a:hover {
 .form-control:focus,
 .btn:active:focus:active:focus {
     box-shadow: none;
-    border-color: var(--color-accent-primary);
+    border-color: var(--color-accent-light);
 }
 
 .first-element-buffer {
@@ -73,13 +73,21 @@ a:hover {
 
 .first-element-buffer h2{
     font-weight: 600;
-    color: var(--color-accent-dark);
+    color: var(--color-accent-light);
 }
 
 /* Headings */
 
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
+}
+
+.heading-accent-dark {
+    color: var(--color-accent-dark);
+}
+
+.heading-accent-light {
+    color: var(--color-accent-light);
 }
 
 /* Home page */
@@ -106,16 +114,42 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-heading {
-    color: var(--color-accent-dark);
+    color: var(--color-accent-light);
     font-weight: 600;
-    text-shadow: 1px 1px var(--color-accent-primary);
+    /* text-shadow: 1px 1px var(--color-accent-primary); */
     font-size: 3em;
 }
 
-#intro-section {
-    background-color: #fff;
+#intro-section,
+#categories-section {
+    background-color: var(--color-dark);
 }
 
+.card-intro,
+.card-intro .card-footer {
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+}
+
+.card-intro .card-text {
+    color: #fff;
+}
+
+
+.card-intro h5 {
+    color: var(--color-accent-dark);
+    font-weight: 600;
+}
+
+.card-intro span {
+    color: var(--color-accent-primary);
+}
+
+
+.home-section {
+    border-bottom: 1px solid var(--color-accent-dark);
+    padding: 5rem 0;
+}
 
 .home-section .container {
     padding: 3rem 2rem;
@@ -126,7 +160,10 @@ h1, h2, h3, h4, h5, h6 {
     padding: 1rem;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--color-accent-primary);
+}
+
+#brands-section .container {
+    min-height: 43vh;
 }
 
 #brands-section .nav-pills .nav-link {
@@ -142,24 +179,21 @@ h1, h2, h3, h4, h5, h6 {
     background-color: #343a40;
 }
 
-.card-intro {
-    border: none;
-    color: var(--color-accent-dark);
-    background-color: #fff;
+.tab-content>.active {
+    line-height: 2rem;;
 }
 
-.card-intro h5 {
-    color: var(--color-accent-primary);
-    font-weight: 600;
-}
-
-.card-intro span {
-    color: var(--color-accent-primary);
+#categories-section p {
+    color: #fff;
 }
 
 .category-thumbnail {
     max-height: 96px;
     width: auto;
+}
+
+.card-footer a {
+    color: #fff;
 }
 
 /* TBC */
@@ -218,7 +252,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .fa-heart,
 .fa-star {
-    color: var(--color-accent-primary);
+    color: var(--color-accent-light);
 }
 
 

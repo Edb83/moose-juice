@@ -93,7 +93,7 @@
                             </small>
                         {% endif %}
                     </div>
-                    <div class="card-footer bg-white">
+                    <div class="card-footer">
                         {% if product.brand.available_sizes.all|length > 1 %}From {% endif %}{% if product.on_sale %}<s>£{{ product.brand.available_sizes.all.0.price }}</s> £{{ product.brand.available_sizes.all.0.sale_price }}{% else %}£{{ product.brand.available_sizes.all.0.price }}{% endif %}
                     </div>
                 </div>

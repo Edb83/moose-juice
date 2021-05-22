@@ -13,7 +13,7 @@
 
 </div>
 
-<section id="intro-section" class="home-section border-accent-dark">
+<section id="intro-section" class="home-section">
     <div class="container">
         <div class="row row-cols-1 row-cols-md-3">
 
@@ -24,7 +24,7 @@
                         <p class="card-text">Scrumptious flavours in a variety of nicotine strengths and sizes across our three stupendous brands.</p>
                     </div>
                     <div class="card-footer">
-                        <p class="card-text">Check out our brands!</p>
+                        <p class="card-text"><a href="#brands-section">Brands</a></p>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                         <p class="card-text">We're always looking for feedback and will continue to expand and improve our e-liquid menu.</p>
                     </div>
                     <div class="card-footer">
-                        <p class="card-text">Check out our flavour categories!</p>
+                        <p class="card-text"><a href="#categories-section">Flavours</a></p>
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                         <p class="card-text">Get points for your purchases, reviews and - heck - just for signing up! We hope you'll come back again and again.</p>
                     </div>
                     <div class="card-footer">
-                        <p class="card-text">Sign up to start earning!</p>
+                        <p class="card-text"><a href="{% url 'account_signup' %}">Sign up to start earning!</a></p>
                     </div>
                 </div>
             </div>
@@ -61,9 +61,9 @@
     <p>5 points for reviewing a juice you've purchased</p>
 </div> -->
 
-<section id="brands-section" class="home-section border-accent-primary">
+<section id="brands-section" class="home-section">
     <div class="container">
-        <h3 class="mb-3 text-center">Brands</h3>
+        <h3 class="mb-3 text-center heading-accent-light">Brands</h3>
         <!-- Mobile horizontal pills display -->
         <div class="row d-block d-md-none">
             <ul class="nav nav-pills mb-3 justify-content-center" id="h-pills-tab" role="tablist">
@@ -87,7 +87,7 @@
         <!-- Vertical pills display for larger resolutions -->
         <div class="row d-none d-md-flex">
             <div class="col-3">
-                <div class="nav flex-column nav-pills align-items-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <div class="nav flex-column nav-pills text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     {% for brand in brands %}
                         <a class="nav-link {% if forloop.counter == 1 %}active{% endif %}" id="v-pills-{{ brand.id }}-tab" data-toggle="pill" href="#v-pills-{{ brand.id }}" role="tab" aria-controls="v-pills-{{ brand.id }}" aria-selected="{% if forloop.counter == 1 %}true{% else %}false{% endif %}">
                             {{ brand.friendly_name }}
@@ -108,9 +108,9 @@
     </div>
 </section>
 
-<section id="categories-section" class="home-section border-accent-dark">
+<section id="categories-section" class="home-section">
     <div class="container text-center">
-        <h3>Flavour Profiles</h3>
+        <h3 class="heading-accent-dark">Flavour Profiles</h3>
         <div class="row d-flex justify-content-around">
             {% for category in categories %}
                 <div class="col-6 col-md-4 mt-1 mb-4">
@@ -119,7 +119,9 @@
                             <img class="mx-auto img-fluid mb-3 category-thumbnail" src="{{ category.image.url }}" alt="{{ category.friendly_name }}">
                         </a>
                     {% endif %}
-                    <div>{{ category.friendly_name }}</div>
+                    <div><p>
+                        {{ category.friendly_name }}
+                    </p></div>
                 </div>
             {% endfor %}
         </div>
