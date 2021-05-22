@@ -28,7 +28,7 @@
 <body>
     <header>
 
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top border-accent">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top border-accent-primary">
 
             <a class="navbar-brand" href="{% url 'home' %}">
                 <img src="{{ MEDIA_URL }}moose-logo-dark.png" width="30" height="30" class="d-inline-block align-top logo" alt="Moose logo">
@@ -49,10 +49,10 @@
                     <a class="nav-link" href="{% url 'products' %}?sale">Sale</a>
                     
                     <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="brandsDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Brands
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <div class="dropdown-menu" aria-labelledby="brandsDropdownMenuLink">
                             {% for brand in brands %}
                                 <a class="dropdown-item" href="{% url 'products' %}?brand={{ brand.name }}">{{ brand.friendly_name }}</a>
                             {% endfor %}
@@ -60,10 +60,10 @@
                     </div>
 
                     <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="flavoursDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Flavours
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <div class="dropdown-menu" aria-labelledby="flavoursDropdownMenuLink">
                             {% for category in categories %}
                             <a class="dropdown-item" href="{% url 'products' %}?category={{ category.name}}">{{ category.friendly_name }}</a>
                             {% endfor %}
@@ -71,10 +71,10 @@
                     </div>
 
                     <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="accountDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Account
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <div class="dropdown-menu" aria-labelledby="accountDropdownMenuLink">
                             {% if request.user.is_authenticated %}
                                 {% if request.user.is_superuser %}
                                     <a href="{% url 'add_product' %}" class="dropdown-item">Product Management</a>

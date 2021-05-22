@@ -4,7 +4,7 @@
 /* Common styles */
 
 :root {
-    --color-primary: #343a40;
+    --color-dark: #343a40;
     --color-accent-primary: #FF6633;
     --color-accent-dark: #2c2c2c;
     --color-info: #0062cc;
@@ -30,8 +30,12 @@ a:hover {
     margin-right: 0.5em;
 }
 
-.border-accent {
-    border-bottom: solid 2px var(--color-accent-primary);
+.border-accent-primary {
+    border-bottom: solid 1px var(--color-accent-primary) !important;
+}
+
+.border-accent-dark {
+    border-bottom: solid 1px var(--color-accent-dark) !important;
 }
 
 .navbar-nav .nav-link,
@@ -110,6 +114,32 @@ h1, h2, h3, h4, h5, h6 {
 
 #intro-section {
     background-color: #fff;
+}
+
+
+.home-section .container {
+    padding: 3rem 2rem;
+}
+
+.home-section .container > h3 {
+    font-weight: 600;
+    padding: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-accent-primary);
+}
+
+#brands-section .nav-pills .nav-link {
+    color: var(--color-accent-primary);
+}
+
+#brands-section .nav-pills .nav-link:hover {
+    color: var(--color-accent-primary);
+}
+
+#brands-section .nav-pills .nav-link.active {
+    color: #fff;
+    background-color: #343a40;
 }
 
 .card-intro {

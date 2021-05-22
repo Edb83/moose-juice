@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<div class="hero-image border-accent pb-5">
+<div class="hero-image border-accent-primary pb-5">
 
     <div class="hero-overlay"></div>
     <div class="hero-text-container">
@@ -13,34 +13,40 @@
 
 </div>
 
-<section id="intro-section">
-    <div class="container py-5">
+<section id="intro-section" class="home-section border-accent-dark">
+    <div class="container">
         <div class="row row-cols-1 row-cols-md-3">
 
             <div class="col mb-4">
                 <div class="card card-intro h-100">
                     <div class="card-body">
-                        <h5 class="card-title">Pick</h5>
-                        <p class="card-text">Scrumptious flavours in a variety of nicotine strengths and sizes across our <span>three stupendous brands</span>.</p>
-                        <p class="card-text">Whatever your style we've got you!</p>
+                        <h5 class="card-title">Pick <span>&#10230;</span></h5>
+                        <p class="card-text">Scrumptious flavours in a variety of nicotine strengths and sizes across our three stupendous brands.</p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="card-text">Check out our brands!</p>
                     </div>
                 </div>
             </div>
             <div class="col mb-4">
                 <div class="card card-intro h-100">
                     <div class="card-body">
-                        <h5 class="card-title">Review</h5>
-                        <p class="card-text">We're always looking for feedback and will oontinue to expand and improve our <span>e-liquid menu</span>.</p>
-                        <p class="card-text">Let us know what you think!</p>
+                        <h5 class="card-title">Taste <span>&#10230;</span></h5>
+                        <p class="card-text">We're always looking for feedback and will continue to expand and improve our e-liquid menu.</p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="card-text">Check out our flavour categories!</p>
                     </div>
                 </div>
             </div>
             <div class="col mb-4">
                 <div class="card card-intro h-100">
                     <div class="card-body">
-                        <h5 class="card-title">Profit</h5>
-                        <p class="card-text">Get points for your purchases, reviews and - heck - just for <span>signing up!</span> We hope you'll come back again and again.</p>
-                        <p class="card-text">Whatever you pick, it's bound to be good.</p>
+                        <h5 class="card-title">Profit <span>&#10230;</span></h5>
+                        <p class="card-text">Get points for your purchases, reviews and - heck - just for signing up! We hope you'll come back again and again.</p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="card-text">Sign up to start earning!</p>
                     </div>
                 </div>
             </div>
@@ -49,49 +55,76 @@
     </div>
 </section>
 
+<!-- <div>
+    <p>100 points for Registering</p>
+    <p>1 points for every £1 spent</p>
+    <p>5 points for reviewing a juice you've purchased</p>
+</div> -->
 
-
-
-
-<div class="container text-center">
-
-    <div>
-        <h3>
-            Buy > Review > Rewards
-        </h3>
-    </div>
-
-    <div>
-        <p>100 points for Registering</p>
-        <p>1 points for every £1 spent</p>
-        <p>5 points for reviewing a juice you've purchased</p>
-    </div>
-    <HR>
-    </HR>
-    <h3>Brands</h3>
-    <div class="d-flex justify-content-around">
-        {% for brand in brands %}
-        <div>{{ brand.friendly_name }}</div>
-        {% endfor %}
-    </div>
-    <hr>
-
-    <h3>Flavour Profiles</h3>
-    <div class="row d-flex justify-content-around">
-        {% for category in categories %}
-        <div class="col-12 col-sm-6 col-md-4 my-5">
-
-            {% if category.image %}
-            <a href="{% url 'products' %}?category={{category.name}}">
-                <img class="mx-auto img-fluid mb-3 category-thumbnail" src="{{ category.image.url }}" alt="{{ category.friendly_name }}">
-            </a>
-            {% endif %}
-            <div>{{ category.friendly_name }}</div>
+<section id="brands-section" class="home-section border-accent-primary">
+    <div class="container">
+        <h3 class="mb-3 text-center">Brands</h3>
+        <!-- Mobile horizontal pills display -->
+        <div class="row d-block d-md-none">
+            <ul class="nav nav-pills mb-3 justify-content-center" id="h-pills-tab" role="tablist">
+                {% for brand in brands %}
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link {% if forloop.counter == 1 %}active{% endif %}" id="h-pills-{{ brand.id }}-tab" data-toggle="pill" href="#h-pills-{{ brand.id }}" role="tab" aria-controls="pills-{{ brand.id }}" aria-selected="{% if forloop.counter == 1 %}true{% else %}false{% endif %}">
+                            {{ brand.friendly_name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="tab-content" id="h-pills-tabContent">
+                {% for brand in brands %}
+                    <div class="tab-pane fade show {% if forloop.counter == 1 %}active{% endif %}" id="h-pills-{{ brand.id }}" role="tabpanel" aria-labelledby="h-pills-{{ brand.id }}-tab">
+                        {{ brand.description }}
+                    </div>
+                {% endfor %}
+            </div>
         </div>
-        {% endfor %}
-    </div>
 
-</div>
+        <!-- Vertical pills display for larger resolutions -->
+        <div class="row d-none d-md-flex">
+            <div class="col-3">
+                <div class="nav flex-column nav-pills align-items-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    {% for brand in brands %}
+                        <a class="nav-link {% if forloop.counter == 1 %}active{% endif %}" id="v-pills-{{ brand.id }}-tab" data-toggle="pill" href="#v-pills-{{ brand.id }}" role="tab" aria-controls="v-pills-{{ brand.id }}" aria-selected="{% if forloop.counter == 1 %}true{% else %}false{% endif %}">
+                            {{ brand.friendly_name }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="tab-content" id="v-pills-tabContent">
+                    {% for brand in brands %}
+                        <div class="tab-pane fade show {% if forloop.counter == 1 %}active{% endif %}" id="v-pills-{{ brand.id }}" role="tabpanel" aria-labelledby="v-pills-{{ brand.id }}-tab">
+                            {{ brand.description }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+          </div>
+    </div>
+</section>
+
+<section id="categories-section" class="home-section border-accent-dark">
+    <div class="container text-center">
+        <h3>Flavour Profiles</h3>
+        <div class="row d-flex justify-content-around">
+            {% for category in categories %}
+                <div class="col-6 col-md-4 mt-1 mb-4">
+                    {% if category.image %}
+                        <a href="{% url 'products' %}?category={{category.name}}">
+                            <img class="mx-auto img-fluid mb-3 category-thumbnail" src="{{ category.image.url }}" alt="{{ category.friendly_name }}">
+                        </a>
+                    {% endif %}
+                    <div>{{ category.friendly_name }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
 
 {% endblock %}
 
