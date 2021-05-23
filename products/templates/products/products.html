@@ -6,13 +6,13 @@
 
 <div class="container first-element-buffer">
     {% if brand %}
-        <h2 class="text-center">{{ brand.friendly_name }}</h2>
-        <p class="product-filter-text">{{brand.description}}</p>
+    <h2 class="text-center">{{ brand.friendly_name }}</h2>
+    <p class="product-filter-text">{{brand.description}}</p>
     {% elif category %}
     <div class="row">
         <div class="col-1">
             {% if category.image %}
-                <img class="category-img-sm mr-2" src="{{ category.image.url }}" alt="{{ category.friendly_name }}">
+            <img class="category-img-sm mr-2" src="{{ category.image.url }}" alt="{{ category.friendly_name }}">
             {% endif %}
         </div>
         <div class="col-10">
@@ -22,13 +22,15 @@
         </div>
         <div class="col-1"></div>
     </div>
-        <p class="product-filter-text">{{ category.description}}</p>
+    <p class="product-filter-text">{{ category.description}}</p>
     {% elif sale %}
-        <h2 class="text-center">Sale</h2>
-        <p class="product-filter-text">Grab your favourite Moose Juice while it's on sale!</p>
+    <h2 class="text-center">Sale</h2>
+    <p class="product-filter-text">Grab your favourite Moose Juice while it's on sale!</p>
     {% else %}
-        <h2 class="text-center">Moose Juice</h2>
-        <p class="product-filter-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi eius laboriosam cumque suscipit aperiam, facere id eum inventore perspiciatis atque? Sed quidem maiores veniam eius hic aspernatur, non similique tempore.</p>
+    <h2 class="text-center">Moose Juice</h2>
+    <p class="product-filter-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi eius laboriosam cumque
+        suscipit aperiam, facere id eum inventore perspiciatis atque? Sed quidem maiores veniam eius hic aspernatur, non
+        similique tempore.</p>
     {% endif %}
 </div>
 
@@ -38,8 +40,10 @@
         <div class="col-12 offset-md-8 col-md-4 offset-l-10 col-l-2 py-3">
             <select id="sort-selector" class="custom-select my-1 mr-sm-2">
                 <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
-                <option value="created_on_desc" {% if current_sorting == 'date_desc' %}selected{% endif %}>New arrivals</option>
-                <option value="average_rating_desc" {% if current_sorting == 'rating_desc' %}selected{% endif %}>Top rated</option>
+                <option value="created_on_desc" {% if current_sorting == 'date_desc' %}selected{% endif %}>New arrivals
+                </option>
+                <option value="average_rating_desc" {% if current_sorting == 'rating_desc' %}selected{% endif %}>Top
+                    rated</option>
                 <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>A-Z</option>
                 <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Z-A</option>
             </select>
@@ -47,57 +51,60 @@
     </div>
     <div class="row">
         <div class="col">
-            {{ products|length }} Juice{{products|length|pluralize }}{% if search_term %} found with <strong>"{{ search_term }}"</strong>{% endif %}
+            {{ products|length }} Juice{{products|length|pluralize }}{% if search_term %} found with
+            <strong>"{{ search_term }}"</strong>{% endif %}
         </div>
     </div>
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 text-center">
         {% for product in products %}
-            <div class="col mb-4">
-                <div class="card h-100 border-white">
-                    <div class="product-img-container">
-                        <div class="product-heart-container">
-                            <a href="{% url 'toggle_favourite' product.id %}">
-                                <span class="icon icon-product">
-                                    {% if product not in profile.favourites.all or not request.user.is_superuser %}
-                                        <i class="far fa-heart fa-lg"></i>
-                                    {% else %}
-                                        <i class="fas fa-heart fa-lg"></i>
-                                    {% endif %}
-                                </span>
+        <div class="col mb-4">
+            <div class="card h-100 border-white">
+                <div class="product-img-container">
+                    <!-- https://stackoverflow.com/a/61685356
+                        URL passed in from server to client side to be used in ajax call -->
+                    <div class="product-heart-container" data-product={{product.id}} data-url="{% url 'toggle_favourite' product.id %}">
+                        <span class="icon icon-product">
+                            {% if product not in profile.favourites.all or not request.user.is_superuser %}
+                            <i class="far fa-heart fa-lg"></i>
+                            {% else %}
+                            <i class="fas fa-heart fa-lg"></i>
+                            {% endif %}
+                        </span>
+                    </div>
+                    <div class="product-svg-container">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 339">
+                            <a href="{% url 'product_detail' product.id %}">
+                                {% include 'products/includes/product-svg.html' %}
                             </a>
-                        </div>
-                        <div class="product-svg-container">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 339">
-                                <a href="{% url 'product_detail' product.id %}">
-                                    {% include 'products/includes/product-svg.html' %}
-                                </a>
-                            </svg>
-                        </div>
-                    </div>
-                    
-                    <div class="card-body">    
-                        <h5 class="card-title">{{ product.name }}</h5>
-                        
-                        {% if product.average_rating %}
-                            <div class="product-stars" data-value="{{ product.average_rating }}"></div>
-                        {% else %}
-                            <div>
-                                <span>Not yet rated</span>
-                            </div>
-                        {% endif %}
-                        {% if request.user.is_superuser %}
-                            <small class="text-center">
-                                <a href="{% url 'edit_product' product.id %}">Edit</a> | 
-                                <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
-                            </small>
-                        {% endif %}
-                    </div>
-                    <div class="card-footer">
-                        {% if product.brand.available_sizes.all|length > 1 %}From {% endif %}{% if product.on_sale %}<s>£{{ product.brand.available_sizes.all.0.price }}</s> £{{ product.brand.available_sizes.all.0.sale_price }}{% else %}£{{ product.brand.available_sizes.all.0.price }}{% endif %}
+                        </svg>
                     </div>
                 </div>
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+
+                    {% if product.average_rating %}
+                    <div class="product-stars" data-value="{{ product.average_rating }}"></div>
+                    {% else %}
+                    <div>
+                        <span>Not yet rated</span>
+                    </div>
+                    {% endif %}
+                    {% if request.user.is_superuser %}
+                    <small class="text-center">
+                        <a href="{% url 'edit_product' product.id %}">Edit</a> |
+                        <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
+                    </small>
+                    {% endif %}
+                </div>
+                <div class="card-footer">
+                    {% if product.brand.available_sizes.all|length > 1 %}From
+                    {% endif %}{% if product.on_sale %}<s>£{{ product.brand.available_sizes.all.0.price }}</s>
+                    £{{ product.brand.available_sizes.all.0.sale_price }}{% else %}£{{ product.brand.available_sizes.all.0.price }}{% endif %}
+                </div>
             </div>
+        </div>
         {% endfor %}
     </div>
 </div>
@@ -108,53 +115,80 @@
 
 {% block extra_js %}
 
-    {{ block.super }}
+{{ block.super }}
 
-    <script type="text/javascript">
-        $('#sort-selector').change(function() {
-            let selector = $(this);
-            let currentUrl = new URL(window.location);
+<script type="text/javascript">
+    $('#sort-selector').change(function () {
+        let selector = $(this);
+        let currentUrl = new URL(window.location);
 
-            let selectedVal = selector.val();
-            if(selectedVal != "reset"){
-                let stringSplit = selectedVal.split("_")
-                let direction = stringSplit[(stringSplit.length)-1];
-                stringSplit.pop();
-                let sort = stringSplit.join("_");
+        let selectedVal = selector.val();
+        if (selectedVal != "reset") {
+            let stringSplit = selectedVal.split("_")
+            let direction = stringSplit[(stringSplit.length) - 1];
+            stringSplit.pop();
+            let sort = stringSplit.join("_");
 
-                currentUrl.searchParams.set("sort", sort);
-                currentUrl.searchParams.set("direction", direction);
+            currentUrl.searchParams.set("sort", sort);
+            currentUrl.searchParams.set("direction", direction);
 
-                window.location.replace(currentUrl);
+            window.location.replace(currentUrl);
+        } else {
+            currentUrl.searchParams.delete("sort");
+            currentUrl.searchParams.delete("direction");
+
+            window.location.replace(currentUrl);
+        }
+    })
+</script>
+
+<script type="text/javascript">
+    const productStars = document.querySelectorAll('.product-stars');
+
+    productStars.forEach(rating => {
+        const ratingValue = parseInt(rating.dataset.value);
+        const fullStar = ratingValue;
+        let stars = '';
+
+        for (let i = 1; i < 6; i++) {
+            if (i <= fullStar) {
+                stars += `<i class="fas fa-star"></i>`;
             } else {
-                currentUrl.searchParams.delete("sort");
-                currentUrl.searchParams.delete("direction");
-
-                window.location.replace(currentUrl);
+                stars += `<i class="far fa-star"></i>`;
             }
-        })
-    </script>
-
-    <script type="text/javascript">
-
-        const productStars = document.querySelectorAll('.product-stars');
-
-        productStars.forEach(rating => {
-            const ratingValue = parseInt(rating.getAttribute('data-value'));
-            const fullStar = ratingValue;
-            let stars = '';
-
-            for (let i = 1; i < 6; i++) {
-                if (i <= fullStar) {
-                    stars += `<i class="fas fa-star"></i>`;
-                }
-                else {
-                    stars += `<i class="far fa-star"></i>`;
-                }
-            }
+        }
 
         rating.innerHTML = stars;
-        })
-    </script>
+    })
+</script>
+
+<script type="text/javascript">
+
+    fullHeart = `<i class="fas fa-heart fa-lg"></i>`
+    emptyHeart = `<i class="far fa-heart fa-lg"></i>`
+
+    $(".product-heart-container").click(function () {
+        const product = this.dataset.product;
+        const iconSpan = $(this).children('span');
+        const toggleUrl = this.dataset.url;
+
+        $.ajax({
+            url: toggleUrl,
+            dataType: 'json',
+            success: function (data) {
+                if (data.is_authenticated) {
+                    if (data.is_favourite) {
+                        iconSpan.children('i').replaceWith(emptyHeart);
+                    } else {
+                        iconSpan.children('i').replaceWith(fullHeart);
+                    }
+                } else {
+                    window.location.replace('{% url "account_login" %}')
+                }
+                
+            }
+        });
+    });
+</script>
 
 {% endblock %}

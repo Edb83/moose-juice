@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponseRedirect
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 
 from django.db.models import F, Q
 from django.db.models.functions import Lower
@@ -34,6 +35,7 @@ def all_products(request):
             sortkey = request.GET['sort']
             sort = sortkey
             if sortkey == 'average_rating':
+                # F used to leave nulls last in Postgres queries
                 products = products.order_by(F(
                     'average_rating').desc(nulls_last=True))
             else:
@@ -149,17 +151,21 @@ def favourites(request):
 
 @login_required
 def toggle_favourite(request, product_id):
+
     profile = get_object_or_404(UserProfile, user=request.user)
     product = get_object_or_404(Product, pk=product_id)
+
+    data = {
+        'is_favourite': profile.favourites.filter(pk=product_id).exists(),
+        'is_authenticated': request.user.is_authenticated
+    }
+
     if profile.favourites.filter(pk=product_id).exists():
         profile.favourites.remove(product)
-        messages.success(request, f'Removed {product.name} from your favourites')
     else:
         profile.favourites.add(product)
-        messages.success(request, f'Added {product.name} to your favourites')
 
-    # NEED TO HANDLE 'next' if returning to same page --> JS/json?
-    return redirect(reverse('products'))
+    return JsonResponse(data)
 
 
 @login_required
