@@ -251,18 +251,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .fa-heart,
+.fa-heart-broken,
 .fa-star {
     color: var(--color-accent-light);
 }
 
 
-.icon-product:hover .fas.fa-heart:before {
-    content: "\f7a9";
-}
-
-.icon-product:hover .far.fa-heart::before {
-    content: "\F004";
-    /* Required or the pseudo-class will not work: */
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
+.icon-product>i:hover {
+    color: #e44b4b;
 }

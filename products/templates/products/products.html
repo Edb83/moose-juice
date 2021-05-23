@@ -63,7 +63,7 @@
                 <div class="product-img-container">
                     <!-- https://stackoverflow.com/a/61685356
                         URL passed in from server to client side to be used in ajax call -->
-                    <div class="product-heart-container" data-product={{product.id}} data-url="{% url 'toggle_favourite' product.id %}">
+                    <div class="product-heart-container" data-url="{% url 'toggle_favourite' product.id %}">
                         <span class="icon icon-product">
                             {% if product not in profile.favourites.all or not request.user.is_superuser %}
                             <i class="far fa-heart fa-lg"></i>
@@ -109,86 +109,13 @@
     </div>
 </div>
 
-
 {% endblock %}
-
 
 {% block extra_js %}
 
 {{ block.super }}
-
-<script type="text/javascript">
-    $('#sort-selector').change(function () {
-        let selector = $(this);
-        let currentUrl = new URL(window.location);
-
-        let selectedVal = selector.val();
-        if (selectedVal != "reset") {
-            let stringSplit = selectedVal.split("_")
-            let direction = stringSplit[(stringSplit.length) - 1];
-            stringSplit.pop();
-            let sort = stringSplit.join("_");
-
-            currentUrl.searchParams.set("sort", sort);
-            currentUrl.searchParams.set("direction", direction);
-
-            window.location.replace(currentUrl);
-        } else {
-            currentUrl.searchParams.delete("sort");
-            currentUrl.searchParams.delete("direction");
-
-            window.location.replace(currentUrl);
-        }
-    })
-</script>
-
-<script type="text/javascript">
-    const productStars = document.querySelectorAll('.product-stars');
-
-    productStars.forEach(rating => {
-        const ratingValue = parseInt(rating.dataset.value);
-        const fullStar = ratingValue;
-        let stars = '';
-
-        for (let i = 1; i < 6; i++) {
-            if (i <= fullStar) {
-                stars += `<i class="fas fa-star"></i>`;
-            } else {
-                stars += `<i class="far fa-star"></i>`;
-            }
-        }
-
-        rating.innerHTML = stars;
-    })
-</script>
-
-<script type="text/javascript">
-
-    fullHeart = `<i class="fas fa-heart fa-lg"></i>`
-    emptyHeart = `<i class="far fa-heart fa-lg"></i>`
-
-    $(".product-heart-container").click(function () {
-        const product = this.dataset.product;
-        const iconSpan = $(this).children('span');
-        const toggleUrl = this.dataset.url;
-
-        $.ajax({
-            url: toggleUrl,
-            dataType: 'json',
-            success: function (data) {
-                if (data.is_authenticated) {
-                    if (data.is_favourite) {
-                        iconSpan.children('i').replaceWith(emptyHeart);
-                    } else {
-                        iconSpan.children('i').replaceWith(fullHeart);
-                    }
-                } else {
-                    window.location.replace('{% url "account_login" %}')
-                }
-                
-            }
-        });
-    });
-</script>
+<script src="{% static 'products/js/sort-selector.js' %}"></script>
+<script src="{% static 'products/js/star-display.js' %}"></script>
+<script src="{% static 'products/js/favourites-toggle.js' %}"></script>
 
 {% endblock %}

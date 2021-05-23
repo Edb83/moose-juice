@@ -9,17 +9,17 @@
         <div class="card-body">
 
             <div class="row">
-                <div class="product-heart-container">
-                    <a href="{% url 'toggle_favourite' product.id %}">
-                        <span class="icon icon-product">
-                            {% if product not in profile.favourites.all %}
-                                <i class="far fa-heart fa-2x"></i>
-                            {% else %}
-                                <i class="fas fa-heart fa-2x"></i>
-                            {% endif %}
-                        </span>
-                    </a>
-                </div>    
+                <!-- https://stackoverflow.com/a/61685356
+                URL passed in from server to client side to be used in ajax call -->
+                <div class="product-heart-container" data-url="{% url 'toggle_favourite' product.id %}">
+                    <span class="icon icon-product">
+                        {% if product not in profile.favourites.all or not request.user.is_superuser %}
+                        <i class="far fa-heart fa-lg"></i>
+                        {% else %}
+                        <i class="fas fa-heart fa-lg"></i>
+                        {% endif %}
+                    </span>
+                </div>
                 <div class="col-4 col-md-3 col-lg-2 mx-auto">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 339">
                         {% include 'products/includes/product-svg.html' %}
@@ -158,11 +158,12 @@
         {% endfor %}
     </div>
 
-
-
 {% endblock %}
 
 {% block extra_js %}
+
     {{ block.super }}
     {% include 'products/includes/quantity_input_script.html' %}
+    <script src="{% static 'products/js/favourites-toggle.js' %}"></script>
+
 {% endblock %}

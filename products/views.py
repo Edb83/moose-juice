@@ -157,7 +157,7 @@ def toggle_favourite(request, product_id):
 
     data = {
         'is_favourite': profile.favourites.filter(pk=product_id).exists(),
-        'is_authenticated': request.user.is_authenticated
+        'is_authenticated': request.user.is_authenticated,
     }
 
     if profile.favourites.filter(pk=product_id).exists():

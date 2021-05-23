@@ -44,4 +44,8 @@ Bug 12: sorting products by rating worked fine in mySQL but not in Postgres, app
 Solution: using F function with nulls_last=True as argument in separate conditional for sortkey == 'average_rating'
 
 Bug 13: in Postgres orders are somtimes saved twice and have no grand total attached to them
-Solution: 
+Solution: missing migration on deployed site
+
+Bug 14: static files not loading
+Solution: add STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') to settings.py
+
