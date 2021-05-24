@@ -24,6 +24,12 @@ a:hover {
     text-decoration: none;
 }
 
+.btn-dark:hover {
+    color: #fff;
+    background-color: var(--color-accent-light);
+    border-color: var(--color-accent-light);
+}
+
 /* Navbar */
 
 .logo {

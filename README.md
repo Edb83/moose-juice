@@ -257,7 +257,7 @@ Full details of testing can be found [here](TESTING.md).
 <span id="credits"></span>
 ## Credits
 ### Tutorials / Resources
-- TBC
+- [How to work with AJAX requests with Django](https://simpleisbetterthancomplex.com/tutorial/2016/08/29/how-to-work-with-ajax-request-with-django.html)
 ### Student projects
 - [LigaMoon's Prickly](https://github.com/LigaMoon/Prickly)
 ### Code modified from other sources
