@@ -99,7 +99,7 @@ class StripeWH_Handler:
 
             except Order.DoesNotExist:
                 attempt += 1
-                time.sleep(1)
+                time.sleep(2)
         if order_exists:
             self._send_confirmation_email(order)
             return HttpResponse(
