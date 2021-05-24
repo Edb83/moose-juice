@@ -94,6 +94,7 @@ class StripeWH_Handler:
                     original_cart=cart,
                     stripe_pid=pid,
                 )
+
                 order_exists = True
                 break
 

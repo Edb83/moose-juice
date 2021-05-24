@@ -10,6 +10,7 @@ from django_countries.fields import CountryField
 
 from products.models import Product, Size, Nicotine
 from profiles.models import UserProfile
+from rewards.models import Reward
 
 
 class Order(models.Model):
@@ -55,11 +56,19 @@ class Order(models.Model):
         """
         self.order_total = self.lineitems.aggregate(
             Sum('lineitem_total'))['lineitem_total__sum'] or 0
+
         if self.order_total < settings.FREE_DELIVERY_THRESHOLD:
             self.delivery_cost = Decimal(settings.STANDARD_DELIVERY)
         else:
             self.delivery_cost = 0
-        self.grand_total = self.order_total + self.delivery_cost
+
+        if self.points_redeemed:
+            reward_base = getattr(Reward.objects.get(type="Purchase"), "value")
+            discount_to_apply = (self.points_redeemed * reward_base) / 100
+        else:
+            discount_to_apply = 0
+
+        self.grand_total = self.order_total + self.delivery_cost - Decimal(discount_to_apply)
         self.save()
 
     def save(self, *args, **kwargs):

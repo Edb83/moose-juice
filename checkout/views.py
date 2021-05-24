@@ -59,7 +59,21 @@ def checkout(request):
             pid = request.POST.get('client_secret').split('_secret')[0]
             order.stripe_pid = pid
             order.original_cart = json.dumps(cart)
+
+            if request.user.is_authenticated:
+                discount_applied = request.session.get(
+                    'discount_applied', False)
+
+                # Add points redeemed to order for model to calculate total
+                if discount_applied:
+                    profile = UserProfile.objects.get(user=request.user)
+                    order.points_redeemed = profile.points
+                    # Set user's points back to 0
+                    profile.points = 0
+                    profile.save()
+
             order.save()
+
             for item, quantity in cart.items():
                 try:
                     # Use string created in cart view to isolate model ids
@@ -156,7 +170,6 @@ def checkout_success(request, order_number):
 
         profile = UserProfile.objects.get(user=request.user)
         reward = Reward.objects.get(type="Purchase")
-        discount_applied = request.session.get('discount_applied', False)
 
         # Attach the user's profile to the order
         order.user_profile = profile
@@ -164,11 +177,6 @@ def checkout_success(request, order_number):
         # Add points earned to order
         points_earned = int(math.floor(order.order_total)) * reward.value
         order.points_earned = points_earned
-
-        # Add points redeemed to order and remove from profile 
-        if discount_applied:
-            order.points_redeemed = profile.points
-            profile.points = 0
 
         # Update profile and order
         profile.save()
