@@ -7,7 +7,11 @@ from checkout.models import Order
 def view_cart(request):
     """ A view to return the shopping cart contents """
 
-    return render(request, 'cart/cart.html')
+    context = {
+        'on_cart_page': True,
+    }
+
+    return render(request, 'cart/cart.html', context)
 
 
 def add_to_cart(request, item_id):

@@ -14,7 +14,7 @@
             </div>
         </div>
 
-        {% if grand_total and not on_profile_page %}
+        {% if grand_total and not on_profile_page and not on_checkout_success_page %}
             <hr>
             <p>You have <strong>{{ product_count }}</strong> item{{ product_count|pluralize }} in your cart</p>
             {% for item in cart_items %}
@@ -33,12 +33,14 @@
                         Spend <strong>£{{ free_delivery_delta }}</strong> more for free delivery!
                     </p>
                     {% endif %}
-                    <a href="{% url 'checkout' %}" class="btn btn-outline-dark">
-                        Secure Checkout
+                    {% if not on_cart_page %}
+                    <a href="{% url 'view_cart' %}" class="btn btn-outline-dark">
+                        Review Cart
                         <span class="icon">
-                            <i class="fas fa-lock"></i>
+                            <i class="fas fa-shopping-cart"></i>
                         </span>
                     </a>
+                    {% endif %}
                 </div>
             </div>
         {% endif %}

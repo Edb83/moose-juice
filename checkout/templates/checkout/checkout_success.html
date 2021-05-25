@@ -159,13 +159,24 @@
     </div>
 
     <!-- Button to repeat order -->
-    <div>
-        <a href="{% url 'replicate_cart' order.order_number %}" class="btn btn-outline-dark mt-5">
-            <span class="icon">
-                <i class="fas fa-shopping-cart"></i>
-            </span>
-            Order again
-        </a>
+    <div class="row">
+        <div class="col">
+            {% if on_checkout_success_page %}
+                <a href="{% url 'profile' %}" class="btn btn-outline-dark mt-5">
+                    <span class="icon">
+                        <i class="fas fa-user"></i>
+                    </span>
+                    Back to Profile
+                </a>
+            {% else %}
+                <a href="{% url 'replicate_cart' order.order_number %}" class="btn btn-dark mt-5">
+                    <span class="icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </span>
+                    Order again
+                </a>
+            {% endif %}
+        </div>
     </div>
 
 </div> 

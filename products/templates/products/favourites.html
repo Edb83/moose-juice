@@ -4,20 +4,25 @@
 {% block content %}
 
 
-<div class="container first-element-buffer">
+<div class="section container first-element-buffer">
     <div class="row">
         <div class="col mb-3">
-            <h2 class="text-center mb-5">Your Favourites</h2>
-            {% if products|length > 0 %}
-            <p class="text-center">You've chosen <strong>{{ products|length }}</strong> favourite
-                Juice{{products|length|pluralize }}. Click a <span class="icon"><i
-                        class="fas fa-heart fa-fw"></i></span> to remove it from the list - you can always add more!</p>
-            {% else %}
-            <p class="text-center">You've got no favourites to show at the moment - click a <span class="icon"><i class="fas fa-heart fa-fw"></i></span> to stick them in here.</p>
-            {% endif %}
+            <div class="pb-5 border-accent-primary">
+                <h2 class="text-center mb-5">Your Favourites</h2>
+                {% if products|length > 0 %}
+                <p class="text-center">You've chosen <strong>{{ products|length }}</strong> favourite
+                    Juice{{products|length|pluralize }}. Click a <span class="icon"><i
+                            class="fas fa-heart fa-fw"></i></span> to remove it from the list - you can always add more!</p>
+                {% else %}
+                <p class="text-center">You've got no favourites to show at the moment - click a <span class="icon"><i class="fas fa-heart fa-fw"></i></span> to stick them in here.</p>
+                {% endif %}
+
+            </div>
         </div>
     </div>
+</div>
 
+<div class="section container my-5">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 text-center">
         {% for product in products %}
             <div class="col mb-4">
@@ -57,6 +62,7 @@
             </div>
         {% endfor %}
     </div>
+
 </div>
 
 {% endblock %}

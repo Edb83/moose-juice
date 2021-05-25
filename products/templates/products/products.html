@@ -4,7 +4,7 @@
 {% block content %}
 
 
-<div class="container first-element-buffer">
+<div class="section container first-element-buffer">
     {% if brand %}
     <h2 class="text-center">{{ brand.friendly_name }}</h2>
     <p class="product-filter-text">{{brand.description}}</p>
@@ -35,7 +35,7 @@
 </div>
 
 
-<div class="container my-5">
+<div class="section container my-5">
     <div class="row">
         <div class="col-12 offset-md-8 col-md-4 offset-l-10 col-l-2 py-3">
             <select id="sort-selector" class="custom-select my-1 mr-sm-2">
@@ -49,13 +49,18 @@
             </select>
         </div>
     </div>
+
     <div class="row">
-        <div class="col">
-            {{ products|length }} Juice{{products|length|pluralize }}{% if search_term %} found with
-            <strong>"{{ search_term }}"</strong>{% endif %}
+        <div class="col my-3">
+            <p class="py-3 border-accent-primary">
+                {{ products|length }} Juice{{products|length|pluralize }}{% if search_term %} found with
+                <strong>"{{ search_term }}"</strong>{% endif %}
+            </p>
         </div>
     </div>
+</div>
 
+<div class="section container">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 text-center">
         {% for product in products %}
         <div class="col mb-4">
@@ -99,6 +104,7 @@
         </div>
         {% endfor %}
     </div>
+
 </div>
 
 {% endblock %}

@@ -43,8 +43,8 @@ Solution: adding font-family and font-weight to the pseudo class (https://stacko
 Bug 12: sorting products by rating worked fine in mySQL but not in Postgres, appearing to order by nulls first
 Solution: using F function with nulls_last=True as argument in separate conditional for sortkey == 'average_rating'
 
-Bug 13: in Postgres orders are somtimes saved twice and have no grand total attached to them
-Solution: caused by webhook not being able to find order due to mismatching grand_total following discount applied in cart. Solved by including points_redeemed at point of order form save so that grand_total could be calculated properly
+Bug 13: orders somtimes saved twice and have no grand total attached to them
+Solution: caused by webhook not being able to find order due to mismatching grand_total (following discount applied in cart). Solved by checking discount_applied session at point of order_form save and including points_redeemed so that grand_total can be calculated properly
 
 Bug 14: static files not loading
 Solution: add STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') to settings.py
