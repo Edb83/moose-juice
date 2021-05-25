@@ -96,6 +96,39 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--color-accent-light);
 }
 
+
+/* Toasts */
+
+.message-container {
+    position: fixed;
+    top: 70px;
+    right: 15px;
+    min-width: 218px;
+    z-index: 99999999999;
+}
+
+.close {
+    color: #fff;
+    opacity: 0.9;
+}
+
+.close:not(:disabled):not(.disabled):focus, .close:not(:disabled):not(.disabled):hover {
+    color: var(--color-accent-dark);
+    text-shadow: 0 1px 0 var(--color-accent-light);
+    opacity: 1;
+}
+
+.toast hr {
+    border-top: 1px solid var(--color-accent-light);
+}
+
+.toast-cart-wrapper {
+    height: 100px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
 /* Home page */
 .hero-image {
     height: 100vh;
@@ -207,11 +240,6 @@ h1, h2, h3, h4, h5, h6 {
 .update-link,
 .remove-item {
     cursor: pointer;
-}
-
-.message-container {
-    position: fixed;
-    z-index: 999999;
 }
 
 

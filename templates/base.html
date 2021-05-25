@@ -153,12 +153,15 @@
             
             <!-- Stripe -->
             <script src="https://js.stripe.com/v3/"></script>
+
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('.toast').toast('show');
+                });
+            </script>
         {% endblock %}
 
         {% block extra_js %}
-            <script type="text/javascript">
-                $('.toast').toast('show');
-            </script>
         {% endblock %}
 
     </body>

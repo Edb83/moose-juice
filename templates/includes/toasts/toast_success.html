@@ -1,46 +1,58 @@
-<div class="toast custom-toast rounded-0 border-top-0" data-autohide="false">
-    <div class="arrow-up arrow-success"></div>
-    <div class="w-100 toast-capper bg-success"></div>
-    <div class="toast-header bg-white text-dark">
+<div class="toast border-top-0" data-autohide="false">
+
+    <div class="toast-header bg-dark text-white border-accent-primary">
         <strong class="mr-auto">Success!</strong>
-        <button type="button" class="ml-2 mb-1 close text-dark" data-dismiss="toast" aria-label="Close">
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="toast-body bg-white">
         <div class="row">
             <div class="col">
-                {{ message }}
+                <p class="border-accent-primary pb-3">{{ message }}</p>
             </div>
         </div>
 
-        {% if grand_total and not on_profile_page and not on_checkout_success_page %}
-            <hr>
-            <p>You have <strong>{{ product_count }}</strong> item{{ product_count|pluralize }} in your cart</p>
-            {% for item in cart_items %}
-                <p><strong>{{ item.quantity }}</strong> x {{ item.product.name }} ({{ item.nic.strength }} {{ item.nic.type }})</p>
-            {% endfor %}
+        {% if cart_items and not on_profile_page and not on_checkout_success_page and not on_cart_page %}
+            
+            <div class="toast-cart-wrapper mb-4">
+                {% for item in cart_items %}
+                <div class="row">
+                    <div class="col-3">
+                        <p><strong>{{ item.quantity }}</strong></p>
+                    </div>
+                    <div class="col-9">
+                        <p class="my-0">{{ item.product.name }}</p>
+                        <small class="my-0">({{ item.nic.strength }} {{ item.nic.type }})</small>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
             <div class="row">
                 <div class="col">
-                    <p>
-                        <strong>
-                            Total{% if free_delivery_delta > 0 %} (Exc. delivery){% endif %}:
-                            <span class="float-right">£{{ total|floatformat:2 }}</span>
-                        </strong>
-                    </p>
-                    {% if free_delivery_delta > 0 %}
-                    <p>
-                        Spend <strong>£{{ free_delivery_delta }}</strong> more for free delivery!
-                    </p>
-                    {% endif %}
-                    {% if not on_cart_page %}
-                    <a href="{% url 'view_cart' %}" class="btn btn-outline-dark">
-                        Review Cart
-                        <span class="icon">
-                            <i class="fas fa-shopping-cart"></i>
-                        </span>
-                    </a>
-                    {% endif %}
+                    <div>
+                        <p class="text-muted">You have <strong>{{ product_count }}</strong> item{{ product_count|pluralize }} in your cart</p>
+                        <p>
+                            <strong>
+                                Total{% if free_delivery_delta > 0 %} (Exc. delivery){% endif %}:
+                                <span class="float-right">£{{ total|floatformat:2 }}</span>
+                            </strong>
+                        </p>
+                        {% if free_delivery_delta > 0 %}
+                            <p>
+                                Spend <strong>£{{ free_delivery_delta|floatformat:2 }}</strong> more for free delivery!
+                            </p>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <a href="{% url 'view_cart' %}" class="btn btn-outline-dark d-block">
+                            Review Cart
+                            <span class="icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </span>
+                        </a>
+                    </div>
+
                 </div>
             </div>
         {% endif %}
