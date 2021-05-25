@@ -3,9 +3,9 @@
 
 {% block content %}
 
-<div class="container first-element-buffer">
+<section class="container first-element-buffer border-accent-primary">
     
-    <div class="card">
+    <div class="card card-product-detail">
         <div class="card-body">
 
             <div class="row">
@@ -26,28 +26,34 @@
                     <div class="col-auto mx-auto">
                         <small class="text-center">
                             <a href="{% url 'edit_product' product.id %}">Edit</a> | 
-                            <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
+                            <a class="delete-modal-trigger text-danger" data-toggle="modal" data-target="#productDeleteModal">Delete</a>
                         </small>
                     </div>
                 </div>
             {% endif %}
 
             {% if product.reviews.all %}
-                <p class="text-center">{{ product.average_rating | floatformat:2 }}</p>
-                <p class="text-center"><a href="#product-reviews">{{ product.reviews.all | length }} review{{ product.reviews.all | length | pluralize }}</a></p>
+                <div class="product-stars text-center" data-value="{{ product.average_rating }}"></div>
+                <p class="text-center"><a href="#reviews-section">{{ product.reviews.all | length }} review{{ product.reviews.all | length | pluralize }}</a></p>
             {% else %}
-                <p class="text-center">No reviews</p>
-                <p class="text-center"><a href="#product-reviews">Leave your own?</a></p>
+                <p class="text-center">Not yet reviewed</p>
+                <p class="text-center"><a href="#reviews-section">Leave your own?</a></p>
             {% endif %}
             <ul class="list-inline text-center">
                 {% for tag in product.tags.all %}
-                <li class="list-inline-item"><a href="{% url 'products' %}?q={{tag.name}}">{{ tag.name | capfirst }}</a></li>
+                    <li class="list-inline-item"><a href="{% url 'products' %}?q={{tag.name}}">{{ tag.name | capfirst }}</a></li>
+                {% empty %}
+                    <p>No flavours</p>
                 {% endfor %}
             </ul>
             <p class="text-justify">{{ product.description }}</p>
     
         </div>
     </div>
+
+</section>
+
+<section class="container product-options mb-5 pb-5 border-accent-primary">
 
     <form class="form my-3 text-center" action="{% url 'add_to_cart' product.id %}" method="POST">
         {% csrf_token %}
@@ -80,7 +86,7 @@
 
                         <!-- Decrement qty -->
                         <div class="input-group-prepend">
-                            <button class="decrement-qty btn btn-black rounded-0" 
+                            <button class="decrement-qty btn btn-black" 
                                 data-item_id="{{ product.id }}" id="decrement-qty_{{ product.id }}">
                                 <span class="icon">
                                     <i class="fas fa-caret-left"></i>
@@ -93,7 +99,7 @@
 
                         <!-- Increment qty -->
                         <div class="input-group-append">
-                            <button class="increment-qty btn btn-black rounded-0"
+                            <button class="increment-qty btn btn-black"
                             data-item_id="{{ product.id }}" id="increment-qty_{{ product.id }}">
                                 <span class="icon">
                                     <i class="fas fa-caret-right"></i>
@@ -111,16 +117,39 @@
                     <span class="icon">
                         <i class="fas fa-chevron-left"></i>
                     </span>
-                    Back to Juices
+                     Juices
                 </a>
                 <input type="submit" class="btn btn-dark mt-5" value="Add to Cart">
             </div>
             <input type="hidden" name="redirect_url" value="{{ request.path }}">
         </div>
     </form>
-    <hr>
 
-    <!-- Reviews -->
+  <!-- Delete modal -->
+    <div class="modal fade" id="productDeleteModal" tabindex="-1" aria-labelledby="productDeleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content custom-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productDeleteModalLabel">Confirm deletion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                Are you sure you want to delete {{ product.name }}?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
+                    <a class="btn btn-danger" href="{% url 'delete_product' product.id %}" >Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section id="reviews-section" class="container">
+
     <h2 class="text-center">Reviews</h2>
     <div class="review-form-wrapper">
         {% if request.user.is_authenticated %}
@@ -130,25 +159,27 @@
         {% endif %}
     </div>
 
-    <div id="product-reviews" class="reviews-wrapper my-5">
+    <div class="reviews-wrapper py-5">
         {% for review in product.reviews.all %}
-            <div class="card">
-                <div class="card-header">
-                    <p class="text-center">{{ review.rating }}</p>
-                    {% if review.verified_purchase %}<p class="text-center"><small>Verified purchase</small></p>{% endif %}
+            <div class="card card-product-review my-5">
+                <div class="card-header border-accent-primary">
+                    <h5 class="card-title">{{ review.title }}</h5>
+                    <div class="product-stars" data-value="{{ review.rating }}"></div>
                 </div>
                 <div class="card-body">
-                  <h5 class="card-title">{{ review.title }}</h5>
-                  <p class="card-text">{{ review.body }}</p>
+                    {% if review.verified_purchase %}<p><strong>Verified purchase</strong></p>{% endif %}
+                    <p class="card-text">{{ review.body }}</p>
                 </div>
                 <div class="card-footer text-muted">
                     by {{ review.user.username }} on {{ review.created_on|date:"SHORT_DATE_FORMAT" }}
                 </div>
-              </div>
+            </div>
         {% empty %}
               <p class="text-center">No reviews yet!</p>
         {% endfor %}
     </div>
+
+</section>
 
 {% endblock %}
 
@@ -157,5 +188,11 @@
     {{ block.super }}
     {% include 'products/includes/quantity_input_script.html' %}
     <script src="{% static 'products/js/favourites-toggle.js' %}"></script>
+    <script src="{% static 'products/js/star-display.js' %}"></script>
+    <script type="text/javascript">
+        $('#productDeleteModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    })
+    </script>
 
 {% endblock %}

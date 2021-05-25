@@ -17,8 +17,6 @@ class ProductForm(forms.ModelForm):
 
         self.fields['category'].choices = category_friendly_names
         self.fields['brand'].choices = brand_friendly_names
-        for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'border-black rounded-0'
 
 
 class ReviewForm(forms.ModelForm):
@@ -31,4 +29,5 @@ class ReviewForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
         for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'border-black rounded-0'
+            field.widget.attrs['class'] = 'review-form-input'
+        self.fields['body'].widget.attrs = {'rows': 5}

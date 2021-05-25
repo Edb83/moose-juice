@@ -4,7 +4,7 @@
 {% block content %}
 
 
-<div class="section container first-element-buffer">
+<section class="container first-element-buffer">
     {% if brand %}
     <h2 class="text-center">{{ brand.friendly_name }}</h2>
     <p class="product-filter-text">{{brand.description}}</p>
@@ -32,10 +32,10 @@
         suscipit aperiam, facere id eum inventore perspiciatis atque? Sed quidem maiores veniam eius hic aspernatur, non
         similique tempore.</p>
     {% endif %}
-</div>
+</section>
 
 
-<div class="section container my-5">
+<section class="container my-5">
     <div class="row">
         <div class="col-12 offset-md-8 col-md-4 offset-l-10 col-l-2 py-3">
             <select id="sort-selector" class="custom-select my-1 mr-sm-2">
@@ -58,13 +58,13 @@
             </p>
         </div>
     </div>
-</div>
+</section>
 
-<div class="section container">
+<section class="container">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 text-center">
         {% for product in products %}
         <div class="col mb-4">
-            <div class="card h-100 border-white">
+            <div class="card card-products h-100">
                 <div class="product-img-container">
                     {% if request.user.is_authenticated %}
                         {% include 'products/includes/product-heart-container.html' %}
@@ -80,32 +80,36 @@
 
                 <div class="card-body">
                     <h5 class="card-title">{{ product.name }}</h5>
-
                     {% if product.average_rating %}
-                    <div class="product-stars" data-value="{{ product.average_rating }}"></div>
+                        <div class="product-stars" data-value="{{ product.average_rating }}"></div>
                     {% else %}
-                    <div>
-                        <span>Not yet rated</span>
-                    </div>
+                        <div>
+                            <span>Not yet rated</span>
+                        </div>
                     {% endif %}
                     {% if request.user.is_superuser %}
-                    <small class="text-center">
-                        <a href="{% url 'edit_product' product.id %}">Edit</a> |
-                        <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
-                    </small>
+                        <small class="text-center">
+                            <a href="{% url 'edit_product' product.id %}">Edit</a>
+                        </small>
                     {% endif %}
                 </div>
+
                 <div class="card-footer">
-                    {% if product.brand.available_sizes.all|length > 1 %}From
-                    {% endif %}{% if product.on_sale %}<s>£{{ product.brand.available_sizes.all.0.price }}</s>
-                    £{{ product.brand.available_sizes.all.0.sale_price }}{% else %}£{{ product.brand.available_sizes.all.0.price }}{% endif %}
+                    {% if product.brand.available_sizes.all|length > 1 %}
+                        From
+                    {% endif %}
+                    {% if product.on_sale %}
+                        <s>£{{ product.brand.available_sizes.all.0.price }}</s> £{{ product.brand.available_sizes.all.0.sale_price }}
+                    {% else %}
+                        £{{ product.brand.available_sizes.all.0.price }}
+                    {% endif %}
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
 
-</div>
+</section>
 
 {% endblock %}
 
