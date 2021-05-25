@@ -89,15 +89,22 @@ def replicate_cart(request, order_number):
     Create a new cart filled with items/quantities from previous order
     """
 
-    if 'cart' in request.session:
-        del request.session['cart']
+    # if 'cart' in request.session:
+    #     del request.session['cart']
 
     order = Order.objects.get(order_number=order_number)
     original_cart = eval(order.original_cart)
     cart = request.session.get('cart', {})
 
-    for item, quantity in original_cart.items():
-        cart[item] = quantity
+    try:
+        for item, quantity in original_cart.items():
+            cart[item] = quantity
+
+    except Exception as e:
+        messages.error(request, 'Sorry, some of the items \
+            from your previous order could not be found. \
+            Please look for them from the stores.')
+        return redirect(reverse('view_cart'))
 
     request.session['cart'] = cart
 
