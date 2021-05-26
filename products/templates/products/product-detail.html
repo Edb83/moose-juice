@@ -7,9 +7,6 @@
     <div class="card card-product-detail">
 
         <div class="row no-gutters">
-            {% if request.user.is_authenticated %}
-                {% include 'products/includes/product-heart-container.html' %}
-            {% endif %}
             <div class="col-2 col-lg-1 mx-auto align-self-center">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 339">
                     {% include 'products/includes/product-svg.html' %}
@@ -18,8 +15,17 @@
             
             <div class="col-md-8">
                 <div class="card-body">
-                    <h2 class="card-title text-center">{{ product.name }}</h2>
-
+                    <div class="row flex-nowrap">
+                        <div class="col-10 offset-1">
+                            <h2 class="card-title text-center">{{ product.name }}</h2>
+                        </div>
+                        <div class="col-1">
+                            {% if request.user.is_authenticated %}
+                                {% include 'products/includes/product-heart-container.html' %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    
                     {% if request.user.is_superuser %}
                         <div class="text-center">
                             <small>
@@ -59,76 +65,91 @@
 </section>
 
 <section class="container product-options mb-5 pb-5 border-accent-primary">
-
-    <form class="form my-3 text-center" action="{% url 'add_to_cart' product.id %}" method="POST">
-        {% csrf_token %}
-        <div class="form-row">
-            <!-- Size -->
-            <div class="col-12 btn-group-toggle my-3" data-toggle="buttons">
-                <h5 class="my-3 text-center">Size</h5>
-                {% for size in product.brand.available_sizes.all %}
-                    <label class="btn btn-outline-dark active m-1">
-                        <input type="radio" name="size" value="{{ size.id }}" autocomplete="off" required> {{ size.label }}
-                    </label>
-                {% endfor %}
-            </div>
-
-            <!-- Nic content -->
-            <div class="col-12 btn-group-toggle my-3" data-toggle="buttons">
-                <h5 class="my-3 text-center">Nic content</h5>
-                {% for nic in product.brand.available_nics.all %}
-                    <label class="btn btn-outline-dark active m-1">
-                        <input type="radio" name="nic" value="{{ nic.id }}" autocomplete="off" required> {{ nic.strength }} {{ nic.type }}
-                    </label>
-                {% endfor %}
-            </div>
-
-            <!-- Quantity -->
-            <div class="col-auto mx-auto">
-                <h5 class="my-3 text-center" >Quantity</h5>
-                <div class="form-group d-flex justify-content-center">
-                    <div class="input-group"> 
-
-                        <!-- Decrement qty -->
-                        <div class="input-group-prepend">
-                            <button class="decrement-qty btn btn-black" 
-                                data-item_id="{{ product.id }}" id="decrement-qty_{{ product.id }}">
-                                <span class="icon">
-                                    <i class="fas fa-caret-left"></i>
-                                </span>
-                            </button>
+<div class="row">
+    <div class="d-none d-md-block col-md-4 py-5 my-auto">
+        <div class="card-nic-info">
+            <h5>
+                <span class="icon">
+                <i class="fas fa-tint"></i>
+                </span> Nic types?
+            </h5>
+            <p>Higher <strong>mg</strong> means more nicotine in each puff.</p>
+            <p><strong>Freebase</strong> takes several minutes to enter the bloodstream. Ideal for sub-ohm vaping or if you want a stronger 'throat-hit' from a pod system.</p>
+            <p><strong>Salts</strong> act quickly to mimic the effect of a cigarette. They provide a smoother 'throat-hit' and are ideally used in pod systems.</p>
+          </div>
+    </div>
+    <div class="col-sm-12 col-md-8">
+        <form class="form my-3 text-center" action="{% url 'add_to_cart' product.id %}" method="POST">
+            {% csrf_token %}
+            <div class="form-row">
+                <!-- Size -->
+                <div class="col-12 btn-group-toggle my-3" data-toggle="buttons">
+                    <h5 class="my-3 text-center">Size</h5>
+                    {% for size in product.brand.available_sizes.all %}
+                        <label class="btn btn-outline-dark active m-1">
+                            <input type="radio" name="size" value="{{ size.id }}" autocomplete="off" required> {{ size.label }}
+                        </label>
+                    {% endfor %}
+                </div>
+    
+                <!-- Nic content -->
+                <div class="col-12 btn-group-toggle my-3" data-toggle="buttons">
+                    <h5 class="my-3 text-center">Nic content</h5>
+                    {% for nic in product.brand.available_nics.all %}
+                        <label class="btn btn-outline-dark active m-1">
+                            <input type="radio" name="nic" value="{{ nic.id }}" autocomplete="off" required> {{ nic.strength }} {{ nic.type }}
+                        </label>
+                    {% endfor %}
+                </div>
+    
+                <!-- Quantity -->
+                <div class="col-auto mx-auto">
+                    <h5 class="my-3 text-center" >Quantity</h5>
+                    <div class="form-group d-flex justify-content-center">
+                        <div class="input-group"> 
+    
+                            <!-- Decrement qty -->
+                            <div class="input-group-prepend">
+                                <button class="decrement-qty btn btn-black" 
+                                    data-item_id="{{ product.id }}" id="decrement-qty_{{ product.id }}">
+                                    <span class="icon">
+                                        <i class="fas fa-caret-left"></i>
+                                    </span>
+                                </button>
+                            </div>
+    
+                            <!-- Input qty -->
+                            <input class="form-control qty_input text-center" type="number" name="quantity" value="1" min="1" max="99" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}" autocomplete="off">
+    
+                            <!-- Increment qty -->
+                            <div class="input-group-append">
+                                <button class="increment-qty btn btn-black"
+                                data-item_id="{{ product.id }}" id="increment-qty_{{ product.id }}">
+                                    <span class="icon">
+                                        <i class="fas fa-caret-right"></i>
+                                    </span>
+                                </button>
+                            </div>
+    
                         </div>
-
-                        <!-- Input qty -->
-                        <input class="form-control qty_input text-center" type="number" name="quantity" value="1" min="1" max="99" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}" autocomplete="off">
-
-                        <!-- Increment qty -->
-                        <div class="input-group-append">
-                            <button class="increment-qty btn btn-black"
-                            data-item_id="{{ product.id }}" id="increment-qty_{{ product.id }}">
-                                <span class="icon">
-                                    <i class="fas fa-caret-right"></i>
-                                </span>
-                            </button>
-                        </div>
-
                     </div>
                 </div>
+    
+                <!-- Add to cart / back -->
+                <div class="col-12">
+                    <a href="{% url 'products' %}" class="btn btn-outline-dark mt-5">
+                        <span class="icon">
+                            <i class="fas fa-chevron-left"></i>
+                        </span>
+                         Juices
+                    </a>
+                    <input type="submit" class="btn btn-dark mt-5" value="Add to Cart">
+                </div>
+                <input type="hidden" name="redirect_url" value="{{ request.path }}">
             </div>
-
-            <!-- Add to cart / back -->
-            <div class="col-12">
-                <a href="{% url 'products' %}" class="btn btn-outline-dark mt-5">
-                    <span class="icon">
-                        <i class="fas fa-chevron-left"></i>
-                    </span>
-                     Juices
-                </a>
-                <input type="submit" class="btn btn-dark mt-5" value="Add to Cart">
-            </div>
-            <input type="hidden" name="redirect_url" value="{{ request.path }}">
-        </div>
-    </form>
+        </form>
+    </div>
+</div>
 
   <!-- Delete modal -->
     <div class="modal fade" id="productDeleteModal" tabindex="-1" aria-labelledby="productDeleteModalLabel" aria-hidden="true">
@@ -194,10 +215,6 @@
     {% include 'products/includes/quantity_input_script.html' %}
     <script src="{% static 'products/js/favourites-toggle.js' %}"></script>
     <script src="{% static 'products/js/star-display.js' %}"></script>
-    <script type="text/javascript">
-        $('#productDeleteModal').on('shown.bs.modal', function () {
-        $('#myInput').trigger('focus')
-    })
-    </script>
-
+    <script src="{% static 'products/js/delete-modal.js' %}"></script>
+    
 {% endblock %}

@@ -53,7 +53,7 @@
     <div class="row">
         <div class="col my-3">
             <p class="py-3 border-accent-primary">
-                {{ products|length }} Juice{{products|length|pluralize }}{% if search_term %} found with
+                <strong>{{ products|length }}</strong> Juice{{products|length|pluralize }}{% if search_term %} found with
                 <strong>"{{ search_term }}"</strong>{% endif %}
             </p>
         </div>

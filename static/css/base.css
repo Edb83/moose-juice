@@ -201,9 +201,9 @@ h1, h2, h3, h4, h5, h6 {
     padding: 1rem 0;
 }
 
-.home-section .container {
+/* .home-section .container {
     padding: 2rem 3rem;
-}
+} */
 
 .home-section .container > h3 {
     font-weight: 600;
@@ -213,7 +213,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* #brands-section .container {
-    min-height: 43vh;
+    height: 100%;
 } */
 
 #brands-section .nav-pills .nav-link {
@@ -333,10 +333,24 @@ h1, h2, h3, h4, h5, h6 {
 
 .fa-heart,
 .fa-heart-broken,
-.fa-star {
+.fa-star,
+.fa-tint {
     color: var(--color-accent-light);
 }
 
 .icon-product>i:hover {
     color: #e44b4b;
+}
+
+/* Remove number spinner on number inputs */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
