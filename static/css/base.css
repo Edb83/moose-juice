@@ -321,6 +321,14 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
 }
 
+/* Profile */
+
+#dashboard-container .tab-content {
+    /* overflow-y: scroll; */
+    height: calc(100vh - 351px);
+    overflow: auto;
+}
+
 /* Icons */
 
 .icon {
@@ -354,3 +362,10 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+@media (orientation: landscape) {
+    #dashboard-container .tab-content {
+        height: auto;
+        overflow: auto;
+    }
+  }
