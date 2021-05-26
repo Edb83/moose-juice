@@ -140,10 +140,6 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--color-accent-dark);
 }
 
-.delete-modal-trigger {
-    cursor: pointer;
-}
-
 
 /* Home page */
 .hero-image {
@@ -202,11 +198,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .home-section {
     border-bottom: 1px solid var(--color-accent-dark);
-    padding: 5rem 0;
+    padding: 1rem 0;
 }
 
 .home-section .container {
-    padding: 3rem 2rem;
+    padding: 2rem 3rem;
 }
 
 .home-section .container > h3 {
@@ -216,9 +212,9 @@ h1, h2, h3, h4, h5, h6 {
     text-transform: uppercase;
 }
 
-#brands-section .container {
+/* #brands-section .container {
     min-height: 43vh;
-}
+} */
 
 #brands-section .nav-pills .nav-link {
     color: var(--color-accent-primary);
@@ -253,7 +249,8 @@ h1, h2, h3, h4, h5, h6 {
 /* TBC */
 
 .update-link,
-.remove-item {
+.remove-item,
+.delete-modal-trigger {
     cursor: pointer;
 }
 
@@ -276,10 +273,6 @@ h1, h2, h3, h4, h5, h6 {
     align-self: center;
 }
 
-.product-detail-svg-container {
-    max-height: 100px;
-}
-
 .product-img-container {
     display: contents;
 }
@@ -287,6 +280,15 @@ h1, h2, h3, h4, h5, h6 {
 .product-heart-container {
     position: absolute;
     right: 10%;
+}
+
+.product-flavour-container a {
+    color: var(--color-dark);
+    font-weight: 600;
+}
+
+.product-flavour-container a:hover {
+    color: var(--color-accent-light);
 }
 
 .category-img-sm {

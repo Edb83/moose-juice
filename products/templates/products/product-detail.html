@@ -3,54 +3,59 @@
 
 {% block content %}
 
-<section class="container first-element-buffer border-accent-primary">
-    
+<section class="container first-element-buffer pb-5 border-accent-primary">
     <div class="card card-product-detail">
-        <div class="card-body">
 
-            <div class="row">
-                {% if request.user.is_authenticated %}
-                    {% include 'products/includes/product-heart-container.html' %}
-                {% endif %}
-                <div class="col-4 col-md-3 col-lg-2 mx-auto">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 339">
-                        {% include 'products/includes/product-svg.html' %}
-                    </svg>
-                </div>
+        <div class="row no-gutters">
+            {% if request.user.is_authenticated %}
+                {% include 'products/includes/product-heart-container.html' %}
+            {% endif %}
+            <div class="col-2 col-lg-1 mx-auto align-self-center">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 339">
+                    {% include 'products/includes/product-svg.html' %}
+                </svg>
             </div>
             
-            <h2 class="card-title text-center">{{ product.name }}</h2>
-     
-            {% if request.user.is_superuser %}
-                <div class="row">
-                    <div class="col-auto mx-auto">
-                        <small class="text-center">
-                            <a href="{% url 'edit_product' product.id %}">Edit</a> | 
-                            <a class="delete-modal-trigger text-danger" data-toggle="modal" data-target="#productDeleteModal">Delete</a>
-                        </small>
-                    </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h2 class="card-title text-center">{{ product.name }}</h2>
+
+                    {% if request.user.is_superuser %}
+                        <div class="text-center">
+                            <small>
+                                <a href="{% url 'edit_product' product.id %}">Edit</a> | 
+                                <a class="delete-modal-trigger text-danger" data-toggle="modal" data-target="#productDeleteModal">Delete</a>
+                            </small>
+                        </div>
+
+                    {% endif %}
+        
+                    {% if product.reviews.all %}
+                        <div class="product-stars text-center" data-value="{{ product.average_rating }}"></div>
+                        <p class="text-center"><a href="#reviews-section">{{ product.reviews.all | length }} review{{ product.reviews.all | length | pluralize }}</a></p>
+                    {% else %}
+                        <p class="text-center">Not yet reviewed</p>
+                        <p class="text-center"><a href="#reviews-section">Leave your own?</a></p>
+                    {% endif %}
+                    
+                    <p class="text-justify">{{ product.description }}</p>
                 </div>
-            {% endif %}
+            </div>
 
-            {% if product.reviews.all %}
-                <div class="product-stars text-center" data-value="{{ product.average_rating }}"></div>
-                <p class="text-center"><a href="#reviews-section">{{ product.reviews.all | length }} review{{ product.reviews.all | length | pluralize }}</a></p>
-            {% else %}
-                <p class="text-center">Not yet reviewed</p>
-                <p class="text-center"><a href="#reviews-section">Leave your own?</a></p>
-            {% endif %}
-            <ul class="list-inline text-center">
-                {% for tag in product.tags.all %}
-                    <li class="list-inline-item"><a href="{% url 'products' %}?q={{tag.name}}">{{ tag.name | capfirst }}</a></li>
-                {% empty %}
-                    <p>No flavours</p>
-                {% endfor %}
-            </ul>
-            <p class="text-justify">{{ product.description }}</p>
-    
+            <div class="col-12 col-md-8 offset-md-4">
+                <div class="product-flavour-container">
+                    <ul class="list-inline text-center">
+                        {% for tag in product.tags.all %}
+                            <li class="list-inline-item"><a href="{% url 'products' %}?q={{tag.name}}">{{ tag.name | capfirst }}</a></li>
+                        {% empty %}
+                            <p>No flavours</p>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
 
+    </div>
 </section>
 
 <section class="container product-options mb-5 pb-5 border-accent-primary">
