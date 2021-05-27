@@ -329,6 +329,11 @@ h1, h2, h3, h4, h5, h6 {
     overflow: auto;
 }
 
+/* Cart */
+.cart-input-wrapper {
+    width: max-content;
+}
+
 /* Icons */
 
 .icon {
@@ -363,7 +368,7 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-@media (orientation: landscape) {
+@media (orientation: landscape) and (max-width: 1023px) {
     #dashboard-container .tab-content {
         height: auto;
         overflow: auto;
