@@ -110,7 +110,8 @@
     
                             <!-- Decrement qty -->
                             <div class="input-group-prepend">
-                                <button class="decrement-qty btn btn-black" 
+                                <button class="decrement-qty btn btn-black"
+                                    type="button"
                                     data-item_id="{{ product.id }}" id="decrement-qty_{{ product.id }}">
                                     <span class="icon">
                                         <i class="fas fa-caret-left"></i>
@@ -124,6 +125,7 @@
                             <!-- Increment qty -->
                             <div class="input-group-append">
                                 <button class="increment-qty btn btn-black"
+                                type="button"
                                 data-item_id="{{ product.id }}" id="increment-qty_{{ product.id }}">
                                     <span class="icon">
                                         <i class="fas fa-caret-right"></i>
@@ -212,7 +214,7 @@
 {% block extra_js %}
 
     {{ block.super }}
-    {% include 'products/includes/quantity_input_script.html' %}
+    <script src="{% static 'js/quantity-input.js' %}"></script>
     <script src="{% static 'products/js/favourites-toggle.js' %}"></script>
     <script src="{% static 'products/js/star-display.js' %}"></script>
     <script src="{% static 'products/js/delete-modal.js' %}"></script>

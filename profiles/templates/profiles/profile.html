@@ -101,18 +101,7 @@
 
 {% block extra_js %}
 {{ block.super }}
-<script>
-$('#pills-details-tab').on('click', function (event) {
-  event.preventDefault()
-  $(this).tab('show')
-})
-$('#pills-orders-tab').on('click', function (event) {
-  event.preventDefault()
-  $(this).tab('show')
-})
-$('#pills-points-tab').on('click', function (event) {
-  event.preventDefault()
-  $(this).tab('show')
-})
-</script>
+
+<script src="{% static 'profiles/js/tabs.js' %}"></script>
+
 {% endblock %}

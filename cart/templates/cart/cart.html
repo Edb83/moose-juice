@@ -91,7 +91,7 @@
                                             </div>
                     
                                             <!-- Input qty -->
-                                            <input class="form-control form-control-sm qty_input text-center" type="number" name="quantity" value="{{ item.quantity }}" min="1" max="99" data-item_id="{{ item.item_id }}" id="id_qty_{{ item.item_id }}" autocomplete="off">
+                                            <input class="form-control form-control-sm qty_input text-center" type="number" name="quantity" value="{{ item.quantity }}" min="1" max="99" data-item_id="{{ item.item_id }}" data-token="{{ csrf_token }}" id="id_qty_{{ item.item_id }}" autocomplete="off">
                     
                                             <!-- Increment qty -->
                                             <div class="input-group-append">
@@ -211,28 +211,8 @@
 {% endblock %}
 
 {% block extra_js %}
-    {{ block.super }}
-    {% include 'products/includes/quantity_input_script.html' %}
-
-    <script type="text/javascript">
-        // Update quantity on click
-        $('.update-link').click(function(e) {
-            let form = $(this).prev('.update-form');
-            form.submit();
-        })
-    
-        // Remove item and reload on click
-        $('.remove-item').click(function(e) {
-            let csrfToken = "{{ csrf_token }}";
-            let itemId = $(this).attr('id').split('remove_')[1];
-            let url = `/cart/remove/${itemId}/`;
-            let data = {'csrfmiddlewaretoken': csrfToken};
-    
-            $.post(url, data)
-             .done(function() {
-                 location.reload();
-             });
-        })
-    </script>
+{{ block.super }}
+    <script src="{% static 'js/quantity-input.js' %}"></script>
+    <script src="{% static 'cart/js/remove-item.js' %}"></script>
 
 {% endblock %}
