@@ -150,6 +150,8 @@ class StripeWH_Handler:
                     order_line_item.save()
             except Exception as e:
                 if order:
+                    print(f'Exception ln 151 to delete Order: {e}')
+                    print(f'Order: {order.order_number} | Grand_total: £{order.grand_total}')
                     order.delete()
                 return HttpResponse(
                     content=f'Webhook received: {event["type"]} | ERROR: {e}',
