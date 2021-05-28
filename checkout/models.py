@@ -69,10 +69,7 @@ class Order(models.Model):
             discount_to_apply = 0
 
         self.grand_total = self.order_total + self.delivery_cost - Decimal(discount_to_apply)
-        print(f'order_number saved on model instance: {self.order_number}')
-        print(f'user_profile saved on model instance: {self.user_profile}')
-        print(f'order_total saved on model instance: {self.order_total}')
-        print(f'grand_total saved on model instance: {self.grand_total}')
+
         self.save()
 
     def save(self, *args, **kwargs):
@@ -83,7 +80,6 @@ class Order(models.Model):
         if not self.order_number:
             self.order_number = self._generate_order_number()
         
-        print(f'Order saved: {self.order_number}')
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -117,8 +113,6 @@ class OrderLineItem(models.Model):
 
         self.lineitem_total = price * self.quantity
 
-        print(f'OrderLineItem saved for order: {self.order.order_number}')
-        print(f'OrderLineItem saved product: {self.product.name}')
         super().save(*args, **kwargs)
 
     def __str__(self):

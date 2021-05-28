@@ -70,7 +70,6 @@ def remove_from_cart(request, item_id):
         return HttpResponse(status=200)
 
     except Exception as e:
-        print(f'Remove from cart: {e}')
         return HttpResponse(status=500)
 
 

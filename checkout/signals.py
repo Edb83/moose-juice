@@ -3,13 +3,14 @@ from django.dispatch import receiver
 
 from .models import OrderLineItem
 
+
 @receiver(post_save, sender=OrderLineItem)
 def total_signal_revive(sender, instance, created, **kwargs):
     """
     Update order total on lineitem update/create
     """
-    print(f'OrderLineItem accessed order: {instance.order.order_number}')
     instance.order.update_total()
+
 
 @receiver(post_delete, sender=OrderLineItem)
 def total_signal_destroy(sender, instance, **kwargs):

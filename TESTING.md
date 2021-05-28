@@ -49,3 +49,8 @@ Solution: caused by webhook not being able to find order due to mismatching gran
 Bug 14: static files not loading
 Solution: add STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') to settings.py
 
+Bug 15: when moving inline scripts to respective static folders, one file (`remove-item.js`) could not be accessed.
+Solution: changed `STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)` to `STATICFILES_DIRS = [BASE_DIR/'static/']`
+
+Bug 16: orders saved in Production would have no cost associated with them
+Solution: this was particularly difficult to solve as the issue was only present in the deployed version. Extensive use of print statements showed that after the order was initially saved, the OrderLineItem signal to `update_total()` was not being fired. This (post)[https://stackoverflow.com/questions/66762262/django-signals-not-executed] led to checking the signal function name `update_on_save()` which, when changed, eliminated the error. 
