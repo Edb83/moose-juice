@@ -125,11 +125,11 @@ class StripeWH_Handler:
                     county=shipping_details.address.state,
                     original_cart=cart,
                     stripe_pid=pid,
+                )
 
                 print(f'Order did not exist in WH Handler try block!')
                 print(f'Cart contents: {order.original_cart}')
 
-                )
                 for item, quantity in json.loads(cart).items():
                     # Use string created in cart view to isolate model ids
                     product_id = item.split("_")[0]
