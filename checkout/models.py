@@ -69,6 +69,10 @@ class Order(models.Model):
             discount_to_apply = 0
 
         self.grand_total = self.order_total + self.delivery_cost - Decimal(discount_to_apply)
+        print(f'order_number saved on model instance: {self.order_number}')
+        print(f'user_profile saved on model instance: {self.user_profile}')
+        print(f'order_total saved on model instance: {self.order_total}')
+        print(f'grand_total saved on model instance: {self.grand_total}')
         self.save()
 
     def save(self, *args, **kwargs):

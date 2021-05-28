@@ -14,14 +14,14 @@ let style = {
         iconColor: '#000',
         color: '#000',
         fontWeight: '500',
-        fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
+        fontFamily: 'Karla, sans-serif, Segoe UI, sans-serif',
         fontSize: '16px',
         fontSmoothing: 'antialiased',
         ':-webkit-autofill': {
           color: '#fce883',
         },
         '::placeholder': {
-          color: '#87BBFD',
+          color: '#343a40',
         },
       },
       invalid: {
