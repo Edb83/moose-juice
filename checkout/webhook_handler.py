@@ -94,9 +94,9 @@ class StripeWH_Handler:
                     original_cart=cart,
                     stripe_pid=pid,
                 )
-                print(f'WH Handler try block - grand_total: {order.grand_total}')
-                print(f'WH Handler try block - original_cart: {order.original_cart}')
-                print(f'WH Handler try block - stripe_pid: {order.stripe_pid}')
+                print(f'Attempt: {attempt} | WH Handler try block - grand_total: {order.grand_total}')
+                print(f'Attempt: {attempt} | WH Handler try block - original_cart: {order.original_cart}')
+                print(f'Attempt: {attempt} | WH Handler try block - stripe_pid: {order.stripe_pid}')
 
                 order_exists = True
                 break
@@ -127,7 +127,7 @@ class StripeWH_Handler:
                     stripe_pid=pid,
                 )
 
-                print(f'Order did not exist in WH Handler try block!')
+                print('Order did not exist in WH Handler try block!')
                 print(f'Cart contents: {order.original_cart}')
 
                 for item, quantity in json.loads(cart).items():
@@ -152,7 +152,7 @@ class StripeWH_Handler:
                 if order:
                     print(f'Exception ln 151 to delete Order: {e}')
                     print(f'Order: {order.order_number} | Grand_total: £{order.grand_total}')
-                    order.delete()
+                    # order.delete()
                 return HttpResponse(
                     content=f'Webhook received: {event["type"]} | ERROR: {e}',
                     status=500)

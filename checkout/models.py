@@ -82,6 +82,8 @@ class Order(models.Model):
         """
         if not self.order_number:
             self.order_number = self._generate_order_number()
+        
+        print(f'Order saved: {self.order_number}')
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -114,6 +116,9 @@ class OrderLineItem(models.Model):
             price = self.bottle_size.price
 
         self.lineitem_total = price * self.quantity
+
+        print(f'OrderLineItem saved for order: {self.order.order_number}')
+        print(f'OrderLineItem saved product: {self.product.name}')
         super().save(*args, **kwargs)
 
     def __str__(self):

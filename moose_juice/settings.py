@@ -27,9 +27,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
-# DEBUG = 'DEVELOPMENT' in os.environ
-
-DEBUG = True
+DEBUG = 'DEVELOPMENT' in os.environ
 
 ALLOWED_HOSTS = ['moose-juice.herokuapp.com', 'localhost']
 
