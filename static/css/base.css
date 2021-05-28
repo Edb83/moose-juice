@@ -323,9 +323,15 @@ h1, h2, h3, h4, h5, h6 {
 /* Profile */
 
 #dashboard-container .tab-content {
-    /* overflow-y: scroll; */
     height: calc(100vh - 351px);
     overflow: auto;
+}
+
+/* Add Product */
+
+.add-product-svg-container {
+    max-width: 200px;
+    height: fit-content;
 }
 
 /* Cart */

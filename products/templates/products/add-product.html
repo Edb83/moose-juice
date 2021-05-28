@@ -4,29 +4,33 @@
 {% block content %}
     <div class="container first-element-buffer">
         <div class="row">
-            <div class="col-12 col-md-6">
-                <hr>
-                <h2 class="logo-font mb-4">Product Management</h2>
-                <h5 class="text-muted">Add a Product</h5>
-                <hr>
+            <div class="col-12 mx-auto col-md-6">
+                <h2 class="text-center mb-4">Add New Juice</h2>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row p5-5">
             <div class="col-12 col-md-6">
                 <form method="POST" action="{% url 'add_product' %}" class="form mb-2" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form | crispy }}
-                    <div class="text-right">
-                        <a class="btn btn-outline-black" href="{% url 'products' %}">Cancel</a>
-                        <button class="btn btn-black" type="submit">Add Product</button>
+                    <div class="text-right my-5">
+                        <a class="btn btn-outline-dark" href="{% url 'products' %}">Cancel</a>
+                        <button class="btn btn-dark" type="submit">Add Product</button>
                     </div>
                 </form>
-            </div>            
+            </div>
+            <div class="d-none d-md-flex col-md-6 mx-auto add-product-svg-container">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 339">
+                    {% include 'products/includes/product-svg.html' %}
+                </svg>
+            </div>
         </div>
     </div>
 {% endblock %}
 
 {% block extra_js %}
+{{ block.super }}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.4.5/jscolor.min.js"></script>
+    <script src="{% static 'products/js/change-color.js' %}"></script>
 {% endblock %}
