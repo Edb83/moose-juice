@@ -2,31 +2,70 @@
 {% load static %}
 
 {% block content %}
-    <div class="container first-element-buffer">
-        <div class="row">
-            <div class="col-12 col-md-6">
-                <hr>
-                <h2 class="logo-font mb-4">Product Management</h2>
-                <h5 class="text-muted">Edit a Product</h5>
-                <hr>
+<div class="container first-element-buffer">
+    <div class="row">
+        <div class="col-12 mx-auto col-md-6">
+                <h2 class="text-center mb4">Edit Juice</h5>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row pb-5">
             <div class="col-12 col-md-6">
                 <form method="POST" action="{% url 'edit_product' product.id %}" class="form mb-2" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form | crispy }}
-                    <div class="text-right">
+                    <div class="text-right my-5">
                         <a class="btn btn-outline-dark" href="{% url 'products' %}">Cancel</a>
-                        <button class="btn btn-dark" type="submit">Update Product</button>
+                        <button class="btn btn-dark" type="submit">Update Juice</button>
                     </div>
                 </form>
-            </div>            
+            </div>
+
+            <div class="d-none d-md-block col-md-6 mx-auto card card-products text-center">
+
+                <div class="product-img-container">
+                    <div class="product-heart-container">
+                        <span class="icon icon-product">
+                            <i class="fas fa-heart fa-2x"></i>
+                        </span>
+                    </div>
+                    <div class="add-product-svg-container mx-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 339">
+                            {% include 'products/includes/product-svg.html' %}
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    {% if product.average_rating %}
+                        <div class="product-stars" data-value="{{ product.average_rating }}"></div>
+                    {% else %}
+                        <div>
+                            <span>Not yet rated</span>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="card-footer">
+                    {% if product.brand.available_sizes.all|length > 1 %}
+                        From
+                    {% endif %}
+                    {% if product.on_sale %}
+                        <s>£{{ product.brand.available_sizes.all.0.price }}</s> £{{ product.brand.available_sizes.all.0.sale_price }}
+                    {% else %}
+                        £{{ product.brand.available_sizes.all.0.price }}
+                    {% endif %}
+                </div>
+
+            </div>
         </div>
     </div>
 {% endblock %}
 
 {% block extra_js %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.4.5/jscolor.min.js"></script>
+    <script src="{% static 'products/js/star-display.js' %}"></script>
+    <script src="{% static 'products/js/change-color.js' %}"></script>
+    <script src="{% static 'products/js/input-mirror.js' %}"></script>
 {% endblock %}

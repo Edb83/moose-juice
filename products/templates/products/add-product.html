@@ -8,22 +8,43 @@
                 <h2 class="text-center mb-4">Add New Juice</h2>
             </div>
         </div>
-
-        <div class="row p5-5">
+        
+        <div class="row pb-5">
             <div class="col-12 col-md-6">
                 <form method="POST" action="{% url 'add_product' %}" class="form mb-2" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form | crispy }}
                     <div class="text-right my-5">
                         <a class="btn btn-outline-dark" href="{% url 'products' %}">Cancel</a>
-                        <button class="btn btn-dark" type="submit">Add Product</button>
+                        <button class="btn btn-dark" type="submit">Add Juice</button>
                     </div>
                 </form>
             </div>
-            <div class="d-none d-md-flex col-md-6 mx-auto add-product-svg-container">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 339">
-                    {% include 'products/includes/product-svg.html' %}
-                </svg>
+
+            <div class="d-none d-md-block col-md-6 mx-auto card card-products text-center">
+
+                <div class="product-img-container">
+                    <div class="product-heart-container">
+                        <span class="icon icon-product">
+                            <i class="fas fa-heart fa-2x"></i>
+                        </span>
+                    </div>
+                    <div class="add-product-svg-container mx-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 339">
+                            {% include 'products/includes/product-svg.html' %}
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <h5 class="card-title">?</h5>
+                    <div class="product-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></div>
+                </div>
+
+                <div class="card-footer">
+                    £TBC
+                </div>
+
             </div>
         </div>
     </div>
@@ -33,4 +54,5 @@
 {{ block.super }}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.4.5/jscolor.min.js"></script>
     <script src="{% static 'products/js/change-color.js' %}"></script>
+    <script src="{% static 'products/js/input-mirror.js' %}"></script>
 {% endblock %}
