@@ -27,11 +27,9 @@
                     </div>
                     
                     {% if request.user.is_superuser %}
-                        <div class="text-center">
-                            <small>
-                                <a href="{% url 'edit_product' product.id %}">Edit</a> | 
-                                <a class="delete-modal-trigger text-danger" data-toggle="modal" data-target="#productDeleteModal">Delete</a>
-                            </small>
+                        <div class="text-center mb-3">
+                            <a href="{% url 'edit_product' product.id %}" class="badge badge-secondary">Edit</a>
+                            <a class="delete-modal-trigger badge badge-danger" data-toggle="modal" data-target="#productDeleteModal">Delete</a>
                         </div>
 
                     {% endif %}

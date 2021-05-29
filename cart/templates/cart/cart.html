@@ -28,7 +28,7 @@
                                     <i class="fas fa-times"></i>
                                 </span>Remove discount
                             </a>
-                            <span class="badge badge-pill badge-success float-right">Discount applied</span>
+                            <span class="badge badge-pill badge-warning">Discount applied</span>
                         </div>
                     {% endif %}
                                     
@@ -122,14 +122,14 @@
                 <div class="col-auto ml-auto">
                     Cart Total:
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <strong>£{{ original_total|floatformat:2 }}</strong>
                 </div>
             </div>
 
             {% if discount_applied %}
                 <div class="row">
-                    <div class="col-auto ml-auto">
+                    <div class="col-auto ml-auto text-right">
                         <span class="float-right">After discount:</span></br>
                         <a href="{% url 'toggle_discount' %}" class="text-danger">
                             <span class="icon">
@@ -137,7 +137,7 @@
                             </span>Remove discount
                         </a>
                     </div>
-                    <div class="col-4">
+                    <div class="col-3">
                         <strong>£{{ total|floatformat:2 }}</strong>
                     </div>
                 </div>
@@ -147,7 +147,7 @@
                 <div class="col-auto ml-auto">
                     Delivery:
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <strong>£{{ delivery|floatformat:2 }}</strong>
                 </div>
             </div>
@@ -156,7 +156,7 @@
                 <div class="col-auto ml-auto">
                     <h5><strong>Grand Total:</strong></h5>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <h5><strong>£{{ grand_total|floatformat:2 }}</strong></h5>
                 </div>
             </div>
@@ -168,10 +168,10 @@
                 {% if not user.is_authenticated and total >= 1 %}
                     <p>You could earn <strong>{{ points_earned }} point{{ points_earned|pluralize }}</strong> for completing this purchase. Register or sign in to start earning!</p>
                 {% else %}
-                    <p>You will receive <strong>{{ points_earned }} point{{ points_earned|pluralize }}</strong> for completing this purchase!</p>
+                    <p>You will earn <strong>{{ points_earned }} point{{ points_earned|pluralize }}</strong> for completing this purchase!</p>
                 {% endif %}
                 {% if free_delivery_delta > 0 %}
-                <p class="text-success">
+                <p>
                     Spend <strong>£{{ free_delivery_delta|floatformat:2 }}</strong> more for free delivery
                 </p>
                 {% endif %}

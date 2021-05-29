@@ -65,11 +65,15 @@ a:hover {
     z-index: 2;
 }
 
+.container-search .border {
+    border: 1px solid #343a40!important;
+}
+
 .btn:focus,
 .form-control:focus,
 .btn:active:focus:active:focus {
     box-shadow: none;
-    border-color: var(--color-accent-light);
+    border-color: var(--color-accent-light) !important;
 }
 
 .first-element-buffer {

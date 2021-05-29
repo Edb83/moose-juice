@@ -10,49 +10,92 @@
 
 <div class="container first-element-buffer">
     <div class="row">
-        <div class="col">
+        <div class="col mb-3">
             <h2 class="text-center">Checkout</h2>
         </div>
     </div>
     <div class="row">
         <div class="col-12 col-lg-6 order-lg-last mb-5">
-            <p class="text-muted">Order Summary ({{ product_count }})</p>
-            <div class="row">
-                <div class="col-7 offset-2">
-                    <p class="mb-1 mt-0 small text-muted">Item</p>
-                </div>
-                <div class="col-3 text-right">
-                    <p class="mb-1 mt-0 small text-muted">Subtotal</p>
-                </div>
-            </div>
-            {% for item in cart_items %}
+            <div class="checkout-items-container pb-3 border-accent-primary">
+                <p>Order Summary</p>
                 <div class="row">
                     <div class="col-7">
-                        <p class="my-0"><strong>{{ item.product.name }}</strong></p>
-                        <p class="my-0 small">Size: {{ item.size.label }}</p>
-                        <p class="my-0 small text-muted">Qty: {{ item.quantity }}</p>
+                        <p class="mb-1 mt-0 small text-muted">Juice</p>
+                    </div>
+                    <div class="col-2 text-center">
+                        <p class="mb-1 mt-0 small text-muted">Qty</p>
                     </div>
                     <div class="col-3 text-right">
-                        <p class="my-0 small text-muted">£{% if item.product.on_sale %}{{ item.size.sale_price | calc_subtotal:item.quantity }}{% else %}{{ item.size.price | calc_subtotal:item.quantity }}{% endif %}</p>
+                        <p class="mb-1 mt-0 small text-muted">Subtotal</p>
                     </div>
                 </div>
-            {% endfor %}
-            <hr class="my-0">
-            <div class="row text-black text-right">
-                <div class="col-7 offset-2">
-                    <p class="my-0">Order Total:</p>
-                    <p class="my-0">Delivery:</p>
-                    <p class="my-0">Grand Total:</p>
+                {% for item in cart_items %}
+                    <div class="row">
+                        <div class="col-7">
+                            <p class="my-0"><strong>{{ item.product.name }}</strong></p>
+                            <p class="my-0 small">{{ item.size.label }} bottle</p>
+                            <p class="my-0 small">{{ item.nic.strength }} {{ item.nic.type}}</p>
+                        </div>
+                        <div class="col-2 text-center">
+                            <p class="my-0 small"><strong>{{ item.quantity }}</strong></p>
+                        </div>
+                        <div class="col-3 text-right">
+                            <p class="my-0 small"><strong>£{% if item.product.on_sale %}{{ item.size.sale_price | calc_subtotal:item.quantity }}{% else %}{{ item.size.price | calc_subtotal:item.quantity }}{% endif %}</strong></p>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+            <div class="checkout-summary-container py-3 border-accent-primary text-right">
+                <div class="row">
+                    <div class="col-auto ml-auto">
+                        Cart Total:
+                    </div>
+                    <div class="col-3">
+                        <strong>£{{ original_total|floatformat:2 }}</strong>
+                    </div>
                 </div>
-                <div class="col-3">
-                    <p class="my-0">£{{ total | floatformat:2 }}</p>
-                    <p class="my-0">£{{ delivery | floatformat:2 }}</p>
-                    <p class="my-0"><strong>£{{ grand_total | floatformat:2 }}</strong></p>
+    
+                {% if discount_applied %}
+                    <div class="row text-secondary">
+                        <div class="col-auto ml-auto">
+                            <strong>Points used:</strong>
+                        </div>
+                        <div class="col-3">
+                            <strong>{{ points_available }}</strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-auto ml-auto">
+                            After discount:
+                        </div>
+                        <div class="col-3">
+                            <strong>£{{ total|floatformat:2 }}</strong>
+                        </div>
+                    </div>
+                {% endif %}
+    
+                <div class="row">
+                    <div class="col-auto ml-auto">
+                        Delivery:
+                    </div>
+                    <div class="col-3">
+                        <strong>£{{ delivery|floatformat:2 }}</strong>
+                    </div>
+                </div>
+                
+                <div class="row mt-1">
+                    <div class="col-auto ml-auto">
+                        <h5><strong>Grand Total:</strong></h5>
+                    </div>
+                    <div class="col-3">
+                        <h5><strong>£{{ grand_total|floatformat:2 }}</strong></h5>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col">
-            <p>Fill out the form below to complete your order</p>
+            <p>Your details</p>
             <form action="{% url 'checkout' %}" method="POST" id="payment-form">
                 {% csrf_token %}
                 <fieldset>
@@ -69,9 +112,9 @@
                     {{ order_form.county | as_crispy_field }}
                     {{ order_form.postcode | as_crispy_field }}
                     {{ order_form.country | as_crispy_field }}
-                    <div class="form-check form-check-inline float-right mr-0">
+                    <div class="form-check form-check-inline float-right mr-0 my-3">
                         {% if user.is_authenticated %}
-                            <label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
+                            <label class="form-check-label text-muted" for="id-save-info">Save this delivery information to my profile</label>
                             <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
                         {% else %}
                             <label class="form-check-label" for="id-save-info">
@@ -97,15 +140,15 @@
                         <span class="icon">
                             <i class="fas fa-chevron-left"></i>
                         </span>
-                        <span class="font-weight-bold">Adjust Cart</span>
+                        Adjust Cart
                     </a>
                     <button id="submit-button" class="btn btn-dark">
-                        <span class="font-weight-bold">Complete Order</span>
+                        Order
                         <span class="icon">
                             <i class="fas fa-lock"></i>
                         </span>
                     </button>
-                    <p class="small text-danger my-0">
+                    <p class="small text-danger mt-1 my-0">
                         <span class="icon">
                             <i class="fas fa-exclamation-circle"></i>
                         </span>
