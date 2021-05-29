@@ -33,12 +33,12 @@
       <form action="{% url 'profile' %}" method="POST" id="profile-update-form">
         {% csrf_token %}
         {{ form|crispy }}
-        <button class="btn btn-outline-dark">Update info</button>
+        <button class="btn btn-dark float-right">Update info</button>
       </form>
     </div>
   
     <!-- Orders tab -->
-    <div class="tab-pane fade" id="pills-orders" role="tabpanel" aria-labelledby="pills-orders-tab">
+    <div class="tab-pane fade border-accent-primary" id="pills-orders" role="tabpanel" aria-labelledby="pills-orders-tab">
       <table class="table table-sm table-borderless">
         <thead>
           <tr>
@@ -62,7 +62,7 @@
     </div>
   
     <!-- Points tab -->
-    <div class="tab-pane fade" id="pills-points" role="tabpanel" aria-labelledby="pills-points-tab">
+    <div class="tab-pane fade border-accent-primary" id="pills-points" role="tabpanel" aria-labelledby="pills-points-tab">
       <table class="table table-sm table-borderless">
         <thead>
           <tr>

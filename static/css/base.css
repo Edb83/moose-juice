@@ -204,9 +204,6 @@ h1, h2, h3, h4, h5, h6 {
     padding: 1rem 0;
 }
 
-/* .home-section .container {
-    padding: 2rem 3rem;
-} */
 
 .home-section .container > h3 {
     font-weight: 600;
@@ -215,9 +212,6 @@ h1, h2, h3, h4, h5, h6 {
     text-transform: uppercase;
 }
 
-/* #brands-section .container {
-    height: 100%;
-} */
 
 #brands-section .nav-pills .nav-link {
     color: var(--color-accent-primary);
@@ -327,7 +321,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Profile */
 
 #dashboard-container .tab-content {
-    height: calc(100vh - 351px);
+    height: calc(100vh - 400px);
     overflow: auto;
 }
 
@@ -343,6 +337,24 @@ h1, h2, h3, h4, h5, h6 {
     width: max-content;
 }
 
+/* Order Summary */
+
+.order-summary-container h5,
+.order-details-container h5 {
+    color: var(--color-accent-light);
+    font-weight: 600;
+}
+
+
+.order-details-container .row {
+    margin-bottom: 1rem;
+}
+
+.receipt-details p {
+    margin-bottom: 0.6rem;
+}
+
+
 /* Icons */
 
 .icon {
@@ -356,7 +368,9 @@ h1, h2, h3, h4, h5, h6 {
 .fa-heart,
 .fa-heart-broken,
 .fa-star,
-.fa-tint {
+.fa-tint,
+.fa-phone,
+.fa-envelope {
     color: var(--color-accent-light);
 }
 
@@ -383,3 +397,9 @@ input[type=number] {
         overflow: auto;
     }
   }
+
+@media (min-width: 992px) {
+    .order-details-container {
+        border-right: 1px solid var(--color-dark);
+    }
+}

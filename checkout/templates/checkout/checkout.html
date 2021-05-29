@@ -18,7 +18,7 @@
         <div class="col-12 col-lg-6 order-lg-last mb-5">
             <div class="checkout-items-container pb-3 border-accent-primary">
                 <p>Order Summary</p>
-                <div class="row">
+                <div class="row mb-1">
                     <div class="col-7">
                         <p class="mb-1 mt-0 small text-muted">Juice</p>
                     </div>
@@ -51,7 +51,7 @@
                     <div class="col-auto ml-auto">
                         Cart Total:
                     </div>
-                    <div class="col-3">
+                    <div class="col-4 col-md-3">
                         <strong>£{{ original_total|floatformat:2 }}</strong>
                     </div>
                 </div>
@@ -61,15 +61,23 @@
                         <div class="col-auto ml-auto">
                             <strong>Points used:</strong>
                         </div>
-                        <div class="col-3">
+                        <div class="col-4 col-md-3">
                             <strong>{{ points_available }}</strong>
+                        </div>
+                    </div>
+                    <div class="row text-secondary">
+                        <div class="col-auto ml-auto">
+                            <strong>Discount:</strong>
+                        </div>
+                        <div class="col-4 col-md-3">
+                            <strong>- £{{ points_available|calc_divide:100 }}</strong>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-auto ml-auto">
                             After discount:
                         </div>
-                        <div class="col-3">
+                        <div class="col-4 col-md-3">
                             <strong>£{{ total|floatformat:2 }}</strong>
                         </div>
                     </div>
@@ -79,7 +87,7 @@
                     <div class="col-auto ml-auto">
                         Delivery:
                     </div>
-                    <div class="col-3">
+                    <div class="col-4 col-md-3">
                         <strong>£{{ delivery|floatformat:2 }}</strong>
                     </div>
                 </div>
@@ -88,7 +96,7 @@
                     <div class="col-auto ml-auto">
                         <h5><strong>Grand Total:</strong></h5>
                     </div>
-                    <div class="col-3">
+                    <div class="col-4 col-md-3">
                         <h5><strong>£{{ grand_total|floatformat:2 }}</strong></h5>
                     </div>
                 </div>

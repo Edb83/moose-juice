@@ -88,10 +88,6 @@ def replicate_cart(request, order_number):
     """
     Create a new cart filled with items/quantities from previous order
     """
-
-    # if 'cart' in request.session:
-    #     del request.session['cart']
-
     order = Order.objects.get(order_number=order_number)
     original_cart = eval(order.original_cart)
     cart = request.session.get('cart', {})
