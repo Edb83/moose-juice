@@ -76,7 +76,8 @@ a:hover {
 .btn:focus,
 .form-control:focus,
 .btn:active:focus:active:focus {
-    box-shadow: none;
+    -webkit-box-shadow: none;
+            box-shadow: none;
     border-color: var(--color-accent-light) !important;
 }
 
@@ -152,14 +153,15 @@ h1, h2, h3, h4, h5, h6 {
 .hero-image {
     height: 100vh;
     position: relative;
-    background: url('/media/background.svg') no-repeat center bottom fixed;
+    background: url('/media/background.svg') no-repeat bottom left fixed;
     background-size: cover;
 }
 
 .hero-overlay {
     height: 100vh;
     opacity: 1;
-    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(15px);
 }
 
 .hero-heading {
@@ -175,7 +177,9 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 0;
     top: 75%;
     left: 75%;
-    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
     text-align: right;
 }
 
@@ -278,7 +282,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .product-svg-container {
     width: 100px;
-    align-self: center;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
 }
 
 .product-img-container {
@@ -340,11 +346,15 @@ h1, h2, h3, h4, h5, h6 {
 
 .add-product-svg-container {
     max-width: 200px;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
     height: fit-content;
 }
 
 /* Cart */
 .cart-input-wrapper {
+    width: -webkit-max-content;
+    width: -moz-max-content;
     width: max-content;
 }
 
@@ -369,9 +379,15 @@ h1, h2, h3, h4, h5, h6 {
 /* Icons */
 
 .icon {
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
     display: inline-flex;
-    justify-content: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
     height: 1.5rem;
     width: 1.5rem;
 }
@@ -428,4 +444,3 @@ input[type=number] {
         border-right: 1px solid var(--color-dark);
     }
 }
-
