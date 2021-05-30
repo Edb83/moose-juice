@@ -121,7 +121,7 @@ def product_detail(request, product_id):
                     review.verified_purchase = True
 
                 review.save()
-                messages.success(request, 'Review added')
+                messages.info(request, 'Review added')
                 return redirect(reverse('product_detail', args=[product.id]))
             else:
                 messages.error(request, 'Failed to add review - please check form and try again')
@@ -180,7 +180,7 @@ def add_product(request):
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
             product = form.save()
-            messages.success(request, 'Product successfully added')
+            messages.info(request, 'Product added')
             return redirect(reverse('product_detail', args=[product.id]))
         else:
             messages.error(request, 'Failed to add product - please check form and try again')
@@ -212,7 +212,7 @@ def edit_product(request, product_id):
         form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
             form.save()
-            messages.success(request, f'Successfully updated {product.name}')
+            messages.info(request, f'Updated {product.name}')
             return redirect(reverse('product_detail', args=[product.id]))
         else:
             messages.error(request, 'Failed to update product - please check form and try again')
@@ -243,6 +243,6 @@ def delete_product(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     product_name = product.name
     product.delete()
-    messages.success(request, f'{product_name} deleted!')
+    messages.info(request, f'{product_name} deleted')
 
     return redirect(reverse('products'))
