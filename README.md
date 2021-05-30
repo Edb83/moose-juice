@@ -3,7 +3,7 @@
 
 **[Live demo](#)**
 ---
-<span id="top"></span>
+<span id="top"></span> 
 ## Index
 - <a href="#context">Context</a>
 - <a href="#ux">UX</a>
@@ -23,12 +23,9 @@
 <span id="context"></span>
 
 ## Context
-The COVID-19 pandemic has had a dramatic effect on everyone's lives, not least those of working parents who can no longer rely on childcare or school due to the restrictions put in place.
+Smoking will kill you. Anyone who smokes should use vaping as an enjoyable means to kick the habit. The only risk is taking up a different, albeit infinitely safter habit.
 
-When a case occurs in your child's bubble and they are forced to self-isolate at home, you can expect to spend your days fitting work in around your children's homeschooling
-and other needs. Without the option of leaving the house you'll be climbing the walls in no time, feeling guilty that you've left them to watch Peppa Pig for 4 hours straight, again.
-You need to break the cycle and find some inspiration without having to create elaborate plans which will likely be greeted with a slow clap and roll of the eyes, leaving you
-ever more frustrated with them, yourself and the situation at large. You need a Self Isolution.
+With that out of the way (and in spite of the bizarre public health stances taken by countries around the world), vaping has become mainstream. It caters to a variety of users with very different wants and expectations, from the older generation just looking to improve their health, to the hobbyists spending vast sums on their hardware.There are many online vaping stores out there, but they tend to be busy and bloated, selling anything you might ever need but with little style. The simplest and most crucial part of the industry is the e-liquid itself, and that's where Moose Juice comes in.
 
 <div align="right"><a style="text-align:right" href="#top">Go to index :arrow_double_up:</a></div>
 
@@ -39,22 +36,73 @@ ever more frustrated with them, yourself and the situation at large. You need a 
 <span id="ux-overview"></span>
 
 ### Overview
-Self Isolution is a site aimed at parents of young children who have been put into self-isolation. Users are looking for ideas for simple activities to entertain, educate and somehow enrich the lives of their offspring, without leaving the comfort of their own homes. All content is available without registering, but once logged in users can add their
-own activity ideas and share the collective burden of raising this misfortunate generation.
-All design decisions have been made with the following goals in mind:
-- TBC
+Unconcerned with selling hardware in its myriad forms, Moose Juice can focus on providing nothing but the highest quality, home-brewed e-liquid and delivering a great user experience. By using an aesthetic not typically seen in larger vaping e-commerce stores alongside an accessible rewards system, the company hopes to retain its clientelle and be guided by their feedback. Converting a sale will rely on quickly signposting potential customers to relevant products and then giving them options.
+
+In summary, the two questions asked by the site should be "What's your taste?" and "How do you vape?"
+
+#### Flavours
+Flavour and choice are paramount at Moose Juice. That's what will keep people off cigarettes for good. Options to filter by common vaping flavour profiles (bakery, dessert, fruit etc) are complimented by the ability to search for individual flavour notes (cinnamon, cream, apple etc). When browsing for a new juice to try, most users will go straight for an individual flavour and then make a choice based on its popularity.
+
+#### Brands
+From an e-liquid perspective all vapers will fall into one of three categories, which Moose Juice caters for in its brands.
+
+**Big Moose**
+
+For use with 'sub-ohm' devices, which get through a lot of juice and put out large vape clouds. This type of e-liquid has a thicker consistency due to a higher ratio of vegetable glycerin (VG) to propylene glycol (PG) and as sub-ohm devices use it up quickly, needs to come in larger bottles. Due to the TPD Regulations it cannot be sold pre-mixed with nicotine.
+
+**Mini Moose**
+
+One of two Moose Juice brands aimed at users of the more discreet 'pod' systems. These juices have a 50:50 PG/VG ratio and come in a variety of pre-mixed freebase nicotine strengths. The TPD Regulations do not allow pre-mixed e-liquids to be sold in bottles larger than 10ml.
+
+**Salty Moose**
+
+These pre-mixed juices use nicotine salts rather than freebase, providing a much quicker absorbtion rate akin to that of traditional cigarettes and a smoother 'throat hit' on the inhale.
+
+The different compositions of these e-liquids mean that certain flavour combinations are better suited to one brand than another. Moose Juice's expertise in understanding these differences is what makes them so good. The flavour mix of an individual product is therefore not suitable to include in each of the three brands.
+
+
+
 <span id="ux-stories"></span>
 
 ### User stories
 
 #### Overarching user expectations
-- TBC
-#### As a first-time visitor I want
-- TBC
-#### As a returning user I want
-- TBC
-#### As the site owner I want:
-- TBC
+- Consistent
+- Easy to navigate
+- Intuitive
+- Responsive
+- Secure
+- Visually pleasing
+
+|**As a...**|**I want to...**|**So I can...**|
+|:-----|:-----|:-----|
+|Potential customer|Immediately understand the purpose of the site|Decide whether to stay|
+||Easily browse through juices|Learn how much they cost and how others have rated them|
+||Create an account easily|Purchase products|
+||Add items to my shopping cart before registering|Avoiding registering if not necessary|
+||Learn about a specific juice's flavour profile|Make an informed purchase decision|
+||Search by juice name and flavour|Find specific products|
+||Filter by broad flavour profiles|Find juices matching my taste|
+||Filter by individual flavours|Quickly find the flavours I like|
+||Read reviews/ratings for juices|Making informed purchase decisions|
+||Learn about any rewards system|Register with confidence|
+||Choose bottle size and nicotine content|Customise purchases to my preference|
+|Registered user|Save my default delivery details|Proceed to checkout more quickly in future|
+||Add a juice to my favourites list|Quickly find a product I'd like to purchase again|
+||View my previous purchases|Make repeat orders|
+||Leave a review and rating for juices|Inform others about good/bad juices|
+||Know that a review has come from a verified purchase|Make informed purchase decisions|
+||Review my basket prior to checkout|Remove/adjust quantities|
+||Receive confirmation of my orders|Have proof of purchase|
+||See what juices are on sale|Find the best value for money|
+||Receive free delivery above an order threshold|Feel rewarded for larger purchases|
+||Receive reward points|Get discounts on future purchases and feel rewarded for my loyalty|
+||View my reward points|See what I can redeem on future purchases|
+|Site owner|View, add, edit and delete products|Keep the product list up to date|
+||...||
+||||
+
+
 <span id="ux-wireframes"></span>
 
 ### Wireframes

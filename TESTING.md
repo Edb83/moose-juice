@@ -58,7 +58,10 @@ Solution: this was particularly difficult to solve as the issue was only present
 Bug 17: rounding error for points earned on a purchase means user will occasionally get 1 point extra
 Solution: could not reproduce even with order_total ending £0.50 but set items to end £0.49 or £0.99 to mitigate issue
 
-Bug 18: deleting a product which has been purchased will obviously delete an order's lineitem and lead to difficulties.
+BUg 18: messages.success includes cart contents no matter the context
+Solution: Partially solved by including context on rendered views (e.g. on_profile_page), however context cannot be passed on form submissions etc in the same way. Using a hidden form field is probably the best solution but in the meanwhile switched certain messages over from messages.success to the less cluttered messages.info
+
+Bug 19: deleting a product which has been purchased will obviously delete an order's lineitem and lead to difficulties.
 Solution: insufficient time to fix, but likely using `on_delete=models.SET()` and retrieving string versions of the to-be-deleted product, siz, nicotine, price etc would be the way forward
 UNSOLVED
 

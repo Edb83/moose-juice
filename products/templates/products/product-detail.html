@@ -16,8 +16,9 @@
             <div class="col-md-8">
                 <div class="card-body">
                     <div class="row flex-nowrap">
-                        <div class="col-10 offset-1">
-                            <h2 class="card-title text-center">{{ product.name }}</h2>
+                        <div class="col-10 offset-1 text-center">
+                            <h2 class="card-title">{{ product.name }}</h2>
+                            <small>{{ product.brand.friendly_name|upper }}</small>
                         </div>
                         <div class="col-1">
                             {% if request.user.is_authenticated %}
