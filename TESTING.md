@@ -58,3 +58,8 @@ Solution: this was particularly difficult to solve as the issue was only present
 Bug 17: rounding error for points earned on a purchase means user will occasionally get 1 point extra
 Solution: could not reproduce even with order_total ending £0.50 but set items to end £0.49 or £0.99 to mitigate issue
 
+Bug 18: deleting a product which has been purchased will obviously delete an order's lineitem and lead to difficulties.
+Solution: insufficient time to fix, but likely using `on_delete=models.SET()` and retrieving string versions of the to-be-deleted product, siz, nicotine, price etc would be the way forward
+UNSOLVED
+
+

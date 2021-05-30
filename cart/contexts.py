@@ -1,5 +1,6 @@
 from decimal import Decimal
 from django.conf import settings
+from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from products.models import Product, Size, Nicotine
 from profiles.models import UserProfile
@@ -14,19 +15,44 @@ def cart_contents(request):
     product_count = 0
     points_available = 0
     points_earned = 0
-
+    discount_applied = request.session.get('discount_applied')
     cart = request.session.get('cart', {})
 
-    discount_applied = request.session.get('discount_applied')
-    for item, quantity in cart.items():
+    # Create a new dict so that items can be removed if needed
+    new_dict = {k: v for k, v in cart.items()}
+
+    for item, quantity in new_dict.items():
         # Use string created in cart view to isolate model ids
         product_id = item.split("_")[0]
         size_id = item.split("_")[1]
         nic_id = item.split("_")[2]
-        # Retrieve relevant objects for templating
-        product = get_object_or_404(Product, pk=product_id)
-        size = get_object_or_404(Size, pk=size_id)
-        nic = get_object_or_404(Nicotine, pk=nic_id)
+
+        # Retrieve relevant objects for templating and remove if
+        # no longer in database
+        try:
+            product = Product.objects.get(pk=product_id)
+        except Product.DoesNotExist:
+            del cart[item]
+            messages.error(request, 'An item could not be added as it is \
+                no longer available. Try to find a worthy replacement!')
+            continue
+
+        try:
+            size = Size.objects.get(pk=size_id)
+        except Size.DoesNotExist:
+            del cart[item]
+            messages.error(request, 'An item could not be added as its \
+                size is no longer available. Try to find a worthy replacement!')
+            continue
+
+        try:
+            nic = Nicotine.objects.get(pk=nic_id)
+        except Nicotine.DoesNotExist:
+            del cart[item]
+            messages.error(request, 'An item could not be added as its \
+                nicotine options have changed. Try to find a worthy replacement!')
+            continue
+
         # Check sale status and retrieve relevant price from Size model
         if product.on_sale:
             price = size.sale_price
@@ -45,6 +71,7 @@ def cart_contents(request):
         })
 
     original_total = total
+    request.session['cart'] = cart
 
     if request.user.is_authenticated:
         profile = get_object_or_404(UserProfile, user_id=request.user)

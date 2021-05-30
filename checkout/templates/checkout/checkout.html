@@ -70,7 +70,7 @@
                             <strong>Discount:</strong>
                         </div>
                         <div class="col-4 col-md-3">
-                            <strong>- £{{ points_available|calc_divide:100 }}</strong>
+                            <strong>- £{{ points_available|calc_divide:100|floatformat:2 }}</strong>
                         </div>
                     </div>
                     <div class="row">

@@ -82,7 +82,7 @@
                                 <strong>Discount:</strong>
                             </div>
                             <div class="col-4 col-md-3">
-                                <strong>- £{{ order.points_redeemed|calc_divide:100 }}</strong>
+                                <strong>- £{{ order.points_redeemed|calc_divide:100|floatformat:2 }}</strong>
                             </div>
                         </div>
                     {% endif %}

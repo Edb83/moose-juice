@@ -97,10 +97,7 @@ def replicate_cart(request, order_number):
             cart[item] = quantity
 
     except Exception as e:
-        messages.error(request, 'Sorry, some of the items \
-            from your previous order could not be found. \
-            Please look for them from the stores.')
-        return redirect(reverse('view_cart'))
+        return HttpResponse(status=500)
 
     request.session['cart'] = cart
 

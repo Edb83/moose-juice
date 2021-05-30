@@ -49,14 +49,18 @@
                             </div>
                         {% endif %}
                         {% if request.user.is_superuser %}
-                            <small class="text-center">
-                                <a href="{% url 'edit_product' product.id %}">Edit</a> | 
-                                <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
-                            </small>
+                            <a href="{% url 'edit_product' product.id %}" class="badge badge-secondary">Edit</a>
                         {% endif %}
                     </div>
-                    <div class="card-footer bg-white">
-                        {% if product.brand.available_sizes.all|length > 1 %}From {% endif %}{% if product.on_sale %}<s>£{{ product.brand.available_sizes.all.0.price }}</s> £{{ product.brand.available_sizes.all.0.sale_price }}{% else %}£{{ product.brand.available_sizes.all.0.price }}{% endif %}
+                    <div class="card-footer">
+                        {% if product.brand.available_sizes.all|length > 1 %}
+                            From
+                        {% endif %}
+                        {% if product.on_sale %}
+                            <s>£{{ product.brand.available_sizes.all.0.price }}</s> £{{ product.brand.available_sizes.all.0.sale_price }}
+                        {% else %}
+                            £{{ product.brand.available_sizes.all.0.price }}
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -70,6 +74,7 @@
 {% block extra_js %}
 
 {{ block.super }}
+<script src="{% static 'products/js/star-display.js' %}"></script>
 <script src="{% static 'products/js/favourites-toggle.js' %}"></script>
 
 {% endblock %}
