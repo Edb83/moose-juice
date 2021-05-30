@@ -7,10 +7,10 @@
     <div class="hero-overlay"></div>
     <div class="hero-text-container">
         <h1 class="hero-heading">Moose Juice</h1>
-        <h4>Hand-crafted e-liquid</h4>
-        <p class="text-muted">Free delivery on orders over £{{ free_delivery_threshold }}!</p>
+        <h5>E-liquid.</h5>
+        <h5>Home-brewed.</h5>
+        <h5>Get some.</h5>
     </div>
-
 </div>
 
 <section id="intro-section" class="home-section">
@@ -24,7 +24,7 @@
                         <p class="card-text">Scrumptious flavours in a variety of nicotine strengths and sizes across our three stupendous brands.</p>
                     </div>
                     <div class="card-footer">
-                        <p class="card-text"><a href="#brands-section">Brands</a></p>
+                        <a class="btn btn-outline-light" href="#brands-section">Brands</a>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                         <p class="card-text">We're always looking for feedback and will continue to expand and improve our e-liquid menu.</p>
                     </div>
                     <div class="card-footer">
-                        <p class="card-text"><a href="#categories-section">Flavours</a></p>
+                        <a class="btn btn-outline-light" href="#categories-section">Flavours</a>
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                         <p class="card-text">Get points for your purchases, reviews and - heck - just for signing up! We hope you'll come back again and again.</p>
                     </div>
                     <div class="card-footer">
-                        <p class="card-text"><a href="{% url 'account_signup' %}">Sign up!</a></p>
+                        <a class="btn btn-outline-light" href="{% url 'account_signup' %}">Sign up!</a>
                     </div>
                 </div>
             </div>
@@ -134,7 +134,8 @@
 
 <script type="text/javascript" >
     $(document).ready(function () {
-        $('.hero-overlay').fadeTo(3500, 0.4);
+        $('.hero-overlay').fadeTo(3000, 0);
+        $('.hero-text-container').fadeTo(1500, 0.9);
     })
 </script>
 

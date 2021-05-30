@@ -69,6 +69,10 @@ a:hover {
     border: 1px solid #343a40!important;
 }
 
+.container-search input {
+    background-color: transparent;
+}
+
 .btn:focus,
 .form-control:focus,
 .btn:active:focus:active:focus {
@@ -148,30 +152,37 @@ h1, h2, h3, h4, h5, h6 {
 .hero-image {
     height: 100vh;
     position: relative;
-    background: url('/media/background.jpg') no-repeat center center fixed; 
+    background: url('/media/background.svg') no-repeat center bottom fixed;
     background-size: cover;
 }
 
 .hero-overlay {
     height: 100vh;
     opacity: 1;
-    background-color: #fff;
+    backdrop-filter: blur(15px);
+}
 
+.hero-heading {
+    letter-spacing: 5px;
+    font-weight: 600;
+    font-size: 2em;
 }
 
 .hero-text-container {
     text-align: center;
     position: absolute;
-    top: 50%;
-    left: 50%;
+    color: #000;
+    opacity: 0;
+    top: 75%;
+    left: 75%;
     transform: translate(-50%, -50%);
+    text-align: right;
 }
 
-.hero-heading {
-    color: var(--color-accent-light);
-    font-weight: 600;
-    font-size: 3em;
+.hero-text-container h5 {
+    white-space: nowrap;
 }
+
 
 #intro-section,
 #categories-section {
@@ -391,6 +402,20 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+
+/* Media queries */
+
+/* @media (min-width: 1024px) {
+    .hero-text-container {
+        left: 17%;
+        top: 85%;
+        color: #000;
+        text-shadow: 1px 1px var(--color-accent-light);
+    }
+} */
+
+
+
 @media (orientation: landscape) and (max-width: 1023px) {
     #dashboard-container .tab-content {
         height: auto;
@@ -403,3 +428,4 @@ input[type=number] {
         border-right: 1px solid var(--color-dark);
     }
 }
+
