@@ -9,6 +9,7 @@
     --color-accent-light: #e4714b;
     --font-heading: 'Raleway', sans-serif;
     --font-default: 'Karla', sans-serif;
+    --shadow-normal: 0 .5rem 1rem rgba(0,0,0,.15)!important;
 }
 
 html {
@@ -19,8 +20,14 @@ body {
     font-family: var(--font-default);
 }
 
-a:hover {
+.card-body a {
+    color: #3c7c9a;
+    font-weight: 600;
+}
+
+.card-body a:hover {
     text-decoration: none;
+    color: #2d5e74;
 }
 
 .btn-dark:hover {
@@ -355,6 +362,10 @@ h1, h2, h3, h4, h5, h6 {
     overflow: auto;
 }
 
+.btn-outline-dark:not(:disabled):not(.disabled).active:focus {
+    box-shadow: none;
+}
+
 .nav-pills .nav-link {
     margin: 0.2em;
 }
@@ -419,10 +430,12 @@ h1, h2, h3, h4, h5, h6 {
     width: 1.5rem;
 }
 
+.product-icon-container .fa-edit:hover,
+.product-icon-container .fa-trash:hover {
+    color: var(--color-dark);
+}
 
-.fa-edit:hover,
-.fa-trash:hover,
-.fa-trash-alt:hover {
+.card-product-review i:hover {
     color: var(--color-accent-dark) !important;
 }
 
@@ -483,11 +496,11 @@ input[type=number] {
     }
 
     .card-products:hover {
-        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+        box-shadow: var(--shadow-normal);
     }
 
     .product-options {
-        box-shadow: 0 1rem 3rem rgba(0,0,0,.175)!important;
+        box-shadow: var(--shadow-normal);
         border-bottom: transparent;
     }
 
@@ -496,7 +509,7 @@ input[type=number] {
     }
 
     .edit-product-image-container {
-        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+        box-shadow: var(--shadow-normal);
         height: fit-content;
     }
 

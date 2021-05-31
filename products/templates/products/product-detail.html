@@ -78,7 +78,7 @@
                         <h5 class="my-3 text-center">Size</h5>
                         {% for size in product.brand.available_sizes.all %}
                             <label class="btn btn-outline-dark active m-1">
-                                <input type="radio" name="size" value="{{ size.id }}" autocomplete="off" required> {{ size.label }}
+                                <input type="radio" name="size" value="{{ size.id }}" required> {{ size.label }}
                             </label>
                         {% endfor %}
                     </div>
@@ -88,7 +88,7 @@
                         <h5 class="my-3 text-center">Nic content</h5>
                         {% for nic in product.brand.available_nics.all %}
                             <label class="btn btn-outline-dark active m-1">
-                                <input type="radio" name="nic" value="{{ nic.id }}" autocomplete="off" required> {{ nic.strength }} {{ nic.type }}
+                                <input type="radio" name="nic" value="{{ nic.id }}" required> {{ nic.strength }} {{ nic.type }}
                             </label>
                         {% endfor %}
                     </div>

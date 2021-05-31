@@ -15,7 +15,7 @@ URL passed in from server to client side to be used in ajax call -->
         {% if request.user.is_superuser %}
         <div class="product-edit-container">
             <span class="icon">
-                <a href="{% url 'edit_product' product.id %}" class="text-dark">
+                <a href="{% url 'edit_product' product.id %}" class="text-secondary">
                     <i class="fas fa-edit"></i>
                 </a>
             </span>
@@ -23,7 +23,7 @@ URL passed in from server to client side to be used in ajax call -->
             {% if on_product_detail_page %}
                 <div class="product-trash-container">
                     <span class="icon">
-                        <a class="delete-modal-trigger text-dark" data-toggle="modal" data-target="#productDeleteModal">
+                        <a class="delete-modal-trigger text-secondary" data-toggle="modal" data-target="#productDeleteModal">
                             <i class="fas fa-trash"></i>
                         </a>
                     </span>
