@@ -4,38 +4,38 @@
 {% block content %}
 
 
-<section class="container first-element-buffer">
+<header class="container first-element-buffer">
     {% if brand %}
         <h2 class="text-center">{{ brand.friendly_name }}</h2>
         <p class="product-filter-text">{{brand.description}}</p>
     {% elif category %}
-    <div class="row">
-        <div class="col-1">
-            {% if category.image %}
-            <img class="category-img-sm mr-2" src="{{ category.image.url }}" alt="{{ category.friendly_name }}">
-            {% endif %}
+        <div class="row">
+            <div class="col-1">
+                {% if category.image %}
+                <img class="category-img-sm mr-2" src="{{ category.image.url }}" alt="{{ category.friendly_name }}">
+                {% endif %}
+            </div>
+            <div class="col-10">
+                <h2 class="text-center category-heading">
+                    {{ category.friendly_name }}
+                </h2>
+            </div>
+            <div class="col-1"></div>
         </div>
-        <div class="col-10">
-            <h2 class="text-center category-heading">
-                {{ category.friendly_name }}
-            </h2>
-        </div>
-        <div class="col-1"></div>
-    </div>
-    <p class="product-filter-text">{{ category.description}}</p>
+        <p class="product-filter-text">{{ category.description}}</p>
     {% elif sale %}
-    <h2 class="text-center">Sale</h2>
-    <p class="product-filter-text">Grab your favourite Moose Juice while it's on sale!</p>
+        <h2 class="text-center">Sale</h2>
+        <p class="product-filter-text">Grab your favourite Moose Juice while it's on sale!</p>
     {% else %}
-    <h2 class="text-center">Moose Juice</h2>
-    <p class="product-filter-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi eius laboriosam cumque
-        suscipit aperiam, facere id eum inventore perspiciatis atque? Sed quidem maiores veniam eius hic aspernatur, non
-        similique tempore.</p>
+        <h2 class="text-center">Moose Juice</h2>
+        <p class="product-filter-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi eius laboriosam cumque
+            suscipit aperiam, facere id eum inventore perspiciatis atque? Sed quidem maiores veniam eius hic aspernatur, non
+            similique tempore.</p>
     {% endif %}
-</section>
+</header>
 
 
-<section class="container my-5">
+<nav class="container my-5">
     <div class="row">
         <div class="col-12 offset-md-8 col-md-4 offset-l-10 col-l-2 py-3">
             <select id="sort-selector" class="custom-select my-1 mr-sm-2">
@@ -58,9 +58,9 @@
             </p>
         </div>
     </div>
-</section>
+</nav>
 
-<section class="container">
+<main class="container">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 text-center">
         {% for product in products %}
         <div class="col mb-4">
@@ -106,7 +106,7 @@
         {% endfor %}
     </div>
 
-</section>
+</main>
 
 {% endblock %}
 

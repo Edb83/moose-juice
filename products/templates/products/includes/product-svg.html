@@ -1,5 +1,5 @@
 <defs>
-    <linearGradient id="{{ forloop.counter }}-gradient" gradientTransform="rotate(90)">
+    <linearGradient id="gradient-{{ forloop.counter }}" gradientTransform="rotate(90)">
       <stop offset="30%" stop-color="#ffffff" />
       <stop offset="70%" class="js-stopColor" stop-color="{% if product.id %}{{ product.color }}{% else %}{{ item.product.color}}{% endif %}" />
     </linearGradient>
@@ -81,7 +81,7 @@
         113.00,133.00 105.00,133.00 105.00,133.00
         105.00,133.00 105.00,85.00 105.00,85.00 Z"
 />
-<path id="{{ product.id}}-body" class="js-bottle" fill="url('#{{ forloop.counter }}-gradient')" stroke="black" stroke-width="3" d="M 0.00,0.00
+<path id="bottle-svg-body-{{ product.id}}" class="js-bottle" fill="url('#gradient-{{ forloop.counter }}')" stroke="black" stroke-width="3" d="M 0.00,0.00
     M 52.00,141.24
     C 52.00,141.24 98.00,141.24 98.00,141.24
         114.08,141.20 119.98,152.44 120.00,167.00

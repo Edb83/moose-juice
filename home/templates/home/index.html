@@ -69,7 +69,7 @@
             <ul class="nav nav-pills mb-3 flex-nowrap justify-content-center text-center" id="h-pills-tab" role="tablist">
                 {% for brand in brands %}
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link {% if forloop.counter == 1 %}active{% endif %}" id="h-pills-{{ brand.id }}-tab" data-toggle="pill" href="#h-pills-{{ brand.id }}" role="tab" aria-controls="pills-{{ brand.id }}" aria-selected="{% if forloop.counter == 1 %}true{% else %}false{% endif %}">
+                        <a class="nav-link {% if forloop.counter == 1 %}active{% endif %}" id="h-pills-{{ brand.id }}-tab" data-toggle="pill" href="#h-pills-{{ brand.id }}" role="tab" aria-controls="h-pills-{{ brand.id }}" aria-selected="{% if forloop.counter == 1 %}true{% else %}false{% endif %}">
                             {{ brand.friendly_name }}
                         </a>
                     </li>
@@ -132,11 +132,7 @@
 
 {% block extra_js %}
 
-<script type="text/javascript" >
-    $(document).ready(function () {
-        $('.hero-overlay').fadeTo(3000, 0);
-        $('.hero-text-container').fadeTo(1500, 0.9);
-    })
-</script>
+    {{ block.super }}
+    <script src="{% static 'home/js/hero-blur.js' %}"></script>
 
 {% endblock %}

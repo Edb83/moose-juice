@@ -5,10 +5,10 @@
 {% block content %}
 
 <!-- Introduction -->
-<section class="container first-element-buffer">
+<header class="container first-element-buffer border-accent-primary pb-5">
     <div class="row">
         <div class="col mb-3">
-            <div class="pb-5 border-accent-primary">
+            <div>
                 <h2 class="text-center mb-5">Cart</h2>
                 <!-- Check for cart items and if a registered user, points -->
                 {% if cart_items %}
@@ -38,17 +38,17 @@
             </div>
         </div>
     </div>
-</div>
+</header>
 
 <!-- Cart contents -->
-<section>
+<main class="container mt-5">
     {% if cart_items %}
-        <div class="cart-contents border-accent-primary mt-5">
+        <div class="cart-contents border-accent-primary">
             {% for item in cart_items %}
                 <div class="row pb-5">
                     <!-- SVG -->
                     <div class="col-2 align-self-center text-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25px" length="auto" viewBox="0 0 154 339">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25px" viewBox="0 0 154 339">
                             {% include 'products/includes/product-svg.html' %}
                         </svg>
                     </div>
@@ -72,7 +72,7 @@
                         </div>
                         <div class="row text-center align-items-center flex-nowrap overflow-hidden">
                             <!-- Price per unit -->
-                            <div class="col">
+                            <div class="col text-left">
                                     £{{ item.size.price }}
                             </div>
                             <!-- Quantity input -->
@@ -146,7 +146,7 @@
                 </div>
                 <div class="row">
                     <div class="col-auto ml-auto text-right">
-                        <span class="float-right">After discount:</span></br>
+                        <span class="float-right">After discount:</span><br>
                         <a href="{% url 'toggle_discount' %}" class="text-danger">
                             <span class="icon">
                                 <i class="fas fa-times"></i>
@@ -222,7 +222,7 @@
             </span>Juices
         </a>
     {% endif %}
-</section>
+</main>
     
 {% endblock %}
 

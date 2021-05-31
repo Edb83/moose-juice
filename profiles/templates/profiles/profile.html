@@ -45,7 +45,7 @@
         <tbody>
           {% for order in orders %}
             <tr>
-              <td scope="row">{{ order.date|date:"SHORT_DATE_FORMAT" }}</th>
+              <td>{{ order.date|date:"SHORT_DATE_FORMAT" }}</td>
               <td><a href="{% url 'order_history' order.order_number %}" title="{{ order.order_number }}">{{ order.order_number|truncatechars:6 }}</a></td>
               <td>{{ order.lineitems.all|length }}</td>
               <td>£{{ order.grand_total }}</td>
@@ -68,7 +68,7 @@
         <tbody>
             {% for event in rewards %}
               <tr>
-                <td scope="row">{{ event.created_on|date:"SHORT_DATE_FORMAT" }}</td>
+                <td>{{ event.created_on|date:"SHORT_DATE_FORMAT" }}</td>
                 <td>
                   {% if event.product %}
                     {{ event.reward.type }}: <a href="{% url 'product_detail' event.product.id %}">{{ event.product.name }}</a>
