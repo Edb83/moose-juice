@@ -263,14 +263,14 @@ h1, h2, h3, h4, h5, h6 {
 
 /* TBC */
 
-.update-link,
-.remove-item,
-.delete-modal-trigger {
-    cursor: pointer;
-}
+
 
 
 /* Products */
+
+.card {
+    border: transparent;
+}
 
 .card-products {
     border: transparent;
@@ -296,6 +296,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .product-heart-container {
     position: absolute;
+    top: 2%;
     right: 10%;
 }
 
@@ -338,11 +339,21 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
 }
 
+.update-link,
+.remove-item,
+.delete-modal-trigger {
+    cursor: pointer;
+}
+
 /* Profile */
 
 #dashboard-container .tab-content {
     height: calc(100vh - 400px);
     overflow: auto;
+}
+
+.nav-pills .nav-link {
+    margin: 0.2em;
 }
 
 /* Add Product */
@@ -372,6 +383,15 @@ h1, h2, h3, h4, h5, h6 {
 
 .order-details-container .row {
     margin-bottom: 1rem;
+}
+
+.order-details-container .col-auto {
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
+
+.order-summary-buttons-container a {
+    margin-bottom: 0.5rem;
 }
 
 .receipt-details p {

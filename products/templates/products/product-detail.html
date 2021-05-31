@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<section class="container first-element-buffer pb-5 border-accent-primary">
+<section class="container first-element-buffer pb-5">
     <div class="card card-product-detail">
 
         <div class="row no-gutters">
@@ -63,94 +63,94 @@
     </div>
 </section>
 
-<section class="container product-options mb-5 pb-5 border-accent-primary">
-<div class="row">
-    <div class="d-none d-md-block col-md-4 py-5 my-auto">
-        <div class="card-nic-info">
-            <h5>
-                <span class="icon">
-                <i class="fas fa-tint"></i>
-                </span> Nic types?
-            </h5>
-            <p>Higher <strong>mg</strong> means more nicotine in each puff.</p>
-            <p><strong>Freebase</strong> takes several minutes to enter the bloodstream. Ideal for sub-ohm vaping or if you want a stronger 'throat-hit' from a pod system.</p>
-            <p><strong>Salts</strong> act quickly to mimic the effect of a cigarette. They provide a smoother 'throat-hit' and are ideally used in pod systems.</p>
-          </div>
-    </div>
-    <div class="col-sm-12 col-md-8">
-        <form class="form my-3 text-center" action="{% url 'add_to_cart' product.id %}" method="POST">
-            {% csrf_token %}
-            <div class="form-row">
-                <!-- Size -->
-                <div class="col-12 btn-group-toggle my-3" data-toggle="buttons">
-                    <h5 class="my-3 text-center">Size</h5>
-                    {% for size in product.brand.available_sizes.all %}
-                        <label class="btn btn-outline-dark active m-1">
-                            <input type="radio" name="size" value="{{ size.id }}" autocomplete="off" required> {{ size.label }}
-                        </label>
-                    {% endfor %}
-                </div>
-    
-                <!-- Nic content -->
-                <div class="col-12 btn-group-toggle my-3" data-toggle="buttons">
-                    <h5 class="my-3 text-center">Nic content</h5>
-                    {% for nic in product.brand.available_nics.all %}
-                        <label class="btn btn-outline-dark active m-1">
-                            <input type="radio" name="nic" value="{{ nic.id }}" autocomplete="off" required> {{ nic.strength }} {{ nic.type }}
-                        </label>
-                    {% endfor %}
-                </div>
-    
-                <!-- Quantity -->
-                <div class="col-auto mx-auto">
-                    <h5 class="my-3 text-center" >Quantity</h5>
-                    <div class="form-group d-flex justify-content-center">
-                        <div class="input-group"> 
-    
-                            <!-- Decrement qty -->
-                            <div class="input-group-prepend">
-                                <button class="decrement-qty btn btn-black"
+<section class="container product-options my-5 py-5 shadow-lg">
+    <div class="row">
+        <div class="d-none d-md-block col-md-4 pl-5 my-auto">
+            <div class="card-nic-info">
+                <h5>
+                    <span class="icon">
+                    <i class="fas fa-tint"></i>
+                    </span> Nic types?
+                </h5>
+                <p>Higher <strong>mg</strong> means more nicotine in each puff.</p>
+                <p><strong>Freebase</strong> takes several minutes to enter the bloodstream. Ideal for sub-ohm vaping or if you want a stronger 'throat-hit' from a pod system.</p>
+                <p><strong>Salts</strong> act quickly to mimic the effect of a cigarette. They provide a smoother 'throat-hit' and are ideally used in pod systems.</p>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-8">
+            <form class="form my-3 text-center" action="{% url 'add_to_cart' product.id %}" method="POST">
+                {% csrf_token %}
+                <div class="form-row">
+                    <!-- Size -->
+                    <div class="col-12 btn-group-toggle my-3" data-toggle="buttons">
+                        <h5 class="my-3 text-center">Size</h5>
+                        {% for size in product.brand.available_sizes.all %}
+                            <label class="btn btn-outline-dark active m-1">
+                                <input type="radio" name="size" value="{{ size.id }}" autocomplete="off" required> {{ size.label }}
+                            </label>
+                        {% endfor %}
+                    </div>
+        
+                    <!-- Nic content -->
+                    <div class="col-12 btn-group-toggle my-3" data-toggle="buttons">
+                        <h5 class="my-3 text-center">Nic content</h5>
+                        {% for nic in product.brand.available_nics.all %}
+                            <label class="btn btn-outline-dark active m-1">
+                                <input type="radio" name="nic" value="{{ nic.id }}" autocomplete="off" required> {{ nic.strength }} {{ nic.type }}
+                            </label>
+                        {% endfor %}
+                    </div>
+        
+                    <!-- Quantity -->
+                    <div class="col-auto mx-auto">
+                        <h5 class="my-3 text-center" >Quantity</h5>
+                        <div class="form-group d-flex justify-content-center">
+                            <div class="input-group"> 
+        
+                                <!-- Decrement qty -->
+                                <div class="input-group-prepend">
+                                    <button class="decrement-qty btn btn-black"
+                                        type="button"
+                                        data-item_id="{{ product.id }}" id="decrement-qty_{{ product.id }}">
+                                        <span class="icon">
+                                            <i class="fas fa-caret-left"></i>
+                                        </span>
+                                    </button>
+                                </div>
+        
+                                <!-- Input qty -->
+                                <input class="form-control qty_input text-center" type="number" name="quantity" value="1" min="1" max="99" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}" autocomplete="off">
+        
+                                <!-- Increment qty -->
+                                <div class="input-group-append">
+                                    <button class="increment-qty btn btn-black"
                                     type="button"
-                                    data-item_id="{{ product.id }}" id="decrement-qty_{{ product.id }}">
-                                    <span class="icon">
-                                        <i class="fas fa-caret-left"></i>
-                                    </span>
-                                </button>
+                                    data-item_id="{{ product.id }}" id="increment-qty_{{ product.id }}">
+                                        <span class="icon">
+                                            <i class="fas fa-caret-right"></i>
+                                        </span>
+                                    </button>
+                                </div>
+        
                             </div>
-    
-                            <!-- Input qty -->
-                            <input class="form-control qty_input text-center" type="number" name="quantity" value="1" min="1" max="99" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}" autocomplete="off">
-    
-                            <!-- Increment qty -->
-                            <div class="input-group-append">
-                                <button class="increment-qty btn btn-black"
-                                type="button"
-                                data-item_id="{{ product.id }}" id="increment-qty_{{ product.id }}">
-                                    <span class="icon">
-                                        <i class="fas fa-caret-right"></i>
-                                    </span>
-                                </button>
-                            </div>
-    
                         </div>
                     </div>
+        
+                    <!-- Add to cart / back -->
+                    <div class="col-12">
+                        <a href="{% url 'products' %}" class="btn btn-outline-dark mt-5">
+                            <span class="icon">
+                                <i class="fas fa-chevron-left"></i>
+                            </span>
+                            Juices
+                        </a>
+                        <input type="submit" class="btn btn-dark mt-5" value="Add to Cart">
+                    </div>
+                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
                 </div>
-    
-                <!-- Add to cart / back -->
-                <div class="col-12">
-                    <a href="{% url 'products' %}" class="btn btn-outline-dark mt-5">
-                        <span class="icon">
-                            <i class="fas fa-chevron-left"></i>
-                        </span>
-                         Juices
-                    </a>
-                    <input type="submit" class="btn btn-dark mt-5" value="Add to Cart">
-                </div>
-                <input type="hidden" name="redirect_url" value="{{ request.path }}">
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 
   <!-- Delete modal -->
     <div class="modal fade" id="productDeleteModal" tabindex="-1" aria-labelledby="productDeleteModalLabel" aria-hidden="true">
@@ -187,23 +187,30 @@
     </div>
 
     <div class="reviews-wrapper py-5">
-        {% for review in product.reviews.all %}
-            <div class="card card-product-review my-5">
-                <div class="card-header border-accent-primary">
-                    <h5 class="card-title">{{ review.title }}</h5>
-                    <div class="product-stars" data-value="{{ review.rating }}"></div>
+        
+        <div class="row">
+            {% for review in product.reviews.all %}
+                <div class="col-12 col-md-8 mx-auto">
+                    <div class="card card-product-review my-5 shadow">
+                        <div class="card-header border-accent-primary">
+                            <h5 class="card-title">{{ review.title }}</h5>
+                            <div class="product-stars" data-value="{{ review.rating }}"></div>
+                        </div>
+                        <div class="card-body">
+                            {% if review.verified_purchase %}<p><strong>Verified purchase</strong></p>{% endif %}
+                            <p class="card-text">{{ review.body }}</p>
+                        </div>
+                        <div class="card-footer text-muted">
+                            by {{ review.user.username }} on {{ review.created_on|date:"SHORT_DATE_FORMAT" }}
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    {% if review.verified_purchase %}<p><strong>Verified purchase</strong></p>{% endif %}
-                    <p class="card-text">{{ review.body }}</p>
+            {% empty %}
+                <div class="col-12 col-md-8">
+                    Empty
                 </div>
-                <div class="card-footer text-muted">
-                    by {{ review.user.username }} on {{ review.created_on|date:"SHORT_DATE_FORMAT" }}
-                </div>
-            </div>
-        {% empty %}
-              <p class="text-center">No reviews yet!</p>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 
 </section>

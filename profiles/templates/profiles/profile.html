@@ -1,10 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block extra_css %}
-    <link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
-{% endblock %}
-
 {% block content %}
 
 <div id="dashboard-container" class="container first-element-buffer">
@@ -39,7 +35,7 @@
   
     <!-- Orders tab -->
     <div class="tab-pane fade border-accent-primary" id="pills-orders" role="tabpanel" aria-labelledby="pills-orders-tab">
-      <table class="table table-sm table-borderless">
+      <table class="table table-sm table-borderless text-center">
         <thead>
           <tr>
             <th scope="col">Date</th>
@@ -87,6 +83,10 @@
                       {% else %}{{ event.points }}
                     {% endif %}
                 </td>
+              </tr>
+            {% empty %}
+              <tr>
+                <td colspan="3" class="text-center">No rewards</td>
               </tr>
             {% endfor %}
         </tbody>

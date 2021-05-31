@@ -64,7 +64,7 @@
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 text-center">
         {% for product in products %}
         <div class="col mb-4">
-            <div class="card card-products h-100">
+            <div class="card card-products h-100 shadow-lg">
                 <div class="product-img-container">
                     {% if request.user.is_authenticated %}
                         {% include 'products/includes/product-heart-container.html' %}
@@ -80,7 +80,7 @@
 
                 <div class="card-body text-center">
                     <small>{{ product.brand.friendly_name|upper }}</small>
-                    <h5 class="card-title">{{ product.name }}</h5>
+                    <h5 class="card-title"><strong>{{ product.name }}</strong></h5>
                     {% if product.average_rating %}
                         <div class="product-stars" data-value="{{ product.average_rating }}"></div>
                     {% else %}

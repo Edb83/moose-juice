@@ -98,15 +98,16 @@
                 </div>
                 <!-- Button to repeat order -->
                 <div class="row mt-5">
-                    <div class="col text-right">
-                        {% if on_checkout_success_page %}
-                            <a href="{% url 'profile' %}" class="btn btn-outline-dark">
-                                <span class="icon">
-                                    <i class="fas fa-user"></i>
-                                </span>
-                                Profile
-                            </a>
-                        {% else %}
+                    <div class="col text-right order-summary-buttons-container">
+                        
+                        <a href="{% url 'profile' %}" class="btn btn-outline-dark">
+                            <span class="icon">
+                                <i class="fas fa-user"></i>
+                            </span>
+                            Dashboard
+                        </a>
+                        
+                        {% if not on_checkout_success_page %}
                             <a href="{% url 'replicate_cart' order.order_number %}" class="btn btn-dark">
                                 <span class="icon">
                                     <i class="fas fa-shopping-cart"></i>
