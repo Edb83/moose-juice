@@ -99,8 +99,8 @@ The different compositions of these e-liquids mean that certain flavour combinat
 ||Receive reward points|Get discounts on future purchases and feel rewarded for my loyalty|
 ||View my reward points|See what I can redeem on future purchases|
 |Site owner|View, add, edit and delete products|Keep the product list up to date|
-||...||
-||||
+||Have a flexible reward system|Entice new customers and reward existing members|
+||Have a simple payment structure|Easily make price changes for all products|
 
 
 <span id="ux-wireframes"></span>
@@ -109,42 +109,66 @@ The different compositions of these e-liquids mean that certain flavour combinat
 Wireframes created at the start of the project for **mobile**, **tablet** and **desktop** can be accessed [here](wireframes/), as well as the planned **site map** and **data schema**.
 
 There were some noteworthy deviations from the plan. These were:
-1. TBC
+1. Not including a blog app due to time constraints. This would be relatively simple to implement
+2. Not including a suggestion for similar products, again due to time constraints. This could be expanded to include an algorithm to suggest products based on order history or current browsing habits
+3. Not including a bespoke login page as the allauth template was adequate
+4. Not including breadcrumbs due to unexpected complexity and insufficient time
+5. Not including pagination due to lack of time
 
 <span id="ux-design"></span>
 
 ### Design choices
-TBC
+Bootstrap provides a flexible framework for building upon and wherever possible its structure has been used and modified to achieve the desired functionality and feel.
 
 #### Colours
-TBC
+The colour scheme has been losely based on the orange colour of a traditional cigarette's filter in order to hopefully inspire some familiarity in potential customers, who may be interested in vaping on their road to quitting smoking. 
 
 **Core**
-TBC
-- ![#3949ab](https://via.placeholder.com/15/3949ab/000000?text=+) #3949ab (indigo darken-1)
-- ![#1a237e](https://via.placeholder.com/15/1a237e/000000?text=+) #1a237e (indigo darken-4)
+
+The 'filter-tip' orange is consistently used as an accent colour against Bootstrap's cool `dark` tones, along with judicious white space.
+
+- ![#343a40](https://via.placeholder.com/15/343a40/000000?text=+) #343a40
+- ![#ff7f54](https://via.placeholder.com/15/ff7f54/000000?text=+) #ff7f54 (for dark backgrounds)
+- ![#e4714b](https://via.placeholder.com/15/e4714b/000000?text=+) #e4714b (for light backgrounds)
 
 **Cards**
-TBC
-- ![#e8eaf6](https://via.placeholder.com/15/e8eaf6/000000?text=+) #e8eaf6 (indigo lighten-5)
-- ![#f1f8e9](https://via.placeholder.com/15/f1f8e9/000000?text=+) #e8eaf6 (light-green lighten-5)
-- ![#0077ff](https://via.placeholder.com/15/0077ff/000000?text=+) #0077ff ("Dodger Blue")
 
-**Buttons**
-TBC
-- ![#26a69a](https://via.placeholder.com/15/26a69a/000000?text=+) #26a69a (teal lighten-1)
-- ![#3f51b5](https://via.placeholder.com/15/3f51b5/000000?text=+) #3f51b5 (indigo)
-- ![#f44336](https://via.placeholder.com/15/f44336/000000?text=+) #f44336 (red)
-- ![#ff6d00](https://via.placeholder.com/15/ff6d00/000000?text=+) #f44336 (orange accent-4)
+Originally the project was going to use ready-branded photos of existing vape products. However, in order to provide a different overall aesthetic (and perhaps due to the challenge of sourcing relevant data and images) the decision was made to use an inline SVG which could be varied per product. The result is a broad spectrum of colours which work well to punctuate the otherwise restricted colour palette. 
 
-**Transition and transformation**
-TBC
+**Buttons, Tabs, Pills**
+
+The same colours are used as for the core site elements, with variations depending on the action. Positive actions (choose, confirm, submit, delete) have a solid dark background with orange hover effects whereas negative actions (back, cancel etc) are indicated using just an outline which is filled dark on hover. One exception is the pill used to indicate a discount has been applied on an otherwise two-tone page (Boostrap's `warning`). 
+
+#### Hero image
+
+Another SVG has been used for the hero image to compliment the juice bottles. It has been edited to match the rest of the site and a subtle blurring effect used to evoke clouds of vapor clearing from the silhouette.
+
+#### Icons
+
+Simple icons are used with variations on the core colour scheme. Orange hover effects are used for user feedback, as are Font Awesome `fas` and `far` icons to indicate whether a product is a user favourite or not. On the favourites page itself, `broken-heart` is used to indicate that the product has been removed from favourites rather than jarringly reloading the page. Icons are also used to give some context to buttons during the checkout process (`piggy-bank`, `lock`, `times`), and for the frequently used `star` icon on ratings.
+
+#### Shadows
+In order to highlight particular areas of interest to the user, some subtle shadowing is used when products are hovered (larger screens) and also for modals, toasts, product reviews and the add/edit product page (larger screens). Used sparingly, these effects have impact on an otherwise flat canvas.
 
 #### Fonts
-[Bubblegum Sans](https://fonts.google.com/specimen/Bubblegum+Sans#about)
-TBC
-[Montserrat](https://fonts.google.com/specimen/Montserrat#about)
-TBC
+[Karla](https://fonts.google.com/specimen/Karla#about)
+
+A softer font used for everything other than headings. In keeping with the rounded edges on much of the other site elements.
+
+[Raleway](https://fonts.google.com/specimen/Raleway#about)
+
+A harder, slender font used for all the site's headers.
+
+#### Bootstrap
+
+- [Buttons](https://getbootstrap.com/docs/4.6/components/buttons/)
+- [Cards](https://getbootstrap.com/docs/4.6/components/card/)
+- [Forms](https://getbootstrap.com/docs/4.6/components/forms/)
+- [Modals](https://getbootstrap.com/docs/4.6/components/modal/)
+- [Navs](https://getbootstrap.com/docs/4.6/components/navs/)
+- [Navbar](https://getbootstrap.com/docs/4.6/components/navbar/)
+- [Toasts](https://getbootstrap.com/docs/4.6/components/toasts/)
+
 <div align="right"><a style="text-align:right" href="#top">Go to index :arrow_double_up:</a></div>
 
 <span id="database-model"></span>
@@ -168,14 +192,41 @@ TBC
 
 ### Current
 
-**1. Material design**
-MaterializeCSS features:
-- [Cards](https://materializecss.com/cards.html)
-- [Forms](https://materializecss.com/text-inputs.html)
-- [Menu dropdown](https://materializecss.com/dropdown.html)
-- [Modals](https://materializecss.com/modals.html)
-- [Sidenav](https://materializecss.com/sidenav.html)
-- [Toasts](https://materializecss.com/toasts.html)
+#### Site-wide
+
+**Navbar**
+
+**Search bar**
+
+**Headings**
+
+**Toasts**
+
+
+#### Page-specific
+
+**Home**
+
+**Products**
+
+**Product details**
+
+**Cart**
+
+**Checkout**
+
+**Checkout success**
+
+**Account dashboard**
+
+**Add/edit product**
+
+
+
+
+
+
+
 
 **2. Secure passwords**
 When registering for the site, the user's password is hashed so that it is not revealed to the database owner.
