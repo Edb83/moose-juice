@@ -434,6 +434,10 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--color-accent-light);
 }
 
+.product-icon-container span {
+    margin-bottom: 0.3rem;
+}
+
 .icon-product>i:hover {
     color: #e44b4b;
 }

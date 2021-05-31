@@ -28,7 +28,7 @@
             <div class="col mb-4">
                 <div class="card card-products h-100">
                     <div class="product-img-container">
-                        {% include 'products/includes/product-heart-container.html' %}
+                        {% include 'products/includes/product-icon-container.html' %}
                         <div class="product-svg-container">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 339">
                                 <a href="{% url 'product_detail' product.id %}">
@@ -49,9 +49,7 @@
                                 <span>Not yet rated</span>
                             </div>
                         {% endif %}
-                        {% if request.user.is_superuser %}
-                            <a href="{% url 'edit_product' product.id %}" class="badge badge-secondary">Edit</a>
-                        {% endif %}
+
                     </div>
                     <div class="card-footer">
                         {% if product.brand.available_sizes.all|length > 1 %}

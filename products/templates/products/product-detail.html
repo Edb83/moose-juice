@@ -20,9 +20,9 @@
                             <h2 class="card-title">{{ product.name }}</h2>
                             <small>{{ product.brand.friendly_name|upper }}</small>
                         </div>
-                        <div class="col-1 align-self-center">
+                        <div class="col-1">
                             {% if request.user.is_authenticated %}
-                                {% include 'products/includes/product-heart-container.html' %}
+                                {% include 'products/includes/product-icon-container.html' %}
                             {% endif %}
                         </div>
                     </div>
