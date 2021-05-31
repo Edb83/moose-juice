@@ -417,11 +417,13 @@ h1, h2, h3, h4, h5, h6 {
     width: 1.5rem;
 }
 
-.fa-edit {
+.fa-edit,
+.fa-trash-alt {
     color: #fff;
 }
 
-.fa-edit:hover {
+.fa-edit:hover,
+.fa-trash-alt:hover {
     color: var(--color-accent-dark);
 }
 

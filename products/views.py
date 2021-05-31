@@ -170,79 +170,6 @@ def add_product(request):
 
 
 @login_required
-def add_review(request, product_id):
-    """ Add a review for a product """
-    product = get_object_or_404(Product, pk=product_id)
-    if request.user.is_authenticated:
-        profile = get_object_or_404(UserProfile, user_id=request.user)
-    else:
-        profile = None
-
-    if request.user.is_authenticated:
-        if request.method == 'POST':
-            form = ReviewForm(request.POST)
-            reviews = product.reviews.all()
-
-            if reviews.filter(user=request.user).exists():
-                messages.info(request, f"You've already reviewed {product.name}")
-                return redirect(reverse('product_detail', args=[product.id]))
-
-            if form.is_valid():
-                review = form.save(commit=False)
-                review.product = product
-                review.user = request.user
-                # Check whether line items related to user include the product
-                if OrderLineItem.objects.filter(
-                    order__user_profile=profile).filter(
-                        product=product).exists():
-                    review.verified_purchase = True
-
-                review.save()
-                messages.info(request, 'Review added')
-                return redirect(reverse('product_detail', args=[product.id]))
-            else:
-                messages.error(request, 'Failed to add review - please check form and try again')
-
-    context = {
-        'form': form,
-        'profile': profile,
-    }
-
-    return render(request, context)
-
-
-@login_required
-def edit_review(request, product_id, review_id):
-    """
-    Edit a product review
-    """
-    product = get_object_or_404(Product, pk=product_id)
-    review = get_object_or_404(ProductReview, pk=review_id)
-
-    if request.method == 'POST':
-        form = ReviewForm(request.POST, instance=review)
-        if form.is_valid():
-            form.save()
-            messages.info(request, 'Updated review')
-            return redirect(reverse('product_detail', args=[product.id]))
-        else:
-            messages.error(request, 'Failed to update review - please check form and try again')
-
-    else:
-        form = ReviewForm(instance=review)
-
-    template = 'products/product-detail.html'
-    context = {
-        'form': form,
-        'review': review,
-        'product': product,
-        'edit': True,
-    }
-
-    return render(request, template, context)
-
-
-@login_required
 def edit_product(request, product_id):
     """
     Edit a product in the store
@@ -296,3 +223,96 @@ def delete_product(request, product_id):
     messages.info(request, f'{product_name} deleted')
 
     return redirect(reverse('products'))
+
+
+
+@login_required
+def add_review(request, product_id):
+    """ Add a review for a product """
+    product = get_object_or_404(Product, pk=product_id)
+    if request.user.is_authenticated:
+        profile = get_object_or_404(UserProfile, user_id=request.user)
+    else:
+        profile = None
+
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = ReviewForm(request.POST)
+            reviews = product.reviews.all()
+
+            if reviews.filter(user=request.user).exists():
+                messages.info(request, f"You've already reviewed {product.name}")
+                return redirect(reverse('product_detail', args=[product.id]))
+
+            if form.is_valid():
+                review = form.save(commit=False)
+                review.product = product
+                review.user = request.user
+                # Check whether line items related to user include the product
+                if OrderLineItem.objects.filter(
+                    order__user_profile=profile).filter(
+                        product=product).exists():
+                    review.verified_purchase = True
+
+                review.save()
+                messages.info(request, 'Review added')
+                return redirect(reverse('product_detail', args=[product.id]))
+            else:
+                messages.error(request, 'Failed to add review - please check form and try again')
+
+    context = {
+        'form': form,
+        'profile': profile,
+    }
+
+    return render(request, context)
+
+
+@login_required
+def edit_review(request, review_id):
+    """
+    Edit a product review
+    """
+    review = get_object_or_404(ProductReview, pk=review_id)
+    product = review.product
+
+    if request.method == 'POST':
+        form = ReviewForm(request.POST, instance=review)
+        if form.is_valid():
+            form.save()
+            messages.info(request, 'Updated review')
+            return redirect(reverse('product_detail', args=[product.id]))
+        else:
+            messages.error(request, 'Failed to update review - please check form and try again')
+
+    else:
+        form = ReviewForm(instance=review)
+
+    template = 'products/product-detail.html'
+    context = {
+        'form': form,
+        'review': review,
+        'product': product,
+        'edit': True,
+    }
+
+    return render(request, template, context)
+
+
+@login_required
+def delete_review(request, review_id):
+    """
+    Delete a user's product review
+    """
+
+    if not request.user.is_superuser:
+        messages.error(request, "Sorry, you don't have the necessary permissions to do that.")
+        return redirect(reverse('home'))
+
+    review = get_object_or_404(ProductReview, pk=review_id)
+    product = review.product
+    review_owner = review.user
+    review.delete()
+    messages.info(request, f"Deleted {review_owner}'s review")
+
+    return redirect(reverse('product_detail', args=[product.id]))

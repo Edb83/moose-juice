@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-12 col-md-8 mx-auto">
         {% if edit %}
-            <form method="POST" action="{% url 'edit_review' product.id review.id %}#reviews-section" class="form mb-2">
+            <form method="POST" action="{% url 'edit_review' review.id %}#reviews-section" class="form mb-2">
                 {% csrf_token %}
                 {{ form | crispy }}
                 <div class="text-right mt-5">

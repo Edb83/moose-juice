@@ -151,7 +151,7 @@
         </div>
     </div>
 
-  <!-- Delete modal -->
+  <!-- Delete Product Modal -->
     <div class="modal fade" id="productDeleteModal" tabindex="-1" aria-labelledby="productDeleteModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content custom-modal">
@@ -194,16 +194,27 @@
                         <div class="card-header border-accent-primary">
                             <h5 class="card-title">{{ review.title }}</h5>
                             <div class="row">
-                                <div class="col-8">
+                                <div class="col-7">
                                     <div class="product-stars" data-value="{{ review.rating }}"></div>
                                 </div>
-                                <div class="col-auto ml-auto">
+                                <div class="col-auto ml-auto d-flex">
+                                    <!-- User/admin edit button -->
                                     {% if review.user == request.user or request.user.is_superuser %}
-                                        <a href="{% url 'edit_review' product.id review.id %}#reviews-section">
+                                        <a href="{% url 'edit_review' review.id %}#reviews-section">
                                             <span class="icon">
                                                 <i class="fas la-2x fa-edit"></i>
                                             </span>
                                         </a>
+                                    {% endif %}
+                                    <!-- Admin only delete button -->
+                                    {% if request.user.is_superuser %}
+                                        <div class="text-center mb-3">
+                                            <a class="delete-modal-trigger" data-toggle="modal" data-target="#reviewDeleteModal">
+                                                <span class="icon">
+                                                    <i class="fas la-2x fa-trash-alt"></i>
+                                                </span>
+                                            </a>
+                                        </div>
                                     {% endif %}
                                 </div>
                             </div>
@@ -217,6 +228,28 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Delete Review Modal -->
+                <div class="modal fade" id="reviewDeleteModal" tabindex="-1" aria-labelledby="reviewDeleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content custom-modal">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="reviewDeleteModalLabel">Confirm deletion</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                            Are you sure you want to delete {{ review.user }}'s review?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
+                                <a class="btn btn-danger" href="{% url 'delete_review' review.id %}" >Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             {% empty %}
             <div class="col-12 col-md-8 mx-auto">
                 <div class="card card-product-review my-5 shadow">
