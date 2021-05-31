@@ -31,20 +31,22 @@
                         </div>
                     </div>
                     {% for item in order.lineitems.all %}
-                        <div class="row mb-1">
-                            <div class="col-6">
-                                <p class="my-0"><strong>{{ item.product.name }}</strong></p>
-                                <p class="my-0 small">{{ item.bottle_size.label }} bottle</p>
-                                <p class="my-0 small">{{ item.nicotine.strength }} {{ item.nicotine.type }}</p>
+                        {% with unit_cost=item.lineitem_total|calc_divide:item.quantity %}
+                            <div class="row mb-1">
+                                <div class="col-6">
+                                    <p class="my-0"><strong>{{ item.product.name }}</strong></p>
+                                    <p class="my-0 small">{{ item.bottle_size.label }} bottle</p>
+                                    <p class="my-0 small">{{ item.nicotine.strength }} {{ item.nicotine.type }}</p>
+                                </div>
+                                <div class="col-3 text-center">
+                                    <p class="my-0 small"><strong>{{ item.quantity }}</strong> x £{{ unit_cost }}{% if unit_cost < item.bottle_size.price %}<br/>(sale){% endif %}</p>
+        
+                                </div>
+                                <div class="col-3 text-right">
+                                    <p class="my-0 small"><strong>£{{ item.lineitem_total }}</strong></p>
+                                </div>
                             </div>
-                            <div class="col-3 text-center">
-                                <p class="my-0 small">{% with unit_cost=item.lineitem_total|calc_divide:item.quantity %}<strong>{{ item.quantity }}</strong> x £{{ unit_cost }}{% if unit_cost < item.bottle_size.price %}<br/>(sale){% endif %}{% endwith %}</p>
-    
-                            </div>
-                            <div class="col-3 text-right">
-                                <p class="my-0 small"><strong>£{{ item.lineitem_total }}</strong></p>
-                            </div>
-                        </div>
+                        {% endwith %}
                     {% endfor %}
     
                 </div>

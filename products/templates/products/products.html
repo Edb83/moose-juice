@@ -6,8 +6,8 @@
 
 <section class="container first-element-buffer">
     {% if brand %}
-    <h2 class="text-center">{{ brand.friendly_name }}</h2>
-    <p class="product-filter-text">{{brand.description}}</p>
+        <h2 class="text-center">{{ brand.friendly_name }}</h2>
+        <p class="product-filter-text">{{brand.description}}</p>
     {% elif category %}
     <div class="row">
         <div class="col-1">
@@ -64,7 +64,7 @@
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 text-center">
         {% for product in products %}
         <div class="col mb-4">
-            <div class="card card-products h-100 shadow-lg">
+            <div class="card card-products h-100">
                 <div class="product-img-container">
                     {% if request.user.is_authenticated %}
                         {% include 'products/includes/product-heart-container.html' %}

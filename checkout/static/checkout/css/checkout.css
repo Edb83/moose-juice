@@ -46,3 +46,8 @@ select option[value=""],
 select:invalid {
     color: #aab7c4 !important;
 }
+
+.submit-button a,
+.submit-button button {
+    margin-bottom: 0.5rem;
+}

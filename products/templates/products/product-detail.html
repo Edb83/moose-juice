@@ -3,8 +3,8 @@
 
 {% block content %}
 
-<section class="container first-element-buffer pb-5">
-    <div class="card card-product-detail">
+<section class="container first-element-buffer pb-5 border-accent-primary product-details-container">
+    <div class="card">
 
         <div class="row no-gutters">
             <div class="col-2 col-lg-1 mx-auto align-self-center">
@@ -63,7 +63,7 @@
     </div>
 </section>
 
-<section class="container product-options my-5 py-5 shadow-lg">
+<section class="container product-options my-5 pb-5 border-accent-primary">
     <div class="row">
         <div class="d-none d-md-block col-md-4 pl-5 my-auto">
             <div class="card-nic-info">
@@ -175,7 +175,7 @@
 
 </section>
 
-<section id="reviews-section" class="container">
+<section id="reviews-section" class="container py-5">
 
     <h2 class="text-center">Reviews</h2>
     <div class="review-form-wrapper">
@@ -186,7 +186,7 @@
         {% endif %}
     </div>
 
-    <div class="reviews-wrapper py-5">
+    <div class="reviews-wrapper my-5">
         
         <div class="row">
             {% for review in product.reviews.all %}
@@ -206,9 +206,13 @@
                     </div>
                 </div>
             {% empty %}
-                <div class="col-12 col-md-8">
-                    Empty
+            <div class="col-12 col-md-8 mx-auto">
+                <div class="card card-product-review my-5 shadow">
+                    <div class="card-header border-accent-primary">
+                        <h5 class="card-title text-center">This is where the reviews should be!</h5>
+                    </div>
                 </div>
+            </div>
             {% endfor %}
         </div>
     </div>

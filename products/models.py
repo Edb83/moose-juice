@@ -100,6 +100,9 @@ class Product(models.Model):
 
 
 class ProductReview(models.Model):
+    class Meta:
+        ordering = ['-pk']
+
     RATING_CHOICES = (
         (5, '5'),
         (4, '4'),
@@ -107,6 +110,7 @@ class ProductReview(models.Model):
         (2, '2'),
         (1, '1'),
     )
+
     product = models.ForeignKey(Product,
                                 null=True,
                                 blank=True,
