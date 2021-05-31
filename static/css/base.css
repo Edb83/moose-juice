@@ -153,7 +153,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Home page */
 .hero-image {
-    height: 95vh;
+    height: 90vh;
     position: relative;
     background-image: url('/media/background.svg');
     background-position-x: left;
@@ -460,6 +460,13 @@ input[type=number] {
 
     .hero-text-container h5{
         font-size: 1.5rem;
+    }
+
+    .hero-text-container .btn {
+        padding: .5rem 1rem;
+        font-size: 1.25rem;
+        line-height: 1.5;
+        border-radius: .3rem;
     }
 
     .product-options {
