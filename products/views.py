@@ -109,6 +109,11 @@ def product_detail(request, product_id):
     if request.user.is_authenticated:
         if request.method == 'POST':
             form = ReviewForm(request.POST)
+            reviews = product.reviews.all()
+
+            if reviews.filter(user=request.user).exists():
+                messages.info(request, f"You've already reviewed {product.name}")
+                return redirect(reverse('product_detail', args=[product.id]))
 
             if form.is_valid():
                 review = form.save(commit=False)

@@ -26,7 +26,8 @@ def reward_review(sender, instance, **kwargs):
     if reviews.filter(user=user).exists():
         pass
 
-    else:
+    # Check whether user has previously purchased
+    if instance.verified_purchase:
         # Update and save points to user's profile
         user.userprofile.points += reward_value
         user.userprofile.save()
