@@ -263,10 +263,6 @@ h1, h2, h3, h4, h5, h6 {
     color: #fff;
 }
 
-/* TBC */
-
-
-
 
 /* Products */
 
@@ -285,6 +281,11 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0 0 0.5rem 0;
 }
 
+/* .card-title-wrapper {
+    display: flex;
+    justify-content: center;
+} */
+
 .product-svg-container {
     width: 100px;
     -ms-flex-item-align: center;
@@ -296,7 +297,7 @@ h1, h2, h3, h4, h5, h6 {
     display: contents;
 }
 
-.product-heart-container {
+.product-icon-container {
     position: absolute;
     top: 2%;
     right: 10%;
@@ -417,14 +418,11 @@ h1, h2, h3, h4, h5, h6 {
     width: 1.5rem;
 }
 
-.fa-edit,
-.fa-trash-alt {
-    color: #fff;
-}
 
 .fa-edit:hover,
+.fa-trash:hover,
 .fa-trash-alt:hover {
-    color: var(--color-accent-dark);
+    color: var(--color-accent-dark) !important;
 }
 
 .fa-heart,

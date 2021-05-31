@@ -20,19 +20,12 @@
                             <h2 class="card-title">{{ product.name }}</h2>
                             <small>{{ product.brand.friendly_name|upper }}</small>
                         </div>
-                        <div class="col-1">
+                        <div class="col-1 align-self-center">
                             {% if request.user.is_authenticated %}
                                 {% include 'products/includes/product-heart-container.html' %}
                             {% endif %}
                         </div>
                     </div>
-                    
-                    {% if request.user.is_superuser %}
-                        <div class="text-center mb-3">
-                            <a href="{% url 'edit_product' product.id %}" class="badge badge-secondary">Edit</a>
-                            <a class="delete-modal-trigger badge badge-danger" data-toggle="modal" data-target="#productDeleteModal">Delete</a>
-                        </div>
-                    {% endif %}
         
                     {% if product.reviews.all %}
                         <div class="product-stars text-center" data-value="{{ product.average_rating }}"></div>
@@ -201,8 +194,8 @@
                                     <!-- User/admin edit button -->
                                     {% if review.user == request.user or request.user.is_superuser %}
                                         <a href="{% url 'edit_review' review.id %}#reviews-section">
-                                            <span class="icon">
-                                                <i class="fas la-2x fa-edit"></i>
+                                            <span class="icon mr-2">
+                                                <i class="fas fa-lg fa-edit text-light"></i>
                                             </span>
                                         </a>
                                     {% endif %}
@@ -211,7 +204,7 @@
                                         <div class="text-center mb-3">
                                             <a class="delete-modal-trigger" data-toggle="modal" data-target="#reviewDeleteModal">
                                                 <span class="icon">
-                                                    <i class="fas la-2x fa-trash-alt"></i>
+                                                    <i class="fas fa-lg fa-trash-alt text-light"></i>
                                                 </span>
                                             </a>
                                         </div>

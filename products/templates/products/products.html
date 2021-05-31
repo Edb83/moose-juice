@@ -88,9 +88,7 @@
                             <span>Not yet rated</span>
                         </div>
                     {% endif %}
-                    {% if request.user.is_superuser %}
-                        <a href="{% url 'edit_product' product.id %}" class="badge badge-secondary">Edit</a>
-                    {% endif %}
+                    
                 </div>
 
                 <div class="card-footer">

@@ -105,6 +105,7 @@ def product_detail(request, product_id):
     context = {
         'product': product,
         'form': form,
+        'on_product_detail_page': True,
     }
 
     return render(request, 'products/product-detail.html', context)

@@ -10,7 +10,7 @@
         </div>
 
         <div class="row pb-5">
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-7">
                 <form method="POST" action="{% url 'edit_product' product.id %}" class="form mb-2" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form | crispy }}
@@ -21,14 +21,9 @@
                 </form>
             </div>
 
-            <div class="d-none d-md-block col-lg-5 mx-auto card card-products text-center edit-product-image-container">
+            <div class="d-none d-md-block col-lg-4 mx-auto card card-products text-center edit-product-image-container">
 
                 <div class="product-img-container">
-                    <div class="product-heart-container">
-                        <span class="icon icon-product">
-                            <i class="fas fa-heart fa-2x"></i>
-                        </span>
-                    </div>
                     <div class="add-product-svg-container mx-auto">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 339">
                             {% include 'products/includes/product-svg.html' %}

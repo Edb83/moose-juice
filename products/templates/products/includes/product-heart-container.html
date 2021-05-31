@@ -1,14 +1,34 @@
 <!-- https://stackoverflow.com/a/61685356
 URL passed in from server to client side to be used in ajax call -->
-<div class="product-heart-container"
-    data-url="{% url 'toggle_favourite' product.id %}"
-    data-redirect="{% url 'account_login' %}"
->
-    <span class="icon icon-product">
-        {% if product not in profile.favourites.all %}
-            <i class="far fa-heart fa-lg"></i>
-        {% else %}
-            <i class="fas fa-heart fa-lg"></i>
+<div class="product-icon-container">
+    <div class="d-flex flex-column">
+        <div class="product-heart-container" data-url="{% url 'toggle_favourite' product.id %}"
+        data-redirect="{% url 'account_login' %}">
+            <span class="icon icon-product">
+                {% if product not in profile.favourites.all %}
+                <i class="far fa-heart fa-lg"></i>
+                {% else %}
+                <i class="fas fa-heart fa-lg"></i>
+                {% endif %}
+            </span>
+        </div>
+        {% if request.user.is_superuser %}
+        <div class="product-edit-container">
+            <span class="icon">
+                <a href="{% url 'edit_product' product.id %}" class="text-dark">
+                    <i class="fas la-lg fa-edit"></i>
+                </a>
+            </span>
+        </div>
+            {% if on_product_detail_page %}
+                <div class="product-trash-container">
+                    <span class="icon">
+                        <a class="delete-modal-trigger text-dark" data-toggle="modal" data-target="#productDeleteModal">
+                            <i class="fas la-lg fa-trash"></i>
+                        </a>
+                    </span>
+                </div>
+            {% endif %}
         {% endif %}
-    </span>
+    </div>
 </div>
