@@ -101,7 +101,7 @@ class Product(models.Model):
 
 class ProductReview(models.Model):
     class Meta:
-        ordering = ['-pk']
+        ordering = ['-created_on']
 
     RATING_CHOICES = (
         (5, '5'),
@@ -115,7 +115,7 @@ class ProductReview(models.Model):
                                 null=True,
                                 blank=True,
                                 related_name='reviews',
-                                on_delete=models.CASCADE)
+                                on_delete=models.SET_NULL)
     user = models.ForeignKey(User, null=True, blank=True,
                              on_delete=models.CASCADE)
     title = models.CharField(max_length=254)

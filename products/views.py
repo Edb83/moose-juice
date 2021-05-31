@@ -265,7 +265,6 @@ def edit_product(request, product_id):
 
     else:
         form = ProductForm(instance=product)
-        messages.info(request, f'You are editing {product.name}')
 
     template = 'products/edit-product.html'
     context = {
@@ -288,7 +287,12 @@ def delete_product(request, product_id):
 
     product = get_object_or_404(Product, pk=product_id)
     product_name = product.name
+    # Save reviews for later removal
+    reviews = product.reviews.all()
+    # Delete the product, SET_NULL on delete will take effect
     product.delete()
+    # Delete all reviews and signal will still fire to update_rating if product exists
+    reviews.delete()
     messages.info(request, f'{product_name} deleted')
 
     return redirect(reverse('products'))

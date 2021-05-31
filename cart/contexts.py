@@ -33,7 +33,7 @@ def cart_contents(request):
             product = Product.objects.get(pk=product_id)
         except Product.DoesNotExist:
             del cart[item]
-            messages.error(request, 'An item could not be added as it is \
+            messages.error(request, 'An item was removed from your cart as it is \
                 no longer available. Try to find a worthy replacement!')
             continue
 
