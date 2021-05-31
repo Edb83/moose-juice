@@ -1,11 +1,21 @@
 <div class="row">
     <div class="col-12 col-md-8 mx-auto">
-        <form method="POST" action="{% url 'product_detail' product.id %}" class="form mb-2">
-            {% csrf_token %}
-            {{ form | crispy }}
-            <div class="text-right mt-5">
-                <button class="btn btn-dark" type="submit">Submit Review</button>
-            </div>
-        </form>
+        {% if edit %}
+            <form method="POST" action="{% url 'edit_review' product.id review.id %}#reviews-section" class="form mb-2">
+                {% csrf_token %}
+                {{ form | crispy }}
+                <div class="text-right mt-5">
+                    <button class="btn btn-dark" type="submit">Update Review</button>
+                </div>
+            </form>
+        {% else %}
+            <form method="POST" action="{% url 'add_review' product.id %}#reviews-section" class="form mb-2">
+                {% csrf_token %}
+                {{ form | crispy }}
+                <div class="text-right mt-5">
+                    <button class="btn btn-dark" type="submit">Submit Review</button>
+                </div>
+            </form>
+        {% endif %}
     </div>            
 </div>

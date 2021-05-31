@@ -32,7 +32,6 @@
                             <a href="{% url 'edit_product' product.id %}" class="badge badge-secondary">Edit</a>
                             <a class="delete-modal-trigger badge badge-danger" data-toggle="modal" data-target="#productDeleteModal">Delete</a>
                         </div>
-
                     {% endif %}
         
                     {% if product.reviews.all %}
@@ -194,7 +193,20 @@
                     <div class="card card-product-review my-5 shadow">
                         <div class="card-header border-accent-primary">
                             <h5 class="card-title">{{ review.title }}</h5>
-                            <div class="product-stars" data-value="{{ review.rating }}"></div>
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="product-stars" data-value="{{ review.rating }}"></div>
+                                </div>
+                                <div class="col-auto ml-auto">
+                                    {% if review.user == request.user or request.user.is_superuser %}
+                                        <a href="{% url 'edit_review' product.id review.id %}#reviews-section">
+                                            <span class="icon">
+                                                <i class="fas la-2x fa-edit"></i>
+                                            </span>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
                             {% if review.verified_purchase %}<p><strong>Verified purchase</strong></p>{% endif %}

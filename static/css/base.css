@@ -417,6 +417,14 @@ h1, h2, h3, h4, h5, h6 {
     width: 1.5rem;
 }
 
+.fa-edit {
+    color: #fff;
+}
+
+.fa-edit:hover {
+    color: var(--color-accent-dark);
+}
+
 .fa-heart,
 .fa-heart-broken,
 .fa-star,
