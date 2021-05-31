@@ -479,6 +479,10 @@ input[type=number] {
         border-radius: .3rem;
     }
 
+    .card-products:hover {
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    }
+
     .product-options {
         box-shadow: 0 1rem 3rem rgba(0,0,0,.175)!important;
         border-bottom: transparent;
