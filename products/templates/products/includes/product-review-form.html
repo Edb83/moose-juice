@@ -4,15 +4,22 @@
             <form method="POST" action="{% url 'edit_review' review.id %}#reviews-section" class="form mb-2">
                 {% csrf_token %}
                 {{ form | crispy }}
-                <div class="text-right mt-5">
-                    <button class="btn btn-dark" type="submit">Update Review</button>
+                <div class="text-center my-4">
+                    <small>Please note you can only review each juice once, and you will only receive points if you have previously purchased it.</small>
+                </div>
+                <div class="text-right">
+                    <a href="{% url 'product_detail' product.id %}#reviews-section" class="btn btn-outline-dark">Cancel</a>
+                    <button class="btn btn-dark" type="submit">Update</button>
                 </div>
             </form>
         {% else %}
             <form method="POST" action="{% url 'add_review' product.id %}#reviews-section" class="form mb-2">
                 {% csrf_token %}
                 {{ form | crispy }}
-                <div class="text-right mt-5">
+                <div class="text-center my-4">
+                    <small>Please note you can only review each juice once, and you will only receive points if you have previously purchased it.</small>
+                </div>
+                <div class="text-right">
                     <button class="btn btn-dark" type="submit">Submit Review</button>
                 </div>
             </form>

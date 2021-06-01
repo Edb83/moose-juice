@@ -267,7 +267,9 @@ def add_review(request, product_id):
                     review.verified_purchase = True
 
                 review.save()
-                messages.info(request, 'Review added')
+                messages.info(
+                    request,
+                    'Thanks for the review - 5 points to you!')
                 return redirect(reverse('product_detail', args=[product.id]))
             else:
                 messages.error(
@@ -304,6 +306,7 @@ def edit_review(request, review_id):
     else:
         form = ReviewForm(instance=review)
 
+    messages.info(request, f"You are editing your review of {product}.")
     template = 'products/product-detail.html'
     context = {
         'form': form,
