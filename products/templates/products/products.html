@@ -63,46 +63,60 @@
 <main class="container">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 text-center">
         {% for product in products %}
-        <div class="col mb-4">
-            <div class="card card-products h-100">
-                <div class="product-img-container">
-                    {% if request.user.is_authenticated %}
-                        {% include 'products/includes/product-icon-container.html' %}
-                    {% endif %}
-                    <div class="product-svg-container">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 339">
-                            <a href="{% url 'product_detail' product.id %}" aria-label="Go to {{ product.name }} details page">
-                                {% include 'products/includes/product-svg.html' %}
-                            </a>
-                        </svg>
+            <div class="col mb-4">
+                <div class="card card-products h-100">
+                    <div class="product-img-container">
+                        {% if request.user.is_authenticated %}
+                            {% include 'products/includes/product-icon-container.html' %}
+                        {% endif %}
+                        <div class="product-svg-container">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 339">
+                                <a href="{% url 'product_detail' product.id %}" aria-label="Go to {{ product.name }} details page">
+                                    {% include 'products/includes/product-svg.html' %}
+                                </a>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="card-body text-center">
+                        <small>{{ product.brand.friendly_name|upper }}</small>
+                        <h3 class="h5 card-title"><strong>{{ product.name }}</strong></h3>
+                        {% if product.average_rating %}
+                            <div class="product-stars" data-value="{{ product.average_rating }}"></div>
+                        {% else %}
+                            <div>
+                                <span>Not yet rated</span>
+                            </div>
+                        {% endif %}
+                        
+                    </div>
+
+                    <div class="card-footer">
+                        {% if product.brand.available_sizes.all|length > 1 %}
+                            From
+                        {% endif %}
+                        {% if product.on_sale %}
+                            <s>£{{ product.brand.available_sizes.all.0.price }}</s> £{{ product.brand.available_sizes.all.0.sale_price }}
+                        {% else %}
+                            £{{ product.brand.available_sizes.all.0.price }}
+                        {% endif %}
                     </div>
                 </div>
-
-                <div class="card-body text-center">
-                    <small>{{ product.brand.friendly_name|upper }}</small>
-                    <h3 class="h5 card-title"><strong>{{ product.name }}</strong></h3>
-                    {% if product.average_rating %}
-                        <div class="product-stars" data-value="{{ product.average_rating }}"></div>
-                    {% else %}
-                        <div>
-                            <span>Not yet rated</span>
-                        </div>
-                    {% endif %}
-                    
-                </div>
-
-                <div class="card-footer">
-                    {% if product.brand.available_sizes.all|length > 1 %}
-                        From
-                    {% endif %}
-                    {% if product.on_sale %}
-                        <s>£{{ product.brand.available_sizes.all.0.price }}</s> £{{ product.brand.available_sizes.all.0.sale_price }}
-                    {% else %}
-                        £{{ product.brand.available_sizes.all.0.price }}
-                    {% endif %}
-                </div>
             </div>
-        </div>
+        {% empty %}
+                <div class="mx-auto text-center">
+                    <div>
+                        <strong>There was no juice to be found!</strong>
+                    </div>
+                    <div>
+                        <a href="{% url 'products' %}" class="btn btn-outline-dark my-4">
+                            <span class="icon">
+                                <i class="fas fa-chevron-left"></i>
+                            </span>
+                            Juices
+                        </a>
+                    </div>
+                </div>
         {% endfor %}
     </div>
 
