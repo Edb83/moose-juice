@@ -159,8 +159,10 @@ This does not have [universal support](https://caniuse.com/css-backdrop-filter) 
 [JS Hint](https://jshint.com/) - 0 errors, 0 warnings - **PASS**
 
 
-[PyCodeStyle](https://github.com/PyCQA/pycodestyle) - 0 warnings - **PASS**
-
+[Pep8 Online](http://pep8online.com/) - 0 errors - **PASS**
+- webhookhandler.py has two lines which could not be shortened without making the code illegible
+- webhooks.py has one line which could not be shortened
+- settings.py has two lines which could not be shortened
 
 
 <div align="right"><a style="text-align:right" href="#top">Go to index :arrow_double_up:</a></div>
