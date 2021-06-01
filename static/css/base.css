@@ -24,14 +24,17 @@ body {
     font-family: var(--font-default);
 }
 
-.card-body a {
+a:hover {
+    text-decoration: none;
+}
+
+.link-normal {
     color: #3c7c9a;
     font-weight: 600;
 }
 
-.card-body a:hover {
-    text-decoration: none;
-    color: #2d5e74;
+.link-normal:hover {
+    color: var(--color-dark)
 }
 
 .btn-dark:hover {

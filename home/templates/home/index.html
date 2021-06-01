@@ -9,7 +9,7 @@
         <h1 class="hero-heading">Moose Juice</h1>
         <p class="h5">Home-brewed</p>
         <p class="h5">E-liquid</p>
-        <p class><a class="btn btn btn-outline-dark" href="{% url 'products' %}">Show me</a></p>
+        <p class><a class="btn btn-outline-dark" href="{% url 'products' %}">Shop</a></p>
     </div>
 </div>
 
@@ -78,7 +78,8 @@
             <div class="tab-content" id="h-pills-tabContent">
                 {% for brand in brands %}
                     <div class="tab-pane fade show {% if forloop.counter == 1 %}active{% endif %}" id="h-pills-{{ brand.id }}" role="tabpanel" aria-labelledby="h-pills-{{ brand.id }}-tab">
-                        {{ brand.description }}
+                        {{ brand.description }} 
+                        <p class="mt-1"><a class="link-normal" href="{% url 'products' %}?brand={{ brand.name }}">Check out {{ brand.friendly_name }}!</a></p>
                     </div>
                 {% endfor %}
             </div>
@@ -100,6 +101,7 @@
                     {% for brand in brands %}
                         <div class="tab-pane fade show {% if forloop.counter == 1 %}active{% endif %}" id="v-pills-{{ brand.id }}" role="tabpanel" aria-labelledby="v-pills-{{ brand.id }}-tab">
                             {{ brand.description }}
+                            <p class="mt-1"><a class="link-normal" href="{% url 'products' %}?brand={{ brand.name }}">Check out {{ brand.friendly_name }}!</a></p>
                         </div>
                     {% endfor %}
                 </div>

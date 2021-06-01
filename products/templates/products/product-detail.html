@@ -29,10 +29,10 @@
         
                     {% if product.reviews.all %}
                         <div class="product-stars text-center" data-value="{{ product.average_rating }}"></div>
-                        <p class="text-center"><a href="#reviews-section">{{ product.reviews.all | length }} review{{ product.reviews.all | length | pluralize }}</a></p>
+                        <p class="text-center"><a class="link-normal" href="#reviews-section">{{ product.reviews.all | length }} review{{ product.reviews.all | length | pluralize }}</a></p>
                     {% else %}
                         <p class="text-center">Not yet reviewed</p>
-                        <p class="text-center"><a href="#reviews-section">Leave your own?</a></p>
+                        <p class="text-center"><a class="link-normal" href="#reviews-section">Leave your own?</a></p>
                     {% endif %}
                     
                     <p class="text-justify">{{ product.description }}</p>
@@ -177,7 +177,7 @@
         {% if request.user.is_authenticated %}
             {% include 'products/includes/product-review-form.html' %}
         {% else %}
-            <p class="text-center">Please <a href="{% url 'account_signup' %}">Register</a> or <a href="{% url 'account_login' %}">Login</a> to leave a review.</p>
+            <p class="text-center">Please <a class="link-normal" href="{% url 'account_signup' %}">Register</a> or <a class="link-normal" href="{% url 'account_login' %}">Login</a> to leave a review.</p>
         {% endif %}
     </div>
 
