@@ -89,10 +89,10 @@ The following tests have been carried out without issue:
 
 **Product pages**
 
-- Performance: **79 - 97%**
+- Performance: **99%**
 - Accessibility: **100%**
 - Best Practices: **100%**
-- SEO: **90%**
+- SEO: **100%**
 
 **Categories page**
 

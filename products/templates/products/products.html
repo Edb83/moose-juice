@@ -71,7 +71,7 @@
                     {% endif %}
                     <div class="product-svg-container">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 339">
-                            <a href="{% url 'product_detail' product.id %}">
+                            <a href="{% url 'product_detail' product.id %}" aria-label="Go to {{ product.name }} details page">
                                 {% include 'products/includes/product-svg.html' %}
                             </a>
                         </svg>
@@ -80,7 +80,7 @@
 
                 <div class="card-body text-center">
                     <small>{{ product.brand.friendly_name|upper }}</small>
-                    <h5 class="card-title"><strong>{{ product.name }}</strong></h5>
+                    <h3 class="h5 card-title"><strong>{{ product.name }}</strong></h3>
                     {% if product.average_rating %}
                         <div class="product-stars" data-value="{{ product.average_rating }}"></div>
                     {% else %}
