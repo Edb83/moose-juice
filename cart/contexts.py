@@ -42,7 +42,8 @@ def cart_contents(request):
         except Size.DoesNotExist:
             del cart[item]
             messages.error(request, 'An item could not be added as its \
-                size is no longer available. Try to find a worthy replacement!')
+                size is no longer available. \
+                Try to find a worthy replacement!')
             continue
 
         try:
@@ -50,7 +51,8 @@ def cart_contents(request):
         except Nicotine.DoesNotExist:
             del cart[item]
             messages.error(request, 'An item could not be added as its \
-                nicotine options have changed. Try to find a worthy replacement!')
+                nicotine options have changed. \
+                Try to find a worthy replacement!')
             continue
 
         # Check sale status and retrieve relevant price from Size model

@@ -15,7 +15,10 @@ def view_cart(request):
 
 
 def add_to_cart(request, item_id):
-    """ Add a quantity of the chosen product (inc options) to the shopping cart """
+    """
+    Add a quantity of the chosen product (inc options)
+    to the shopping cart
+    """
 
     product = Product.objects.get(pk=item_id)
     size_id = request.POST.get('size')

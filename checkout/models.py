@@ -68,7 +68,8 @@ class Order(models.Model):
         else:
             discount_to_apply = 0
 
-        self.grand_total = self.order_total + self.delivery_cost - Decimal(discount_to_apply)
+        self.grand_total = (
+            self.order_total + self.delivery_cost - Decimal(discount_to_apply))
 
         self.save()
 
@@ -116,4 +117,7 @@ class OrderLineItem(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f'{self.product.name}-{self.bottle_size.label}-{self.nicotine.strength} on order {self.order.order_number}'
+        return f'{self.product.name}-\
+            {self.bottle_size.label}-\
+                {self.nicotine.strength} \
+                    on order {self.order.order_number}'

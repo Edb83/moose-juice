@@ -147,7 +147,9 @@ def add_product(request):
     """ Add a product to the store """
 
     if not request.user.is_superuser:
-        messages.error(request, "Sorry, you don't have the necessary permissions to do that.")
+        messages.error(
+            request,
+            "Sorry, you don't have the necessary permissions to do that.")
         return redirect(reverse('home'))
 
     if request.method == 'POST':
@@ -157,7 +159,9 @@ def add_product(request):
             messages.info(request, 'Product added')
             return redirect(reverse('product_detail', args=[product.id]))
         else:
-            messages.error(request, 'Failed to add product - please check form and try again')
+            messages.error(
+                request,
+                "Failed to add product - please check form and try again")
 
     else:
         form = ProductForm()
@@ -177,7 +181,9 @@ def edit_product(request, product_id):
     """
 
     if not request.user.is_superuser:
-        messages.error(request, "Sorry, you don't have the necessary permissions to do that.")
+        messages.error(
+            request,
+            "Sorry, you don't have the necessary permissions to do that.")
         return redirect(reverse('home'))
 
     product = get_object_or_404(Product, pk=product_id)
@@ -189,7 +195,9 @@ def edit_product(request, product_id):
             messages.info(request, f'Updated {product.name}')
             return redirect(reverse('product_detail', args=[product.id]))
         else:
-            messages.error(request, 'Failed to update product - please check form and try again')
+            messages.error(
+                request,
+                "Failed to update product - please check form and try again")
 
     else:
         form = ProductForm(instance=product)
@@ -210,7 +218,9 @@ def delete_product(request, product_id):
     """
 
     if not request.user.is_superuser:
-        messages.error(request, "Sorry, you don't have the necessary permissions to do that.")
+        messages.error(
+            request,
+            "Sorry, you don't have the necessary permissions to do that.")
         return redirect(reverse('home'))
 
     product = get_object_or_404(Product, pk=product_id)
@@ -219,12 +229,12 @@ def delete_product(request, product_id):
     reviews = product.reviews.all()
     # Delete the product, SET_NULL on delete will take effect
     product.delete()
-    # Delete all reviews and signal will still fire to update_rating if product exists
+    # Delete all reviews
+    # Signal will still fire to update_rating if product exists
     reviews.delete()
     messages.info(request, f'{product_name} deleted')
 
     return redirect(reverse('products'))
-
 
 
 @login_required
@@ -242,7 +252,8 @@ def add_review(request, product_id):
             reviews = product.reviews.all()
 
             if reviews.filter(user=request.user).exists():
-                messages.info(request, f"You've already reviewed {product.name}")
+                messages.info(
+                    request, f"You've already reviewed {product.name}")
                 return redirect(reverse('product_detail', args=[product.id]))
 
             if form.is_valid():
@@ -259,7 +270,9 @@ def add_review(request, product_id):
                 messages.info(request, 'Review added')
                 return redirect(reverse('product_detail', args=[product.id]))
             else:
-                messages.error(request, 'Failed to add review - please check form and try again')
+                messages.error(
+                    request,
+                    "Failed to add review - please check form and try again")
 
     context = {
         'form': form,
@@ -284,7 +297,9 @@ def edit_review(request, review_id):
             messages.info(request, 'Updated review')
             return redirect(reverse('product_detail', args=[product.id]))
         else:
-            messages.error(request, 'Failed to update review - please check form and try again')
+            messages.error(
+                request,
+                "Failed to update review - please check form and try again")
 
     else:
         form = ReviewForm(instance=review)
@@ -307,7 +322,9 @@ def delete_review(request, review_id):
     """
 
     if not request.user.is_superuser:
-        messages.error(request, "Sorry, you don't have the necessary permissions to do that.")
+        messages.error(
+            request,
+            "Sorry, you don't have the necessary permissions to do that.")
         return redirect(reverse('home'))
 
     review = get_object_or_404(ProductReview, pk=review_id)
