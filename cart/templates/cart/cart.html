@@ -85,18 +85,21 @@
                                             <!-- Decrement qty -->
                                             <div class="input-group-prepend">
                                                 <button class="decrement-qty btn btn-sm" 
-                                                    data-item_id="{{ item.item_id }}" id="decrement-qty_{{ item.item_id }}">
+                                                    data-item_id="{{ item.item_id }}" id="decrement-qty_{{ item.item_id }}"
+                                                    aria-label="Decrease quantity of {{ item.product.name }}">
                                                     <i class="fas fa-caret-left fa-sm"></i>
                                                 </button>
                                             </div>
                     
                                             <!-- Input qty -->
                                             <input class="form-control form-control-sm qty_input text-center" type="number" name="quantity" value="{{ item.quantity }}" min="1" max="99" data-item_id="{{ item.item_id }}" data-token="{{ csrf_token }}" id="id_qty_{{ item.item_id }}" autocomplete="off">
+                                            <label for="id_qty_{{ item.item_id }}" class="sr-only">Input quantity for {{ item.product.name }}</label>
                     
                                             <!-- Increment qty -->
                                             <div class="input-group-append">
                                                 <button class="increment-qty btn btn-sm"
-                                                data-item_id="{{ item.item_id }}" id="increment-qty_{{ item.item_id }}">
+                                                data-item_id="{{ item.item_id }}" id="increment-qty_{{ item.item_id }}"
+                                                aria-label="Increase quantity of {{ item.product.name }}">
                                                     <i class="fas fa-caret-right fa-sm"></i>
                                                 </button>
                                             </div>

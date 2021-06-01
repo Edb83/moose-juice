@@ -77,6 +77,14 @@ The following tests have been carried out without issue:
 
 ## Automated testing
 
+Performance is generally good due to use of SVGs over images, however there are reported issues which relate to:
+ - `render-blocking resources` due to Bootstrap and Font Awesome
+ - `unused CSS` due to Bootstrap and Font Awesome
+ - `unused JavaScript` due to Stripe and Jquery
+
+Across the site all efforts have been made to provide screen-reader compatibility using aria-labels. However, there are issues relating to:
+- `Heading elements are not in a sequentially-descending order`, some of which have not been remedied
+
 [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools) - Lighthouse audit summary for both desktop and mobile:
 
 **Home page**
@@ -86,7 +94,6 @@ The following tests have been carried out without issue:
 - Best Practices: **100%**
 - SEO: **100%**
 
-
 **Product pages**
 
 - Performance: **99%**
@@ -94,23 +101,39 @@ The following tests have been carried out without issue:
 - Best Practices: **100%**
 - SEO: **100%**
 
-**Categories page**
+**Product details page**
 
-- Performance: **82 - 99%**
+- Performance: **98%**
+- Accessibility: **99%**
+- Best Practices: **100%**
+- SEO: **90%**
+
+**Cart page**
+
+- Performance: **90 - 99%**
+- Accessibility: **98%**
+- Best Practices: **100%**
+- SEO: **98 - 100%**
+
+**Checkout page**
+
+An issue relating to Stripe's `[aria-hidden="true"] elements contain focusable descendents` is present but has not been resolved.
+
+- Performance: **89 - 99%**
 - Accessibility: **97%**
 - Best Practices: **100%**
 - SEO: **100%**
 
-**Add / Edit pages**
+**Add/edit juice page**
 
-- Performance: **90 - 99%**
-- Accessibility: **88%**
+- Performance: **99 - 100%**
+- Accessibility: **100%**
 - Best Practices: **100%**
-- SEO: **98 - 100%**
+- SEO: **100%**
 
-**Profile page**
+**Account dashboard page**
 
-- Performance: **73 - 98%**
+- Performance: **99 - 100%**
 - Accessibility: **100%**
 - Best Practices: **100%**
 - SEO: **100%**

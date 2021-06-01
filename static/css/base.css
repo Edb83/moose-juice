@@ -1,3 +1,9 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
 
 @import url('https://fonts.googleapis.com/css2?family=Karla&family=Raleway&display=swap');
 
@@ -270,12 +276,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .category-thumbnail {
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
 }
 .category-thumbnail:hover {
-      transform: scale(1.2);
+      -webkit-transform: scale(1.2);
+          -ms-transform: scale(1.2);
+              transform: scale(1.2);
 }
-
 
 /* Products */
 
@@ -365,7 +374,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-outline-dark:not(:disabled):not(.disabled).active:focus {
-    box-shadow: none;
+    -webkit-box-shadow: none;
+            box-shadow: none;
 }
 
 .nav-pills .nav-link {
@@ -397,14 +407,14 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
 }
 
-
 .order-details-container .row {
     margin-bottom: 1rem;
 }
 
 .order-details-container .col-auto {
     overflow-x: hidden;
-    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+       text-overflow: ellipsis;
 }
 
 .order-summary-buttons-container a {
@@ -414,7 +424,6 @@ h1, h2, h3, h4, h5, h6 {
 .receipt-details p {
     margin-bottom: 0.6rem;
 }
-
 
 /* Icons */
 
@@ -498,11 +507,13 @@ input[type=number] {
     }
 
     .card-products:hover {
-        box-shadow: var(--shadow-normal);
+        -webkit-box-shadow: var(--shadow-normal);
+                box-shadow: var(--shadow-normal);
     }
 
     .product-options {
-        box-shadow: var(--shadow-normal);
+        -webkit-box-shadow: var(--shadow-normal);
+                box-shadow: var(--shadow-normal);
         border-bottom: transparent;
     }
 
@@ -511,13 +522,14 @@ input[type=number] {
     }
 
     .edit-product-image-container {
-        box-shadow: var(--shadow-normal);
+        -webkit-box-shadow: var(--shadow-normal);
+                box-shadow: var(--shadow-normal);
+        height: -webkit-fit-content;
+        height: -moz-fit-content;
         height: fit-content;
     }
 
 }
-
-
 
 @media (orientation: landscape) and (max-width: 1023px) {
     .hero-text-container {

@@ -103,7 +103,8 @@
                                 <div class="input-group-prepend">
                                     <button class="decrement-qty btn btn-black"
                                         type="button"
-                                        data-item_id="{{ product.id }}" id="decrement-qty_{{ product.id }}">
+                                        data-item_id="{{ product.id }}" id="decrement-qty_{{ product.id }}"
+                                        aria-label="Decrease quantity of {{ product.name}}">
                                         <span class="icon">
                                             <i class="fas fa-caret-left"></i>
                                         </span>
@@ -112,12 +113,14 @@
         
                                 <!-- Input qty -->
                                 <input class="form-control qty_input text-center" type="number" name="quantity" value="1" min="1" max="99" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}" autocomplete="off">
+                                <label for="id_qty_{{ product.id }}" class="sr-only">Input quantity for {{ product.name}}</label>
         
                                 <!-- Increment qty -->
                                 <div class="input-group-append">
                                     <button class="increment-qty btn btn-black"
                                     type="button"
-                                    data-item_id="{{ product.id }}" id="increment-qty_{{ product.id }}">
+                                    data-item_id="{{ product.id }}" id="increment-qty_{{ product.id }}"
+                                    aria-label="Increase quantity of {{ product.name}}">
                                         <span class="icon">
                                             <i class="fas fa-caret-right"></i>
                                         </span>
@@ -193,7 +196,7 @@
                                 <div class="col-auto ml-auto d-flex">
                                     <!-- User/admin edit button -->
                                     {% if review.user == request.user or request.user.is_superuser %}
-                                        <a href="{% url 'edit_review' review.id %}#reviews-section">
+                                        <a href="{% url 'edit_review' review.id %}#reviews-section" aria-label="Edit review from {{ review.user }}">
                                             <span class="icon mr-2">
                                                 <i class="fas fa-lg fa-edit text-light"></i>
                                             </span>
@@ -202,7 +205,7 @@
                                     <!-- Admin only delete button -->
                                     {% if request.user.is_superuser %}
                                         <div class="text-center mb-3">
-                                            <a class="delete-modal-trigger" data-toggle="modal" data-target="#reviewDeleteModal">
+                                            <a class="delete-modal-trigger" data-toggle="modal" data-target="#reviewDeleteModal" aria-label="Delete review from {{ review.user }}">
                                                 <span class="icon">
                                                     <i class="fas fa-lg fa-trash-alt text-light"></i>
                                                 </span>
@@ -223,11 +226,11 @@
                 </div>
 
                 <!-- Delete Review Modal -->
-                <div class="modal fade" id="reviewDeleteModal" tabindex="-1" aria-labelledby="reviewDeleteModalLabel" aria-hidden="true">
+                <div class="modal fade" id="reviewDeleteModal" tabindex="-1" aria-labelledby="reviewDeleteModalLabel-{{ forloop.counter }}" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content custom-modal">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="reviewDeleteModalLabel">Confirm deletion</h5>
+                                <h5 class="modal-title" id="reviewDeleteModalLabel-{{ forloop.counter }}">Confirm deletion</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
