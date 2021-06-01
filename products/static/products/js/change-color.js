@@ -5,6 +5,6 @@ let chosenColor;
 
 $(colorPicker).on('input',function () {
     chosenColor = this.dataset.currentColor;
-        colorGradient.setAttribute('stop-color', chosenColor)
-        bottleFill.setAttribute('fill', "url('#-gradient')")
-})
+    colorGradient.setAttribute('stop-color', chosenColor);
+    bottleFill.setAttribute('fill', "url('#-gradient')");
+});

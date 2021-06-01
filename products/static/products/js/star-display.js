@@ -14,4 +14,4 @@ productStars.forEach(rating => {
     }
 
     rating.innerHTML = stars;
-})
+});

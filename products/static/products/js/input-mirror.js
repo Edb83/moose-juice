@@ -7,11 +7,10 @@ $(function(){
         if (nameInput.val()) {
             nameOutput.text(nameInput.val());
         } else {
-            nameOutput.text("?")
+            nameOutput.text("?");
         }
-    };
+    }
 
     $(nameInput)
-        .change(onChange)
-        .keyup(onChange);
+        .change(onChange).keyup(onChange);
 });

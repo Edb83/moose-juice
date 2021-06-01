@@ -28,7 +28,7 @@ let style = {
         iconColor: '#FFC7EE',
         color: '#FFC7EE',
       },
-    }
+    };
 
 let card = elements.create('card', {style: style});
 card.mount('#card-element');
@@ -126,5 +126,5 @@ form.addEventListener('submit', function(ev) {
   // 8. If data not posted to view, reload the page and allow any Django error messages
   }).fail(function () {
       location.reload();
-  })
+  });
 });

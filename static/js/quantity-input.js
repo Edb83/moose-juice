@@ -34,7 +34,7 @@ $('.decrement-qty').click(function(e) {
    let closestInput = $(this).closest('.input-group').find('.qty_input')[0];
    let currentValue = parseInt($(closestInput).val());
    if (currentValue - 1 == 0) {
-    $(closestInput).val = 1
+    $(closestInput).val = 1;
     e.preventDefault();
    } else {
        $(closestInput).val(currentValue - 1);

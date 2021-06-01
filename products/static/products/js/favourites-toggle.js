@@ -1,7 +1,7 @@
 // get HTML to inject into container
-const heartFull = `<i class="fas fa-heart fa-lg"></i>`
-const heartEmpty = `<i class="far fa-heart fa-lg"></i>`
-const heartBroken = `<i class="fas fa-heart-broken fa-lg"></i>`
+const heartFull = `<i class="fas fa-heart fa-lg"></i>`;
+const heartEmpty = `<i class="far fa-heart fa-lg"></i>`;
+const heartBroken = `<i class="fas fa-heart-broken fa-lg"></i>`;
 
 // listen for click on container and read data attributes to know route to follow
 $(".product-heart-container").click(function () {
@@ -29,7 +29,7 @@ $(".product-heart-container").click(function () {
                 }
             // otherwise redirect to login
             } else {
-                window.location.assign(redirectUrl)
+                window.location.assign(redirectUrl);
             }
         }
     });

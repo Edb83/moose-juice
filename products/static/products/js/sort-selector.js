@@ -4,7 +4,7 @@ $('#sort-selector').change(function () {
 
     let selectedVal = selector.val();
     if (selectedVal != "reset") {
-        let stringSplit = selectedVal.split("_")
+        let stringSplit = selectedVal.split("_");
         let direction = stringSplit[(stringSplit.length) - 1];
         stringSplit.pop();
         let sort = stringSplit.join("_");
@@ -19,4 +19,4 @@ $('#sort-selector').change(function () {
 
         window.location.replace(currentUrl);
     }
-})
+});
