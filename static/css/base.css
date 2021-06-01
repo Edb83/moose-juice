@@ -186,8 +186,8 @@ h1, h2, h3, h4, h5, h6 {
     position: absolute;
     color: #000;
     opacity: 0;
-    top: 40%;
-    left: 50%;
+    top: 50%;
+    left: 55%;
     -webkit-transform: translate(-50%, -50%);
         -ms-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
@@ -198,7 +198,6 @@ h1, h2, h3, h4, h5, h6 {
 .hero-text-container h5 {
     white-space: nowrap;
 }
-
 
 #intro-section,
 #categories-section {
@@ -215,7 +214,6 @@ h1, h2, h3, h4, h5, h6 {
     color: #fff;
 }
 
-
 .card-intro h5 {
     color: var(--color-accent-dark);
     font-weight: 600;
@@ -225,12 +223,14 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--color-accent-primary);
 }
 
-
 .home-section {
     border-bottom: 1px solid var(--color-accent-dark);
-    padding: 1rem 0;
+    padding: 7rem 0;
 }
 
+.home-section .container {
+    min-height: 20rem;
+}
 
 .home-section .container > h3 {
     font-weight: 600;
@@ -268,6 +268,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .card-footer a {
     color: #fff;
+}
+
+.category-thumbnail {
+    transition: all .2s ease-in-out;
+}
+.category-thumbnail:hover {
+      transform: scale(1.2);
 }
 
 
