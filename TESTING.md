@@ -140,11 +140,17 @@ An issue relating to Stripe's `[aria-hidden="true"] elements contain focusable d
 
 [W3C - HTML](https://validator.w3.org/) - 0 errors, 0 warnings - **PASS**
 
-[W3C - CSS](https://jigsaw.w3.org/css-validator/) - 
+[W3C - CSS](https://jigsaw.w3.org/css-validator/) - 3 errors, 776 warnings
 
-- Use of unknown vendor extensions
+These were added by the CSS autoprefixer:
 
-[CSS Lint](http://csslint.net/) - 
+`text-decoration-skip-ink doesn't exist : none`
+
+`overflow-anchor doesn't exist : none`
+
+This does not have [universal support](https://caniuse.com/css-backdrop-filter) however in testing the hero image was still visible just without the fading blur effect: 
+
+`backdrop-filter doesn't exist : blur(15px)`
 
 
 
