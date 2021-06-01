@@ -195,7 +195,7 @@ h1, h2, h3, h4, h5, h6 {
     white-space: nowrap;
 }
 
-.hero-text-container h5 {
+.hero-text-container .h5 {
     white-space: nowrap;
 }
 
@@ -214,7 +214,7 @@ h1, h2, h3, h4, h5, h6 {
     color: #fff;
 }
 
-.card-intro h5 {
+.card-intro .h5 {
     color: var(--color-accent-dark);
     font-weight: 600;
 }
@@ -232,13 +232,12 @@ h1, h2, h3, h4, h5, h6 {
     min-height: 20rem;
 }
 
-.home-section .container > h3 {
+.home-section .container > h2 {
     font-weight: 600;
     padding: 1rem;
     letter-spacing: 2px;
     text-transform: uppercase;
 }
-
 
 #brands-section .nav-pills .nav-link {
     color: var(--color-accent-primary);
@@ -262,8 +261,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .category-thumbnail {
-    max-height: 96px;
-    width: auto;
+    height: 96px;
+    width: 96px;
 }
 
 .card-footer a {
@@ -295,11 +294,6 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0 0 0.5rem 0;
 }
 
-/* .card-title-wrapper {
-    display: flex;
-    justify-content: center;
-} */
-
 .product-svg-container {
     width: 100px;
     -ms-flex-item-align: center;
@@ -328,6 +322,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .category-img-sm {
     height: 50px;
+    width: 50px;
 }
 
 .category-heading {
@@ -491,7 +486,7 @@ input[type=number] {
         font-size: 2rem;
     }
 
-    .hero-text-container h5{
+    .hero-text-container .h5{
         font-size: 1.5rem;
     }
 

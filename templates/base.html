@@ -8,13 +8,14 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Moose Juice - home-brewed e-liquid for delivery">
     {% endblock %}
 
     {% block extra_meta %}
         <link rel="apple-touch-icon" sizes="180x180" href="{{ MEDIA_URL }}apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="{{ MEDIA_URL }}favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="{{ MEDIA_URL }}favicon-16x16.png">
-        <link rel="manifest" href="{{ MEDIA_URL }}site.webmanifest" crossorigin="use-credentials">
+        <!-- <link rel="manifest" href="{{ MEDIA_URL }}site.webmanifest" crossorigin="use-credentials"> -->
     {% endblock %}
 
     {% block core_css %}
@@ -105,7 +106,7 @@
                 <div class="input-group">
                     <input type="text" class="form-control text-center" name="q" placeholder="What's your flavour?" autocomplete="off">
                     <span class="input-group-append">
-                        <button class="btn btn-dark border border-left-0 text-light" type="submit">
+                        <button class="btn btn-dark border border-left-0 text-light" type="submit" aria-label="search">
                             <i class="fa fa-search"></i>
                         </button>
                     </span>

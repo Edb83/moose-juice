@@ -1,3 +1,209 @@
+<span id="top"></span>
+
+Back to [README](README.md)
+
+## Index
+
+- <a href="#user-stories">User stories - how are they met?</a>
+- <a href="#testing-manual">Manual</a>
+- <a href="#testing-auto">Automated</a>
+- <a href="#testing-responsive">Responsiveness</a>
+- <a href="#testing-resolved">Resolved issues</a>
+- <a href="#testing-unresolved">Unresolved issues</a>
+
+---
+
+<span id="user-stories"></span>
+
+## User stories - how are they met?
+
+### Overarching user expectations
+
+**Consistency**
+
+The site has been designed to be as consistent as possible, no matter the content:
+- The Navbar and Footer remain the same across all pages, including Error pages.
+- Headings and icons (form fields and add/edit/delete buttons) are standardised across all pages.
+- Cards are a uniform shape and size per page and will never spill into a subsequent row.
+- Cards represent a 'zoomed out' view of multiple selection items (Activities/Search Bar page and Categories pages), whereas views of single items (View Activity, input forms) are 'zoomed in' without a card to suggest a boundary.
+- Where necessary, text is truncated to preserve the grid layout.
+
+**Easy navigation**
+
+The likely options a user might need at a given moment have been carefully considered to ensure a smooth browsing experience:
+
+- Headings are descriptive of the content displayed even when a search or filter is applied.
+- When a search finds no results...
+- The title of each page updates in the browser window to indicate where the user is.
+- The Footer contains top-level menu options, 
+
+**Intuitive design**
+
+
+- Familiar icons have been used across the site for commonly expected actions e.g. add, edit, delete, search, back.
+- Toasts pop-ups discretely alert the user when they perform meaningful actions i.e. logins and content changes.
+- As a user might expect, modals appear to confirm content deletion.
+
+**Responsiveness**
+
+- Pages adapt to a variety of screen sizes thanks to the Bootstrap grid template and extensive testing in Chrome Dev Tools.
+- Where readability is compromised, page structure is modified to give more space to the elements (e.g. giving username its own row on the View Activity page).
+
+**Security**
+
+- Allauth provides a robust user account system while Stripe offers secure payments, furthered by use of webhooks to ensure transactions are recorded.
+
+**Appealing visuals**
+
+- SVGs
+- Simple, bold colours and use of consistent spacing bring clarity to the content.
+
+### As a X I want...
+
+**To immediately understand what the purpose of the site is and what it can provide**
+
+<div align="right"><a style="text-align:right" href="#top">Go to index :arrow_double_up:</a></div>
+
+<span id="testing-manual"></span>
+
+## Manual testing
+
+The following tests have been carried out without issue:
+
+
+<div align="right"><a style="text-align:right" href="#top">Go to index :arrow_double_up:</a></div>
+
+<span id="testing-auto"></span>
+
+## Automated testing
+
+[Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools) - Lighthouse audit summary for both desktop and mobile:
+
+**Home page**
+
+- Performance: **99%**
+- Accessibility: **100%**
+- Best Practices: **100%**
+- SEO: **100%**
+
+
+**Product pages**
+
+- Performance: **79 - 97%**
+- Accessibility: **100%**
+- Best Practices: **100%**
+- SEO: **90%**
+
+**Categories page**
+
+- Performance: **82 - 99%**
+- Accessibility: **97%**
+- Best Practices: **100%**
+- SEO: **100%**
+
+**Add / Edit pages**
+
+- Performance: **90 - 99%**
+- Accessibility: **88%**
+- Best Practices: **100%**
+- SEO: **98 - 100%**
+
+**Profile page**
+
+- Performance: **73 - 98%**
+- Accessibility: **100%**
+- Best Practices: **100%**
+- SEO: **100%**
+
+[W3C - HTML](https://validator.w3.org/) - 0 errors, 0 warnings - **PASS**
+
+[W3C - CSS](https://jigsaw.w3.org/css-validator/) - 
+
+- Use of unknown vendor extensions
+
+[CSS Lint](http://csslint.net/) - 
+
+
+
+[Unicorn revealer - overflow](https://chrome.google.com/webstore/detail/unicorn-revealer/lmlkphhdlngaicolpmaakfmhplagoaln/related) - no evidence of overflow - **PASS**
+
+[JS Hint](https://jshint.com/) - 0 errors, 0 warnings - **PASS**
+
+
+[PyCodeStyle](https://github.com/PyCQA/pycodestyle) - 0 warnings - **PASS**
+
+
+
+<div align="right"><a style="text-align:right" href="#top">Go to index :arrow_double_up:</a></div>
+
+<span id="testing-responsive"></span>
+
+## Responsiveness
+
+The site has been designed with a mobile-first philosophy and, supported by [Materialize](https://materializecss.com/), has been thoroughly tested at all stages of development using [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools).
+
+In addition to Materialize's breakpoints, various media queries have been used to maximise the legibility of text and provide sufficient spacing for all content. These queries include optimised `margin`, `padding`, `text-align` and adjustments of `display` to accommodate changes in HTML structure. Particular attention has been paid to the appearance of cards and buttons on different devices.
+
+Examples:
+
+- on the View Activity page the 'Back' button has been aligned with the activity details below in keeping with Materialize's breakpoints.
+- on the Categories page, the cards' appearance at the breakpoints from 2 to 3 columns was studied to make sure that even in a worst case scenario their content would not be put out of place. Revisions saw the card choice and position of each element tested, including when logged in as admin and the edit and delete buttons are visible.
+- the Footer content was separated out on larger screen sizes to make better use of the space.
+- the `flow-text` Materialize class has been used for any large text areas to ensure they are as legible as possible depending on device viewed with.
+
+
+<div align="right"><a style="text-align:right" href="#top">Go to index :arrow_double_up:</a></div>
+
+### Browsers
+
+Tested on:
+
+- Chrome
+- Edge
+- Firefox
+- Safari (iOS)
+
+### Screen sizes
+
+Tested with Chrome DevTools using profiles for:
+
+- Moto G4
+- Galaxy S5
+- Pixel 2
+- Pixel 2 XL
+- iPhone 5 SE
+- iPhone 6/7/8
+- iPhone 6/7/8 Plus
+- iPhone X
+- iPad
+- iPad Pro
+
+... and also using the responsive profiles of:
+
+- Mobile S (320px)
+- Mobile M (375px)
+- Mobile L (425px)
+- Tablet (768px)
+- Laptop (1024px)
+- Laptop L (1440px)
+
+Real world testing on:
+
+- iPhone 6S
+- iPhone SE
+- iPhone 11 Pro
+- Asus ZenBook
+- Dell XPS 7590
+
+
+<div align="right"><a style="text-align:right" href="#top">Go to index :arrow_double_up:</a></div>
+
+## Issues and bugs
+
+<span id="testing-resolved"></span>
+
+### Resolved
+
 Bug 1: get_object_or_404 error caused by object id not being found
 Solution: find erroneous string iteration pointing to Nicotine (4 items) rather than Size (3 items)
 
@@ -5,7 +211,7 @@ Bug 2: search queries via M2M relationship (Tags model) would return duplicate r
 Solution: using .distinct() on the filtered query
 
 Bug 3: line order items can be set to 0 in Admin
-Solution: due to setting default=0 ?
+Solution: 
 
 <!-- Bug 4: line order items have price tied to the model when it should be set on save
 Solution:  -->
@@ -68,3 +274,4 @@ UNSOLVED
 Bug 20: deleting a product which has reviews leads to a KeyError
 Solution: caused by the signal which updates a product rating on deletion. On product deletion the CASCADE would delete all reviews, which would in turn fire the update_total signal for an instance which no longer existed. Solved initially by changing the signal to pre_delete, but this would have caused problems when updating the rating as it would include the to-be-deleted review too. Solve eventually by changing the ProductReview's on_delete to SET_NULL, storing the to-be-deleted reviews in the product's delete view,  deleting them after the product itself was deleted, and finally including a check that the product instance existed on the post_delete update signal.
 
+### Unresolved
