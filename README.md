@@ -23,9 +23,9 @@
 <span id="context"></span>
 
 ## Context
-Smoking will kill you. Anyone who smokes should use vaping as an enjoyable means to kick the habit. The only risk is taking up a different, albeit infinitely safter habit.
+Smoking will kill you. Anyone who smokes should explore vaping as an enjoyable means to kick the habit. The only risk is taking up a different, albeit much safter habit.
 
-With that out of the way (and in spite of the bizarre public health stances taken by countries around the world), vaping has become mainstream. It caters to a variety of users with very different wants and expectations, from the older generation just looking to improve their health, to the hobbyists spending vast sums on their hardware.There are many online vaping stores out there, but they tend to be busy and bloated, selling anything you might ever need but with little style. The simplest and most crucial part of the industry is the e-liquid itself, and that's where Moose Juice comes in.
+Vaping has become mainstream. The userbase is broad and has varied wants and expectations, from the older generation looking to quit the habit, to the hobbyists spending vast sums on their hardware. There are many online vaping stores out there, but they tend to be busy and bloated, selling anything you might ever need but with little style. The simplest and most crucial part of the industry is the e-liquid itself, and that's where Moose Juice comes in.
 
 <div align="right"><a style="text-align:right" href="#top">Go to index :arrow_double_up:</a></div>
 
@@ -36,31 +36,29 @@ With that out of the way (and in spite of the bizarre public health stances take
 <span id="ux-overview"></span>
 
 ### Overview
-Unconcerned with selling hardware in its myriad forms, Moose Juice can focus on providing nothing but the highest quality, home-brewed e-liquid and delivering a great user experience. By using an aesthetic not typically seen in larger vaping e-commerce stores alongside an accessible rewards system, the company hopes to retain its clientelle and be guided by their feedback. Converting a sale will rely on quickly signposting potential customers to relevant products and then giving them options.
+Unconcerned with selling hardware in its myriad forms, Moose Juice is focused on providing nothing but high quality, home-brewed e-liquid and delivering a great user experience. With an aesthetic not typically seen in larger vaping e-commerce stores and an accessible rewards system, the company hopes to retain and grow its clientele, guided by their feedback. The target audience is 25 - 40-yr-old smokers and existing vapers looking for a dedicated juice supplier. Converting a sale will rely on quickly signposting potential customers to relevant products and then giving them options.
 
-In summary, the two questions asked by the site should be "What's your taste?" and "How do you vape?"
+The two questions asked by the site are "What's your flavour?" and "How do you vape?"
 
 #### Flavours
 Flavour and choice are paramount at Moose Juice. That's what will keep people off cigarettes for good. Options to filter by common vaping flavour profiles (bakery, dessert, fruit etc) are complimented by the ability to search for individual flavour notes (cinnamon, cream, apple etc). When browsing for a new juice to try, most users will go straight for an individual flavour and then make a choice based on its popularity.
 
 #### Brands
-From an e-liquid perspective all vapers will fall into one of three categories, which Moose Juice caters for in its brands.
+As far as e-liquid goes, all vapers will fall into one of three categories. Moose Juice has a brand for each category:
 
 **Big Moose**
 
-For use with 'sub-ohm' devices, which get through a lot of juice and put out large vape clouds. This type of e-liquid has a thicker consistency due to a higher ratio of vegetable glycerin (VG) to propylene glycol (PG) and as sub-ohm devices use it up quickly, needs to come in larger bottles. Due to the TPD Regulations it cannot be sold pre-mixed with nicotine.
+For use in 'sub-ohm' devices, which need a lot of juice to produce those thick clouds. This type of e-liquid has a thicker consistency and as it's used up quickly needs to come in larger bottles. Due to the TPD Regulations it cannot be sold pre-mixed with nicotine.
 
 **Mini Moose**
 
-One of two Moose Juice brands aimed at users of the more discreet 'pod' systems. These juices have a 50:50 PG/VG ratio and come in a variety of pre-mixed freebase nicotine strengths. The TPD Regulations do not allow pre-mixed e-liquids to be sold in bottles larger than 10ml.
+One of two Moose Juice brands aimed at users of discreet 'pod' systems. These thinner juices come in a variety of pre-mixed freebase nicotine strengths and to comply with TPD Regulations must not be sold in bottles larger than 10ml.
 
 **Salty Moose**
 
 These pre-mixed juices use nicotine salts rather than freebase, providing a much quicker absorbtion rate akin to that of traditional cigarettes and a smoother 'throat hit' on the inhale.
 
-The different compositions of these e-liquids mean that certain flavour combinations are better suited to one brand than another. Moose Juice's expertise in understanding these differences is what makes them so good. The flavour mix of an individual product is therefore not suitable to include in each of the three brands.
-
-
+The way each brand of e-liquid is made means that certain flavour combinations are better suited to one over another. Moose Juice's expertise in understanding these differences is what makes them so good. A particular mix of flavours will only appear in one brand.
 
 <span id="ux-stories"></span>
 
@@ -120,10 +118,8 @@ There were some noteworthy deviations from the plan. These were:
 ### Design choices
 Bootstrap provides a flexible framework for building upon and wherever possible its structure has been used and modified to achieve the desired functionality and feel.
 
-#### Colours
-The colour scheme has been losely based on the orange colour of a traditional cigarette's filter in order to hopefully inspire some familiarity in potential customers, who may be interested in vaping on their road to quitting smoking. 
-
-**Core**
+#### Core colour scheme
+The colour scheme is based on the orange colour of a traditional cigarette's filter in order to inspire familiarity in potential customers who may look to vaping on their road to quitting smoking. 
 
 The 'filter-tip' orange is consistently used as an accent colour against Bootstrap's cool `dark` tones, along with judicious white space.
 
@@ -131,35 +127,36 @@ The 'filter-tip' orange is consistently used as an accent colour against Bootstr
 - ![#ff7f54](https://via.placeholder.com/15/ff7f54/000000?text=+) #ff7f54 (for dark backgrounds)
 - ![#e4714b](https://via.placeholder.com/15/e4714b/000000?text=+) #e4714b (for light backgrounds)
 
-**Cards**
+The aim was to provide a solid colour base which could bring the other elements on the site to life, most notably the multi-coloured juice bottles.
 
-Originally the project was going to use ready-branded photos of existing vape products. However, in order to provide a different overall aesthetic (and perhaps due to the challenge of sourcing relevant data and images) the decision was made to use an inline SVG which could be varied per product. The result is a broad spectrum of colours which work well to punctuate the otherwise restricted colour palette. 
+#### SVGs
 
-**Buttons, Tabs, Pills**
+In the planning stages the project was going to use images of existing vape products. However, in order to provide a different overall aesthetic (and in part due to the challenge of sourcing relevant data and images) the decision was made to use an inline SVG which could be varied per product. The result is a broad spectrum of colours which work well to punctuate the otherwise restricted colour palette. 
 
-The same colours are used as for the core site elements, with variations depending on the action. Positive actions (choose, confirm, submit, delete) have a solid dark background with orange hover effects whereas negative actions (back, cancel etc) are indicated using just an outline which is filled dark on hover. One exception is the pill used to indicate a discount has been applied on an otherwise two-tone page (Boostrap's `warning`). 
+#### Buttons, Tabs, Pills
+
+The same colours are used as for the core site elements, with variations depending on the action. Affirmative actions (choose, confirm, submit, delete) have a solid dark background with orange hover effects whereas negative actions (back, cancel etc) are indicated an outline which is filled dark on hover. Other splashes of colour are used to highlight important information, such as the pill to show a discount has been applied on an otherwise two-tone page (Boostrap's `warning`). 
 
 #### Hero image
 
-Another SVG has been used for the hero image to compliment the juice bottles. It has been edited to match the rest of the site and a subtle blurring effect used to evoke clouds of vapor clearing from the silhouette.
+Another SVG has been used for the hero image to compliment the juice bottles. It has been edited to match the site's core colours and a subtle blurring effect applied to evoke clouds of vapor clearing from the silhouette.
 
 #### Icons
 
-Simple icons are used with variations on the core colour scheme. Orange hover effects are used for user feedback, as are Font Awesome `fas` and `far` icons to indicate whether a product is a user favourite or not. On the favourites page itself, `broken-heart` is used to indicate that the product has been removed from favourites rather than jarringly reloading the page. Icons are also used to give some context to buttons during the checkout process (`piggy-bank`, `lock`, `times`), and for the frequently used `star` icon on ratings.
+Simple icons are used with variations on the core colour scheme. Orange hover effects are used for user feedback, as are Font Awesome `fas` and `far` icons to indicate whether a product is a user favourite or not. On the favourites page itself, `broken-heart` is used to indicate that the product has been removed from favourites. Icons are also used to give context to buttons during the checkout process (`piggy-bank`, `lock`, `times`), some information about nicotine on the product details page, and for the `star` icon on ratings.
 
 #### Shadows
-In order to highlight particular areas of interest to the user, some subtle shadowing is used when products are hovered (larger screens) and also for modals, toasts, product reviews and the add/edit product page (larger screens). Used sparingly, these effects have impact on an otherwise flat canvas.
+In order to highlight particular areas of interest to the user, some subtle shadowing is used when products are hovered (larger screens only) and also for modals, toasts, product reviews and the add/edit product page (larger screens only). Used sparingly, these effects have impact on an otherwise flat canvas.
 
 #### Fonts
-[Karla](https://fonts.google.com/specimen/Karla#about)
 
-A softer font used for everything other than headings. In keeping with the rounded edges on much of the other site elements.
+[Raleway](https://fonts.google.com/specimen/Raleway#about) - A hard, slender font used for all the site's headers.
 
-[Raleway](https://fonts.google.com/specimen/Raleway#about)
-
-A harder, slender font used for all the site's headers.
+[Karla](https://fonts.google.com/specimen/Karla#about) - A softer font used for everything other than headings. It compliments the rounded edges of the other elements on the site.
 
 #### Bootstrap
+
+The following Bootstrap components have been used:
 
 - [Buttons](https://getbootstrap.com/docs/4.6/components/buttons/)
 - [Cards](https://getbootstrap.com/docs/4.6/components/card/)
@@ -194,22 +191,70 @@ TBC
 
 #### Site-wide
 
+**Favourites**
+
+- Users can easily save their favourite juices from any of the product pages, and remove from favourites just as easily
+- A heart icon shows whether or not a product is a user favourite (full vs empty). When clicked an ajax request updates the database without reloading the page, providing a more seamless user experience
+
+**Rewards**
+
+- Points are rewarded for various user actions:
+  - Registering (100 points)
+  - Leaving a review following a verified purchase (5 points)
+  - For every £1 spent (1 point)
+- They can be redeemed for a discount of 1 penny per point until the order total is zero.
+- Points earned for purchases are calculated on the order total after an existing discount has been applied, and before the delivery cost is added on.
+- Users can track how they have earned and spent points via their Account Dashboard.
+
 **Navbar**
+
+Consistent on all pages, the navbar provides quick access to all areas of the site.
 
 **Search bar**
 
-**Headings**
+The search bar finds juices matching a user's query either by name or from their constituent flavours. If a user knows what they want, this is their route to finding it. The user's search term is displayed once submitted.
 
 **Toasts**
 
+These pop-ups give context to and confirmation of user actions, including error messages, login/out, and success on leaving a review or on checkout. Where appropriate they also show a summarised copy of the shopping cart with a link to review before heading to checkout.
 
 #### Page-specific
 
 **Home**
 
+- Striking hero image draws potential customers in and a simple call to action links straight to the juice products page.
+- Trio of action cards invite further exploration of the home page (the brands and flavour categories) and a link to sign up to start receiving rewards.
+- Brand section establishes how Moose Juice has separated its product range, gives details about each brand and a link to the respective juices.
+- Flavour categories need no more explanation than a bold thumbnail icon which will filter the juices accordingly.
+
 **Products**
 
+- Sort field to order filtered juices by new arrivals, rating or name. The number of matching juices is displayed.
+- Product cards show the essential details (name, category, rating and price), with a satisfying box-shadow hover effect.
+- SVG used to depict each card, with an endless possibility of colours as chosen by the admin.
+- Product rating is shown depicted as a set of stars.
+- Product RRP is visible and if on sale this is struck out and replaced by the sale price.
+
+  *Registered users*
+- Can add/remove favourites by clicking the heart icon.
+
+  *Super users*
+- Those with admin rights get an extra icon which links to the edit product page.
+
 **Product details**
+
+- In addition to the information and functionality of the products page, a product description and list of individual flavour notes is included.
+- Flavours link to all other products with the same flavour.
+- A form allows users to pick options for the product, as well as the quantity, before submitting and adding the item to their cart.
+- Only options available for the brand in question are available.
+- Product reviews can be found under the form, including the star rating and whether the review is following a verified purchase.
+
+  *Registered users*
+- Have the ability to leave and edit reviews, but not to delete them.
+
+  *Super users*
+- Can both edit and delete a juice from the product detail page.
+- Can edit and delete any user's review.
 
 **Cart**
 
@@ -228,65 +273,38 @@ TBC
 
 
 
-**2. Secure passwords**
+**Secure passwords**
 When registering for the site, the user's password is hashed so that it is not revealed to the database owner.
 
-**3. CRUD functionality**
+**CRUD functionality**
 
-Visitors can:
-- View all activities
-- View all categories.
+All users can:
+- Read all products
 
-Users can:
-- Add their own activities
-- Edit their own activities 
-- Delete their own activities.
+Registered users can:
+- Create product reviews
+- Update product reviews
+- Update their delivery details
+- Update their list of favourites
 
-The admin can:
-- Add their own activities
-- Edit any users' activities
-- Delete any users' activities
-- Add a category
-- Edit a category
-- Delete a category.
+Superusers can:
+- Frontend:
+  - Create, Update and Delete products
+  - Create, Update and Delete any product reviews
 
-**4. Image uploads**
-Rather than having to find a URL for an image, users can upload their own files. This encourages them to provide their own content, but if they skip this step then a default image is displayed from the relevant category.
 
-**5. Image resizing**
-Prior to uploading an image, a user's file is resized so that it does not adversely affect site load times, and also gives some control over its dimensions.
+**Static and image file hosting**
 
-**6. User profile**
-Users can view all activities they have created in one place and easily edit or delete them.
+- Static and image files are served from an Amazon S3 Bucket
 
-**7. Admin rights**
-The admin has the additional ability to:
-- Edit or delete any activity on the site from its View Activity page
-- Add categories
-- Edit a category summary or image (but they cannot edit the name of a category to preserve relationship integrity)
-- Delete categories from the Categories page, with measures for preserving relational integrity for activities no longer associated with a category.
+**Confirm delete**
+When the admin clicks to delete a product or review, a modal pops up to confirm they wish to do so to prevent accidental deletion.
 
-**8. Confirm delete**
-When the user or admin clicks to delete an activity or category, a modal pops up to confirm they wish to do so to prevent accidental deletion.
+**Access protection**
 
-**9. Category reassignment on deletion**
-When the admin chooses to delete a category which has associated activities, these activities are moved to the 'Unassigined' category and are still visible on the site.
+Routes are protected using Django's `@login_required` route decorators to ensure non-super-users cannot interfere with the database.
 
-**10. Search**
-All users can search for keywords appearing in:
-- Activity title
-- Activity summary
-- Activity description
-- Activity required equipment
-Activities can be filtered by category from the Categories page and also by target age or activity author by clicking on the associated tag from the Activities, View Activity or Profile pages.
-
-**11. Pagination**
-The Activities page (and any search or filters applied) will limit the number of activities visible to 9 in order to reduce the number of images loaded and keep the focus on the content. As individual users are unlikely to be adding much more than 9 activities, it makes sense not to paginate the Profile page to avoid spilling onto a second page in this rare instance.
-
-**12. Access protection**
-Routes to restricted functions such as add, edit and delete (for both session user and admin) are protected so that they cannot be accessed by brute force via the URL.
-
-**13. 404 and 500 error handling**
+**404 and 500 error handling**
 Pages for 404 and 500 errors keep the user on the site when something goes wrong, allowing them to return to the content with minimal disruption.
 
 <span id="features-future"></span>
