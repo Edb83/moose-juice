@@ -16,12 +16,20 @@
     --shadow-normal: 0 .5rem 1rem rgba(0,0,0,.15)!important;
 }
 
-html {
+html,
+body {
     height: 100%;
 }
 
+/* https://css-tricks.com/couple-takes-sticky-footer/ */
 body {
+    display: flex;
+    flex-direction: column;
     font-family: var(--font-default);
+}
+
+.content {
+    flex: 1 0 auto;
 }
 
 a:hover {
@@ -70,6 +78,29 @@ a:hover {
 .navbar-dark .navbar-toggler {
     border: none;
 }
+
+/* Footer */
+
+.footer {
+  flex-shrink: 0;
+  background-color: var(--color-dark);
+  border-top: 1px solid var(--color-accent-dark);
+}
+
+.footer .fab {
+    color: #fff;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+
+.footer .fab:hover {
+      -webkit-transform: scale(1.2);
+          -ms-transform: scale(1.2);
+              transform: scale(1.2);
+}
+
 
 /* Search */
 
@@ -167,6 +198,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Home page */
 .hero-image {
+    flex: none;
     height: 90vh;
     position: relative;
     background-image: url('/media/background.svg');
@@ -245,8 +277,12 @@ h1, h2, h3, h4, h5, h6 {
 
 
 .home-section {
-    border-bottom: 1px solid var(--color-accent-dark);
     padding: 7rem 0;
+}
+
+#brands-section,
+#intro-section {
+    border-bottom: 1px solid var(--color-accent-dark);
 }
 
 #brands-section .container {
@@ -386,6 +422,7 @@ h1, h2, h3, h4, h5, h6 {
 #dashboard-container .tab-content {
     height: calc(100vh - 320px);
     overflow: auto;
+    margin-bottom: 3rem;
 }
 
 .btn-outline-dark:not(:disabled):not(.disabled).active:focus {
@@ -558,6 +595,12 @@ input[type=number] {
     }
 }
 
+#dashboard-container .tab-content {
+    height: calc(100vh - 320px);
+    overflow: auto;
+}
+
+
 @media (min-width: 992px) {
     .order-details-container {
         border-right: 1px solid var(--color-dark);
@@ -568,3 +611,4 @@ input[type=number] {
         border-radius: .25rem!important;
     }
 }
+

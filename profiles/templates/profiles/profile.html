@@ -75,7 +75,7 @@
                 <td>{{ event.created_on|date:"SHORT_DATE_FORMAT" }}</td>
                 <td>
                   {% if event.product %}
-                    {{ event.reward.type }}: <a class="link-normal" href="{% url 'product_detail' event.product.id %}">{{ event.product.name }}</a>
+                    {{ event.reward.type }}: <a class="link-normal" href="{% url 'product_detail' event.product.id %}#reviews-section">{{ event.product.name }}</a>
                   {% else %}
                     {{ event.reward.type }}
                 {% endif %}
