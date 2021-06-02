@@ -25,29 +25,29 @@ The site has been designed to be as consistent as possible, no matter the conten
 - The Navbar and Footer remain the same across all pages, including Error pages.
 - Headings and icons (form fields and add/edit/delete buttons) are standardised across all pages.
 - Cards are a uniform shape and size per page and will never spill into a subsequent row.
-- Cards represent a 'zoomed out' view of multiple selection items (Activities/Search Bar page and Categories pages), whereas views of single items (View Activity, input forms) are 'zoomed in' without a card to suggest a boundary.
-- Where necessary, text is truncated to preserve the grid layout.
 
 **Easy navigation**
 
 The likely options a user might need at a given moment have been carefully considered to ensure a smooth browsing experience:
 
-- Headings are descriptive of the content displayed even when a search or filter is applied.
-- When a search finds no results...
+- Headings are descriptive of the content displayed.
+- When a search finds no results this is indicated with a link to get back to the action.
 - The title of each page updates in the browser window to indicate where the user is.
-- The Footer contains top-level menu options, 
+- Hover effects provide feedback on larger displays.
+- The footer contains is reserved for social media links.
 
 **Intuitive design**
 
-
-- Familiar icons have been used across the site for commonly expected actions e.g. add, edit, delete, search, back.
-- Toasts pop-ups discretely alert the user when they perform meaningful actions i.e. logins and content changes.
+- Familiar icons have been used across the site for commonly expected actions e.g. heart, lock, shopping-cart, user, trash.
+- Toasts pop-ups discretely alert the user when they perform meaningful actions i.e. logins, errors, successes.
 - As a user might expect, modals appear to confirm content deletion.
 
 **Responsiveness**
 
 - Pages adapt to a variety of screen sizes thanks to the Bootstrap grid template and extensive testing in Chrome Dev Tools.
-- Where readability is compromised, page structure is modified to give more space to the elements (e.g. giving username its own row on the View Activity page).
+- Where readability is compromised, page structure is modified to give more space to the elements (e.g. putting order details on a new row during checkout on smaller screens).
+- Where necessary, text is truncated to preserve the grid layout.
+- Use of SVGs rather than raster images (other than for flavour categories) means the site loads quickly and maintains image quality.
 
 **Security**
 
@@ -55,12 +55,136 @@ The likely options a user might need at a given moment have been carefully consi
 
 **Appealing visuals**
 
-- SVGs
+- SVGs provide lots of colour variety in an otherwise clean and simple colour scheme.
+- For browsers that support it, the hero image has a subtle but interesting blur effect
 - Simple, bold colours and use of consistent spacing bring clarity to the content.
+- Consistent accents bring all of the content together.
+- Subtle shadow effects make key elements pop off the page on larger displays (modals, product cards, reviews).
 
-### As a X I want...
+### As a potential customer I want to...
 
-**To immediately understand what the purpose of the site is and what it can provide**
+**Immediately understand what the purpose of the site is and what it can provide**
+
+- The hero image and call to action immediately spell out both the purpose and tone of the site. It's an e-liquid shop, come browse.
+- The info section underneath gives an idea of the company's ethos with anchor links to additional content down the page, plus a summary of the reward scheme on offer.
+- The Brands section explains how the products are divided, gives some information about them and provides a link to explore further.
+- The Flavour Categories section has bright bold icons depicting the flavour groups on offer. It doesn't need further explanation.
+
+**Easily browse through the juices**
+
+- There are numerous links to focus the user's attention on the juices at any point where they may be losing focus, and also ways to filter and sort them.
+- The navigation bar lets the user filter by sale, brand and flavour category.
+- The search bar allows the user to find juices by their name or the flavours they have.
+- The sort field lets users order whatever juices they have visible by date added, rating or alphabetically.
+- The product cards are simple yet informative allowing the user to quickly tell the brand, rating, price and whether they are on sale.
+
+**Create an account easily**
+
+- The Sign Up link is shown straight after the hero image and is otherwise available from the Nav Bar under Account.
+- A clutter-free sign-up template asks for only an email address, username and password, plus confirmation fields.
+- On registering the user is sent a confirmation email which when accessed takes them back to the site and logs them in.
+
+**Add items to my shopping cart before registering**
+
+- Users do not need to register to add items to their cart, or even to place orders.
+- If they add items to their cart and then decide to register along the way, their cart is preserved and they can enjoy the benefits of the points system.
+
+**Learn about a specific juice's flavour profile and filter accordingly**
+
+- There are two sides to the flavours - broad categories (e.g. bakery, dessert fruit) and individual flavours (e.g. apple, plum). Users can filter by broad category from the home screen or Nav Bar dropdown, including a description to wet their appetite, and they can search for juices which share a flavour (e.g. apple) when looking on the product details page. The search also matches the name of juices.
+
+**Read reviews/ratings for juices**
+
+- The rating (if available) for each juice is visible on the products page.
+- On viewing a juice in detail the user is directed to read existing reviews, which appear below the option selection form.
+
+**Learn about any rewards system**
+
+- This is highlighted on the home page and their full history of rewards is available once they have set up a profile in the Account Dashboard.
+
+**Choose bottle size and nicotine content**
+
+- Each brand has different options available, which are inherited by all juices in that brand
+- When looking at a product's details, before adding to their cart the user must choose from the available options.
+
+
+### As a Registered User I want to...
+
+**Save my default delivery details**
+
+- Users can either update their details from their account dashboard or by opting to at the checkout screen.
+- When they next come to checkout, these details will all be prepopulated apart from their credit card details.
+
+**Add a juice to my favourites list**
+
+- On the products, product details and favourites page there is a heart icon which the user can click to add or remove the juice from their favourites
+- While on the favourites page, a third icon variant indicates that a juice has been removed from their favourites should they wish to add it back.
+
+**View my previous purchases**
+
+- The account dashboard page has a tab showing the user's order history with the date or purchase, order number, number of items and total cost.
+- Clicking on an order number takes the user to a 'Receipt' page, which shows all information about the order including whether an item was on sale, if they used any points and, if so, what the discount was
+
+**Leave a review and rating for juices**
+
+- Registered users can review any juice from the product detail page.
+- They are informed that they can only leave one review per juice, and that to receive points they must have previously purchased it.
+- Users may not delete their reviews, but they can edit them.
+
+**Know that a review has come from a verified purchase**
+
+- Reviews from users who have already purchased a juice will have a 'Verified purchase' tag just above the content.
+
+**Review my basket prior to checkout**
+
+- Users can alter the quantity by clicking the up/down carets in their Cart, as well as removing them by clicking the trash icon.
+
+**Receive confirmation of my orders**
+
+- After successfully checking out, users see a pop-up telling them their order was successful and that a confirmation email has been sent to them.
+
+**See what juices are on sale**
+
+- Users can either choose the 'Sale' option from the Nav Bar, or look at the prices underneath each product card, which will be striken and replaced by a new price if on sale
+
+**Receive free delivery above an order threshold**
+
+- If the order is £30 or more (excluding delivery and after any discounts have been appled), then the delivery fee will be waived.
+
+**Receive reward points**
+
+- Users earn points for registering (100 points), reviewing a juice they have purchased (5 points) and for every whole pound they spend (1 point). A point is worth 1 penny discount on future purchases (with a minimum order total of £0, not including the delivery cost).
+- Users can redeem their points from the Cart page (or remove the discount).
+
+**View my reward points**
+
+- A user's reward points are shown on their Account Dashboard page and also when they have any items in their cart.
+
+### As a Site Owner I want to...
+
+**View, add, edit and delete products**
+
+- Superusers can access the Add Product page from the Account tab and choosing 'Quick Add'
+- As they fill out the form a mock-up of the product as it would appear on the site is updated in real time, including the colour picker.
+- They can change any relevant field including whether the product should be on sale.
+- The Edit Product page can be accessed from any of the product pages by clicking the edit icon.
+- The form fields are prepopulated with the existing product's details.
+- From the front-end a product can only be deleted via the product detail page to minimise accidents, by clicking the trashcan icon.
+- A modal appears to confirm whether they want to go ahead.
+
+**Have a flexible reward system**
+
+- The number of points award for user actions can be changed in the database and is not hard-coded or retroactive.
+- The database allows for further user actions to be rewarded.
+
+
+**Have a simple payment system**
+
+- The pricing scheme is fairly flat, with prices tied directly to the size of the bottle (currently 10ml, 50ml and 100ml).
+- All juices across the brands will have the same price as others offered in the same bottle
+- Each size also has a sale price, meaning there are six possible prices at present.
+- Sales can be applied to any individual juice.
+
 
 <div align="right"><a style="text-align:right" href="#top">Go to index :arrow_double_up:</a></div>
 
