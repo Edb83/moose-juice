@@ -35,6 +35,7 @@ def profile(request):
     template = 'profiles/profile.html'
     context = {
         'form': form,
+        'user': profile.user,
         'orders': orders,
         'rewards': rewards,
         'points': points,
