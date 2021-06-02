@@ -194,6 +194,127 @@ The likely options a user might need at a given moment have been carefully consi
 
 The following tests have been carried out without issue:
 
+**Navigation Bar**
+- Hover over each nav element to confirm all change colour to orange other than logo and title
+    - CHECK
+- Click Moose Juice logo to confirm goes to home page
+    - CHECK
+- Click All Juices to confirm displays all products
+    - CHECK
+- Click Sale to confirm only products on sale are displayed
+    - CHECK
+- Click Brands to confirm all Brands listed
+    - CHECK
+- Click each Brand to confirm that only products matching that Brand are displayed, and that Brand title and description are displayed underneath Nav Bar
+    - CHECK
+- Click Flavours to confirm all Categories are listed
+    - CHECK
+- Click each Flavour to check that only products matching that Category are displayed, and that Category name, logo and description are displayed underneath Nav Bar
+    - CHECK
+- Click Account (logged out) to confirm only options Register and Login are displayed
+    - CHECK
+- Click Account (logged in as Registered user) to confirm only options Dashboard and Logout are displayed
+    - CHECK
+- Click Account (logged in as Superuser) to confirm options Quick Add, Dashboard and Logout are displayed
+    - CHECK
+- Click Heart (logged out) to confirm redirect to Sign In page
+    - CHECK
+- Click Heart (logged in as Registered user) to confirm Favourites page is displayed
+    - CHECK
+- Click Price (Cart) to confirm goes to Cart page
+    - CHECK
+- Reduce horizontal screen width to 767px to confirm hamburger icon replaces inner Nav items
+    - CHECK
+- Reduce horizontal screen width to 575px to confirm Moose Juice title disappears
+    - CHECK
+- Reduce horizontal screen width to 320px to confirm no display errors
+    - CHECK
+
+**Footer**
+- Visit each page to confirm footer remains at the bottom of the page, even when there is minimal content (Sign Up)
+    - CHECK
+- Hover over each footer icon to confirm transition effect functions
+    - CHECK
+- Click each footer icon to confirm relevant social media page opens in a new window
+    - CHECK
+
+**Search Bar**
+- Hover over magnifying glass icon to confirm colour changes to orange
+    - CHECK
+- Click in search bar to confirm border changes to orange
+    - CHECK
+- Search for 'apple' to confirm that products displayed either contain 'apple' as a flavour (Tag), or contain 'apple' in their name
+    - As expected, result for product named 'Pineapple' containing no apple flavour was displayed, as well as the three products with no apple in their name, but containing 'apple' as a flavour
+    - CHECK
+- Confirm that the container above products displays the correct information about the search
+    - As expected, from the previous test the display was `4 Juices found with "apple"`
+- Confirm that the title and discription displayed above the results are 'Moose Juice' and the default text (not linked to the Brands or Flavour categories)
+    - CHECK
+
+**Home Page**
+
+- On page load, confirm the hero image and call to action fade slowly into focus
+    - CHECK
+- On a screen width over 1023px, confirm that the hero image is fixed to the background when scrolling down the page
+    - CHECK
+- On a screen width of 1023px, confirm that the hero image scrolls with the page
+    - CHECK
+- On a mobile horizonal display where the hero image extends over the Search Bar, confirm that the hero image is still visible through it
+    - CHECK
+- Hover the Shop button in the call to action to confirm it turns dark
+    - CHECK
+- Click the Shop button to confirm it leads to the Products page
+    - CHECK
+- Hover and click the Brands, Flavours and Sign up! to confirm they turn white and lead to the correct anchor positions on the Home page
+    - CHECK
+- Reduce screen width to 767px to confirm intro cards appear in a column rather than row
+    - CHECK
+- Click each of the Brands options to confirm the content switches to describe the Brand
+    - CHECK
+- Click each link in the Brand description to confirm it filters products by that Brand
+    - CHECK
+- Reduce the screen width to 767px to confirm the pills display switches from vertical to horizontal
+    - CHECK
+- Hover over each Flavour profile icon to confirm its transition effect works
+    - CHECK
+- Click each Flavour icon to confirm it leads to a list of products filtered by that category
+    - CHECK
+- Reduce the screen width to 767px to confirm icons appear 2 per row rather than 3
+    - CHECK
+
+**Products**
+- Select each option from the Sort By selector to confirm products are listed in the corresponding order
+    - CHECK
+- Count the number of products in the admin and verify that each one is displayed, and that the correct number is displayed above them
+    - CHECK
+- Hover over the products to confirm the box-shadow effect is displayed
+    - CHECK
+- Check against the database that the correct price is shown for each product that has only one price variant and is not on sale e.g. "£3.50" for a Mini Moose or Salty Moose
+    - CHECK
+- Verify the display for a product with one price variant that is on sale e.g. `<del>£3.50</del> £2.50"
+    - CHECK
+- Check against the database that the correct price is shown for each product that has multiple price variants and is not on sale e.g. "From £7.99" for a Big Moose
+    - CHECK
+- Verify the display for a product with multiple price variants that is on sale e.g. "From <del>£7.99</del> £6.99"
+    - CHECK
+- Confirm the correct Brand is displayed for each product
+    - CHECK
+- Confirm that the correct star rating is displayed for each product and that "Not yet rated" is displayed for those without any reviews
+    - CHECK
+- Confirm the favourite heart icon is only shown when logged in as a Registered user
+    - CHECK
+- Confirm the edit icon is only shown when logged in as a Superuser
+    - CHECK
+- Click a heart icon to confirm it changes from empty to full and vice versa, and that doing so 
+updates the database in the admin view
+    - CHECK
+- Click the edit icon to confirm it leads to the Edit Product page
+    - CHECK
+
+**Product Details Page**
+- x
+
+
 
 <div align="right"><a style="text-align:right" href="#top">Go to index :arrow_double_up:</a></div>
 
@@ -264,26 +385,25 @@ An issue relating to Stripe's `[aria-hidden="true"] elements contain focusable d
 
 [W3C - HTML](https://validator.w3.org/) - 0 errors, 0 warnings - **PASS**
 
-[W3C - CSS](https://jigsaw.w3.org/css-validator/) - 3 errors, 776 warnings
-
-These were added by the CSS autoprefixer:
+[W3C - CSS](https://jigsaw.w3.org/css-validator/) - 3 errors, 776 warnings:
 
 `text-decoration-skip-ink doesn't exist : none`
 
 `overflow-anchor doesn't exist : none`
 
-This does not have [universal support](https://caniuse.com/css-backdrop-filter) however in testing the hero image was still visible just without the fading blur effect: 
+Both were added by the CSS autoprefixer and do not appear to be causing any issues.
 
 `backdrop-filter doesn't exist : blur(15px)`
 
-
+This filter not have [universal support](https://caniuse.com/css-backdrop-filter) however in testing the hero image was still visible on devices without support, just without the fading blur effect. 
 
 [Unicorn revealer - overflow](https://chrome.google.com/webstore/detail/unicorn-revealer/lmlkphhdlngaicolpmaakfmhplagoaln/related) - no evidence of overflow - **PASS**
 
 [JS Hint](https://jshint.com/) - 0 errors, 0 warnings - **PASS**
 
-
 [Pep8 Online](http://pep8online.com/) - 0 errors - **PASS**
+Code from all `.py` files were pasted into pep8 online and all linting errors were fixed apart from:
+
 - webhookhandler.py has two lines which could not be shortened without making the code illegible
 - webhooks.py has one line which could not be shortened
 - settings.py has two lines which could not be shortened
@@ -295,16 +415,16 @@ This does not have [universal support](https://caniuse.com/css-backdrop-filter) 
 
 ## Responsiveness
 
-The site has been designed with a mobile-first philosophy and, supported by [Materialize](https://materializecss.com/), has been thoroughly tested at all stages of development using [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools).
+The site has been designed with a mobile-first philosophy and, supported by [Bootstrap](https://getbootstrap.com/), has been thoroughly tested at all stages of development using [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools).
 
-In addition to Materialize's breakpoints, various media queries have been used to maximise the legibility of text and provide sufficient spacing for all content. These queries include optimised `margin`, `padding`, `text-align` and adjustments of `display` to accommodate changes in HTML structure. Particular attention has been paid to the appearance of cards and buttons on different devices.
+In addition to Bootstrap's breakpoints, various media queries have been used to maximise the legibility of text and provide sufficient spacing for all content. These queries include optimised `margin`, `padding`, `text-align` and adjustments of `display` to accommodate changes in HTML structure. Particular attention has been paid to the appearance of cards and buttons on different devices.
 
 Examples:
 
-- on the View Activity page the 'Back' button has been aligned with the activity details below in keeping with Materialize's breakpoints.
+<!-- - on the View Activity page the 'Back' button has been aligned with the activity details below in keeping with Materialize's breakpoints.
 - on the Categories page, the cards' appearance at the breakpoints from 2 to 3 columns was studied to make sure that even in a worst case scenario their content would not be put out of place. Revisions saw the card choice and position of each element tested, including when logged in as admin and the edit and delete buttons are visible.
 - the Footer content was separated out on larger screen sizes to make better use of the space.
-- the `flow-text` Materialize class has been used for any large text areas to ensure they are as legible as possible depending on device viewed with.
+- the `flow-text` Materialize class has been used for any large text areas to ensure they are as legible as possible depending on device viewed with. -->
 
 
 <div align="right"><a style="text-align:right" href="#top">Go to index :arrow_double_up:</a></div>
