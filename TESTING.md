@@ -298,11 +298,14 @@ Solution: could not reproduce even with order_total ending £0.50 but set items 
 Bug 18: messages.success includes cart contents no matter the context
 Solution: Partially solved by including context on rendered views (e.g. on_profile_page), however context cannot be passed on form submissions etc in the same way. Using a hidden form field is probably the best solution but in the meanwhile switched certain messages over from messages.success to the less cluttered messages.info
 
-Bug 19: deleting a product which has been purchased will obviously delete an order's lineitem and lead to difficulties.
+Bug 19: deleting a product which has been purchased will obviously delete an order's lineitem and lead to problematic order histories.
 Solution: insufficient time to fix, but likely using `on_delete=models.SET()` and retrieving string versions of the to-be-deleted product, siz, nicotine, price etc would be the way forward
 UNSOLVED
 
 Bug 20: deleting a product which has reviews leads to a KeyError
 Solution: caused by the signal which updates a product rating on deletion. On product deletion the CASCADE would delete all reviews, which would in turn fire the update_total signal for an instance which no longer existed. Solved initially by changing the signal to pre_delete, but this would have caused problems when updating the rating as it would include the to-be-deleted review too. Solve eventually by changing the ProductReview's on_delete to SET_NULL, storing the to-be-deleted reviews in the product's delete view,  deleting them after the product itself was deleted, and finally including a check that the product instance existed on the post_delete update signal.
+
+Bug 21: cart is not saved if a user logs out while items are in their cart.
+Solution: 
 
 ### Unresolved

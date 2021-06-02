@@ -258,7 +258,23 @@ These pop-ups give context to and confirmation of user actions, including error 
 
 **Cart**
 
+- Allows line item quantities to be altered or removed from the cart and updates on each change.
+- Shows cart total, delivery and grand total of the order, as well as how many points they would earn if they were registered.
+- If cart total is less than free delivery threshold, amount required to receive free delivery is shown.
+
+  *Registered users*
+- Can see how many points they have available and can choose to redeem them on this order.
+- If discount applied, the total updates accordingly to show discounted price and option to remove discount is offered.
+
+
 **Checkout**
+
+- Shows order summary and form to input delivery details
+
+  *Registered users*
+- If delivery details previously saved, form will be pre-populated with them.
+- Option to save delivery details for future purchases.
+- If discount applied on the cart page, this is shown along with points redeemed.
 
 **Checkout success**
 
