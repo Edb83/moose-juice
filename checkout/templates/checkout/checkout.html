@@ -109,13 +109,13 @@
             <form action="{% url 'checkout' %}" method="POST" id="payment-form">
                 {% csrf_token %}
                 <fieldset>
-                    <legend class="fieldset-label small">Details</legend>
+                    <legend class="fieldset-label small">Contact</legend>
                     {{ order_form.full_name | as_crispy_field }}
                     {{ order_form.email | as_crispy_field }}
+                    {{ order_form.phone_number | as_crispy_field }}
                 </fieldset>
                 <fieldset>
                     <legend class="fieldset-label small">Delivery</legend>
-                    {{ order_form.phone_number | as_crispy_field }}
                     {{ order_form.street_address1 | as_crispy_field }}
                     {{ order_form.street_address2 | as_crispy_field }}
                     {{ order_form.town_or_city | as_crispy_field }}
