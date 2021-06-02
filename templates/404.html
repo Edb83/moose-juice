@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container-responsive">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1>Oops! Page not found!</h1>
+            <div>
+                <a class="normal-link" href="{% url 'home' %}">Go back home.</a>
+             </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
