@@ -50,6 +50,10 @@
               <td>{{ order.lineitems.all|length }}</td>
               <td>£{{ order.grand_total }}</td>
             </tr>
+          {% empty %}
+            <tr>
+              <td colspan="4" class="text-center">You haven't made any orders yet</td>
+            </tr>
           {% endfor %}
         </tbody>
       </table>

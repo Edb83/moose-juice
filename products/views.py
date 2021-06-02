@@ -267,9 +267,15 @@ def add_review(request, product_id):
                     review.verified_purchase = True
 
                 review.save()
-                messages.info(
-                    request,
-                    'Thanks for the review - 5 points to you!')
+                if review.verified_purchase:
+                    messages.info(
+                        request,
+                        'Thanks for the review - 5 points to you!')
+                else:
+                    messages.info(
+                        request,
+                        'Thanks for the review!')
+
                 return redirect(reverse('product_detail', args=[product.id]))
             else:
                 messages.error(
