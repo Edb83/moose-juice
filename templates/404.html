@@ -2,14 +2,18 @@
 {% load static %}
 {% block extra_title %} - 404{% endblock %}
 {% block content %}
-<div class="container-responsive">
-    <div class="row">
-        <div class="col-12 text-center">
-            <h1>Oops! Page not found!</h1>
-            <div>
-                <a class="normal-link" href="{% url 'home' %}">Go back home.</a>
-             </div>
-        </div>
+<div class="dead-center">
+    <h1>Oops! Page not found!</h1>
+    <div>
+        <a href="{% url 'products' %}" class="btn btn-outline-dark mt-5">
+            <span class="icon">
+                <i class="fas fa-chevron-left"></i>
+            </span>
+            Juices
+        </a>
     </div>
+</div>
+<div class="bottom-right">
+    <img src="{{ MEDIA_URL }}404.svg" alt="">
 </div>
 {% endblock %}

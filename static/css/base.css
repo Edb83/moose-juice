@@ -533,6 +533,22 @@ input[type=number] {
 }
 
 
+/* 404 page */
+
+.dead-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.bottom-right {
+    position: absolute;
+    top: 80%;
+    left: 84%;
+    transform: translate(-50%, -50%);
+}
+
 /* Media queries */
 
 @media (min-width: 1024px) {
