@@ -1,7 +1,7 @@
 # Moose Juice
-![alt text](# "Responsive sample")
+![alt text](wireframes/amiresponsive.jpg "Responsive sample")
 
-**[Live demo](#)**
+**[Live demo](https://moose-juice.herokuapp.com/)**
 ---
 <span id="top"></span> 
 ## Index
@@ -126,8 +126,11 @@ The 'filter-tip' orange is consistently used as an accent colour against Bootstr
 - ![#343a40](https://via.placeholder.com/15/343a40/000000?text=+) #343a40
 - ![#ff7f54](https://via.placeholder.com/15/ff7f54/000000?text=+) #ff7f54 (for dark backgrounds)
 - ![#e4714b](https://via.placeholder.com/15/e4714b/000000?text=+) #e4714b (for light backgrounds)
+- ![#3c7c9a](https://via.placeholder.com/15/3c7c9a/000000?text=+) #3c7c9a (for regular links)
 
 The aim was to provide a solid colour base which could bring the other elements on the site to life, most notably the multi-coloured juice bottles.
+
+Other splashes of colour are used to highlight important information, such as the pill to show a discount has been applied on an otherwise two-tone page (Boostrap's `warning`), and a familiar but not typical blue for regular links.
 
 #### SVGs
 
@@ -135,7 +138,7 @@ In the planning stages the project was going to use images of existing vape prod
 
 #### Buttons, Tabs, Pills
 
-The same colours are used as for the core site elements, with variations depending on the action. Affirmative actions (choose, confirm, submit, delete) have a solid dark background with orange hover effects whereas negative actions (back, cancel etc) are indicated an outline which is filled dark on hover. Other splashes of colour are used to highlight important information, such as the pill to show a discount has been applied on an otherwise two-tone page (Boostrap's `warning`). 
+The same colours are used as for the core site elements, with variations depending on the action. Affirmative actions (choose, confirm, submit, delete) have a solid dark background with orange hover effects whereas negative actions (back, cancel etc) are indicated an outline which is filled dark on hover. 
 
 #### Hero image
 
@@ -193,8 +196,8 @@ TBC
 
 **Favourites**
 
-- Users can easily save their favourite juices from any of the product pages, and remove from favourites just as easily
-- A heart icon shows whether or not a product is a user favourite (full vs empty). When clicked an ajax request updates the database without reloading the page, providing a more seamless user experience
+- Users can easily save their favourite juices from any of the product pages, and remove from favourites just as easily.
+- A heart icon shows whether or not a product is a user favourite (full vs empty). When clicked an ajax request updates the database without reloading the page, providing a more seamless user experience.
 
 **Rewards**
 
@@ -205,6 +208,10 @@ TBC
 - They can be redeemed for a discount of 1 penny per point until the order total is zero.
 - Points earned for purchases are calculated on the order total after an existing discount has been applied, and before the delivery cost is added on.
 - Users can track how they have earned and spent points via their Account Dashboard.
+
+**Responsive**
+
+Effort has been made to ensure the website displays well across all devices, using Bootstrap's grid system and various media queries.
 
 **Navbar**
 
@@ -261,15 +268,16 @@ These pop-ups give context to and confirmation of user actions, including error 
 - Allows line item quantities to be altered or removed from the cart and updates on each change.
 - Shows cart total, delivery and grand total of the order, as well as how many points they would earn if they were registered.
 - If cart total is less than free delivery threshold, amount required to receive free delivery is shown.
+- Protection in case an item in the cart has been deleted from the database, in which case the item will not be added and a message alerting the user will be displayed.
 
   *Registered users*
 - Can see how many points they have available and can choose to redeem them on this order.
 - If discount applied, the total updates accordingly to show discounted price and option to remove discount is offered.
 
-
 **Checkout**
 
-- Shows order summary and form to input delivery details
+- Shows order summary and form to input delivery details.
+- Payment handled by Stripe and reliability improved by use of webhooks.
 
   *Registered users*
 - If delivery details previously saved, form will be pre-populated with them.
@@ -278,19 +286,33 @@ These pop-ups give context to and confirmation of user actions, including error 
 
 **Checkout success**
 
+Shows a summary of the order identifier, contact info and delivery information provided, as well as details of the order itself. On checkout the user is sent a confirmation email with details about their order.
+
 **Account dashboard**
+
+  *Registered users*
+- Shows how many points a user has on their profile, with other information split into three sections:
+- Details:
+  - default contact and delivery info
+  - ability to update to make future checkouts quicker
+- Orders:
+  - view previous orders using same template as checkout success page
+  - extra option of repeating the order
+  - repeating an order will repopulate the cart with previous order items
+- Points:
+  - summary of when and how points have been earned (account creation, purchases and reviews for verified purchases)
+  - for reviews, includes a link to the product reviewed
 
 **Add/edit product**
 
+  *Super users*
+- Can add/edit a juice, chosing all of its required features
+- Can choose whether or not the juice is on sale
+- A mockup of the juice as a product card is displayed, the name and colour of which are updated in real time to give a sense of how it will look when in the store
+- On submitting the addition/change, super user is sent to the update product's details page
 
-
-
-
-
-
-
-**Secure passwords**
-When registering for the site, the user's password is hashed so that it is not revealed to the database owner.
+**Secure accounts**
+Account security is covered by Django's allauth.
 
 **CRUD functionality**
 
@@ -308,13 +330,12 @@ Superusers can:
   - Create, Update and Delete products
   - Create, Update and Delete any product reviews
 
-
 **Static and image file hosting**
 
-- Static and image files are served from an Amazon S3 Bucket
+Static and image files are served from an Amazon S3 Bucket.
 
 **Confirm delete**
-When the admin clicks to delete a product or review, a modal pops up to confirm they wish to do so to prevent accidental deletion.
+When users request to delete a product or review, a modal pops up to confirm they wish to do so to prevent accidental deletion.
 
 **Access protection**
 
@@ -326,7 +347,15 @@ Pages for 404 and 500 errors keep the user on the site when something goes wrong
 <span id="features-future"></span>
 
 ### Future
-- TBC
+- Blog app to display industry and Moose Juice news, including comments feature to engage with the community and gather more feedback
+- Pagination and advanced search features to handle an increasing product list
+- Site-wide use of ajax requests to reduce number of page reloads
+- A 'suggested juices' section to encourage users to explore additional purchases
+- Apple / Google pay to improve checkout experience
+- Contact Us for improved correspondance with users
+- About Us page to give insight into Moose Juice's origins and methods for creating their juices
+- 'Learning Zone' to educate potential customers about the benefits of vaping and to dispell some of the myths surrounding it
+
 <div align="right"><a style="text-align:right" href="#top">Go to index :arrow_double_up:</a></div>
 
 <span id="technologies"></span>
@@ -340,15 +369,19 @@ Pages for 404 and 500 errors keep the user on the site when something goes wrong
 - [Python](https://www.python.org/)
 
 ### Frameworks
-- [Flask](https://palletsprojects.com/p/flask/)
-- [jQuery](https://jquery.com/)
 - [Bootstrap](https://getbootstrap.com/)
+- [Django](https://www.djangoproject.com/)
+- [jQuery](https://jquery.com/)
+
+### Database
+- [Heroku Postgres](https://www.heroku.com/postgres)
 
 ### Extensions and kits
 - [Boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
-- [Pillow](https://pillow.readthedocs.io/en/stable/)
 - [django-colorfield](https://pypi.org/project/django-colorfield/)
 - [jscolor](https://jscolor.com/)
+- [Pillow](https://pillow.readthedocs.io/en/stable/)
+- [Stripe](https://stripe.com/docs)
 
 ### Project management
 - [Amazon AWS](https://aws.amazon.com/) (S3)
@@ -368,18 +401,23 @@ Pages for 404 and 500 errors keep the user on the site when something goes wrong
 <span id="deployment"></span>
 
 ## Deployment
-The master branch of this repository is the most current version and has been used for the deployed version of the site. A separate branch was used for implementing... TBC
+The master branch of this repository is the most current version and has been used for the deployed version of the site. Separate branches were used for implementing features and fixes including colours, favourites, discounts, points, ratings, Stripe and SVGs.
 
 ### Prerequisites
 [Python 3](https://www.python.org/downloads/) - core code
+
 [PIP](https://pypi.org/project/pip/) - package installation
+
 [Git](https://git-scm.com/) - version control
-[Amazon AWS S3 Bucket](https://aws.amazon.com/)
-- An Amazon S3 Bucket is used to host the images uploaded to the app by its users.
 
-***Values for the env.py environment variables and Heroku Cvars used in the sections below will be unique to each MongoDB and S3 Bucket created. Please refer to their respective documentation for further details.***
+[Amazon AWS S3 Bucket](https://aws.amazon.com/) - host the site's static and media files
 
-### How to clone Moose Juice
+***Values for the env.py environment variables and Heroku Cvars used in the sections below will be unique to each SQLlite, Postgres and S3 Bucket created. Please refer to their respective documentation for further details.***
+
+<details>
+<summary>How to clone Moose Juice and run locally</summary>
+<p>
+
 To clone this project from its [GitHub repository](https://github.com/Edb83/moose-juice):
 1. From the repository, click **Code**
 2. In the **Clone >> HTTPS** section, copy the clone URL for the repository
@@ -390,56 +428,239 @@ To clone this project from its [GitHub repository](https://github.com/Edb83/moos
 git clone https://github.com/Edb83/moose-juice.git
 ```
 6. Press Enter. Your local clone will be created
-7. Create a file called env.py to hold your app's environment variables, which should contain the following:
+7. Create a file called `env.py` to hold your app's environment variables, which should contain the following:
 
 ```console
 import os
-os.environ.setdefault("IP", "0.0.0.0")
-os.environ.setdefault("PORT", "5000")
-os.environ.setdefault("SECRET_KEY", "<app secret key>")
-os.environ.setdefault("MONGO_URI", "mongodb+srv://<username>:<password>@<cluster_name>-ofgqg.mongodb.net/<database_name>?retryWrites=true&w=majority")
-os.environ.setdefault("MONGO_DBNAME", "<database name>")
-os.environ.setdefault("S3_BUCKET", "<S3 bucket name>")
-os.environ.setdefault("S3_KEY", "<S3 key>")
-os.environ.setdefault("S3_SECRET_ACCESS_KEY", "<S3 secret key>")
-os.environ.setdefault("S3_LOCATION", "https://<S3 bucket name>.s3.<S3 bucket region>.amazonaws.com/")
-```
-8. **Make sure that env.py is listed in your .gitignore file to prevent your environment variables being pushed publicly**
-9. The app can now be run locally using
-```console
-python3 app.py
-```
 
-### How to deploy to Heroku
-To deploy the app to Heroku from its [GitHub repository](https://github.com/Edb83/moose-juice), the following steps were taken:
-1. From the GitPod terminal, create **requirements.txt** and **Procfile** using these commands:
-```console
-pip3 freeze --local > requirements.txt
-echo web: python app.py > Procfile
+os.environ.setdefault("SECRET_KEY", "<app secret key of your choice>")
+os.environ.setdefault("DEVELOPMENT", "True")
+os.environ.setdefault('STRIPE_PUBLIC_KEY', '<key generated by Stripe>')
+os.environ.setdefault('STRIPE_SECRET_KEY', '<key generated by Stripe>')
+os.environ.setdefault('STRIPE_WH_SECRET', '<key generated by Stripe for individual webhook endpoint>')
 ```
-2. **Push** these files to GitHub
-3. **Log In** to [Heroku](https://id.heroku.com/login)
-4. Select **Create new app** from the dropdown in the Heroku dashboard
-5. Choose a unique name ('self-isolution') for the app and the location nearest to you
-6. Go to the **Deploy** tab and under **Deployment method** choose GitHub
-7. In **Connect to GitHub** enter your GitHub repository details and once found, click **Connect**
-8. Go to the **Settings** tab and under **Config Vars** choose **Reveal Config Vars**
-9. Enter the following keys and values, which must match those in the env.py file created earlier:
+To find your Stripe keys, login to Stripe and then under the **Developers** tab look for the 'Publishable Key' and 'Secret Key'
+
+The webhook secret key can be found under **Webhooks** once you have created an endpoint, which should be set to receive all events and match this url structure:
+```
+<your site's base url>/checkout/wh/
+```
+You will need a different endpoint for the local version and deployed site, updating the `STRIPE_WH_SECRET` accordingly in their respective environment variables.
+
+8. **Make sure the following are listed in your .gitignore file to prevent any environment variables being pushed publicly:**
+```
+core.Microsoft*
+core.mongo*
+core.python*
+env.py
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.pyc
+node_modules/
+db.json
+```
+9. Install the app requirements using:
+```
+pip3 install requirements.txt
+```
+10. Apply database migrations using:
+```
+python manage.py migrate
+```
+11. Create a new superuser and fill in your details:
+```
+python manage.py createsuperuser
+```
+12. The app can now be run locally using
+```
+python manage.py runserver
+```
+</details>
+
+<p>
+
+<details>
+<summary>How to deploy to Heroku</summary>
+<p>
+
+To deploy the app to Heroku from its [GitHub repository](https://github.com/Edb83/moose-juice), the following steps were taken:
+<!-- 1. **Commit** and **Push** the files to GitHub -->
+2. **Log In** to [Heroku](https://id.heroku.com/login)
+3. Select **Create new app** from the dropdown in the Heroku dashboard
+4. Choose a unique name ('moose-juice') for the app and the location nearest to you
+5. Under **Resources** search for and add **Heroku Postgres** to your app
+6. In your CLI install **dj_database_url** and **psycopg2** so that you can use Postgres on your deployed site
+```
+pip3 install dj_database_url
+pip3 install psycopg2
+```
+7. Log into Heroku via the CLI
+```
+heroku login -i
+```
+8. Migrate the database into Postgres
+```
+heroku run python manage.py migrate
+```
+9. Create a new superuser and fill in your details:
+```
+python manage.py createsuperuser
+```
+10. Install gunicorn
+```
+pip3 install gunicorn
+```
+11. Freeze the app's requirements
+```
+pip3 freeze > requirements.txt
+```
+11. Create a file called **Procfile** and include the following, making sure not to leave a blank line after it:
+```
+web: gunicorn moose_juice.wsgi:application
+```
+12. Disable Heroku's static file collection (temporarily)
+```
+heroku config:set DISABLE_COLLECTSTATIC=1 --app moose-juice
+```
+13. Add the hostname of your Heroku app to settings.py
+```
+ALLOWED_HOSTS = ['moose-juice.herokuapp.com', 'localhost']
+```
+14. Back in Heroku, select the **Deploy** tab and under **Deployment method** choose GitHub
+15. In **Connect to GitHub** enter your GitHub repository details and once found, click **Connect**
+16. Go to the **Settings** tab and under **Config Vars** choose **Reveal Config Vars**
+17. Enter the following keys and values, some of which will different from those in your env.py:
 
 |**Key**|**Value**|
 |:-----|:-----|
-|IP|`0.0.0.0`|
-|PORT|`5000`|
-|SECRET_KEY|`<app secret key>`|
-|MONGO_URI|mongodb+srv://`<username>`:<password>@`<cluster_name>`-ofgqg.mongodb.net/`<database_name>`?retryWrites=true&w=majority|
-|MONGO_DBNAME|`<database name>`|
-|S3_BUCKET|`<S3 bucket name>`|
-|S3_KEY|`<S3 key>`|
-|S3_SECRET_ACCESS_KEY|`<S3 secret key>`|
-|S3_LOCATION|https://`<S3 bucket name>`.s3.`<S3 bucket region>`.amazonaws.com/|
-10. Go back to the **Deploy** tab and under **Automatic deploys** choose **Enable Automatic Deploys**
-11. Under **Manual deploy**, select **master** and click **Deploy Branch**
-12. Once the app has finished building, click **Open app** from the header row of the dashboard
+|AWS_ACCESS_KEY_ID|`<your variable here>`|
+|AWS_SECRET_ACCESS_KEY|`<your variable here>`|
+|DATABASE_URL|`<added by Heroku when Postgres installed>`|
+|DISABLE_COLLECTSTATIC|`1` NB this variable will be deleted later|
+|EMAIL_HOST_PASS|`<your variable here>`|
+|EMAIL_HOST_USER|`<your variable here>`|
+|SECRET_KEY|`<your variable here>`|
+|STRIPE_PUBLIC_KEY|`<your variable here>`|
+|STRIPE_SECRET_KEY|`<your variable here>`|
+|STRIPE_WH_SECRET|`<different from env.py>`|
+|USE_AWS|True|
+
+18. Go back to the **Deploy** tab and under **Automatic deploys** choose **Enable Automatic Deploys**
+19. Back in your GitPod CLI add, commit and push your changes and Heroku will automatically deploy your app
+```
+git add .
+git commit -m "Initial commit"
+git push
+```
+20. Your deployed site can be launched by clicking **Open App** from its page within Heroku.
+
+</details>
+
+<p>
+
+<details>
+<summary>Setting up an S3 Bucket</summary>
+<p>
+
+1. Create an [Amazon AWS](aws.amazon.com) account
+2. Search for **S3** and create a new bucket
+- Allow public access
+- Acknowledge
+3. Under **Properties > Static** website hosting
+- Enable
+- Index.html as index document
+- Save
+4. Under **Permissions > CORS** use:
+```
+		[
+  {
+      "AllowedHeaders": [
+          "Authorization"
+      ],
+      "AllowedMethods": [
+          "GET"
+      ],
+      "AllowedOrigins": [
+          "*"
+      ],
+      "ExposeHeaders": []
+  }
+]
+```
+5. Under **Permissions > Bucket Policy**:
+- Generate Bucket Policy and take note of **Bucket ARN**
+- Chose **S3 Bucket Policy** as Type of Policy
+- For **Principal**, enter `*`
+- Enter **ARN** noted above
+- **Add Statement**
+- **Generate Policy**
+- Copy **Policy JSON Document**
+- Paste policy into **Edit Bucket policy** on the previous tab
+- Save changes
+
+6. Under **Access Control List (ACL)**:
+- For **Everyone (public access)**, tick **List**
+- Accept that everyone in the world may access the Bucket
+- Save changes
+
+</details>
+<p>
+<details>
+<summary>Setting up AWS IAM (Identity and Access Management)</summary>
+<p>
+
+1. From the **IAM dashboard** within AWS, select **User Groups**:
+- Create new group e.g. `manage-moose-juice`
+- Click through without adding a policy
+- **Create Group**
+2. Select **Policies**:
+- Create policy
+- Under **JSON** tab, click **Import managed policy**
+- Choose **AmazongS3FullAccess**
+- Edit the resource to include the **Bucket ARN** noted earlier when creating the Bucket Policy:
+```
+			"Resource": [
+			                "arn:aws:s3:::moose-juice",
+			                "arn:aws:s3:::moose-juice/*"
+            ]
+```
+- Click **next step** and go to **Review policy**
+- Give the policy a name e.g. `moose-juice-policy` and description
+- **Create policy**
+3. Go back to **User Groups** and choose the group created earlier
+- Under **Permissions > Add permissions**, choose **Attach Policies** and select the one just created
+- **Add permissions**
+4. Under **Users**:
+- Choose a user name e.g. `moose-juice-staticfiles-user`
+- Select **Programmatic access** as the **Access type**
+- Click Next
+- Add the user to the Group just created
+- Click Next and **Create User**
+5. **Download the `.csv` containing the access key and secret access key. This will NOT be available to download again**
+
+</details>
+<p>
+<details>
+<summary>Hooking Django up to S3</summary>
+<p>
+
+1. Install boto3 and django-storages
+```
+pip3 install boto3
+pip3 install django-storages
+pip3 freeze > requirements.txt
+```
+2. Add the values from the `.csv` you downloaded to your Heroku Cvars under Settings:
+```
+AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY
+```
+3. Delete the `DISABLE_COLLECTSTATIC` variable from your Cvars and deploy your Heroku app
+4. With your S3 bucket now set up, you can create a new folder called `media` (at the same level as the newly added `static` folder) and upload any required media files to it, making sure they are publicly accessible under **Permissions**
+
+</details>
+
 <div align="right"><a style="text-align:right" href="#top">Go to index :arrow_double_up:</a></div>
 <span id="testing"></span>
 
