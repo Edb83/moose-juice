@@ -230,13 +230,27 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--color-accent-primary);
 }
 
+#rewards-explainer {
+    font-size: 1.2rem;
+}
+
+#rewards-explainer p {
+    color: var(--color-accent-dark);
+    font-weight: 600;
+}
+
+#rewards-explainer ul {
+    line-height: 180%;
+}
+
+
 .home-section {
     border-bottom: 1px solid var(--color-accent-dark);
     padding: 7rem 0;
 }
 
-.home-section .container {
-    min-height: 20rem;
+#brands-section .container {
+    min-height: 23rem;
 }
 
 .home-section .container > h2 {
@@ -547,5 +561,10 @@ input[type=number] {
 @media (min-width: 992px) {
     .order-details-container {
         border-right: 1px solid var(--color-dark);
+    }
+
+    #rewards-explainer {
+        border: 1px solid;
+        border-radius: .25rem!important;
     }
 }
