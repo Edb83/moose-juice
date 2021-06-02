@@ -674,22 +674,27 @@ Full details of testing can be found [here](TESTING.md).
 ## Credits
 
 ### Tutorials / Resources
+- [Django docs](https://docs.djangoproject.com/en/3.2/)
 - [How to work with AJAX requests with Django](https://simpleisbetterthancomplex.com/tutorial/2016/08/29/how-to-work-with-ajax-request-with-django.html)
+
 
 ### Student projects
 - [LigaMoon's Prickly](https://github.com/LigaMoon/Prickly)
 
 ### Code modified from other sources
-- [TBC](#)
+- [Star rating implementation](https://github.com/LigaMoon/Prickly/blob/main/products/static/products/js/product_item.js)
 
 ### Content
 - All text outside of user-generated content is original
-- [Star rating implementation](https://github.com/LigaMoon/Prickly/blob/main/products/static/products/js/product_item.js)
-- [Favicon](https://favicon.io/emoji-favicons/house)
-- Images from [Pixabay](https://pixabay.com/)
+- Hero image from [Pixabay](https://pixabay.com/vectors/vaping-cigarette-electronic-3630389/)
+- Icons from [Flaticon](https://www.flaticon.com/)
 
 ### Acknowledgements
-- TBC
+- Brian Macharia, my mentor for MS4, for getitng me over the finish line
+- Chris Zielinkski for his generous support with all things Django
+- Gwen Bradbury for her help and support during our shared misery
+- Jonathan Munz, my first mentor, for getting me this far
+- Sean Young for his commitment to helping others and general coding savantism
 
 ### Disclaimer
 This site was developed for educational purposes.
