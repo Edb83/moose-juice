@@ -269,6 +269,7 @@ h1, h2, h3, h4, h5, h6 {
 #rewards-explainer p {
     color: var(--color-accent-dark);
     font-weight: 600;
+    padding-inline-start: 2em;
 }
 
 #rewards-explainer ul {
@@ -536,6 +537,7 @@ input[type=number] {
 /* 404 page */
 
 .background-404 {
+    height: ;
     background-image: url('/media/404.svg');
     background-size: 25vh;
     background-repeat: no-repeat;
@@ -612,17 +614,14 @@ input[type=number] {
     }
 }
 
-#dashboard-container .tab-content {
-    height: calc(100vh - 320px);
-    overflow: auto;
-}
-
 
 @media (min-width: 992px) {
     .order-details-container {
         border-right: 1px solid var(--color-dark);
     }
+}
 
+@media (min-width: 768px) {
     #rewards-explainer {
         border: 1px solid;
         border-radius: .25rem!important;
