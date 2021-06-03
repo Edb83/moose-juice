@@ -194,6 +194,13 @@ The likely options a user might need at a given moment have been carefully consi
 
 The following tests have been carried out without issue:
 
+
+**Sign In and Out**
+
+- Confirm clicking Login or Sign Out from the Account tab signs the user out and displays a confirmation message
+    - CHECK
+
+
 **Navigation Bar**
 - Hover over each nav element to confirm all change colour to orange other than logo and title
     - CHECK
@@ -297,6 +304,8 @@ The following tests have been carried out without issue:
     - CHECK
 - Verify the display for a product with multiple price variants that is on sale e.g. "From <del>£7.99</del> £6.99"
     - CHECK
+
+![right-price](wireframes/right-price.jpg)
 - Confirm the correct Brand is displayed for each product
     - CHECK
 - Confirm that the correct star rating is displayed for each product and that "Not yet rated" is displayed for those without any reviews
@@ -312,7 +321,141 @@ updates the database in the admin view
     - CHECK
 
 **Product Details Page**
-- x
+- Confirm correct information about Product is displayed
+    - CHECK
+- Confirm no icons (heart, edit, trash) appear when not logged in
+    - CHECK
+- Confirm heart icon only displays when logged in as Registered user
+    - CHECK
+- Confirm on loading page that heart is only full if already a favourite
+    - FAIL - it would always be full on joining the page, even though the subsequent clicks would correct it
+    - issue was due to a previous mistake of removing the profile variable from the product detail and favourites views, meaning the template could not tell whether it was in the user's favourites list. Fixed by adding profile back into the contexts of the two views
+    - the reason for this bug is not clear as the correct icon was being used initially
+- Confirm clicking heart icon switches from empty to full and vice versa
+    - CHECK
+- When logged in as a superuser confirm clicking edit icon leads to the Edit Product page
+    - CHECK
+- Confirm clicking delete icon brings up modal asking for confirmation
+    - CHECK
+- Confirm clicking Delete removes the product from the database
+    - CHECK
+
+- Confirm the flavours (Tag model) of a product appear below it and are correct in the database
+    - CHECK
+- Confirm clicking on a flavour brings up other juices containing that same flavour
+    - CHECK
+- Confirm that the options available for a juice are represented correctly in the Add to Cart form
+    - CHECK
+
+![order-form](wireframes/options-form.jpg)
+- Confirm that options are correctly attached to the product when it is added to the Cart
+    - CHECK
+- Confirm that users can update the quantity using the carets or by inputing into the text field
+    - CHECK
+- Confirm that the quantity entered cannot be less than 1 or more than 99, either using arrow keys, clicking the carets or entering the number manually
+    - CHECK
+
+![number-input](wireframes/number-input.jpg)
+- Confirm that clicking the Juices button takes user back to all products view
+    - CHECK
+- Confirm that clicking the Add to Cart button does add the item to the cart
+    - CHECK
+- Confirm that if a product has no reivews, a message asking user to leave a review is displayed, and that clicking it will take them down the Reviews anchor
+    - CHECK
+
+**Reviews**
+
+- Confirm that if a product has no reviews, a message is displayed about this with the request to Register/Login if user is not logged in
+    - CHECK
+
+![no-reviews](wireframes/no-reviews.jpg)
+- Confirm that when logged in as Registered user, Review form is displayed
+    -CHECK
+- Confirm that after filling out the review and submitting, user is redirected back to the reviews section and can see their new review
+    - CHECK
+- Confirm that only if user has previously purchased the juice, they receive a toast notifcation telling them they have earned 5 points and their review has 'Verified Purchase on it'
+    - CHECK
+
+![review](wireframes/review.jpg)
+- Confirm that only review owner or Super user can see edit icon to edit their review
+    - CHECK
+- Confirm only admin can see the trashcan to delete a review
+    - CHECK
+- Confirm user can only review each juice once and they receive a message if they try to submit again
+    - CHECK
+
+![already-reviewed](wireframes/already-reviewed.jpg)
+- Confirm 
+
+
+**Cart**
+
+![cart-lg](wireframes/cart-lg.jpg)
+- Confirm that when there are no items in the shopping cart, visiting the Cart page displays a message saying "There's nothing here" and to "Come back when you've added something!"
+    - CHECK
+- Confirm adding items to cart when logged out, and then logging in, keeps the cart contents
+    - CHECK
+- Confirm correct number of profile points is displayed above cart contents
+    - CHECK
+- Confirm 'Apply discount' button and points tally is only visible when user has points
+    - CHECK
+- Confirm that the same product with different options will appear as a separate item when added to the Cart
+    - CHECK
+- Confirm quantities updated by page refresh when carets clicked
+    - CHECK
+- Confirm line items can be delted by clicking trash can
+    - CHECK
+- Confirm message informing user of how many points they could earn if they were registered/logged in
+    - CHECK
+
+![separate-items](wireframes/separate-items.jpg)
+- Confirm that if a product was in the shopping cart before being deleted, a toast message appears informing the user that it has been removed from the cart
+    - CHECK
+
+![delete-in-cart](wireframes/delete-in-cart.jpg)
+- Confirm logged in users can remove discount and page updates to show this
+    - CHECK
+- Confirm delivery delta is calculated correctly
+    - CHECK
+- Confirm delivery is £0 if £30 threshold reached
+    - CHECK
+- Confirm discount applied before delivery is added on
+    - CHECK
+
+
+**Checkout**
+- Confirm correct items and amounts carried over from cart, including discount if applied
+    - CHECK
+- Confirm if user has logged in and saved their details previously, the form is pre-populated with them
+    - CHECK
+- Confirm Stripe webhooks successfully processed and Order saved
+    - CHECK
+
+![webhook-success](wireframes/webhook-success.jpg)
+
+**Account Dashboard**
+- Confirm correct points displayed above table
+    - CHECK
+- Confirm details can be updated and they prepopulate checkout form
+    - CHECK
+- Confirm all Orders displayed
+    - CHECK
+- Confirm can view individual orders via the link on order number
+    - CHECK
+
+- Confirm Reward history successfully updates and points awarded for Account creation, Reviewing verified purchase, points per pound spent
+    - CHECK
+
+**Add / Edit product**
+- Confirm only admin can access pages
+    - CHECK
+- Confirm Name of Juice and colour update in real time
+    - CHECK
+
+![add-juice](wireframes/add-juice.jpg)
+- Confirm added or updated juice reflected in database
+    - CHECK
+
 
 
 
@@ -434,9 +577,14 @@ Examples:
 Tested on:
 
 - Chrome
+    - no issues
 - Edge
+    - no issues
 - Firefox
+    - Hero image does not apply the blur filter on load but still displays fine
+    - some input fields are larger than expected but overall nothing major
 - Safari (iOS)
+    - cannot use `background-attachment: fixed` as would cause the hero image not to load at all, but because it's a smaller screen this was easier to isolate with a media query and use `scroll` instead
 
 ### Screen sizes
 

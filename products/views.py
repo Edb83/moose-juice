@@ -98,6 +98,10 @@ def product_detail(request, product_id):
     A view to return individual Product details and a form for
     submitting product reviews and ratings
     """
+    if request.user.is_authenticated:
+        profile = get_object_or_404(UserProfile, user_id=request.user)
+    else:
+        profile = None
 
     product = get_object_or_404(Product, pk=product_id)
     form = ReviewForm()
@@ -106,6 +110,7 @@ def product_detail(request, product_id):
         'product': product,
         'form': form,
         'on_product_detail_page': True,
+        'profile': profile,
     }
 
     return render(request, 'products/product-detail.html', context)
@@ -118,6 +123,7 @@ def favourites(request):
     template = 'products/favourites.html'
     context = {
         'products': products,
+        'profile': profile,
     }
 
     return render(request, template, context)
