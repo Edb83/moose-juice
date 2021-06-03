@@ -2,7 +2,7 @@
 URL passed in from server to client side to be used in ajax call -->
 <div class="product-icon-container">
     <div class="d-flex flex-column">
-        <div class="product-heart-container" data-url="{% url 'toggle_favourite' product.id %}"
+        <a class="product-heart-container" data-url="{% url 'toggle_favourite' product.id %}"
         data-redirect="{% url 'account_login' %}" aria-label="Toggle favourite">
             <span class="icon icon-product">
                 {% if product in profile.favourites.all %}
@@ -11,7 +11,7 @@ URL passed in from server to client side to be used in ajax call -->
                     <i class="far fa-heart fa-lg"></i>
                 {% endif %}
             </span>
-        </div>
+        </a>
         {% if request.user.is_superuser %}
         <div class="product-edit-container">
             <span class="icon">
