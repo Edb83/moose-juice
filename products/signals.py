@@ -7,7 +7,8 @@ from .models import ProductReview
 @receiver(post_save, sender=ProductReview)
 def update_rating_on_save(sender, instance, created, **kwargs):
     """
-    Update rating on product review update/create
+    Update a product's average rating on when a review
+    is created or updated.
     """
     instance.product.calculate_rating()
 
@@ -15,7 +16,7 @@ def update_rating_on_save(sender, instance, created, **kwargs):
 @receiver(post_delete, sender=ProductReview)
 def update_rating_on_delete(sender, instance, **kwargs):
     """
-    Update rating on product review delete
+    Update a product's average rating when a review is deleted.
     """
     if instance.product:
         instance.product.calculate_rating()

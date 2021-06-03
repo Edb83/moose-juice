@@ -36,6 +36,13 @@ def cache_checkout_data(request):
 
 
 def checkout(request):
+    """
+    Takes the data from an order form and creates an order in the DB.
+    Also checks whether a registered user has made the order and if they
+    have applied a discount, stores that information and sets their 
+    points to zero.
+
+    """
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 

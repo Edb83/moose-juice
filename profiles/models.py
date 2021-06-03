@@ -11,7 +11,7 @@ from django_countries.fields import CountryField
 class UserProfile(models.Model):
     """
     User profile model for maintaining default delivery info,
-    order history and favourites
+    order history and favourites.
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 

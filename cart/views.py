@@ -7,6 +7,8 @@ from checkout.models import Order
 def view_cart(request):
     """ A view to return the shopping cart contents """
 
+    # Check whether on the cart page so that cart contents won't be repeated when
+    # they can already be seen
     context = {
         'on_cart_page': True,
     }
@@ -40,7 +42,6 @@ def add_to_cart(request, item_id):
     return redirect(redirect_url)
 
 
-# Want to update whole cart on form submit
 def update_cart(request, item_id):
     """ Update quantity of the chosen product in shopping cart """
 
@@ -89,7 +90,10 @@ def toggle_discount(request):
 
 def replicate_cart(request, order_number):
     """
-    Create a new cart filled with items/quantities from previous order
+    Create a new cart filled with items/quantities from previous order, and save
+    it to the session variable.
+    As deleted items are removed from past orders, there will not be a situation
+    where deleted products are added.
     """
     order = Order.objects.get(order_number=order_number)
     original_cart = eval(order.original_cart)

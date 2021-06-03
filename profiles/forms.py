@@ -3,6 +3,9 @@ from .models import UserProfile
 
 
 class UserProfileForm(forms.ModelForm):
+    """
+    Receives information about a user's default details.
+    """
     class Meta:
         model = UserProfile
         exclude = ('user', 'favourites', 'points')

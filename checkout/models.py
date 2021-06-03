@@ -14,6 +14,9 @@ from rewards.models import Reward
 
 
 class Order(models.Model):
+    """
+    A model for orders made by any user
+    """
     class Meta:
         ordering = ['-id']
 
@@ -88,6 +91,10 @@ class Order(models.Model):
 
 
 class OrderLineItem(models.Model):
+    """
+    A model for each row of an order, storing product, size,
+    nicotine content, quantity and the total
+    """
     order = models.ForeignKey(
         Order, null=False, blank=False,
         on_delete=models.CASCADE, related_name='lineitems')

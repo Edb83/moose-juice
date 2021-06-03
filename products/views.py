@@ -118,6 +118,9 @@ def product_detail(request, product_id):
 
 @login_required
 def favourites(request):
+    """
+    A view to return a user's favourites
+    """
     profile = get_object_or_404(UserProfile, user=request.user)
     products = profile.favourites.all()
     template = 'products/favourites.html'
@@ -131,6 +134,10 @@ def favourites(request):
 
 @login_required
 def toggle_favourite(request, product_id):
+    """
+    Add or remove a product from a user's list of favourites. Responds to
+    an ajax request made when heart icon is clicked.
+    """
 
     profile = get_object_or_404(UserProfile, user=request.user)
     product = get_object_or_404(Product, pk=product_id)
@@ -333,7 +340,7 @@ def edit_review(request, review_id):
 @login_required
 def delete_review(request, review_id):
     """
-    Delete a user's product review
+    Delete a user's product review (only if superuser).
     """
 
     if not request.user.is_superuser:

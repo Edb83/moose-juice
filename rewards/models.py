@@ -4,6 +4,11 @@ from products.models import Product
 
 
 class Reward(models.Model):
+    """
+    Stores types of reward and their values when awarded to users
+    on account creation, verified purchase reviews and purchases
+    made.
+    """
     type = models.CharField(max_length=254, null=True, blank=True)
     value = models.IntegerField(null=True, blank=True)
 
@@ -12,7 +17,9 @@ class Reward(models.Model):
 
 
 class RewardHistory(models.Model):
-
+    """
+    The history of all the rewards and points a user has received.
+    """
     class Meta:
         verbose_name_plural = 'Reward History'
         ordering = ['-pk']

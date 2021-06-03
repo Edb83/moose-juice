@@ -6,6 +6,9 @@ from colorfield.fields import ColorField
 
 
 class Size(models.Model):
+    """
+    A model for product bottle sizes, price and sale price.
+    """
     label = models.CharField(max_length=50, null=True, blank=True)
     price = models.DecimalField(
         max_digits=4, decimal_places=2, null=True, blank=True)
@@ -17,6 +20,9 @@ class Size(models.Model):
 
 
 class Nicotine(models.Model):
+    """
+    A model for nicotine types and strengths.
+    """
     TYPE_CHOICES = (
         ('freebase', 'FREEBASE'),
         ('salt', 'SALT'),
@@ -31,6 +37,10 @@ class Nicotine(models.Model):
 
 
 class Brand(models.Model):
+    """
+    A model for brands, each of which has various Sizes and Nicotines available
+    to it.
+    """
     class Meta:
         ordering = ['name']
 
@@ -48,6 +58,9 @@ class Brand(models.Model):
 
 
 class Category(models.Model):
+    """
+    A model for broad flavour categories of vape juice.
+    """
     class Meta:
         verbose_name_plural = "Categories"
         ordering = ['name']
@@ -64,6 +77,10 @@ class Category(models.Model):
 
 
 class Tag(models.Model):
+    """
+    A model for the individual flavours of a Product, which can belong to many different
+    products.
+    """
     class Meta:
         ordering = ['name']
 
@@ -75,6 +92,10 @@ class Tag(models.Model):
 
 
 class Product(models.Model):
+    """
+    A model for products and canonical information. Also stores whether or not
+    a product is for sale, the price for which is taken from the Sizes model.
+    """
     class Meta:
         ordering = ['-pk']
     name = models.CharField(max_length=50)
@@ -91,6 +112,10 @@ class Product(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
 
     def calculate_rating(self):
+        """
+        Aggregate the ratings of all related reviews to determine
+        product's average rating
+        """
         self.average_rating = self.reviews.all().aggregate(Avg("rating"))[
             'rating__avg']
         self.save()
@@ -100,6 +125,9 @@ class Product(models.Model):
 
 
 class ProductReview(models.Model):
+    """
+    A model to store reviews of products, created by users.
+    """
     class Meta:
         ordering = ['-created_on']
 
