@@ -174,14 +174,57 @@ The following Bootstrap components have been used:
 <span id="database-model"></span>
 
 ### Database model
-TBC
 
-#### Activities collection
+A relational database is best suited to this type of project given the number of relationships between the tables. SQLite was used during development and then Heroku Postgres in production. The diagram below may help to visualise the database:
 
-|**Key**|**Type**|**Notes**|
-|:-----|:-----|:-----|
-|_id|ObjectId||
-|TBC|TBC|TBC|
+![Database Schema](wireframes/db-diagram.png)
+
+#### Key models
+
+**Brand**
+- This model is important in determining the options available when selling Products.
+- While a more complex model using product variants, options and variant options has its merits, for the purposes of this project where only one factor (bottle size) determines the price for a whole range of related products, it did not feel appropriate
+- Brand includes two many-to-many fields distinguishing between available nicotines and bottle sizes, and this could have been combined into a single 'options' relationship but to preserve some relational integrity it was decided to split them. As a result there are separate tables for Size and Nicotine
+
+**Product**
+- Holds canonical information about the various juices (name, description, colour, creation date)
+- The price is not stored here as it is only dictated by the volume of liquid it is purchased in. See the Size model for more details
+- While the price is not attached, the admin still has control over its pricing as they can choose whether or not a juice is on sale
+- The product's average rating is also stored here to make work in the Views simpler. It is updated by a `post_save` signal from the ProductReview
+- The foreign key to Brand is particularly important as it governs what options are available to each Product instance, and in turn the pricing options
+- The relationship to Category is merely descriptive
+- A many to many relationship with Tag (ie individual flavours) allows multiple flavours to be added to multiple products
+- One significant downside to removing key information from the Product model was that at each stage of the transactional journey, three models were required to provide necessary data to the Views. Rather than just havng a simple Product instance, both a Size and Nicotine intance were also required. The downside to consolidating all of this information into a 'product variant' model would be the potentially very large number of database entries for a single juice product. In its current state this is not an issue at all
+
+**Size**
+- It may not be ideal to have price stored in a table which is not an intuitive fit, but for this database it makes sense to keep it there because it fits the business model more naturally.
+- Queries to determine a product's price are quite long-winded as a result, but the expected functionality was achieved
+- Due to including the price here, it also makes sense to attach the sale price with it. By adding an `on_sale` Boolean to the Product model this became less problematic
+
+**Nicotine**
+- As with Size, the Nicotine model is needed to keep relevant information about the product options chosen by a user
+- With more time this model could have been extended to provide more information about the various types of nicotine
+
+**OrderLineItem**
+- As mentioned above, this model requires three instances rather than a single 'product' instance to store the necessary information
+
+**Order**
+- In addition to storing typical information about an order such as the user, order number, delivery details and total cost, this model also stores information about the points earned and redeemed by a Registered User.
+- A signal is fired to update the number of points earned once an Order is completed
+
+**UserProfile**
+- Created on registration for each user, this holds typical information that can be used to speed checkout for the user
+- Also stores the user's list of favourites via a many to many relationship with Product, and the number of points they currently have in the bank
+
+
+**ProductReview**
+- Ties reviews to a user and product by foreign key, allowing checks as to whether a user has previously purchased a product before sending a signal to award them points
+- In hindsight this should have been related to UserProfile to allow for simpler queries about user activity and engagement
+
+**RewardHistory**
+- Keeps track of the rewards for purchases and review, and also when points have been spent on a discount
+- The value of rewards is stored in a separate Reward database with the expectation that different rewards may be introduced
+
 
 <div align="right"><a style="text-align:right" href="#top">Go to index :arrow_double_up:</a></div>
 
@@ -392,6 +435,7 @@ Pages for 404 and 500 errors keep the user on the site when something goes wrong
 ### Tools
 - [Am I Responsive?](http://ami.responsivedesign.is/)
 - [Autoprefixer](https://autoprefixer.github.io/)
+- [DB Diagram](https://dbdiagram.io/)
 - [Favicon.io](https://favicon.io//)
 - [Font Awesome](https://fontawesome.com/)
 - [Google Fonts](https://fonts.google.com/)
