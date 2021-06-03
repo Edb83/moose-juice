@@ -73,6 +73,7 @@
                 </p>
             </div>
         </div>
+
         <!-- Mobile horizontal pills display -->
         <div class="row d-block d-md-none px-3">
             <ul class="nav nav-pills mb-3 flex-nowrap justify-content-center text-center" id="h-pills-tab" role="tablist">
@@ -143,7 +144,6 @@
 
 {% block extra_js %}
 
-    {{ block.super }}
+{{ block.super }}
     <script src="{% static 'home/js/hero-blur.js' %}"></script>
-
 {% endblock %}

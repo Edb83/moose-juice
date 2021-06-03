@@ -57,6 +57,8 @@
 
 <section class="container product-options my-5 pb-5 border-accent-primary">
     <div class="row">
+
+        <!-- Nic info -->
         <div class="d-none d-md-block col-md-4 pl-5 my-auto">
             <div class="card-nic-info">
                 <h5>
@@ -70,6 +72,8 @@
             </div>
         </div>
         <div class="col-sm-12 col-md-8">
+
+            <!-- Product choice form -->
             <form class="form my-3 text-center" action="{% url 'add_to_cart' product.id %}" method="POST">
                 {% csrf_token %}
                 <div class="form-row">
@@ -190,9 +194,12 @@
                         <div class="card-header border-accent-primary">
                             <h5 class="card-title">{{ review.title }}</h5>
                             <div class="row">
+
+                                <!-- Stars -->
                                 <div class="col-7">
                                     <div class="product-stars" data-value="{{ review.rating }}"></div>
                                 </div>
+
                                 <div class="col-auto ml-auto d-flex">
                                     <!-- User/admin edit button -->
                                     {% if review.user == request.user or request.user.is_superuser %}
@@ -247,15 +254,16 @@
                 </div>
 
             {% empty %}
-            <div class="col-12 col-md-8 mx-auto">
-                <div class="card card-product-review my-5 shadow">
-                    <div class="card-header border-accent-primary">
-                        <h5 class="card-title text-center">This is where the reviews should be!</h5>
+                <div class="col-12 col-md-8 mx-auto">
+                    <div class="card card-product-review my-5 shadow">
+                        <div class="card-header border-accent-primary">
+                            <h5 class="card-title text-center">This is where the reviews should be!</h5>
+                        </div>
                     </div>
                 </div>
-            </div>
             {% endfor %}
         </div>
+
     </div>
 
 </section>
@@ -264,10 +272,9 @@
 
 {% block extra_js %}
 
-    {{ block.super }}
+{{ block.super }}
     <script src="{% static 'js/quantity-input.js' %}"></script>
     <script src="{% static 'products/js/favourites-toggle.js' %}"></script>
     <script src="{% static 'products/js/star-display.js' %}"></script>
     <script src="{% static 'products/js/delete-modal.js' %}"></script>
-    
 {% endblock %}

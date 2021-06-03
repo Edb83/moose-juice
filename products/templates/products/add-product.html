@@ -11,6 +11,8 @@
         
         <div class="row pb-5">
             <div class="col-12 col-lg-7">
+
+                <!-- Add Juice form -->
                 <form method="POST" action="{% url 'add_product' %}" class="form mb-2" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form | crispy }}
@@ -25,6 +27,7 @@
 
                 <div class="product-img-container">
 
+                    <!-- Big bottle -->
                     <div class="add-product-svg-container mx-auto">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 339">
                             {% include 'products/includes/product-svg.html' %}
@@ -47,6 +50,7 @@
 {% endblock %}
 
 {% block extra_js %}
+
 {{ block.super }}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.4.5/jscolor.min.js"></script>
     <script src="{% static 'products/js/change-color.js' %}"></script>

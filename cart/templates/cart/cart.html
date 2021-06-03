@@ -46,6 +46,7 @@
         <div class="cart-contents border-accent-primary">
             {% for item in cart_items %}
                 <div class="row pb-5">
+
                     <!-- SVG -->
                     <div class="col-2 align-self-center text-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25px" viewBox="0 0 154 339">
@@ -61,6 +62,7 @@
                                     {{ item.product.name }} <span class="text-muted">({{ item.nic.strength }}-{{ item.size.label }})</span>
                                 </div>
                             </div>
+
                             <!-- Remove from cart -->
                             <div class="col text-center">
                                 <a class="remove-item text-danger" id="remove_{{ item.item_id }}">
@@ -71,10 +73,12 @@
                             </div>
                         </div>
                         <div class="row text-center align-items-center flex-nowrap overflow-hidden">
+
                             <!-- Price per unit -->
                             <div class="col text-left">
                                     £{{ item.size.price }}
                             </div>
+
                             <!-- Quantity input -->
                             <div class="col">
                                 <form action="{% url 'update_cart' item.item_id %}" method="POST" class="form update-form">
@@ -120,7 +124,8 @@
         </div>
 
         <div class="cart-summary-container mt-5 text-right">
-    
+
+            <!-- Cart total -->
             <div class="row">
                 <div class="col-auto ml-auto">
                     Cart Total:
@@ -130,6 +135,7 @@
                 </div>
             </div>
 
+            <!-- Points used and discount -->
             {% if discount_applied %}
                 <div class="row text-secondary">
                     <div class="col-auto ml-auto">
@@ -162,6 +168,7 @@
                 </div>
             {% endif %}
 
+            <!-- Delivery -->
             <div class="row">
                 <div class="col-auto ml-auto">
                     Delivery:
@@ -170,7 +177,8 @@
                     <strong>£{{ delivery|floatformat:2 }}</strong>
                 </div>
             </div>
-            
+
+            <!-- Grand total -->
             <div class="row mt-1">
                 <div class="col-auto ml-auto">
                     <h5><strong>Grand Total:</strong></h5>
@@ -181,7 +189,8 @@
             </div>
 
         </div>
-        
+
+        <!-- Points and free delivery delta -->
         <div class="row pt-5">
             <div class="col-12 col-md-6 offset-md-6">
                 {% if not user.is_authenticated and total >= 1 %}
@@ -216,6 +225,7 @@
                 </div>
             </div>
         </div>
+
     <!-- If no cart items -->
     {% else %}
         <p class="text-center"><strong>There's nothing here!</strong></p>
@@ -230,8 +240,8 @@
 {% endblock %}
 
 {% block extra_js %}
+
 {{ block.super }}
     <script src="{% static 'js/quantity-input.js' %}"></script>
     <script src="{% static 'cart/js/remove-item.js' %}"></script>
-
 {% endblock %}

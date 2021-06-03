@@ -3,7 +3,7 @@
 {% block extra_title %} - Juices{% endblock %}
 {% block content %}
 
-
+<!-- Conditional heading inc. default Moose Juice -->
 <header class="container first-element-buffer">
     {% if brand %}
         <h2 class="text-center">{{ brand.friendly_name }}</h2>
@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-1">
                 {% if category.image %}
-                <img class="category-img-sm mr-2" src="{{ category.image.url }}" alt="{{ category.friendly_name }}">
+                    <img class="category-img-sm mr-2" src="{{ category.image.url }}" alt="{{ category.friendly_name }}">
                 {% endif %}
             </div>
             <div class="col-10">
@@ -32,22 +32,21 @@
     {% endif %}
 </header>
 
-
 <nav class="container my-5">
+    <!-- Sorter -->
     <div class="row">
         <div class="col-12 offset-md-8 col-md-4 offset-l-10 col-l-2 py-3">
             <select id="sort-selector" class="custom-select my-1 mr-sm-2">
                 <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
-                <option value="created_on_desc" {% if current_sorting == 'date_desc' %}selected{% endif %}>New arrivals
-                </option>
-                <option value="average_rating_desc" {% if current_sorting == 'rating_desc' %}selected{% endif %}>Top
-                    rated</option>
+                <option value="created_on_desc" {% if current_sorting == 'date_desc' %}selected{% endif %}>New arrivals</option>
+                <option value="average_rating_desc" {% if current_sorting == 'rating_desc' %}selected{% endif %}>Top rated</option>
                 <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>A-Z</option>
                 <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Z-A</option>
             </select>
         </div>
     </div>
 
+    <!-- Juices found -->
     <div class="row">
         <div class="col my-3">
             <p class="py-3 border-accent-primary">
@@ -58,6 +57,7 @@
     </div>
 </nav>
 
+<!-- Juice cards -->
 <main class="container mb-5">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 text-center">
         {% for product in products %}
@@ -102,19 +102,19 @@
                 </div>
             </div>
         {% empty %}
-                <div class="mx-auto text-center">
-                    <div>
-                        <strong>There was no juice to be found!</strong>
-                    </div>
-                    <div>
-                        <a href="{% url 'products' %}" class="btn btn-outline-dark my-4">
-                            <span class="icon">
-                                <i class="fas fa-chevron-left"></i>
-                            </span>
-                            Juices
-                        </a>
-                    </div>
+            <div class="mx-auto text-center">
+                <div>
+                    <strong>There was no juice to be found!</strong>
                 </div>
+                <div>
+                    <a href="{% url 'products' %}" class="btn btn-outline-dark my-4">
+                        <span class="icon">
+                            <i class="fas fa-chevron-left"></i>
+                        </span>
+                        Juices
+                    </a>
+                </div>
+            </div>
         {% endfor %}
     </div>
 
@@ -125,8 +125,7 @@
 {% block extra_js %}
 
 {{ block.super }}
-<script src="{% static 'products/js/sort-selector.js' %}"></script>
-<script src="{% static 'products/js/star-display.js' %}"></script>
-<script src="{% static 'products/js/favourites-toggle.js' %}"></script>
-
+    <script src="{% static 'products/js/sort-selector.js' %}"></script>
+    <script src="{% static 'products/js/star-display.js' %}"></script>
+    <script src="{% static 'products/js/favourites-toggle.js' %}"></script>
 {% endblock %}
