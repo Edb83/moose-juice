@@ -104,7 +104,7 @@ The way each brand of e-liquid is made means that certain flavour combinations a
 <span id="ux-wireframes"></span>
 
 ### Wireframes
-Wireframes created at the start of the project for **mobile**, **tablet** and **desktop** can be accessed [here](wireframes/), as well as the planned **site map** and **data schema**.
+Wireframes created at the start of the project for **mobile** and **desktop** can be accessed [here](wireframes/).
 
 There were some noteworthy deviations from the plan. These were:
 1. Not including a blog app due to time constraints. This would be relatively simple to implement
@@ -254,7 +254,11 @@ A relational database is best suited to this type of project given the number of
 
 **Responsive**
 
-Effort has been made to ensure the website displays well across all devices, using Bootstrap's grid system and various media queries.
+Effort has been made to ensure the website displays well across all devices, using Bootstrap's grid system and various media queries. Extra care was taken to handle the potentially long list of purchases and rewards in the Account Dashboard by limiting the height of the tab and styling it with `overflow-y: auto`.
+
+**Accessible**
+
+Colours have been adjusted using Chrome's suggestions about visibility improvements. Similarly, aria-labels have been used consistently to improve the experience of all potential vapers.
 
 **Navbar**
 
@@ -729,9 +733,10 @@ Full details of testing can be found [here](TESTING.md).
 - [Star rating implementation](https://github.com/LigaMoon/Prickly/blob/main/products/static/products/js/product_item.js)
 
 ### Content
-- All text outside of user-generated content is original
+- All text is original
 - Hero image from [Pixabay](https://pixabay.com/vectors/vaping-cigarette-electronic-3630389/)
 - Icons from [Flaticon](https://www.flaticon.com/)
+- Vape vector from [Vecteezy](https://www.vecteezy.com/free-vector/vape)
 
 ### Acknowledgements
 - Brian Macharia, my mentor for MS4, for getitng me over the finish line

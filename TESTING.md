@@ -305,7 +305,7 @@ The following tests have been carried out without issue:
 - Verify the display for a product with multiple price variants that is on sale e.g. "From <del>£7.99</del> £6.99"
     - CHECK
 
-![right-price](wireframes/right-price.jpg)
+![right-price](wireframes/test-images/right-price.jpg)
 - Confirm the correct Brand is displayed for each product
     - CHECK
 - Confirm that the correct star rating is displayed for each product and that "Not yet rated" is displayed for those without any reviews
@@ -347,7 +347,7 @@ updates the database in the admin view
 - Confirm that the options available for a juice are represented correctly in the Add to Cart form
     - CHECK
 
-![order-form](wireframes/options-form.jpg)
+![order-form](wireframes/test-images/options-form.jpg)
 - Confirm that options are correctly attached to the product when it is added to the Cart
     - CHECK
 - Confirm that users can update the quantity using the carets or by inputing into the text field
@@ -355,7 +355,7 @@ updates the database in the admin view
 - Confirm that the quantity entered cannot be less than 1 or more than 99, either using arrow keys, clicking the carets or entering the number manually
     - CHECK
 
-![number-input](wireframes/number-input.jpg)
+![number-input](wireframes/test-images/number-input.jpg)
 - Confirm that clicking the Juices button takes user back to all products view
     - CHECK
 - Confirm that clicking the Add to Cart button does add the item to the cart
@@ -368,15 +368,15 @@ updates the database in the admin view
 - Confirm that if a product has no reviews, a message is displayed about this with the request to Register/Login if user is not logged in
     - CHECK
 
-![no-reviews](wireframes/no-reviews.jpg)
+![no-reviews](wireframes/test-images/no-reviews.jpg)
 - Confirm that when logged in as Registered user, Review form is displayed
     -CHECK
 - Confirm that after filling out the review and submitting, user is redirected back to the reviews section and can see their new review
     - CHECK
-- Confirm that only if user has previously purchased the juice, they receive a toast notifcation telling them they have earned 5 points and their review has 'Verified Purchase on it'
+- Confirm that only if user has previously purchased the juice, they receive a toast notifcation telling them they have earned 5 points. Their review has also has 'Verified Purchase on it'
     - CHECK
 
-![review](wireframes/review.jpg)
+![review](wireframes/test-images/review.jpg)
 - Confirm that only review owner or Super user can see edit icon to edit their review
     - CHECK
 - Confirm only admin can see the trashcan to delete a review
@@ -384,13 +384,13 @@ updates the database in the admin view
 - Confirm user can only review each juice once and they receive a message if they try to submit again
     - CHECK
 
-![already-reviewed](wireframes/already-reviewed.jpg)
+![already-reviewed](wireframes/test-images/already-reviewed.jpg)
 - Confirm 
 
 
 **Cart**
 
-![cart-lg](wireframes/cart-lg.jpg)
+![cart-lg](wireframes/test-images/cart-lg.jpg)
 - Confirm that when there are no items in the shopping cart, visiting the Cart page displays a message saying "There's nothing here" and to "Come back when you've added something!"
     - CHECK
 - Confirm adding items to cart when logged out, and then logging in, keeps the cart contents
@@ -403,35 +403,35 @@ updates the database in the admin view
     - CHECK
 - Confirm quantities updated by page refresh when carets clicked
     - CHECK
-- Confirm line items can be delted by clicking trash can
+- Confirm line items can be deleted by clicking trash can and clicking through the modal
     - CHECK
 - Confirm message informing user of how many points they could earn if they were registered/logged in
     - CHECK
 
-![separate-items](wireframes/separate-items.jpg)
+![separate-items](wireframes/test-images/separate-items.jpg)
 - Confirm that if a product was in the shopping cart before being deleted, a toast message appears informing the user that it has been removed from the cart
     - CHECK
 
-![delete-in-cart](wireframes/delete-in-cart.jpg)
+![delete-in-cart](wireframes/test-images/delete-in-cart.jpg)
 - Confirm logged in users can remove discount and page updates to show this
     - CHECK
 - Confirm delivery delta is calculated correctly
     - CHECK
 - Confirm delivery is £0 if £30 threshold reached
     - CHECK
-- Confirm discount applied before delivery is added on
+- Confirm discount is applied before the delivery cost is added on
     - CHECK
 
 
 **Checkout**
 - Confirm correct items and amounts carried over from cart, including discount if applied
     - CHECK
-- Confirm if user has logged in and saved their details previously, the form is pre-populated with them
+- Confirm if user has logged in and saved their details previously, the form is pre-populated with these details
     - CHECK
 - Confirm Stripe webhooks successfully processed and Order saved
     - CHECK
 
-![webhook-success](wireframes/webhook-success.jpg)
+![webhook-success](wireframes/test-images/webhook-success.jpg)
 
 **Account Dashboard**
 - Confirm correct points displayed above table
@@ -443,7 +443,7 @@ updates the database in the admin view
 - Confirm can view individual orders via the link on order number
     - CHECK
 
-- Confirm Reward history successfully updates and points awarded for Account creation, Reviewing verified purchase, points per pound spent
+- Confirm Reward history successfully updates and points are awarded for Account creation, Reviewing a purchased product, and for every pound spent
     - CHECK
 
 **Add / Edit product**
@@ -452,11 +452,9 @@ updates the database in the admin view
 - Confirm Name of Juice and colour update in real time
     - CHECK
 
-![add-juice](wireframes/add-juice.jpg)
+![add-juice](wireframes/test-images/add-juice.jpg)
 - Confirm added or updated juice reflected in database
     - CHECK
-
-
 
 
 <div align="right"><a style="text-align:right" href="#top">Go to index :arrow_double_up:</a></div>
@@ -581,7 +579,7 @@ Tested on:
 
 ### Screen sizes
 
-Tested with Chrome DevTools using profiles for:
+Tested with Chrome DevTools using profiles for the following devices, accounting for minimum screen widths of 320px:
 
 - Moto G4
 - Galaxy S5
@@ -620,13 +618,13 @@ Real world testing on:
 
 ### Resolved
 
-- Bug 1: get_object_or_404 error caused by object id not being found
+- Bug 1: `get_object_or_404` error caused by object id not being found
 - Solution: find erroneous string iteration pointing to Nicotine (4 items) rather than Size (3 items)
 
 - Bug 2: search queries via M2M relationship (Tags model) would return duplicate results
-- Solution: using .distinct() on the filtered query
+- Solution: using `.distinct()` on the filtered query
 
-- Bug 5: custom save method on Review model used to request average_rating calculation on Product model. Rating was calculated before the new rating was saved meaning inaccurate ratings
+- Bug 5: custom save method on Review model used to request `average_rating` calculation on Product model. Rating was calculated before the new rating was saved meaning inaccurate ratings
 - Solution: use a signal on Review creation/update/delete to call calculate_rating
 
 - Bug 6: review save/delete signal would not fire as expected
@@ -634,7 +632,7 @@ Real world testing on:
 
 - Bug 7: if product is deleted while exists in cart, 404 across all pages
 - Solution (immediate): set cart contexts to equal 0 across the board and delete session cookies
-- See below for more details
+- This was a recurrent problem and not properly solved until Bug 16
 
 - Bug 8: signal to check whether user has already reviewed product when awarding points would always return true
 - Solution: change from post_save to pre_save (as otherwise user will always have reviewed the product post save)
@@ -654,10 +652,10 @@ Real world testing on:
     font-weight: 900;`
 
 - Bug 12: sorting products by rating worked fine in mySQL but not in Postgres, appearing to order by nulls first
-- Solution: using F function with nulls_last=True as argument in separate conditional for sortkey == 'average_rating'
+- Solution: using `F` function with `nulls_last=True` as argument in separate conditional for `sortkey == 'average_rating'`
 
 - Bug 13: orders somtimes saved twice and have no grand total attached to them
-- Solution: caused by webhook not being able to find order due to mismatching grand_total (following discount applied in cart). - Solved by checking discount_applied session at point of order_form save and including points_redeemed so that grand_total can be calculated properly
+- Solution: caused by webhook not being able to find order due to mismatching grand_total (following discount applied in cart). - Solved by checking discount_applied session at point of order_form save and including points_redeemed so that grand_total can be calculated properly. This was a recurrent problem and not properly solved until Bug 16
 
 - Bug 14: static files not loading
 - Solution: add STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') to settings.py
