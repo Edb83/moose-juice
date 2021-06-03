@@ -537,7 +537,7 @@ input[type=number] {
 /* 404 page */
 
 .background-404 {
-    height: ;
+    height: 100%;
     background-image: url('/media/404.svg');
     background-size: 25vh;
     background-repeat: no-repeat;

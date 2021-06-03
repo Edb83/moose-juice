@@ -8,13 +8,13 @@ import math
 
 
 def cart_contents(request):
-"""
-View to return all information needed to display the cart, by
-converting what has been saved to the session into key variables.
-Protection in place in case a product, size or nic has been
-deleted while still in the cart, removing from the list before
-saving back to the cart session variable.
-"""
+    """
+    View to return all information needed to display the cart, by
+    converting what has been saved to the session into key variables.
+    Protection in place in case a product, size or nic has been
+    deleted while still in the cart, removing from the list before
+    saving back to the cart session variable.
+    """
     cart_items = []
     total = 0
     savings = 0
