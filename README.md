@@ -1,7 +1,7 @@
 # Moose Juice
 ![alt text](wireframes/amiresponsive.jpg "Responsive sample")
 
-**[Live demo](https://moose-juice.herokuapp.com/)**
+**[Live demo](https://moose-juice.onrender.com/)**
 ---
 <span id="top"></span> 
 ## Index
